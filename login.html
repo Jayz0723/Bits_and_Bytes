@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Bits and Bytes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="storefront.css">
+</head>
+<body class="utility-page">
+  <header class="site-header" id="top">
+    <img src="images/home-banner.jpg" width="900" height="260" alt="Bits and Bytes Banner">
+    <hgroup>
+      <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1>
+      <h2>Account Access</h2>
+      <nav class="main-nav" id="horizontal" aria-label="Main navigation">
+        <a href="index.html">Home</a> |
+        <a href="products.html">Products</a> |
+        <a href="build.html">Build Your Own PC</a> |
+        <a href="components.html">Interactive Guide</a> |
+        <a href="about.html">About</a> |
+        <a href="contact.html">Contact</a> |
+        <a class="active" href="login.html">Login</a> |
+        <a class="cart-pill" href="cart.html">Cart <span id="cartCount">0</span></a>
+      </nav>
+    </hgroup>
+  </header>
+
+  <main class="login-page">
+    <section class="login-intro">
+      <p class="eyebrow">Bits and Bytes account</p>
+      <h1>Keep your PC picks in one place.</h1>
+      <p>Sign in to continue your shopping journey, review saved selections, and return to your cart whenever you need.</p>
+      <div class="login-benefits">
+        <span>Saved cart</span>
+        <span>Build ideas</span>
+        <span>Order support</span>
+      </div>
+    </section>
+
+    <form class="login-card" id="loginForm">
+      <p class="eyebrow">Welcome back</p>
+      <h2>Sign in</h2>
+      <p class="form-note">Sign in with an account registered in this browser. Local demo only; do not use a real account password.</p>
+      <label for="loginEmail">Email address</label>
+      <input id="loginEmail" type="email" autocomplete="email" placeholder="you@email.com" required>
+      <label for="loginPassword">Password</label>
+      <div class="password-field">
+        <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+        <button id="togglePassword" type="button" aria-label="Show password">Show</button>
+      </div>
+      <label class="remember-me" for="rememberMe"><input id="rememberMe" type="checkbox"> Remember my email on this device</label>
+      <button class="button primary full-width" type="submit">Sign In</button>
+      <button class="button secondary full-width" id="openRegistration" type="button">Create an account</button>
+      <p class="login-message" id="loginMessage" role="status"></p>
+      <p class="login-help">Need help with an order or account question? <a href="contact.html">Contact support</a>.</p>
+    </form>
+    <section class="login-card" id="signedInAccount" hidden aria-labelledby="signedInTitle">
+      <p class="eyebrow">Your account</p>
+      <h2 id="signedInTitle">You are signed in</h2>
+      <p id="signedInEmail"></p>
+      <a class="button primary full-width" href="cart.html">Return to cart</a>
+      <button class="button secondary full-width" id="signOutAccount" type="button">Sign out</button>
+      <p class="form-note">Local demo session. Your cart stays on this device when you sign out.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Herrera Corporation. All rights reserved.</p>
+    <div>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html">Cart</a>
+    </div>
+    <div class="social-links" aria-label="Social media profiles">
+      <a class="social-icon facebook" href="https://www.facebook.com/johncarlo.herrera.58" target="_blank" rel="noopener noreferrer" aria-label="Facebook: John Carlo Herrera" title="Facebook"><img src="images/social/facebook.svg" alt="" width="24" height="24"></a>
+      <a class="social-icon instagram" href="https://www.instagram.com/jayzzzz0723/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: jayzzzz0723" title="Instagram"><img src="images/social/instagram.svg" alt="" width="24" height="24"></a>
+      <a class="social-icon x-twitter" href="https://x.com/Jayzee20202" target="_blank" rel="noopener noreferrer" aria-label="X: Jayzee20202" title="X"><img src="images/social/x.svg" alt="" width="24" height="24"></a>
+      <a class="social-icon youtube" href="https://www.youtube.com/@johncarloherrera8540" target="_blank" rel="noopener noreferrer" aria-label="YouTube: johncarloherrera8540" title="YouTube"><img src="images/social/youtube.svg" alt="" width="24" height="24"></a>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

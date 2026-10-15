@@ -1,0 +1,20 @@
+[
+  {
+    "file": "products/intel-i5-14600k-chip.png",
+    "url": "https://brightstarcomp.com/cdn/shop/files/3_4356573f-df21-44d0-815e-723f38a8f843.png?v=1737712953&width=1946",
+    "source": "https://brightstarcomp.com/products/intel-core-i5-14600k-lga1700-processor",
+    "product": "Intel Core i5-14600K, chip top"
+  },
+  {
+    "file": "products/amd-7700x-chip.jpg",
+    "url": "https://arteus.pe/cdn/shop/files/100-100000591WOF-3_1024x.jpg?v=1750889288",
+    "source": "https://arteus.pe/products/amd-100-100000591wof-procesador-amd-ryzen-7-7700x-4-5-5-4ghz-32mb-l3-8-core-am5-105w",
+    "product": "AMD Ryzen 7 7700X, chip top"
+  },
+  {
+    "file": "products/kingston-kc600-sata-connectors.jpg",
+    "url": "https://cdn.panacompu.com/cdn-img/pv/kingston-kc600-ssd-2-5inch-back-view.jpg",
+    "source": "https://www.panacompu.com/peru/en/product-information/kingston-kc600-skc600-256g-solid-state-drive-256gb-2-5-3d-tlc",
+    "product": "Kingston KC600 SATA connectors, unlabelled casing design shared across capacities"
+  }
+]

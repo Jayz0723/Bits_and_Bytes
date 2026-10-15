@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloads | Bits and Bytes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261004-editorial">
+</head>
+<body>
+  <header class="site-header downloads-header" id="top">
+    <img src="images/editorial-pc-components.png" width="1600" height="900" alt="PC components arranged on a technical workbench">
+    <hgroup>
+      <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1>
+      <h2>Downloads</h2>
+      <nav class="main-nav" id="horizontal" aria-label="Main navigation">
+        <a href="index.html">Home</a> |
+        <a href="products.html">Products</a> |
+        <a href="build.html">Build Your Own PC</a> |
+        <a href="components.html">Interactive Guide</a> |
+        <a href="about.html">About</a> |
+        <a class="active" href="downloads.html">Downloads</a> |
+        <a href="contact.html">Contact</a> |
+        <a href="login.html">Login</a> |
+        <a class="cart-pill" href="cart.html">Cart <span id="cartCount">0</span></a>
+      </nav>
+    </hgroup>
+  </header>
+
+  <main class="downloads-page">
+    <section class="downloads-hero">
+      <p class="eyebrow">Support library</p>
+      <h1>Manuals, guides, and setup resources</h1>
+      <p>Keep useful product information close by. Preview the complete PC buying guide or download practical setup and maintenance documents.</p>
+    </section>
+
+    <section class="download-feature" aria-labelledby="guideDownloadTitle">
+      <div class="download-preview">
+        <object data="PC_GUIDE.pdf" type="application/pdf" aria-label="PC Guide PDF preview">
+          <a href="PC_GUIDE.pdf">Open the PC Guide PDF</a>
+        </object>
+      </div>
+      <div class="download-feature-copy">
+        <span class="resource-type">Featured PDF</span>
+        <h2 id="guideDownloadTitle">PC Buying and Components Guide</h2>
+        <p>Preview the existing guide in your browser, then save it for offline reference when comparing parts or planning a build.</p>
+        <div class="resource-meta"><span>PDF document</span><span>PC fundamentals</span><span>Offline ready</span></div>
+        <div class="resource-actions">
+          <a class="button primary" href="PC_GUIDE.pdf" download>Download PDF</a>
+          <a class="button secondary" href="PC_GUIDE.pdf" target="_blank" rel="noopener">Open Preview</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="resource-library" aria-labelledby="resourceLibraryTitle">
+      <div class="section-heading left">
+        <p class="eyebrow">Resource library</p>
+        <h2 id="resourceLibraryTitle">Quick-reference manuals</h2>
+        <p>These lightweight starter files can be replaced with your official manuals later without changing the page layout.</p>
+      </div>
+      <div class="resource-grid">
+        <article class="resource-card">
+          <span class="resource-index">01</span><span class="resource-icon" aria-hidden="true">PC</span>
+          <p class="eyebrow">Setup</p><h3>Desktop Setup Checklist</h3>
+          <p>Connections, first-start steps, updates, display settings, and warranty preparation.</p>
+          <a href="downloads/desktop-setup-checklist.txt" download>Download checklist <span aria-hidden="true">&darr;</span></a>
+        </article>
+        <article class="resource-card">
+          <span class="resource-index">02</span><span class="resource-icon" aria-hidden="true">LT</span>
+          <p class="eyebrow">Care</p><h3>Laptop Care Manual</h3>
+          <p>Everyday handling, cooling, charging, transport, backup, and battery safety guidance.</p>
+          <a href="downloads/laptop-care-manual.txt" download>Download manual <span aria-hidden="true">&darr;</span></a>
+        </article>
+        <article class="resource-card">
+          <span class="resource-index">03</span><span class="resource-icon" aria-hidden="true">MT</span>
+          <p class="eyebrow">Maintenance</p><h3>PC Maintenance Guide</h3>
+          <p>A practical schedule for cleaning, storage checks, updates, cables, and safe upgrades.</p>
+          <a href="downloads/pc-maintenance-guide.txt" download>Download guide <span aria-hidden="true">&darr;</span></a>
+        </article>
+        <article class="resource-card resource-card-link">
+          <span class="resource-index">04</span><span class="resource-icon" aria-hidden="true">IG</span>
+          <p class="eyebrow">Interactive</p><h3>PC and Laptop Parts Guide</h3>
+          <p>Explore component locations through the desktop and laptop image maps.</p>
+          <a href="components.html">Open interactive guide <span aria-hidden="true">&rarr;</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="download-support-band">
+      <div><p class="eyebrow">Need another file?</p><h2>Ask our support team for the right manual</h2></div>
+      <a class="button primary" href="contact.html">Contact Support</a>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>&copy; 2026 Herrera Corporation. All rights reserved.</p></footer>
+  <script src="data.js"></script>
+  <script src="app.js?v=20261004-editorial"></script>
+</body>
+</html>

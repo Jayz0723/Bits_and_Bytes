@@ -1,0 +1,13 @@
+# Keep local development files and duplicate image backups off GitHub.
+tmp/
+images/previews/
+images/originals/
+*.crdownload
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Never commit local credentials or environment secrets.
+.env
+.env.*
+!.env.example

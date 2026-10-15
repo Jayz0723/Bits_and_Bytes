@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bits and Bytes | PC and Laptop Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261004-editorial">
+  <link rel="stylesheet" href="storefront.css?v=20261012">
+</head>
+<body class="home-page">
+  <header class="site-header" id="top">
+    <img src="images/home-banner.jpg" width="900" height="260" alt="Bits and Bytes Banner">
+    <hgroup>
+      <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1>
+      <h2>PC and Laptop Store</h2>
+      <nav class="main-nav" id="horizontal" aria-label="Main navigation">
+        <a class="active" href="index.html">Home</a> |
+        <a href="products.html">Products</a> |
+        <a href="build.html">Build Your Own PC</a> |
+        <a href="components.html">Interactive Guide</a> |
+        <a href="about.html">About</a> |
+        <a href="contact.html">Contact</a> |
+        <a href="login.html">Login</a> |
+        <a class="cart-pill" href="cart.html">Cart <span id="cartCount">0</span></a>
+      </nav>
+    </hgroup>
+  </header>
+
+  <main>
+    <section class="hero showcase-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">The right tools. Your next chapter.</p>
+        <h1>PCs, laptops &amp; components</h1>
+        <p>For the game you want to play, the project you want to finish, and everything
+          you do in between. Find your next setup here.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="products.html">Shop Products</a>
+          <a class="button secondary" href="build.html">Build Your Own PC</a>
+        </div>
+      </div>
+      <div class="hero-grid" aria-label="Shop by collection">
+        <a href="products.html#computer-products"><img src="images/products/asus-rog-g22ch.png" alt="ASUS ROG G22CH desktop"><span>Desktop systems <b aria-hidden="true">&rarr;</b></span></a>
+        <a href="products.html#laptops"><img src="images/products/asus-vivobook-k6602.png" alt="ASUS Vivobook Pro 16 OLED"><span>Laptops <b aria-hidden="true">&rarr;</b></span></a>
+        <a href="products.html#computer-parts"><img src="images/products/msi-rtx-4060-main.webp" alt="MSI GeForce RTX 4060 graphics card"><span>Components <b aria-hidden="true">&rarr;</b></span></a>
+        <a href="products.html#accessories"><img src="images/products/logitech-mx-master-3s.png" alt="Logitech MX Master 3S mouse"><span>Desk essentials <b aria-hidden="true">&rarr;</b></span></a>
+
+
+      </div>
+    </section>
+
+    <section class="promo-carousel" id="promoCarousel" aria-label="Featured store promotions" aria-roledescription="carousel">
+      <div class="promo-carousel-viewport">
+        <div class="promo-carousel-track" id="promoCarouselTrack">
+          <article class="promo-slide" aria-label="1 of 4">
+            <img src="images/showcase-gaming-pc.jpg" alt="RGB gaming PC setup">
+            <div class="promo-slide-overlay"></div>
+            <div class="promo-slide-content">
+              <p class="eyebrow">Gaming systems</p>
+              <h2>Level up your setup</h2>
+              <p>Explore RGB-ready gaming PCs with balanced processors, graphics, memory, and cooling.</p>
+              <a class="button primary" href="products.html#computer-products">Shop Gaming PCs</a>
+            </div>
+          </article>
+          <article class="promo-slide" aria-label="2 of 4">
+            <img src="images/showcase-laptop.jpg" alt="Modern laptop ready for school and office work">
+            <div class="promo-slide-overlay"></div>
+            <div class="promo-slide-content">
+              <p class="eyebrow">Portable performance</p>
+              <h2>Work anywhere</h2>
+              <p>Compare laptops for school, office work, gaming, and creative projects.</p>
+              <a class="button primary" href="products.html#laptops">Browse Laptops</a>
+            </div>
+          </article>
+          <article class="promo-slide" aria-label="3 of 4">
+            <img src="images/custom-pc-build.jpg" alt="Components inside a custom desktop PC">
+            <div class="promo-slide-overlay"></div>
+            <div class="promo-slide-content">
+              <p class="eyebrow">Custom builds</p>
+              <h2>Choose every component</h2>
+              <p>Build a compatible PC around your performance needs and budget.</p>
+              <a class="button primary" href="build.html">Start Your Build</a>
+            </div>
+          </article>
+          <article class="promo-slide" aria-label="4 of 4">
+            <img src="images/showcase-monitor.jpg" alt="Desktop monitor for gaming and creative work">
+            <div class="promo-slide-overlay"></div>
+            <div class="promo-slide-content">
+              <p class="eyebrow">Complete the desk</p>
+              <h2>See every detail</h2>
+              <p>Find monitors and accessories that match your PC, workspace, and daily routine.</p>
+              <a class="button primary" href="products.html#accessories">Shop Desk Gear</a>
+            </div>
+          </article>
+        </div>
+      </div>
+      <button class="promo-carousel-button previous" id="promoPrevious" type="button" aria-label="Show previous promotion">&#8249;</button>
+      <button class="promo-carousel-button next" id="promoNext" type="button" aria-label="Show next promotion">&#8250;</button>
+      <div class="promo-carousel-dots" id="promoCarouselDots" aria-label="Choose a promotion"></div>
+    </section>
+
+    <section class="editorial-showcase" aria-labelledby="editorialShowcaseTitle">
+      <div class="editorial-intro">
+        <p class="eyebrow">Designed around real work</p>
+        <h2 id="editorialShowcaseTitle">A better setup starts with the way you use it</h2>
+        <p>Explore complete systems, portable workstations, and upgrade-ready components through clear, focused collections.</p>
+      </div>
+      <article class="editorial-row">
+        <div class="editorial-media">
+          <img src="images/editorial-performance-workspace.png" alt="Premium desktop PC and ultrawide monitor in a professional workspace">
+        </div>
+        <div class="editorial-copy">
+          <span class="editorial-number">01</span>
+          <p class="eyebrow">Desktop performance</p>
+          <h3>Build a system with room to grow</h3>
+          <p>Find a desktop for gaming, office work, or creative projects. Choose your system, then complete the desk with the accessories you need.</p>
+          <a class="text-link" href="products.html#computer-products">Explore desktop systems <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+      <article class="editorial-row reverse">
+        <div class="editorial-media">
+          <img src="images/editorial-creator-laptop.png" alt="Performance laptop in a clean creative workspace">
+        </div>
+        <div class="editorial-copy">
+          <span class="editorial-number">02</span>
+          <p class="eyebrow">Portable workstations</p>
+          <h3>Take capable hardware beyond the desk</h3>
+          <p>Find laptops for classes, office work, design, and gaming with practical filters for brand, price, stock, and intended use.</p>
+          <a class="text-link" href="products.html#laptops">Browse laptops <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+      <article class="editorial-row">
+        <div class="editorial-media">
+          <img src="images/editorial-pc-components.png" alt="Graphics card, processor, memory, SSD, cooling fan, and power supply on a workbench">
+        </div>
+        <div class="editorial-copy">
+          <span class="editorial-number">03</span>
+          <p class="eyebrow">Components and learning</p>
+          <h3>Know what goes inside your machine</h3>
+          <p>Shop components from every partner brand, check compatibility in the builder, and use the interactive guide to understand each part.</p>
+          <div class="editorial-actions">
+            <a class="text-link" href="products.html#computer-parts">Shop components <span aria-hidden="true">&rarr;</span></a>
+            <a class="text-link muted" href="downloads.html">Download guides <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="brand-strip" aria-labelledby="brandStripTitle">
+      <div class="brand-strip-heading">
+        <div>
+          <p class="eyebrow">Hardware ecosystem</p>
+          <h2 id="brandStripTitle">Proudly trusted by</h2>
+        </div>
+        <button class="partner-view-button" id="viewPartners" type="button">View all partners</button>
+      </div>
+      <div class="carousel" aria-label="Featured computer brands">
+        <div class="car-slide">
+            <a class="card partner-logo" href="https://www.amd.com/" target="_blank" rel="noopener noreferrer"><img src="images/amd-logo.png" alt="AMD"></a>
+            <a class="card partner-logo" href="https://www.coolermaster.com/" target="_blank" rel="noopener noreferrer"><img src="images/coolermaster-logo.png" alt="Cooler Master"></a>
+            <a class="card partner-logo" href="https://www.corsair.com/" target="_blank" rel="noopener noreferrer"><img src="images/corsair-logo.png" alt="Corsair"></a>
+            <a class="card partner-logo" href="https://www.gigabyte.com/" target="_blank" rel="noopener noreferrer"><img src="images/gigabyte-logo.png" alt="Gigabyte"></a>
+            <a class="card partner-logo" href="https://www.intel.com/" target="_blank" rel="noopener noreferrer"><img src="images/intel-logo.png" alt="Intel"></a>
+            <a class="card partner-logo" href="https://www.kingston.com/" target="_blank" rel="noopener noreferrer"><img src="images/kingston-logo.png" alt="Kingston"></a>
+            <a class="card partner-logo" href="https://www.nvidia.com/" target="_blank" rel="noopener noreferrer"><img src="images/nvidia-logo.png" alt="NVIDIA"></a>
+            <a class="card partner-logo" href="https://www.hp.com/" target="_blank" rel="noopener noreferrer"><img src="images/hp-logo.png" alt="HP"></a>
+            <a class="card partner-logo" href="https://www.msi.com/" target="_blank" rel="noopener noreferrer"><img src="images/msi-logo.png" alt="MSI"></a>
+            <a class="card partner-logo" href="https://www.asus.com/" target="_blank" rel="noopener noreferrer"><img src="images/asus logo.png" alt="ASUS"></a>
+            <a class="card partner-logo" href="https://www.lenovo.com/" target="_blank" rel="noopener noreferrer"><img src="images/lenovo logo.png" alt="Lenovo"></a>
+            <a class="card partner-logo" href="https://www.dell.com/" target="_blank" rel="noopener noreferrer"><img src="images/dell logo.png" alt="Dell"></a>
+            <a class="card partner-logo" href="https://www.apple.com/" target="_blank" rel="noopener noreferrer"><img src="images/apple logo.png" alt="Apple"></a>
+        </div>
+        <div aria-hidden class="car-slide">
+            <a class="card partner-logo" href="https://www.amd.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/amd-logo.png" alt=""></a>
+            <a class="card partner-logo" href="https://www.coolermaster.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/coolermaster-logo.png" alt=""></a>
+            <a class="card partner-logo" href="https://www.corsair.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/corsair-logo.png" alt=""></a>
+            <a class="card partner-logo" href="https://www.gigabyte.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/gigabyte-logo.png" alt=""></a>
+            <a class="card partner-logo" href="https://www.intel.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/intel-logo.png" alt=""></a>
+            <a class="card partner-logo" href="https://www.kingston.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/kingston-logo.png" alt=""></a>
+            <a class="card partner-logo" href="https://www.nvidia.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/nvidia-logo.png" alt=""></a>
+            <a class="card partner-logo" href="https://www.hp.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/hp-logo.png" alt=""></a>
+            <a class="card partner-logo" href="https://www.msi.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/msi-logo.png" alt=""></a>
+            <a class="card partner-logo" href="https://www.asus.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/asus logo.png" alt=""></a>
+            <a class="card partner-logo" href="https://www.lenovo.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/lenovo logo.png" alt=""></a>
+            <a class="card partner-logo" href="https://www.dell.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/dell logo.png" alt=""></a>
+            <a class="card partner-logo" href="https://www.apple.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/apple logo.png" alt=""></a>
+        </div>
+      </div>
+    </section>
+
+    <dialog class="partner-dialog" id="partnersDialog" aria-labelledby="partnersDialogTitle">
+      <div class="partner-dialog-header">
+        <div>
+          <p class="eyebrow">Bits and Bytes network</p>
+          <h2 id="partnersDialogTitle">All trusted partners</h2>
+        </div>
+        <button class="dialog-close-button" id="closePartners" type="button" aria-label="Close partner list">Close</button>
+      </div>
+      <div class="partner-grid">
+        <a class="partner-card" href="https://www.amd.com/" target="_blank" rel="noopener noreferrer"><img src="images/amd-logo.png" alt="AMD"><span>AMD</span></a>
+        <a class="partner-card" href="https://www.coolermaster.com/" target="_blank" rel="noopener noreferrer"><img src="images/coolermaster-logo.png" alt="Cooler Master"><span>Cooler Master</span></a>
+        <a class="partner-card" href="https://www.corsair.com/" target="_blank" rel="noopener noreferrer"><img src="images/corsair-logo.png" alt="Corsair"><span>Corsair</span></a>
+        <a class="partner-card" href="https://www.gigabyte.com/" target="_blank" rel="noopener noreferrer"><img src="images/gigabyte-logo.png" alt="Gigabyte"><span>Gigabyte</span></a>
+        <a class="partner-card" href="https://www.intel.com/" target="_blank" rel="noopener noreferrer"><img src="images/intel-logo.png" alt="Intel"><span>Intel</span></a>
+        <a class="partner-card" href="https://www.kingston.com/" target="_blank" rel="noopener noreferrer"><img src="images/kingston-logo.png" alt="Kingston"><span>Kingston</span></a>
+        <a class="partner-card" href="https://www.nvidia.com/" target="_blank" rel="noopener noreferrer"><img src="images/nvidia-logo.png" alt="NVIDIA"><span>NVIDIA</span></a>
+        <a class="partner-card" href="https://www.hp.com/" target="_blank" rel="noopener noreferrer"><img src="images/hp-logo.png" alt="HP"><span>HP</span></a>
+        <a class="partner-card" href="https://www.msi.com/" target="_blank" rel="noopener noreferrer"><img src="images/msi-logo.png" alt="MSI"><span>MSI</span></a>
+        <a class="partner-card" href="https://www.asus.com/" target="_blank" rel="noopener noreferrer"><img src="images/asus logo.png" alt="ASUS"><span>ASUS</span></a>
+        <a class="partner-card" href="https://www.lenovo.com/" target="_blank" rel="noopener noreferrer"><img src="images/lenovo logo.png" alt="Lenovo"><span>Lenovo</span></a>
+        <a class="partner-card" href="https://www.dell.com/" target="_blank" rel="noopener noreferrer"><img src="images/dell logo.png" alt="Dell"><span>Dell</span></a>
+        <a class="partner-card" href="https://www.apple.com/" target="_blank" rel="noopener noreferrer"><img src="images/apple logo.png" alt="Apple"><span>Apple</span></a>
+      </div>
+    </dialog>
+
+    <section class="section">
+      <div class="section-heading">
+        <hr>
+        <p class="eyebrow"><strong>Browse by collection</strong></p>
+        <hr>
+        <h2>Find the right part of your setup</h2>
+      </div>
+      <div class="catalog-gateway-grid collection-hover-grid">
+        <a class="catalog-gateway gateway-systems" href="products.html#computer-products">
+          <img src="images/editorial-performance-workspace.png" alt="Desktop PC and ultrawide monitor collection">
+          <span class="gateway-shade" aria-hidden="true"></span>
+          <span class="gateway-copy"><span class="gateway-index">01 / systems</span><strong>Computer Products</strong><span>Desktop PCs and displays for gaming, school, and serious work.</span><em>Browse collection &rarr;</em></span>
+        </a>
+        <a class="catalog-gateway gateway-laptops" href="products.html#laptops">
+          <img src="images/editorial-creator-laptop.png" alt="Performance laptop collection">
+          <span class="gateway-shade" aria-hidden="true"></span>
+          <span class="gateway-copy"><span class="gateway-index">02 / portable</span><strong>Laptops</strong><span>Portable choices for classes, office work, gaming, and creation.</span><em>Browse collection &rarr;</em></span>
+        </a>
+        <a class="catalog-gateway gateway-accessories" href="products.html#accessories">
+          <img src="images/showcase-keyboard.jpg" alt="RGB keyboard accessory">
+          <span class="gateway-shade" aria-hidden="true"></span>
+          <span class="gateway-copy"><span class="gateway-index">03 / desk gear</span><strong>Accessories</strong><span>Keyboards, mice, and essentials that complete your workspace.</span><em>Browse collection &rarr;</em></span>
+        </a>
+        <a class="catalog-gateway gateway-parts" href="products.html#computer-parts">
+          <img src="images/editorial-pc-components.png" alt="PC component collection">
+          <span class="gateway-shade" aria-hidden="true"></span>
+          <span class="gateway-copy"><span class="gateway-index">04 / build core</span><strong>Computer Parts</strong><span>Core parts for upgrades and a custom RGB-ready PC build.</span><em>Browse collection &rarr;</em></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="wide-feature">
+      <div>
+        <p class="eyebrow"><em>Special Feature</em></p>
+        <h2>Build Your Own PC</h2>
+        <p>
+          Choose your processor, motherboard, graphics card, memory, storage, case,
+          monitor, keyboard, and other accessories. The builder warns you when parts
+          do not match, like choosing an Intel CPU with an AMD motherboard socket.
+        </p>
+      </div>
+      <a class="button primary" href="build.html">Start Building</a>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Featured picks</p>
+        <h2>Selected for your next setup</h2>
+      </div>
+      <div class="product-grid" id="featuredProducts"></div>
+    </section>
+
+    <section class="care-benefits" aria-labelledby="careBenefitsTitle">
+      <div class="care-benefits-heading">
+        <p class="eyebrow">Service that stays with you</p>
+        <h2 id="careBenefitsTitle">We Care for You</h2>
+        <p>Practical support for your computer, laptop, and accessories before and after checkout.</p>
+      </div>
+      <div class="care-benefits-grid">
+        <article class="care-benefit">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 3h8M8 21h8M9 3v3l3 3 3-3V3M9 21v-3l3-3 3 3v3"/><path d="M7 3h10M7 21h10"/></svg></span>
+          <h3>Free Assembly Labor</h3>
+          <p>Professional assembly for complete PC builds purchased from our store.</p>
+        </article>
+        <article class="care-benefit">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="m7 22-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></span>
+          <h3>Easy Product Exchange</h3>
+          <p>Assistance for eligible exchanges within the applicable store period.</p>
+        </article>
+        <article class="care-benefit">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6M9 10h.01M15 10h.01"/></svg></span>
+          <h3>On-Site Setup Support</h3>
+          <p>Selected setup services available within supported Metro Manila areas.</p>
+        </article>
+        <article class="care-benefit">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v5c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <h3>Warranty Coverage</h3>
+          <p>Clear store and manufacturer warranty guidance for supported products.</p>
+        </article>
+        <article class="care-benefit">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/><path d="M9 7h6M9 11h6M9 15h3"/><path d="m14 17 1.5 1.5L19 15"/></svg></span>
+          <h3>Warranty Assistance</h3>
+          <p>Help preparing product details and documents for a warranty request.</p>
+        </article>
+        <article class="care-benefit">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2M8 3 6 5M16 3l2 2"/></svg></span>
+          <h3>Performance Testing</h3>
+          <p>System checks for complete desktop builds before pickup or dispatch.</p>
+        </article>
+        <article class="care-benefit">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 6a4 4 0 1 1 8 0v4a4 4 0 1 1-8 0V6Z"/><path d="M12 14v7M9 18h6"/></svg></span>
+          <h3>Cable Management</h3>
+          <p>Neat internal routing for airflow, maintenance, and a cleaner build.</p>
+        </article>
+        <article class="care-benefit">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>
+          <h3>Nationwide Delivery</h3>
+          <p>Shipping options for eligible orders across the Philippines.</p>
+        </article>
+        <article class="care-benefit">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 13v-2a8 8 0 0 1 16 0v2"/><path d="M4 13H2v5h4v-5H4ZM20 13h2v5h-4v-5h2ZM18 19c-1 2-3 2-6 2"/></svg></span>
+          <h3>Technical Support</h3>
+          <p>Friendly assistance for product setup, compatibility, and troubleshooting.</p>
+        </article>
+        <article class="care-benefit">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7 12 3l8 4-8 4-8-4Z"/><path d="m4 7 8 4 8-4v10l-8 4-8-4V7Z"/><path d="M12 11v10"/></svg></span>
+          <h3>Assembly and Installation</h3>
+          <p>Careful component installation with a complete-build inspection.</p>
+        </article>
+        <article class="care-benefit">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 6 4 16l4 4L18 10"/><path d="m13 7 4 4M15 4l2-2 5 5-2 2M3 21l4-1"/></svg></span>
+          <h3>Firmware and Drivers</h3>
+          <p>Essential firmware and driver setup for compatible complete systems.</p>
+        </article>
+        <article class="care-benefit">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.2 2.8 3.5-.3.8 3.4 3 1.8-1.5 3.2 1.5 3.2-3 1.8-.8 3.4-3.5-.3L12 21l-2.2-2.8-3.5.3-.8-3.4-3-1.8L4 12 2.5 8.8l3-1.8.8-3.4 3.5.3L12 3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <h3>Trusted Brand Components</h3>
+          <p>Genuine components from the established partner brands we display.</p>
+        </article>
+        <article class="care-benefit care-benefit-final">
+          <span class="care-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m14 4 6 6-9 9H5v-6l9-9Z"/><path d="m12 6 6 6M3 21h18M7 15l2 2"/></svg></span>
+          <h3>PC Dust Cleaning</h3>
+          <p>Maintenance cleaning support for eligible complete desktop builds.</p>
+        </article>
+      </div>
+      <a class="care-warranty-link" href="warranty.html">Read our warranty information</a>
+    </section>
+
+
+      <details class="section store-listening">
+        <summary>A little background music</summary>
+        <p>Settle in while you explore the collection.</p>
+      <audio controls loop preload="none" aria-label="Optional store background music">
+        <source src="images/lobby.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      </details>
+
+
+    <section class="section home-support" aria-labelledby="homeSupportTitle">
+      <div class="home-support-copy">
+        <p class="eyebrow">The support desk</p>
+        <h2 id="homeSupportTitle">Good hardware.<br>Personal attention.</h2>
+        <p>Need a second opinion on a build, or have a question about your order?
+          Tell us what you have in mind.</p>
+        <a class="text-link" href="contact.html">Contact &amp; frequently asked questions <span aria-hidden="true">&rarr;</span></a>
+        <div class="support-topics"><span>Product advice</span><span>Compatibility</span><span>Order support</span></div>
+      </div>
+      <iframe src="support-widget.html" title="Send a message to Bits and Bytes support" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-top-navigation-by-user-activation" referrerpolicy="no-referrer"></iframe>
+    </section>
+
+    <section class="customer-reviews" aria-labelledby="reviewsTitle">
+      <div class="reviews-heading">
+        <div>
+          <p class="eyebrow">Customer feedback</p>
+          <h2 id="reviewsTitle">What shoppers say about their setup</h2>
+          <p>Sample review cards for the Bits and Bytes store experience.</p>
+        </div>
+        <div class="review-controls" aria-label="Review carousel controls">
+          <button id="reviewPrevious" type="button" aria-label="Show previous reviews">Previous</button>
+          <button id="reviewNext" type="button" aria-label="Show next reviews">Next</button>
+        </div>
+      </div>
+      <div class="review-viewport" aria-live="polite">
+        <div class="review-track" id="reviewTrack">
+          <article class="review-card">
+            <div class="review-person"><span class="review-avatar">AM</span><div><strong>Aira M.</strong><small>Gaming PC order</small></div></div>
+            <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+            <p>“The compatibility notes made choosing parts much less confusing. My RGB gaming setup arrived exactly as planned.”</p>
+          </article>
+          <article class="review-card">
+            <div class="review-person"><span class="review-avatar">JC</span><div><strong>Jules C.</strong><small>Laptop order</small></div></div>
+            <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+            <p>“I could compare the laptop specs, stock, and price before adding it to the cart. The process felt straightforward.”</p>
+          </article>
+          <article class="review-card">
+            <div class="review-person"><span class="review-avatar">RT</span><div><strong>Rina T.</strong><small>Creator setup</small></div></div>
+            <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+            <p>“The custom builder gave me a useful starting point for editing work, then I changed the parts to suit my budget.”</p>
+          </article>
+          <article class="review-card">
+            <div class="review-person"><span class="review-avatar">DL</span><div><strong>Devon L.</strong><small>Accessory order</small></div></div>
+            <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+            <p>“The product details and stock labels helped me find the right keyboard and monitor for my study desk.”</p>
+          </article>
+          <article class="review-card">
+            <div class="review-person"><span class="review-avatar">SM</span><div><strong>Sofia M.</strong><small>Office PC order</small></div></div>
+            <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+            <p>“A clear, tidy store layout. I liked being able to save choices in the wishlist while deciding what to buy.”</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+      
+  </main>
+
+  <script src="data.js?v=20261012-gallery-v2"></script>
+  <script src="app.js?v=20261012-gallery-v2"></script>
+  <script src="support-form.js"></script>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Herrera Corporation. All rights reserved.</p>
+    <div>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html">Cart</a>
+      <a id ="btm" href="#top">Skip to Page Head</a>
+    </div>
+    <div class="social-links" aria-label="Social media profiles">
+      <a class="social-icon facebook" href="https://www.facebook.com/johncarlo.herrera.58" target="_blank" rel="noopener noreferrer" aria-label="Facebook: John Carlo Herrera" title="Facebook"><img src="images/social/facebook.svg" alt="" width="24" height="24"></a>
+      <a class="social-icon instagram" href="https://www.instagram.com/jayzzzz0723/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: jayzzzz0723" title="Instagram"><img src="images/social/instagram.svg" alt="" width="24" height="24"></a>
+      <a class="social-icon x-twitter" href="https://x.com/Jayzee20202" target="_blank" rel="noopener noreferrer" aria-label="X: Jayzee20202" title="X"><img src="images/social/x.svg" alt="" width="24" height="24"></a>
+      <a class="social-icon youtube" href="https://www.youtube.com/@johncarloherrera8540" target="_blank" rel="noopener noreferrer" aria-label="YouTube: johncarloherrera8540" title="YouTube"><img src="images/social/youtube.svg" alt="" width="24" height="24"></a>
+    </div>
+  </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+BITS AND BYTES - PC MAINTENANCE GUIDE
+
+MONTHLY
+- Check that vents are clear and fans spin normally.
+- Review free storage space and remove unneeded temporary files.
+
+EVERY THREE TO SIX MONTHS
+- Shut down and unplug the computer before cleaning.
+- Remove dust from filters and accessible vents.
+- Check cables for strain, damage, or loose connections.
+- Install stable driver and firmware updates from trusted sources.
+
+BEFORE UPGRADING
+- Confirm motherboard, case, power, and connector compatibility.
+- Back up important files.
+- Follow antistatic handling practices.
+
+This sample manual is intended as a replaceable download for the storefront project.

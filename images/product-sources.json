@@ -1,0 +1,188 @@
+[
+  {
+    "file": "products/intel-core-i5-14600k.jpg",
+    "url": "https://ttgshop.vn/media/pro-desc/intel_core_i5_14600k_1_8231c73a5dce49de8d3d9fc4af25f2f0_1024x1024.jpg",
+    "source": "https://ttgshop.vn/cpu-intel-core-i5-14600k-up-to-5-3ghz-14-nhan-20-luong-24mb",
+    "product": "Intel Core i5-14600K"
+  },
+  {
+    "file": "products/amd-ryzen-7-7700x.jpg",
+    "url": "https://cdn.sotel.de/images/1000981311/amd-ryzen-7-7700x-45-ghz-am5-8-cores-16-threads-boxed-ohne-k-001.jpg",
+    "source": "https://www.sotel.de/en/PCs-printer/PC-Components/Motherboards-Processors-Coolers/AMD-Ryzen-7-7700X-processor-4-5-GHz-32-MB-L3-Box.html",
+    "product": "AMD Ryzen 7 7700X"
+  },
+  {
+    "file": "products/gigabyte-b650-aorus-elite-ax.png",
+    "url": "https://static.gigabyte.com/StaticFile/Image/Global/dbefc3ab14d531fb4c57220dc28d3da5/ProductRemoveBg/36115",
+    "source": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-12/support",
+    "product": "Gigabyte B650 AORUS ELITE AX, revision 1.2"
+  },
+  {
+    "file": "products/kingston-fury-beast-ddr5.png",
+    "url": "https://media.kingston.com/kingston/product-comparison/ktc-comp-chart-fury-beast-ddr5_tn.png",
+    "source": "https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr5-memory",
+    "product": "Kingston FURY Beast DDR5 product family"
+  },
+  {
+    "file": "products/corsair-rm850e.webp",
+    "url": "https://assets.corsair.com/image/upload/c_pad,q_85,h_1100,w_1100,f_webp/products/rme-series-2025/Gallery/CP-9020296-NA_01.webp",
+    "source": "https://www.corsair.com/us/en/p/psu/cp-9020296-na/rme-series-rm850e-fully-modular-low-noise-atx-power-supply-cp-9020296-na",
+    "product": "Corsair RM850e, 2025 product family"
+  },
+  {
+    "file": "products/cooler-master-ml240l.png",
+    "url": "https://a.storyblok.com/f/281110/ebaffc68ce/ml240lrgb_g1.png",
+    "source": "https://legacy.coolermaster.com/es-global/products/masterliquid-ml240l-rgb/",
+    "product": "Cooler Master MasterLiquid ML240L RGB"
+  },
+  {
+    "file": "products/cooler-master-ml240l-side.png",
+    "url": "https://a.storyblok.com/f/281110/a74f3b29ea/ml240lrgb_g2.png",
+    "source": "https://legacy.coolermaster.com/es-global/products/masterliquid-ml240l-rgb/",
+    "product": "Cooler Master MasterLiquid ML240L RGB alternate view"
+  },
+  {
+    "file": "products/msi-aegis-r.png",
+    "url": "https://asset.msi.com/resize/image/global/product/product_1669160633809914962a2cb40d02df74877b17555b.png62405b38c58fe0f07fcef2367d8a9ba1/1024.png",
+    "source": "https://us.msi.com/Desktop/Aegis-R-13th/Specification",
+    "product": "MSI Aegis R 13th product family"
+  },
+  {
+    "file": "products/dell-inspiron-14-plus.jpg",
+    "url": "https://www.dellonline.co.za/cdn/shop/files/7902CCDB-9FA8-430E-BE9E-6E44FC0A5074_292705_1800x1800.jpg?v=1741777388",
+    "source": "https://www.dellonline.co.za/products/dell-inspiron-14-plus-7440-14-inch-core-ultra-7-155h-32gb-ram-1tb-ssd-win-11-home-laptop-323755",
+    "product": "Dell Inspiron 14 Plus 7440 product family"
+  },
+  {
+    "file": "products/hp-pavilion-plus-14.jpg",
+    "url": "https://comptechdirect.com/cdn/shop/files/HP_9P9X1UA_INT_1_1024x1024.jpg?v=1721122488",
+    "source": "https://comptechdirect.com/products/hp-pavilion-plus-14-ew1010nr-14-wqxga-laptop-intel-u5-125h-1-20ghz-16gb-ram-512gb-ssd-win11h-9p9x1ua-aba",
+    "product": "HP Pavilion Plus 14, Intel Core Ultra 5"
+  },
+  {
+    "file": "products/msi-rtx-4060-main.webp",
+    "url": "https://storage-asset.msi.com/global/picture/product/product_1689728820bee4166c12b53c656c39ab1b81888843.webp",
+    "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-VENTUS-2X-BLACK-8G-OC/Gallery",
+    "product": "MSI GeForce RTX 4060 VENTUS 2X BLACK 8G OC"
+  },
+  {
+    "file": "products/msi-rtx-4060-side.webp",
+    "url": "https://storage-asset.msi.com/global/picture/product/product_1689728820676b2fd219bbb5d305ebef481361e93e.webp",
+    "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-VENTUS-2X-BLACK-8G-OC/Gallery",
+    "product": "MSI GeForce RTX 4060 VENTUS 2X BLACK 8G OC alternate view"
+  },
+  {
+    "file": "products/msi-rtx-4060-back.webp",
+    "url": "https://storage-asset.msi.com/global/picture/product/product_1689728822eb7add0b7cae993b88ba3c45dcd2c94a.webp",
+    "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-VENTUS-2X-BLACK-8G-OC/Gallery",
+    "product": "MSI GeForce RTX 4060 VENTUS 2X BLACK 8G OC rear view"
+  },
+  {
+    "file": "products/kingston-nv3.png",
+    "url": "https://cdn-reichelt.de/bilder/web/xxl_ws/E910/KINGSTON_SNV3S-500G_02.png",
+    "source": "https://www.reichelt.com/de/en/kingston-nv3-nvme-8482-ssd-500-gb-m-2-pcie-snv3s-500g-p384166.html",
+    "product": "Kingston NV3 M.2 2280 SSD family"
+  },
+  {
+    "file": "products/kingston-fury-beast-large.png",
+    "url": "https://notebookspec.com/storage/pc-ram/1507-ram_1249_20211104-165200_1.png",
+    "source": "https://notebookspec.com/pc-ram/1507-kingston-fury-beast-ddr5-32gb-32gbx1-6000.html",
+    "product": "Kingston FURY Beast DDR5 family"
+  },
+  {
+    "file": "products/kingston-kc600.png",
+    "url": "https://pub.thisshop.com/p/B844559DC1D47B4A/2026/5FF090C80F864294955DAC58670E5B5F.png",
+    "source": "https://www.thisshop.com/item/detail?itemId=4001817907901&pageNum=1",
+    "product": "Kingston KC600 SATA SSD family"
+  },
+  {
+    "file": "products/corsair-rm650e.webp",
+    "url": "https://assets.corsair.com/image/upload/c_pad,q_85,h_1100,w_1100,f_webp/products/rme-series-2025/Gallery/CP-9020302-NA_01.webp",
+    "source": "https://www.corsair.com/us/en/p/psu/cp-9020302-na/rme-series-rm650e-fully-modular-low-noise-atx-power-supply-cp-9020302-na",
+    "product": "Corsair RM650e"
+  },
+  {
+    "file": "products/corsair-rm750e.webp",
+    "url": "https://assets.corsair.com/image/upload/c_pad,q_85,h_1100,w_1100,f_webp/products/rme-series-2025/Gallery/CP-9020295-NA_01.webp",
+    "source": "https://www.corsair.com/us/en/p/psu/cp-9020295-na/rme-series-rm750e-fully-modular-low-noise-atx-power-supply-cp-9020295-na",
+    "product": "Corsair RM750e"
+  },
+  {
+    "file": "products/corsair-rm1000e.webp",
+    "url": "https://assets.corsair.com/image/upload/c_pad,q_85,h_1100,w_1100,f_webp/products/rme-series-2025/Gallery/CP-9020297-NA_01.webp",
+    "source": "https://www.corsair.com/us/en/p/psu/cp-9020297-na/rme-series-rm1000e-fully-modular-low-noise-atx-power-supply-cp-9020297-na",
+    "product": "Corsair RM1000e"
+  },
+  {
+    "file": "products/kingston-nv3-1000gb.png",
+    "url": "https://cdn-reichelt.de/bilder/web/xxl_ws/E910/KINGSTON_SNV3S-1000G_02.png",
+    "source": "https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd",
+    "product": "Kingston NV3 1TB, printed capacity verified"
+  },
+  {
+    "file": "products/kingston-nv3-2000gb.png",
+    "url": "https://cdn-reichelt.de/bilder/web/xxl_ws/E910/KINGSTON_SNV3S-2000G_02.png",
+    "source": "https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd",
+    "product": "Kingston NV3 2TB, printed capacity verified"
+  },
+  {
+    "file": "products/kingston-nv3-4000gb.jpg",
+    "url": "https://media.kingston.com/kingston/product/SNV3S_4000GB-zm-lg.jpg",
+    "source": "https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd",
+    "product": "Kingston NV3 4TB"
+  },
+  {
+    "file": "products/kingston-kc600-256gb.jpg",
+    "url": "https://media.kingston.com/kingston/product/ktc-product-ssd-kc600-256gb-3-sm.jpg",
+    "source": "https://www.kingston.com/en/ssd/kc600-sata-solid-state-drive",
+    "product": "Kingston KC600 256GB retail package"
+  },
+  {
+    "file": "products/kingston-kc600-512gb.jpg",
+    "url": "https://media.kingston.com/kingston/product/ktc-product-ssd-kc600-512gb-3-sm.jpg",
+    "source": "https://www.kingston.com/en/ssd/kc600-sata-solid-state-drive",
+    "product": "Kingston KC600 512GB retail package"
+  },
+  {
+    "file": "products/kingston-kc600-1024gb.jpg",
+    "url": "https://media.kingston.com/kingston/product/ktc-product-ssd-kc600-1024gb-3-sm.jpg",
+    "source": "https://www.kingston.com/en/ssd/kc600-sata-solid-state-drive",
+    "product": "Kingston KC600 1024GB retail package"
+  },
+  {
+    "file": "products/kingston-kc600-2048gb.jpg",
+    "url": "https://media.kingston.com/kingston/product/ktc-product-ssd-kc600-2048gb-3-sm.jpg",
+    "source": "https://www.kingston.com/en/ssd/kc600-sata-solid-state-drive",
+    "product": "Kingston KC600 2048GB retail package"
+  },
+  {
+    "file": "products/kingston-fury-8gb.png",
+    "url": "https://i.ebayimg.com/images/g/M3wAAOSw5xhkyn89/s-l1200.png",
+    "source": "https://www.ebay.com/itm/295855343362",
+    "product": "Kingston FURY Beast KF556C40BB-8, 8GB DDR5-5600"
+  },
+  {
+    "file": "products/kingston-fury-16gb.png",
+    "url": "https://cdn-reichelt.de/bilder/web/xxl_ws/E910/KINGSTON_50KI3252-1040FB_06.png",
+    "source": "https://www.reichelt.de/de/de/shop/produkt/16_gb_ddr5_5600_cl40_kingston_fury_beast_black_xmp-372916",
+    "product": "Kingston FURY Beast 16GB DDR5-5600"
+  },
+  {
+    "file": "products/kingston-fury-32gb-kit.jpg",
+    "url": "https://pulser.kz/gallery/images/image-by-item-and-alias?dirtyAlias=5c05f692dd-2.jpg&item=Product11843",
+    "source": "https://pulser.kz/product/komplekt-modulej-pamati-kingston-fury-beast-kf556c40bbk2-32-ddr5-32-gb-171655",
+    "product": "Kingston FURY Beast 32GB, 2 x 16GB DDR5-5600"
+  },
+  {
+    "file": "products/kingston-fury-64gb-kit.jpg",
+    "url": "https://img.advice.co.th/images_nas/pic_product4/A0161280/A0161280OK_ORI_5.jpg",
+    "source": "https://www.mercular.com/ram-ddr5-5200-64gb-32gbx2-kingston-fury-beast-kf552c40bbk2-64-",
+    "product": "Kingston FURY Beast 64GB, 2 x 32GB DDR5-5200"
+  },
+  {
+    "file": "products/kingston-fury-64gb-kit.jpg",
+    "url": "https://cdn11.bigcommerce.com/s-xwx16vh8tc/images/stencil/1280x1280/products/538807/3253385/Kingston_FURY_Beast_64GB_2_x_32GB_DDR5_SDRAM_Memory_Kit_-_64_GB_2_x_32GB_-_DDR5-6000PC5-48000_DDR5_SDRAM_-_6000_MHz_Dual-rank_-_-_KF560C30BBEK2-64_fleetnetwork_20250221015536__43370.1740120938.jpg?c=2",
+    "source": "https://fleetnetwork.ca/kingston-kf560c30bbek2-64-fury-beast-64gb-2-x-32gb-ddr5-6000-pc5-48000-dimm-memory-kit-6000-mhz-cl30-dual-rank-on-die-ecc/",
+    "product": "Kingston FURY Beast 64GB (2 x 32GB) kit"
+  }
+]
