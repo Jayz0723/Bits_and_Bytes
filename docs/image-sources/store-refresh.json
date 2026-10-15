@@ -1,0 +1,83 @@
+{
+  "note": "Manufacturer and retailer media, downloaded without retouching. Verify permissions before commercial redistribution. Lucide icons are ISC licensed; see docs/LUCIDE-LICENSE.txt.",
+  "assets": [
+    {
+      "file": "images/showcase/surface-video-preview.jpg",
+      "source": "https://i.ytimg.com/vi/s1Oj792qc80/maxresdefault.jpg",
+      "note": "Thumbnail for the user-supplied Microsoft Surface video; playback uses the official YouTube embed."
+    },
+    {
+      "file": "images/products/surface-studio-2-front.png",
+      "source": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Surface-Laptop-Studio-2_touchscreen-tech-spec?fmt=png-alpha&wid=1200"
+    },
+    {
+      "file": "images/products/surface-studio-2-ports.png",
+      "source": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Surface-Laptop-Studio-2_connections-tech-spec?fmt=png-alpha&wid=1200"
+    },
+    {
+      "file": "images/products/surface-studio-2-stage.png",
+      "source": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Surface-Laptop-Studio-2_platinum_photoshop?fmt=png-alpha&wid=1200"
+    },
+    {
+      "file": "images/products/surface-studio-2-main.png",
+      "source": "https://cf-images.dustin.eu/cdn-cgi/image/fit%3Dcontain%2Cformat%3Dpng%2Cquality%3D90%2Cwidth%3D1200/image/d2000010011111427/microsoft-surface-laptop-studio-2-intel-core-i7-64gb-1000gb-rtx-4060-144.png",
+      "note": "Same Surface Laptop Studio 2 chassis across memory configurations. Pen shown is not included."
+    },
+    {
+      "file": "images/products/dell-xps-13-9340.png",
+      "source": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/13-9340/media-gallery/silver/touch/notebook-xps-13-9340-t-sl-gallery-2.psd?fmt=png-alpha&wid=1200"
+    },
+    {
+      "file": "images/products/dell-xps-13-9340-side.png",
+      "source": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/13-9340/media-gallery/silver/touch/notebook-xps-13-9340-t-sl-gallery-4.psd?fmt=png-alpha&wid=1200"
+    },
+    {
+      "file": "images/products/dell-xps-13-9340-angle.png",
+      "source": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/13-9340/media-gallery/silver/touch/notebook-xps-13-9340-t-sl-gallery-5.psd?fmt=png-alpha&wid=1200"
+    },
+    {
+      "file": "images/products/hp-omen-35l.png",
+      "source": "https://hp.widen.net/content/tbaccoydwm/png/tbaccoydwm.png?w=1200&dpi=72&color=ffffff00"
+    },
+    {
+      "file": "images/products/hp-omen-35l-side.png",
+      "source": "https://hp.widen.net/content/su3u0demf2/png/su3u0demf2.png?w=1200&dpi=72&color=ffffff00"
+    },
+    {
+      "file": "images/products/hp-omen-35l-angle.png",
+      "source": "https://hp.widen.net/content/rxp4vbh1i2/png/rxp4vbh1i2.png?w=1200&dpi=72&color=ffffff00"
+    },
+    {
+      "file": "images/products/hp-omen-35l-inside.png",
+      "source": "https://hp.widen.net/content/h06islqycj/png/h06islqycj.png?w=1200&dpi=72&color=ffffff00"
+    },
+    {
+      "file": "images/products/mac-mini-m4.jpg",
+      "source": "https://www.apple.com/newsroom/images/2024/10/apples-new-mac-mini-apples-new-mac-mini-is-more-mighty-more-mini-and-built-for-apple-intelligence/article/Apple-Mac-mini-hero_big.jpg.large.jpg"
+    },
+    {
+      "file": "images/products/mac-mini-m4-front.jpg",
+      "source": "https://www.apple.com/newsroom/images/2024/10/apples-new-mac-mini-apples-new-mac-mini-is-more-mighty-more-mini-and-built-for-apple-intelligence/article/Apple-Mac-mini-front-facing-ports_big.jpg.large.jpg"
+    },
+    {
+      "file": "images/products/mac-mini-m4-back.jpg",
+      "source": "https://www.apple.com/newsroom/images/2024/10/apples-new-mac-mini-apples-new-mac-mini-is-more-mighty-more-mini-and-built-for-apple-intelligence/article/Apple-Mac-mini-back-facing-ports_big.jpg.large.jpg"
+    },
+    {
+      "file": "images/branding/microsoft-logo.png",
+      "source": "https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png"
+    },
+    {
+      "file": "images/icons/shopping-cart.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/shopping-cart.svg"
+    },
+    {
+      "file": "images/icons/play.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/play.svg"
+    },
+    {
+      "file": "images/icons/search.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/search.svg"
+    }
+  ]
+}

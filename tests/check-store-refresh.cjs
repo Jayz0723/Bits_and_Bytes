@@ -1,0 +1,109 @@
+// Local browser regression checks for the shared header and new arrivals.
+const fs = require('node:fs');
+const path = require('node:path');
+const assert = require('node:assert/strict');
+const { chromium } = require('./browser.cjs');
+const root = path.resolve(__dirname, '..');
+
+(async () => {
+  const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  try {
+    const page = await browser.newPage({ reducedMotion: 'reduce' });
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.route('**/*', route => {
+      const url = new URL(route.request().url());
+      if (url.hostname !== 'shop.test') return route.abort();
+      const file = path.resolve(root, decodeURIComponent(url.pathname.slice(1)));
+      if (!file.startsWith(root + path.sep) || !fs.existsSync(file)) return route.fulfill({ status: 404 });
+      const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
+      return route.fulfill({ body: fs.readFileSync(file), contentType: types[path.extname(file)] || 'application/octet-stream' });
+    });
+    for (const width of [1920, 1440, 1024, 390, 320]) {
+      await page.setViewportSize({ width, height: 960 });
+      for (const file of ['index.html', 'pages/components.html', 'pages/products.html', 'pages/cart.html']) {
+        await page.goto('https://shop.test/' + file);
+        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${file} fits ${width}px`);
+        assert.ok(await page.locator('.store-toolbar .cart-pill').isVisible());
+        assert.equal(await page.locator('.cart-pill').getAttribute('aria-label'), 'Cart, 0 items');
+        if (file === 'pages/products.html' && width < 761) {
+          assert.ok(await page.locator('#filterControls').isHidden(), 'Mobile filters start collapsed');
+          await page.click('#toggleFilters');
+          assert.ok(await page.locator('#typeFilter').isVisible());
+          await page.selectOption('#typeFilter', 'Laptop');
+          await page.click('#toggleFilters');
+          assert.ok((await page.locator('.product-card h3').count()) > 0);
+          await page.click('#resetFilters');
+          await page.evaluate(() => scrollTo(0, 0));
+        }
+        if (file === 'pages/components.html' || file === 'index.html') {
+          const banner = await page.locator('.site-header > img').boundingBox();
+          assert.ok(Math.abs(banner.width - width) < 1 && banner.height >= 200, 'Full-width banner has a useful height');
+        }
+        assert.ok(!/\bdemo\b/i.test(await page.locator('body').innerText()), 'No demo wording in storefront copy');
+        await page.screenshot({ path: path.join(root, 'images/previews/refresh-' + path.basename(file, '.html') + '-' + width + '.png') });
+      }
+    }
+
+    // Older secondary pages must load the same header styles as the catalog.
+    for (const width of [1440, 390, 320]) {
+      await page.setViewportSize({ width, height: 960 });
+      for (const file of ['about', 'build', 'downloads', 'terms', 'warranty', 'wishlist']) {
+        await page.goto('https://shop.test/pages/' + file + '.html');
+        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), file + ' fits ' + width);
+        assert.ok(await page.locator('.cart-icon').isVisible(), file + ' has the cart icon');
+        assert.notEqual(await page.locator('.cart-icon').evaluate(icon => getComputedStyle(icon).maskImage), 'none');
+        await page.screenshot({ path: path.join(root, 'images/previews/refresh-' + file + '-' + width + '.png') });
+      }
+    }
+    await page.setViewportSize({ width: 1440, height: 960 });
+    await page.goto('https://shop.test/index.html');
+    await page.locator('.nav-brand').evaluate(link => link.addEventListener('click', event => event.preventDefault(), { once: true }));
+    await page.locator('.nav-brand').click();
+    assert.equal(await page.locator('.nav-brand').evaluate(link => getComputedStyle(link).outlineStyle), 'none', 'No pointer outline on the logo');
+    await page.reload();
+    await page.keyboard.press('Tab');
+    await page.locator('.nav-brand').focus();
+    assert.notEqual(await page.locator('.nav-brand').evaluate(link => getComputedStyle(link).outlineStyle), 'none', 'Keyboard focus remains visible');
+    assert.equal(await page.locator('.promo-slide').count(), 5);
+    await page.locator('[data-promo-slide="4"]').click();
+    assert.equal(await page.locator('.microsoft-promo').getAttribute('aria-hidden'), 'false');
+    await page.locator('.microsoft-promo').screenshot({ path: path.join(root, 'images/previews/refresh-microsoft-slide.png') });
+    assert.equal(await page.locator('.video-stage iframe').count(), 0, 'Video does not load automatically');
+    await page.locator('.home-video').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: path.join(root, 'images/previews/refresh-video.png') });
+    await page.click('#playSurfaceVideo');
+    assert.match(await page.locator('.video-stage iframe').getAttribute('src'), /youtube-nocookie\.com\/embed\/s1Oj792qc80/);
+    assert.ok(await page.locator('a[href="https://www.youtube.com/watch?v=s1Oj792qc80"]').isVisible());
+    await page.goto('https://shop.test/pages/products.html?brand=Microsoft');
+    assert.ok(await page.locator('[data-brand-filter][value="Microsoft"]').isChecked());
+    assert.equal(await page.locator('.product-card').count(), 1);
+    assert.match(await page.locator('.product-card h3').innerText(), /Microsoft Surface/);
+    await page.locator('.store-search input').fill('Mac mini');
+    await page.locator('.store-search button').click();
+    assert.match(page.url(), /q=Mac\+mini/);
+    assert.equal(await page.locator('.product-card').count(), 1);
+    await page.locator('[data-add-product]').click();
+    assert.equal(await page.locator('#cartCount').innerText(), '1');
+    assert.equal(await page.locator('.cart-pill').getAttribute('aria-label'), 'Cart, 1 item');
+
+    for (const id of ['lap-microsoft-studio-2', 'lap-dell-xps-13', 'pc-hp-omen-35l', 'pc-apple-mac-mini-m4']) {
+      await page.goto('https://shop.test/pages/product.html?id=' + id);
+      const photos = await page.evaluate(() => productGallery(catalogProducts().find(product => product.id === new URLSearchParams(location.search).get('id'))));
+      assert.ok(photos.length >= 4 && photos.some(photo => photo.shortLabel === 'Close-up'));
+      const broken = await page.evaluate(async photos => {
+        const results = await Promise.all(photos.map(photo => new Promise(resolve => {
+          const image = new Image();
+          image.onload = () => resolve(image.naturalWidth > 100 ? null : photo.src);
+          image.onerror = () => resolve(photo.src);
+          image.src = photo.src;
+        })));
+        return results.filter(Boolean);
+      }, photos);
+      assert.deepEqual(broken, [], id + ' has working photos');
+      await page.screenshot({ path: path.join(root, 'images/previews/refresh-' + id + '.png') });
+    }
+    assert.deepEqual(errors, []);
+    console.log('Passed responsive banners, logo focus, cart badge, search, Microsoft filtering, video facade, and all new product galleries.');
+  } finally { await browser.close(); }
+})().catch(error => { console.error(error); process.exitCode = 1; });

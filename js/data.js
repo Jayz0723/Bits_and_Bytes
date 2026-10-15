@@ -246,6 +246,61 @@ productVariants["part-ssd-1tb-nvme"].options.forEach((variant) => {
 });
 
 const products = [
+  // New arrivals: keep each model's photographs together with its specifications.
+  {
+    id: "lap-microsoft-studio-2",
+    name: "Microsoft Surface Laptop Studio 2",
+    type: "Laptop", use: "Creator", brand: "Microsoft",
+    price: 139995, stock: 5,
+    image: "images/products/surface-studio-2-main.png",
+    specs: "Intel Core i7-13700H, RTX 4050 6GB, 16GB RAM, 512GB SSD, 14.4-inch 120Hz touchscreen display",
+    gallery: [
+      { src: "images/products/surface-studio-2-main.png", label: "Surface Laptop Studio 2 adjustable display", shortLabel: "Main", note: "Surface Slim Pen shown for illustration; sold separately." },
+      { src: "images/products/surface-studio-2-stage.png", label: "Surface Laptop Studio 2 in stage mode", shortLabel: "Stage" },
+      { src: "images/products/surface-studio-2-front.png", label: "Surface Laptop Studio 2 in studio mode", shortLabel: "Studio" },
+      { src: "images/products/surface-studio-2-ports.png", label: "Surface Laptop Studio 2 connections", shortLabel: "Ports" }
+    ]
+  },
+  {
+    id: "lap-dell-xps-13",
+    name: "Dell XPS 13 9340",
+    type: "Laptop", use: "Office", brand: "Dell",
+    price: 99995, stock: 6,
+    image: "images/products/dell-xps-13-9340.png",
+    specs: "Intel Core Ultra 7 155H, Intel Arc graphics, 16GB RAM, 512GB SSD, 13.4-inch display",
+    gallery: [
+      { src: "images/products/dell-xps-13-9340.png", label: "Dell XPS 13 9340 front angle", shortLabel: "Main" },
+      { src: "images/products/dell-xps-13-9340-side.png", label: "Dell XPS 13 right side and Thunderbolt port", shortLabel: "Right" },
+      { src: "images/products/dell-xps-13-9340-angle.png", label: "Dell XPS 13 alternate angle", shortLabel: "Angle" }
+    ]
+  },
+  {
+    id: "pc-hp-omen-35l",
+    name: "HP OMEN 35L GT16-0066m",
+    type: "Desktop PC", use: "Gaming", brand: "HP",
+    price: 84995, stock: 4,
+    image: "images/products/hp-omen-35l.png",
+    specs: "AMD Ryzen 7 8700G, RTX 4060 8GB, 16GB DDR5 RAM, 1TB SSD",
+    gallery: [
+      { src: "images/products/hp-omen-35l.png", label: "HP OMEN 35L main view", shortLabel: "Main" },
+      { src: "images/products/hp-omen-35l-side.png", label: "HP OMEN 35L right-side casing", shortLabel: "Side" },
+      { src: "images/products/hp-omen-35l-angle.png", label: "HP OMEN 35L glass-panel angle", shortLabel: "Angle" },
+      { src: "images/products/hp-omen-35l-inside.png", label: "HP OMEN 35L internal component layout", shortLabel: "Inside", note: "Manufacturer chassis illustration; internal component appearance can vary by configuration." }
+    ]
+  },
+  {
+    id: "pc-apple-mac-mini-m4",
+    name: "Apple Mac mini M4",
+    type: "Desktop PC", use: "Creator", brand: "Apple",
+    price: 36990, stock: 8,
+    image: "images/products/mac-mini-m4.jpg",
+    specs: "Apple M4 10-core CPU, 10-core integrated graphics, 16GB unified memory, 256GB SSD",
+    gallery: [
+      { src: "images/products/mac-mini-m4.jpg", label: "Apple Mac mini M4 desktop", shortLabel: "Main" },
+      { src: "images/products/mac-mini-m4-front.jpg", label: "Mac mini front USB-C and headphone ports", shortLabel: "Front" },
+      { src: "images/products/mac-mini-m4-back.jpg", label: "Mac mini rear power, Ethernet, HDMI and Thunderbolt ports", shortLabel: "Ports" }
+    ]
+  },
   {
     id: "lap-acer-office",
     name: "Acer Aspire 14 AS14H-53",

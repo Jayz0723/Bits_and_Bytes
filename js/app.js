@@ -62,6 +62,7 @@ function updateCartCount() {
   const count = getCart().reduce((sum, item) => sum + item.quantity, 0);
   document.querySelectorAll("#cartCount").forEach((item) => {
     item.textContent = count;
+    item.closest("a")?.setAttribute("aria-label", `Cart, ${count} item${count === 1 ? "" : "s"}`);
   });
 }
 
@@ -543,6 +544,16 @@ function renderProductsPage() {
     </label>
   `).join("");
 
+  // Shared search and brand links open the catalog with the right filters applied.
+  const query = new URLSearchParams(location.search);
+  if (search) search.value = query.get("q") || "";
+  brandFilters.querySelectorAll("input").forEach((input) => {
+    input.checked = input.value === query.get("brand");
+  });
+  if ([...useFilter.options].some((option) => option.value === query.get("use"))) {
+    useFilter.value = query.get("use");
+  }
+
   const currencyLabel = currencyPreference() === "USD" ? "USD" : "PHP";
   minPrice.placeholder = `${currencyLabel} 0`;
   maxPrice.placeholder = "Any price";
@@ -655,6 +666,24 @@ function productSpecificationEntries(product) {
     ["SPEC", "Specification", product.specs],
     ["STK", "Availability", `${product.stock} units available`]
   ];
+}
+
+function wireMobileFilters() {
+  const button = document.getElementById("toggleFilters");
+  const controls = document.getElementById("filterControls");
+  if (!button || !controls) return;
+  const mobile = window.matchMedia("(max-width: 760px)");
+  let expanded = false;
+  button.closest(".filter-panel").classList.add("filters-ready");
+  function update() {
+    button.hidden = !mobile.matches;
+    controls.hidden = mobile.matches && !expanded;
+    button.setAttribute("aria-expanded", String(!controls.hidden));
+    button.textContent = expanded ? "Hide filters" : "Filters & sort";
+  }
+  button.addEventListener("click", () => { expanded = !expanded; update(); });
+  mobile.addEventListener("change", update);
+  update();
 }
 
 function productConfigurationOptions(product) {
@@ -1017,8 +1046,8 @@ function wireFoldableNavigation() {
     const link = getLink(href);
     const activeClass = link && link.classList.contains("active") ? " active" : "";
     const label = link ? link.textContent.replace(/\s+\d+$/, "").trim() : fallbackLabels[href] || href;
-    const cartMarkup = href === "pages/cart.html" ? ` <span id="cartCount">0</span>` : "";
-    return `<a class="${extraClass}${activeClass}" href="${href}">${label}${cartMarkup}</a>`;
+    if (href === "pages/cart.html") return `<a class="${extraClass}${activeClass}" href="${href}" aria-label="Cart, 0 items" title="View cart"><span class="store-icon cart-icon" aria-hidden="true"></span><span id="cartCount" aria-live="polite">0</span></a>`;
+    return `<a class="${extraClass}${activeClass}" href="${href}">${label}</a>`;
   };
   const groupMarkup = (label, hrefs) => {
     const hasActiveLink = hrefs.some((href) => getLink(href)?.classList.contains("active"));
@@ -1039,6 +1068,7 @@ function wireFoldableNavigation() {
         <a href="pages/products.html#laptops">Laptops</a>
         <a href="pages/products.html#accessories">Accessories</a>
         <a href="pages/products.html#computer-parts">Computer Parts</a>
+        <a href="pages/products.html?brand=Microsoft">Microsoft Surface</a>
         ${linkMarkup("pages/build.html")}
         ${linkMarkup("pages/products.html")}
       </div>
@@ -1049,7 +1079,7 @@ function wireFoldableNavigation() {
   nav.innerHTML = `
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primaryNavMenu">Menu</button>
     <div class="nav-menu" id="primaryNavMenu">
-      <a class="nav-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""></a>
+      <a class="nav-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
       ${linkMarkup("index.html", "nav-home")}
       ${shopMarkup}
       ${groupMarkup("Explore", ["pages/components.html", "pages/about.html", "pages/downloads.html"])}
@@ -1105,6 +1135,44 @@ function wireStickyStoreHeader() {
   nav.prepend(mobileBrand);
   stickyHeader.append(nav, toolbar);
   header.before(stickyHeader);
+
+  // A second, non-sticky row makes the main collections one click away.
+  const browseBar = document.createElement("div");
+  browseBar.className = "store-browse-bar";
+  browseBar.innerHTML = `
+    <nav aria-label="Shop collections">
+      <a href="pages/products.html#computer-products">Desktops</a>
+      <a href="pages/products.html#laptops">Laptops</a>
+      <a href="pages/products.html#computer-parts">Components</a>
+      <a href="pages/products.html#accessories">Accessories</a>
+      <a href="pages/build.html">Build your PC <span aria-hidden="true">&rarr;</span></a>
+    </nav>
+    <form class="store-search" action="pages/products.html" method="get" role="search">
+      <input type="search" name="q" aria-label="Search products" placeholder="Search products, brands..." maxlength="100">
+      <button type="submit" aria-label="Search" title="Search products"><span class="store-icon search-icon" aria-hidden="true"></span></button>
+    </form>`;
+  stickyHeader.after(browseBar);
+}
+
+function wireHomeVideo() {
+  const playButton = document.getElementById("playSurfaceVideo");
+  if (!playButton) return;
+  playButton.addEventListener("click", () => {
+    // File URLs cannot send the website referrer required by YouTube's player.
+    if (location.protocol === "file:") {
+      window.open("https://www.youtube.com/watch?v=s1Oj792qc80", "_blank", "noopener,noreferrer");
+      return;
+    }
+    // YouTube only receives a request when the visitor chooses to load the player.
+    const frame = document.createElement("iframe");
+    frame.src = "https://www.youtube-nocookie.com/embed/s1Oj792qc80?rel=0";
+    frame.title = "Introducing Surface Laptop Ultra - Microsoft Surface";
+    frame.allow = "encrypted-media; picture-in-picture; fullscreen";
+    frame.allowFullscreen = true;
+    frame.referrerPolicy = "strict-origin-when-cross-origin";
+    playButton.replaceWith(frame);
+    frame.focus();
+  });
 }
 
 function wirePartnersDialog() {
@@ -1286,7 +1354,7 @@ function wireSupportChat() {
 
   function respond(message) {
     const normalized = message.toLowerCase();
-    let reply = "Thanks for your message. This demo support chat can help point you to the right page.";
+    let reply = "Thanks for your message. This store assistant can point you to products, build advice, and support.";
     if (normalized.includes("order") || normalized.includes("deliver")) reply = "For delivery details, open Cart and continue to checkout. You can choose your province, city, and barangay there.";
     if (normalized.includes("payment") || normalized.includes("gcash") || normalized.includes("maya")) reply = "At checkout, you can choose Cash on Delivery, card payment, GCash, or Maya.";
     if (normalized.includes("pc") || normalized.includes("build") || normalized.includes("laptop")) reply = "For recommendations, browse Products or use Build Your Own PC to check compatible parts.";
@@ -1725,7 +1793,7 @@ function wireDeliveryCheckout() {
           <label for="billingAddress">Billing address</label>
           <input id="billingAddress" type="text" autocomplete="billing address-line1" placeholder="House number, street, city, and postal code">
         </div>
-        <p class="payment-security-note">For this demo, card details are validated in your browser and are not stored or transmitted.</p>
+        <p class="payment-security-note">Card details are checked on this device only. No payment is processed, stored, or transmitted.</p>
       `;
     } else if (method === "E-wallet") {
       paymentDetail.innerHTML = `
@@ -1826,7 +1894,7 @@ function wireDeliveryCheckout() {
     const provider = document.querySelector('input[name="walletProvider"]:checked')?.value;
     const cardDigits = document.querySelector("#cardNumber")?.value.replace(/\D/g, "");
     const paymentText = provider ? `${method} (${provider})` : cardDigits ? `${method} ending in ${cardDigits.slice(-4)}` : method;
-    alert(`Demo order ready for delivery to: ${address}\nPayment method: ${paymentText}`);
+    alert(`Order review ready for: ${address}\nPreferred payment method: ${paymentText}\nNo order has been sent and no payment has been taken.`);
   });
 }
 
@@ -1847,7 +1915,7 @@ function getSignedInUser() {
 }
 
 async function hashAccountPassword(password, salt) {
-  if (!globalThis.crypto?.subtle) throw new Error("Demo accounts need HTTPS, localhost, or the original local HTML files.");
+  if (!globalThis.crypto?.subtle) throw new Error("Please open the store using HTTPS, localhost, or its original HTML files to sign in securely.");
   const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
   const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt: new TextEncoder().encode(salt), iterations: 100000, hash: "SHA-256" }, key, 256);
   return Array.from(new Uint8Array(bits), (byte) => byte.toString(16).padStart(2, "0")).join("");
@@ -1856,7 +1924,7 @@ async function hashAccountPassword(password, salt) {
 async function signInDemoAccount(email, password) {
   const account = getDemoAccounts().find((account) => account.email === email.trim().toLowerCase());
   if (!account || await hashAccountPassword(password, account.salt) !== account.passwordHash) {
-    throw new Error("Email or password is incorrect. Register first if you do not have a local demo account.");
+    throw new Error("Email or password is incorrect. Register first if you do not have an account on this device.");
   }
   sessionStorage.setItem("bitsAndBytesSignedInEmail", account.email);
   window.dispatchEvent(new Event("store-account-change"));
@@ -1866,7 +1934,7 @@ async function registerDemoAccount(name, email, password) {
   const accounts = getDemoAccounts();
   email = email.trim().toLowerCase();
   if (!name.trim()) throw new Error("Please enter your name.");
-  if (password.length < 8) throw new Error("Use at least 8 characters for your demo password.");
+  if (password.length < 8) throw new Error("Use at least 8 characters for your password.");
   if (accounts.some((account) => account.email === email)) throw new Error("This email already has a local account. Please sign in.");
   const salt = Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => byte.toString(16).padStart(2, "0")).join("");
   const passwordHash = await hashAccountPassword(password, salt);
@@ -1916,7 +1984,7 @@ function openAccountDialog(mode = "login", onSuccess) {
       <p id="accountDialogError" class="account-error" role="alert"></p>
       <button class="button primary full-width" id="accountDialogSubmit" type="submit">Login</button>
     </form>
-    <p class="account-demo-note">Local demo only. Accounts stay in this browser. Do not use a real account password.</p>`;
+    <p class="account-demo-note">Your account is saved on this device. Use a password unique to this store.</p>`;
   document.body.appendChild(dialog);
   const form = dialog.querySelector("form");
   const password = dialog.querySelector("#accountPassword");
@@ -2026,7 +2094,7 @@ function wireLoginForm() {
     try {
       await signInDemoAccount(email.value, password.value);
       password.value = "";
-      message.textContent = "You are signed in to your local demo account.";
+      message.textContent = "You are signed in on this device.";
     } catch (problem) {
       message.textContent = problem.message;
     } finally { submit.disabled = false; }
@@ -2158,6 +2226,7 @@ function wirePeripheralForm() {
 wireFoldableNavigation();
 wireStoreControls();
 wireStickyStoreHeader();
+wireHomeVideo();
 wirePartnersDialog();
 wirePromoCarousel();
 wireReviewCarousel();
@@ -2168,6 +2237,7 @@ updateWishlistCount();
 wireQuickOrder();
 renderFeaturedProducts();
 renderProductsPage();
+wireMobileFilters();
 renderProductDetail();
 renderWishlist();
 renderBuilder();

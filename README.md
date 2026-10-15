@@ -18,6 +18,7 @@ Bits-and-Bytes/
     showcase/             Homepage, banners, and editorial photos
     guides/               Interactive PC/laptop component images and maps
     social/               Facebook, Instagram, X, and YouTube logos
+    icons/                Local interface icons (cart, search, and play)
     decor/                Small background and border artwork
     placeholders/         Spare image placeholders
     uploads/              Existing numbered pictures from the project
@@ -54,6 +55,17 @@ Bits-and-Bytes/
 | Comparison and list-view styles | [css/shopping-tools.css](css/shopping-tools.css) |
 
 ## Images and Documents
+
+The homepage video uses the supplied Microsoft Surface YouTube link. Its player
+loads only after a click; a direct YouTube link remains available if embedding is
+blocked. When opening the HTML file directly, the play button opens YouTube because
+embedded players require a web referrer. Edit the thumbnail and caption in `index.html`, and the embed address in
+`wireHomeVideo()` in `js/app.js` together when changing the video.
+
+Shared navigation and the cart badge are in `js/app.js`; their appearance and the
+full-width banners are in `css/storefront.css`. Brand and search shortcuts use
+`pages/products.html?brand=Microsoft` and `pages/products.html?q=Mac+mini`.
+Brand logos identify stocked product brands, not endorsements or formal partnerships.
 
 See [the image guide](docs/IMAGES.md) for photo locations and editing instructions.
 See [the classroom checklist](docs/CLASS_REQUIREMENTS.md) for the required HTML,

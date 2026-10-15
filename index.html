@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=20261004-editorial">
-  <link rel="stylesheet" href="css/storefront.css?v=20261012">
+  <link rel="stylesheet" href="css/storefront.css?v=20261016-store-refresh">
 </head>
 <body class="home-page">
   <header class="site-header" id="top">
@@ -54,7 +54,7 @@
     <section class="promo-carousel" id="promoCarousel" aria-label="Featured store promotions" aria-roledescription="carousel">
       <div class="promo-carousel-viewport">
         <div class="promo-carousel-track" id="promoCarouselTrack">
-          <article class="promo-slide" aria-label="1 of 4">
+          <article class="promo-slide" aria-label="1 of 5">
             <img src="images/showcase/showcase-gaming-pc.jpg" alt="RGB gaming PC setup">
             <div class="promo-slide-overlay"></div>
             <div class="promo-slide-content">
@@ -64,7 +64,7 @@
               <a class="button primary" href="pages/products.html#computer-products">Shop Gaming PCs</a>
             </div>
           </article>
-          <article class="promo-slide" aria-label="2 of 4">
+          <article class="promo-slide" aria-label="2 of 5">
             <img src="images/showcase/showcase-laptop.jpg" alt="Modern laptop ready for school and office work">
             <div class="promo-slide-overlay"></div>
             <div class="promo-slide-content">
@@ -74,7 +74,7 @@
               <a class="button primary" href="pages/products.html#laptops">Browse Laptops</a>
             </div>
           </article>
-          <article class="promo-slide" aria-label="3 of 4">
+          <article class="promo-slide" aria-label="3 of 5">
             <img src="images/products/legacy/custom-pc-build.jpg" alt="Components inside a custom desktop PC">
             <div class="promo-slide-overlay"></div>
             <div class="promo-slide-content">
@@ -84,7 +84,7 @@
               <a class="button primary" href="pages/build.html">Start Your Build</a>
             </div>
           </article>
-          <article class="promo-slide" aria-label="4 of 4">
+          <article class="promo-slide" aria-label="4 of 5">
             <img src="images/showcase/showcase-monitor.jpg" alt="Desktop monitor for gaming and creative work">
             <div class="promo-slide-overlay"></div>
             <div class="promo-slide-content">
@@ -94,11 +94,41 @@
               <a class="button primary" href="pages/products.html#accessories">Shop Desk Gear</a>
             </div>
           </article>
+          <article class="promo-slide microsoft-promo" aria-label="5 of 5">
+            <img src="images/products/surface-studio-2-main.png" alt="Microsoft Surface Laptop Studio 2 with its adjustable touchscreen" loading="lazy">
+            <div class="promo-slide-content">
+              <p class="eyebrow">Meet Microsoft Surface</p>
+              <h2>Room for your next idea</h2>
+              <p>A versatile touchscreen and dedicated graphics for work that goes beyond the everyday.</p>
+              <a class="button primary" href="pages/products.html?brand=Microsoft">Shop Microsoft</a>
+            </div>
+          </article>
         </div>
       </div>
       <button class="promo-carousel-button previous" id="promoPrevious" type="button" aria-label="Show previous promotion">&#8249;</button>
       <button class="promo-carousel-button next" id="promoNext" type="button" aria-label="Show next promotion">&#8250;</button>
       <div class="promo-carousel-dots" id="promoCarouselDots" aria-label="Choose a promotion"></div>
+    </section>
+
+    <section class="home-video" aria-labelledby="surfaceVideoTitle">
+      <div class="video-heading">
+        <div>
+          <p class="eyebrow">In focus / Microsoft Surface</p>
+          <h2 id="surfaceVideoTitle">See what's next from Surface</h2>
+          <p>Introducing Surface Laptop Ultra. A closer look, from Microsoft.</p>
+        </div>
+        <a class="text-link" href="pages/products.html?brand=Microsoft">Explore our Surface collection <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="video-stage">
+        <button id="playSurfaceVideo" type="button" aria-label="Load the Microsoft Surface video player">
+          <img src="images/showcase/surface-video-preview.jpg" alt="Introducing Surface Laptop Ultra video preview" loading="lazy" width="1280" height="720">
+          <span class="video-play-label"><span class="store-icon play-icon" aria-hidden="true"></span>Watch the film</span>
+        </button>
+      </div>
+      <div class="video-note">
+        <p>Video by Microsoft Surface. Featured devices may differ from our current collection.</p>
+        <p><a href="https://www.youtube.com/watch?v=s1Oj792qc80" target="_blank" rel="noopener noreferrer">Watch on YouTube &nearr;</a></p>
+      </div>
     </section>
 
     <section class="editorial-showcase" aria-labelledby="editorialShowcaseTitle">
@@ -139,7 +169,7 @@
           <span class="editorial-number">03</span>
           <p class="eyebrow">Components and learning</p>
           <h3>Know what goes inside your machine</h3>
-          <p>Shop components from every partner brand, check compatibility in the builder, and use the interactive guide to understand each part.</p>
+          <p>Shop components from familiar hardware brands, check compatibility in the builder, and use the interactive guide to understand each part.</p>
           <div class="editorial-actions">
             <a class="text-link" href="pages/products.html#computer-parts">Shop components <span aria-hidden="true">&rarr;</span></a>
             <a class="text-link muted" href="pages/downloads.html">Download guides <span aria-hidden="true">&rarr;</span></a>
@@ -152,12 +182,13 @@
       <div class="brand-strip-heading">
         <div>
           <p class="eyebrow">Hardware ecosystem</p>
-          <h2 id="brandStripTitle">Proudly trusted by</h2>
+          <h2 id="brandStripTitle">Great brands. More possibilities.</h2>
         </div>
-        <button class="partner-view-button" id="viewPartners" type="button">View all partners</button>
+        <button class="partner-view-button" id="viewPartners" type="button">Explore our brands</button>
       </div>
       <div class="carousel" aria-label="Featured computer brands">
         <div class="car-slide">
+            <a class="card partner-logo" href="pages/products.html?brand=Microsoft"><img src="images/branding/microsoft-logo.png" alt="Shop Microsoft Surface"></a>
             <a class="card partner-logo" href="https://www.amd.com/" target="_blank" rel="noopener noreferrer"><img src="images/branding/amd-logo.png" alt="AMD"></a>
             <a class="card partner-logo" href="https://www.coolermaster.com/" target="_blank" rel="noopener noreferrer"><img src="images/branding/coolermaster-logo.png" alt="Cooler Master"></a>
             <a class="card partner-logo" href="https://www.corsair.com/" target="_blank" rel="noopener noreferrer"><img src="images/branding/corsair-logo.png" alt="Corsair"></a>
@@ -173,6 +204,7 @@
             <a class="card partner-logo" href="https://www.apple.com/" target="_blank" rel="noopener noreferrer"><img src="images/branding/apple logo.png" alt="Apple"></a>
         </div>
         <div aria-hidden class="car-slide">
+            <a class="card partner-logo" href="pages/products.html?brand=Microsoft" tabindex="-1"><img src="images/branding/microsoft-logo.png" alt=""></a>
             <a class="card partner-logo" href="https://www.amd.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/branding/amd-logo.png" alt=""></a>
             <a class="card partner-logo" href="https://www.coolermaster.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/branding/coolermaster-logo.png" alt=""></a>
             <a class="card partner-logo" href="https://www.corsair.com/" target="_blank" rel="noopener noreferrer" tabindex="-1"><img src="images/branding/corsair-logo.png" alt=""></a>
@@ -193,12 +225,13 @@
     <dialog class="partner-dialog" id="partnersDialog" aria-labelledby="partnersDialogTitle">
       <div class="partner-dialog-header">
         <div>
-          <p class="eyebrow">Bits and Bytes network</p>
-          <h2 id="partnersDialogTitle">All trusted partners</h2>
+          <p class="eyebrow">The brands in our collection</p>
+          <h2 id="partnersDialogTitle">Find your favorite brand</h2>
         </div>
         <button class="dialog-close-button" id="closePartners" type="button" aria-label="Close partner list">Close</button>
       </div>
       <div class="partner-grid">
+        <a class="partner-card" href="pages/products.html?brand=Microsoft"><img src="images/branding/microsoft-logo.png" alt="Microsoft"><span>Surface laptops</span></a>
         <a class="partner-card" href="https://www.amd.com/" target="_blank" rel="noopener noreferrer"><img src="images/branding/amd-logo.png" alt="AMD"><span>AMD</span></a>
         <a class="partner-card" href="https://www.coolermaster.com/" target="_blank" rel="noopener noreferrer"><img src="images/branding/coolermaster-logo.png" alt="Cooler Master"><span>Cooler Master</span></a>
         <a class="partner-card" href="https://www.corsair.com/" target="_blank" rel="noopener noreferrer"><img src="images/branding/corsair-logo.png" alt="Corsair"><span>Corsair</span></a>
@@ -369,9 +402,9 @@
     <section class="customer-reviews" aria-labelledby="reviewsTitle">
       <div class="reviews-heading">
         <div>
-          <p class="eyebrow">Customer feedback</p>
-          <h2 id="reviewsTitle">What shoppers say about their setup</h2>
-          <p>Sample review cards for the Bits and Bytes store experience.</p>
+          <p class="eyebrow">The setup notebook</p>
+          <h2 id="reviewsTitle">Make room for what you love</h2>
+          <p>A few practical starting points for your next setup.</p>
         </div>
         <div class="review-controls" aria-label="Review carousel controls">
           <button id="reviewPrevious" type="button" aria-label="Show previous reviews">Previous</button>
@@ -381,29 +414,29 @@
       <div class="review-viewport" aria-live="polite">
         <div class="review-track" id="reviewTrack">
           <article class="review-card">
-            <div class="review-person"><span class="review-avatar">AM</span><div><strong>Aira M.</strong><small>Gaming PC order</small></div></div>
-            <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
-            <p>“The compatibility notes made choosing parts much less confusing. My RGB gaming setup arrived exactly as planned.”</p>
+            <div class="review-person"><span class="review-avatar">01</span><div><strong>More time in the game</strong><small>Gaming systems</small></div></div>
+            <p>Start with the games you actually play. Match the graphics card to your monitor's resolution, then leave room for cooling and future upgrades.</p>
+            <a class="text-link" href="pages/products.html?use=Gaming">Shop gaming</a>
           </article>
           <article class="review-card">
-            <div class="review-person"><span class="review-avatar">JC</span><div><strong>Jules C.</strong><small>Laptop order</small></div></div>
-            <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
-            <p>“I could compare the laptop specs, stock, and price before adding it to the cart. The process felt straightforward.”</p>
+            <div class="review-person"><span class="review-avatar">02</span><div><strong>A lighter daily bag</strong><small>Study essentials</small></div></div>
+            <p>A comfortable keyboard, a clear screen, and enough memory for your coursework matter more than the biggest specification on the box.</p>
+            <a class="text-link" href="pages/products.html?use=Student">Shop for study</a>
           </article>
           <article class="review-card">
-            <div class="review-person"><span class="review-avatar">RT</span><div><strong>Rina T.</strong><small>Creator setup</small></div></div>
-            <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
-            <p>“The custom builder gave me a useful starting point for editing work, then I changed the parts to suit my budget.”</p>
+            <div class="review-person"><span class="review-avatar">03</span><div><strong>Space to create</strong><small>Creative workstations</small></div></div>
+            <p>Editing large projects? Give memory and fast storage a little extra attention. Check your creative apps' requirements before choosing a system.</p>
+            <a class="text-link" href="pages/products.html?use=Creator">Shop for creators</a>
           </article>
           <article class="review-card">
-            <div class="review-person"><span class="review-avatar">DL</span><div><strong>Devon L.</strong><small>Accessory order</small></div></div>
-            <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
-            <p>“The product details and stock labels helped me find the right keyboard and monitor for my study desk.”</p>
+            <div class="review-person"><span class="review-avatar">04</span><div><strong>The finishing touches</strong><small>Desk essentials</small></div></div>
+            <p>Your mouse, keyboard, and monitor are the parts you use all day. Choose the sizes and connections that suit your desk and your routine.</p>
+            <a class="text-link" href="pages/products.html#accessories">Explore accessories</a>
           </article>
           <article class="review-card">
-            <div class="review-person"><span class="review-avatar">SM</span><div><strong>Sofia M.</strong><small>Office PC order</small></div></div>
-            <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
-            <p>“A clear, tidy store layout. I liked being able to save choices in the wishlist while deciding what to buy.”</p>
+            <div class="review-person"><span class="review-avatar">05</span><div><strong>Work without the clutter</strong><small>Office setups</small></div></div>
+            <p>A compact desktop or portable laptop can keep your workspace simple. Check monitor support and available ports before adding your peripherals.</p>
+            <a class="text-link" href="pages/products.html?use=Office">Shop for work</a>
           </article>
         </div>
       </div>
@@ -412,8 +445,8 @@
       
   </main>
 
-  <script src="js/data.js?v=20261012-gallery-v2"></script>
-  <script src="js/app.js?v=20261012-gallery-v2"></script>
+  <script src="js/data.js?v=20261016-store-refresh"></script>
+  <script src="js/app.js?v=20261016-store-refresh"></script>
   <script src="js/support-form.js"></script>
 
   <footer class="site-footer">
