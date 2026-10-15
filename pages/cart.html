@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Resolve shared files from the project root, including on local file URLs. -->
+  <base href="../">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart | Bits and Bytes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/storefront.css">
+</head>
+<body class="utility-page">
+  <header class="site-header" id="top">
+    <img src="images/showcase/home-banner.jpg" width="900" height="260" alt="Bits and Bytes Banner">
+    <hgroup>
+      <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1>
+      <h2>Shopping Cart</h2>
+      <nav class="main-nav" id="horizontal" aria-label="Main navigation">
+        <a href="index.html">Home</a> |
+        <a href="pages/products.html">Products</a> |
+        <a href="pages/build.html">Build Your Own PC</a> |
+        <a href="pages/components.html">Interactive Guide</a> |
+        <a href="pages/about.html">About</a> |
+        <a href="pages/contact.html">Contact</a> |
+        <a href="pages/login.html">Login</a> |
+        <a class="cart-pill active" href="pages/cart.html">Cart <span id="cartCount">0</span></a>
+      </nav>
+    </hgroup>
+  </header>
+
+  <main>
+    <section class="page-hero compact">
+      <p class="eyebrow">Shopping cart</p>
+      <h1>Your selected items</h1>
+      <p>Review your exact models, adjust quantities, and make room for your next upgrade. Your cart stays saved on this device.</p>
+    </section>
+
+    <section class="cart-layout">
+      <div id="cartItems" class="cart-items"></div>
+      <aside class="cart-summary">
+        <h2>Order Summary</h2>
+        <p class="form-note" id="cartUpdateStatus" role="status"></p>
+        <div class="total-row">
+          <span>Total</span>
+          <strong id="cartTotal">PHP 0</strong>
+        </div>
+        <button class="button primary full-width" id="checkoutButton" type="button">Continue to Delivery</button>
+        <button class="button secondary full-width" id="clearCart" type="button">Clear Cart</button>
+      </aside>
+    </section>
+
+    <section class="checkout-panel" id="checkoutPanel" hidden aria-labelledby="deliveryTitle">
+      <div class="delivery-map-card">
+        <p class="eyebrow">Nationwide delivery</p>
+        <h2>Delivered across the Philippines</h2>
+        <p>Choose your delivery location, then add the street address for your PC, laptop, or accessories.</p>
+        <img class="philippines-map" src="https://e7.pngegg.com/pngimages/160/249/png-clipart-philippines-map-philippines-map-map-blue-white.png" alt="Map of the Philippines">
+        <div class="island-legend" aria-label="Delivery coverage">
+          <span>Luzon</span><span>Visayas</span><span>Mindanao</span>
+        </div>
+      </div>
+
+      <form class="delivery-checkout-form" id="deliveryCheckoutForm">
+        <p class="eyebrow">Checkout</p>
+        <h2 id="deliveryTitle">Delivery and payment</h2>
+        <p class="form-note">Complete the required fields below. Your payment details are not stored by this demo website.</p>
+
+        <fieldset class="checkout-form-section">
+          <legend>Contact information</legend>
+          <div class="address-grid">
+            <div>
+              <label for="checkoutEmail">Email address</label>
+              <input id="checkoutEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+            </div>
+            <div>
+              <label for="checkoutPhone">Mobile number</label>
+              <input id="checkoutPhone" type="tel" autocomplete="tel" inputmode="tel" pattern="[0-9+ ]{11,16}" placeholder="0917 123 4567" required>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="checkout-form-section">
+          <legend>Delivery address</legend>
+          <div class="address-grid">
+            <div>
+              <label for="checkoutName">Full name</label>
+              <input id="checkoutName" type="text" autocomplete="name" placeholder="Recipient's full name" required>
+            </div>
+            <div>
+              <label for="countryRegion">Country or region</label>
+              <select id="countryRegion" autocomplete="country-name" required>
+                <option value="Philippines">Philippines</option>
+              </select>
+            </div>
+          </div>
+          <label for="streetAddress">House number, street name, and subdivision</label>
+          <input id="streetAddress" type="text" autocomplete="address-line1" placeholder="123 Technology Street, Sample Village" required>
+          <label for="addressLineTwo">Apartment, suite, building, or floor <span class="optional-label">Optional</span></label>
+          <input id="addressLineTwo" type="text" autocomplete="address-line2" placeholder="Unit 4B, Byte Tower">
+          <div class="address-grid">
+            <div>
+              <label for="provinceSelect">Province / Region</label>
+              <select id="provinceSelect" autocomplete="address-level1" required>
+                <option value="">Select province or region</option>
+              </select>
+            </div>
+            <div>
+              <label for="citySelect">City / Municipality</label>
+              <select id="citySelect" autocomplete="address-level2" required disabled>
+                <option value="">Select province first</option>
+              </select>
+            </div>
+            <div>
+              <label for="barangaySelect">Barangay</label>
+              <select id="barangaySelect" autocomplete="address-level3" required disabled>
+                <option value="">Select city first</option>
+              </select>
+            </div>
+            <div>
+              <label for="postalCode">Postal code</label>
+              <input id="postalCode" type="text" autocomplete="postal-code" inputmode="numeric" pattern="\d{4}" maxlength="4" placeholder="1100" required>
+            </div>
+          </div>
+          <label for="deliveryLandmark">Nearby landmark <span class="optional-label">Optional</span></label>
+          <input id="deliveryLandmark" type="text" placeholder="Near a school, mall, or recognizable building">
+          <label for="deliveryInstructions">Delivery instructions <span class="optional-label">Optional</span></label>
+          <textarea id="deliveryInstructions" rows="2" placeholder="Gate instructions, preferred delivery time, or directions"></textarea>
+        </fieldset>
+
+        <fieldset class="payment-methods">
+          <legend>Payment method</legend>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="Cash on Delivery" checked>
+            <span><strong>Cash on Delivery</strong><small>Pay when the order arrives. Available for eligible locations and order totals.</small></span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="Card Payment">
+            <span><strong>Credit or debit card</strong><small>Visa, Mastercard, American Express, JCB, and supported bank-issued cards.</small></span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="E-wallet">
+            <span><strong>E-wallet</strong><small>Pay using your registered GCash or Maya mobile account.</small></span>
+          </label>
+        </fieldset>
+        <div class="payment-detail" id="paymentDetail" aria-live="polite">Cash on Delivery selected. Prepare the exact amount when your order arrives.</div>
+        <button class="button primary" type="submit">Place Order</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Herrera Corporation. All rights reserved.</p>
+    <div>
+      <a href="pages/products.html">Products</a>
+      <a href="pages/about.html">About</a>
+      <a href="pages/contact.html">Contact</a>
+    </div>
+    <div class="social-links" aria-label="Social media profiles">
+      <a class="social-icon facebook" href="https://www.facebook.com/johncarlo.herrera.58" target="_blank" rel="noopener noreferrer" aria-label="Facebook: John Carlo Herrera" title="Facebook"><img src="images/social/facebook.svg" alt="" width="24" height="24"></a>
+      <a class="social-icon instagram" href="https://www.instagram.com/jayzzzz0723/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: jayzzzz0723" title="Instagram"><img src="images/social/instagram.svg" alt="" width="24" height="24"></a>
+      <a class="social-icon x-twitter" href="https://x.com/Jayzee20202" target="_blank" rel="noopener noreferrer" aria-label="X: Jayzee20202" title="X"><img src="images/social/x.svg" alt="" width="24" height="24"></a>
+      <a class="social-icon youtube" href="https://www.youtube.com/@johncarloherrera8540" target="_blank" rel="noopener noreferrer" aria-label="YouTube: johncarloherrera8540" title="YouTube"><img src="images/social/youtube.svg" alt="" width="24" height="24"></a>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

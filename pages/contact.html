@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Resolve shared files from the project root, including on local file URLs. -->
+  <base href="../">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Bits and Bytes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/storefront.css?v=20261012">
+  <link rel="stylesheet" href="css/support.css?v=20261015">
+</head>
+<body class="contact-page">
+  <header class="site-header" id="top">
+    <img src="images/showcase/home-banner.jpg" width="900" height="260" alt="Bits and Bytes Banner">
+    <hgroup>
+      <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1>
+      <h2>Contact Us</h2>
+      <nav class="main-nav" id="horizontal" aria-label="Main navigation">
+        <a href="index.html">Home</a> |
+        <a href="pages/products.html">Products</a> |
+        <a href="pages/build.html">Build Your Own PC</a> |
+        <a href="pages/components.html">Interactive Guide</a> |
+        <a href="pages/about.html">About</a> |
+        <a class="active" href="pages/contact.html">Contact</a> |
+        <a href="pages/login.html">Login</a> |
+        <a class="cart-pill" href="pages/cart.html">Cart <span id="cartCount">0</span></a>
+      </nav>
+    </hgroup>
+  </header>
+
+  <main>
+    <section class="contact-layout" aria-labelledby="supportTitle">
+      <div class="support-intro">
+        <p class="eyebrow">Bits and Bytes / Customer care</p>
+        <h1 id="supportTitle">Good tech.<br>Better support.</h1>
+        <p class="support-intro-copy">Choosing your next laptop? Fine-tuning a PC build? Let's work through the details together.</p>
+        <nav class="support-topic-links" aria-label="Choose a support topic">
+          <a href="pages/contact.html#supportMessage" data-support-topic="Product question"><span><strong>Find the right device</strong><small>Laptops, desktops, and everyday upgrades</small></span><span aria-hidden="true">&nearr;</span></a>
+          <a href="pages/contact.html#supportMessage" data-support-topic="Build Your Own PC help"><span><strong>Check your build</strong><small>Parts, compatibility, and the finishing touches</small></span><span aria-hidden="true">&nearr;</span></a>
+          <a href="pages/contact.html#supportMessage" data-support-topic="Order support"><span><strong>Help with an order</strong><small>Delivery, checkout, and warranty questions</small></span><span aria-hidden="true">&nearr;</span></a>
+        </nav>
+        <div class="contact-details">
+          <h2>Store information</h2>
+          <dl class="support-contact-list">
+            <div><dt>Location</dt><dd>Manila, Philippines</dd></div>
+            <div><dt>Demo email</dt><dd>support@bitsandbytes.example</dd></div>
+            <div><dt>Sample phone</dt><dd>+63 900 123 4567</dd></div>
+          </dl>
+          <details class="support-team"><summary>Meet the store team</summary>
+          <pre>
+Store Owner: Jc
+Tech Partner: Derick
+Support Focus: PCs, laptops, and accessories
+Email Us: support@bitsandbytes.example
+          </pre>
+          </details>
+        </div>
+      </div>
+      <form class="contact-form" id="supportMessage" data-support-form aria-labelledby="messageTitle">
+        <div class="support-form-heading">
+          <p class="eyebrow">Let's talk</p>
+          <h2 id="messageTitle">What's on your mind?</h2>
+          <p>A model, a budget, or a question. Start wherever you are.</p>
+        </div>
+        <div class="support-form-pair">
+        <div>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required maxlength="100">
+        </div>
+        <div>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="your@email.com" required maxlength="254">
+        </div>
+        </div>
+        <label for="topic">Topic</label>
+        <select id="topic" name="topic">
+          <option>Product question</option>
+          <option>Build Your Own PC help</option>
+          <option>Order support</option>
+        </select>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Tell us what you need..." required maxlength="3000"></textarea>
+        <div class="support-attachment">
+        <label for="supportPhoto">Product photo or receipt <span>(optional)</span></label>
+        <input id="supportPhoto" name="photo" type="file" accept="image/png,image/jpeg,image/webp" aria-describedby="photoHint photoStatus">
+        <small id="photoHint">JPG, PNG, or WebP, up to 5 MB. Preview stays on this device; nothing is uploaded.</small>
+        <p id="photoStatus" role="status"></p>
+        <figure class="support-photo-preview" hidden>
+          <img alt="Your selected support attachment">
+          <figcaption></figcaption>
+          <button class="button small" id="removeSupportPhoto" type="button">Remove photo</button>
+        </figure>
+        </div>
+        <button class="button primary" type="submit">Prepare Message <span aria-hidden="true">&rarr;</span></button>
+        <p class="support-form-status" role="status"></p>
+        <p class="support-demo-note">Store demo: messages are not sent. A draft opens below for review.</p>
+        <section class="support-draft" hidden><hr><h3>Your message draft</h3><p></p><a class="text-link" href="pages/contact.html">Contact details &amp; FAQ &rarr;</a></section>
+      </form>
+
+      <aside class="support-panel">
+        <div class="support-copy">
+          <p class="eyebrow">Support desk</p>
+          <h2>A good setup starts with a conversation.</h2>
+          <p>Ask about order status, laptop recommendations, PC compatibility, or accessories. You can review a message before contacting us.</p>
+        </div>
+        <fieldset class="computer-support-fieldset">
+          <legend>Request support details</legend>
+          <label for="addr">Email address</label>
+          <input id="addr" type="email" placeholder="you@email.com" required>
+          <button class="button small" id="startSupportRequest" type="button">Start request</button>
+        </fieldset>
+        <a class="support-link" href="pages/products.html">Browse the collection</a>
+      </aside>
+    </section>
+
+    <section class="faq-section" aria-labelledby="faqTitle">
+      <div class="faq-heading">
+        <p class="eyebrow">A little clarity</p>
+        <h2 id="faqTitle">Frequently asked questions</h2>
+        <p>Quick answers about products, custom PC builds, delivery, and payment.</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>How do I know if a PC part is compatible with my build?</summary>
+          <p>Open Build Your Own PC and select your parts. The builder checks important details such as CPU socket, RAM type, case size, and estimated power needs.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I see product specifications and stock before adding an item?</summary>
+          <p>Yes. Select Details on any product card to see specifications, price, availability, delivery information, and payment options.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What payment methods can I choose at checkout?</summary>
+          <p>The checkout supports Cash on Delivery, card payment, and e-wallet payment through GCash or Maya in this store demo.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does delivery address selection work?</summary>
+          <p>In the cart checkout, choose a region or province first, then a city or municipality, followed by a barangay. The postal code is filled in when a city is selected.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I save an item and decide later?</summary>
+          <p>Yes. Use the heart button on a product card to save it to your wishlist. Your saved items remain available while you browse the store.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Herrera Corporation. All rights reserved.</p>
+    <div>
+      <a href="pages/products.html">Products</a>
+      <a href="pages/about.html">About</a>
+      <a href="pages/cart.html">Cart</a>
+    </div>
+    <div class="social-links" aria-label="Social media profiles">
+      <a class="social-icon facebook" href="https://www.facebook.com/johncarlo.herrera.58" target="_blank" rel="noopener noreferrer" aria-label="Facebook: John Carlo Herrera" title="Facebook"><img src="images/social/facebook.svg" alt="" width="24" height="24"></a>
+      <a class="social-icon instagram" href="https://www.instagram.com/jayzzzz0723/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: jayzzzz0723" title="Instagram"><img src="images/social/instagram.svg" alt="" width="24" height="24"></a>
+      <a class="social-icon x-twitter" href="https://x.com/Jayzee20202" target="_blank" rel="noopener noreferrer" aria-label="X: Jayzee20202" title="X"><img src="images/social/x.svg" alt="" width="24" height="24"></a>
+      <a class="social-icon youtube" href="https://www.youtube.com/@johncarloherrera8540" target="_blank" rel="noopener noreferrer" aria-label="YouTube: johncarloherrera8540" title="YouTube"><img src="images/social/youtube.svg" alt="" width="24" height="24"></a>
+    </div>
+  </footer>
+
+  <script src="js/data.js?v=20261012-gallery-v2"></script>
+  <script src="js/app.js?v=20261012-gallery-v2"></script>
+  <script src="js/support-form.js"></script>
+</body>
+</html>

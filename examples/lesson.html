@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+  <!-- Resolve shared files from the project root, including on local file URLs. -->
+  <base href="../">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<style>
+
+p.repeat {
+    background: LightBlue url("images/decor/cat.jpg");
+    width: 384px;
+    height: 64px;
+}
+
+p.repeat-y {
+    background: DeepSkyBlue url("images/decor/cat.jpg") repeat-y top right;
+    width: 384px;
+    height: 128px;
+}
+
+body {
+    background: url("images/decor/cat.jpg") no-repeat bottom right fixed;
+        cursor: not-allowed;   
+}
+
+p {
+    border: 2px solid DarkOrange;
+    height: 60px;
+    background: bisque;
+}
+
+p.helpcursor {
+    cursor: help;
+}
+
+p.target-cursor {
+    cursor: url(target.curl), default;
+}
+
+div {
+    display: inline-block; width: 175px; height: 100px; margin:100px; margin: 10px; background: Bisque; border:30px solid transparent;
+}
+
+div.image {
+    border-image:url("images/decor/cat.jpg"); 
+}
+div.round {
+    border-image:url("images/decor/cat.jpg") 33% round; 
+}
+div.stretch {
+    border-image:url("images/decor/cat.jpg") 33% stretch; 
+}
+div.image {
+    border-image: repeating-linear-gradient(45deg, OrangeRed, Orange 20%) 33% ; 
+}
+input:focus{
+    background: DarkOrange;
+}
+a:focus {
+    background: Orange;
+}
+
+div.thumbnail {
+    position: relative; display: inline-block;
+}
+div.dropdown {
+    position: absolute; padding: 2px ; border: 2px dashed DarkOrange; background: White; z-index: 1; display: none;
+}
+div.thumbnail:hover div.dropdown {
+    display:block;
+}
+span.label{
+    display: block; padding: 15px; text-align: center; background: DarkOrange; color: White;
+}
+
+div {
+    margin: 50px; padding: 15px; background: Orange; color: White; font: 1.5em sans-serif; 
+}
+</style>
+    </head>
+
+<body>
+    <h1>Repeat</h1>
+    <div class ="repeat"></div>
+
+    <h1>Repeat-Y</h1>
+    <div class ="repeat-y"></div>
+
+<p class ="repeat"></p>
+<p class="repeat-y"></p>
+
+<p class="help-cursor">Browser defined help cursor</p>
+<p class="target-cursor">Custom Cursor (or browser default)</p>
+
+<div class="image"></div>
+<div class="round"></div>
+<div class="stretch"></div>
+<div class="gradient"></div>
+
+<fieldset>
+    <legend>Send for details</legend>
+    <label for="addr">Enter your email address: </label>
+    <input id="addr" type="text"><br>
+    <input type="submit" value = "Send">
+    <a href = "http://samples">Samples Page</a>
+</fieldset>
+
+<div class="thumbnail">
+    <img src="images/decor/cat.jpg" alt="Logo" width="35" height="50">
+    <div class="dropdown">
+        <img src="images/decor/cat.jpg" alt="Logo" width="135" height="190">
+        <span class="label">HyperText Markup Language</span>
+
+<div class="thumbnail">
+    <img src="images/decor/cat.jpg" alt="Logo" width="35" height="50">
+    <div class="dropdown">
+        <img src="images/decor/cat.jpg" alt="Logo" width="135" height="190">
+        <span class="label">Cascading Style Sheet</span>
+    </div>
+</div>
+
+
+<div class="thumbnail">
+    <img src="images/decor/cat.jpg" alt="Logo" width="35" height="50">
+    <div class="dropdown">
+        <img src="images/decor/cat.jpg" alt="Logo" width="135" height="190">
+        <span class="label">Javascript</span>
+    </div>
+</div>
+
+</body>
+
+
+</html>
