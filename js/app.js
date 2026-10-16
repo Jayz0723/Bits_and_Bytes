@@ -119,13 +119,14 @@ function addToCart(product, quantity = 1) {
 
 const computerPartProducts = [
   {
-    id: "part-ssd-kingston-kc600", name: "Kingston KC600 SATA SSD",
+    id: "part-ssd-kingston-kc600", name: "Kingston KC600 SATA SSD", partCategory: "storage",
     type: "Computer Part", use: "Build", brand: "Kingston",
     price: 2495, stock: 18, image: "images/products/kingston-kc600.png",
     specs: "512GB, 2.5-inch SATA III SSD for desktop and compatible laptop upgrades"
   },
   {
     id: "part-cpu-i5-14600k",
+    partCategory: "cpu",
     name: "Intel Core i5-14600K",
     type: "Computer Part",
     use: "Build",
@@ -138,6 +139,7 @@ const computerPartProducts = [
   },
   {
     id: "part-gpu-rtx-4060",
+    partCategory: "gpu",
     name: "NVIDIA RTX 4060 8GB",
     type: "Computer Part",
     use: "Build",
@@ -150,6 +152,7 @@ const computerPartProducts = [
   },
   {
     id: "part-ram-32gb-ddr5",
+    partCategory: "ram",
     name: "Kingston FURY Beast DDR5 Memory",
     type: "Computer Part",
     use: "Build",
@@ -161,6 +164,7 @@ const computerPartProducts = [
   },
   {
     id: "part-ssd-1tb-nvme",
+    partCategory: "storage",
     name: "Kingston NV3 NVMe SSD",
     type: "Computer Part",
     use: "Build",
@@ -172,6 +176,7 @@ const computerPartProducts = [
   },
   {
     id: "part-cpu-ryzen-7-7700x",
+    partCategory: "cpu",
     name: "AMD Ryzen 7 7700X",
     type: "Computer Part",
     use: "Build",
@@ -183,6 +188,7 @@ const computerPartProducts = [
   },
   {
     id: "part-board-gigabyte-b650",
+    partCategory: "motherboard",
     name: "Gigabyte B650 AORUS Elite AX",
     type: "Computer Part",
     use: "Build",
@@ -194,6 +200,7 @@ const computerPartProducts = [
   },
   {
     id: "part-cooler-master-240",
+    partCategory: "cooling",
     name: "Cooler Master ML240L RGB",
     type: "Computer Part",
     use: "Build",
@@ -206,6 +213,7 @@ const computerPartProducts = [
   },
   {
     id: "part-corsair-psu-850",
+    partCategory: "psu",
     name: "Corsair RM850e 850W Gold PSU",
     type: "Computer Part",
     use: "Build",
@@ -217,6 +225,7 @@ const computerPartProducts = [
   },
   {
     id: "part-kingston-fury-32",
+    partCategory: "ram",
     name: "Kingston FURY Beast 32GB DDR5",
     type: "Computer Part",
     use: "Build",
@@ -236,8 +245,8 @@ function catalogProducts() {
     return {
       ...product, ...media, ...defaultVariant, id: product.id, variants,
       image: defaultVariant?.image || media.image || product.image,
-      photoCapacity: defaultVariant?.photoCapacity,
-      moduleLayout: defaultVariant?.moduleLayout
+      photoCapacity: defaultVariant?.photoCapacity || product.photoCapacity,
+      moduleLayout: defaultVariant?.moduleLayout || product.moduleLayout
     };
   });
 }
@@ -376,7 +385,7 @@ function productCard(baseProduct, variantId) {
       <div class="product-card-body">
         ${product.photoNote ? `<small class="product-photo-note">${product.photoNote}</small>` : ""}
         <div class="tag-row">
-          <span>${product.type}</span>
+          <span>${computerPartCategories.find((category) => category.id === product.partCategory)?.label || product.type}</span>
           <span>${product.use}</span>
           <span class="stock-badge">${product.stock} in stock</span>
         </div>
@@ -521,6 +530,9 @@ function renderProductsPage() {
   if (accessoryChooser) accessoryChooser.parentElement.append(accessoryChooser);
 
   const typeFilter = document.querySelector("#typeFilter");
+  const savedType = typeFilter.value;
+  document.getElementById("partTypeOptions").replaceChildren(...computerPartCategories.map((category) => new Option(category.label, "part:" + category.id)));
+  typeFilter.value = savedType;
   const useFilter = document.querySelector("#useFilter");
   const sortFilter = document.querySelector("#sortFilter");
   const minPrice = document.querySelector("#minPrice");
@@ -551,6 +563,9 @@ function renderProductsPage() {
 
   // Shared search and brand links open the catalog with the right filters applied.
   const query = new URLSearchParams(location.search);
+  if (computerPartCategories.some((category) => category.id === query.get("part"))) {
+    typeFilter.value = "part:" + query.get("part");
+  }
   if (search) search.value = query.get("q") || "";
   brandFilters.querySelectorAll("input").forEach((input) => {
     input.checked = input.value === query.get("brand");
@@ -565,8 +580,11 @@ function renderProductsPage() {
 
   function render() {
     const selectedType = typeFilter.value;
+    const partCategory = computerPartCategories.find((category) => "part:" + category.id === selectedType);
+    document.querySelector("#computer-parts .collection-heading h2").textContent = partCategory?.label || "Computer Parts";
     document.querySelectorAll("[data-catalog-type]").forEach((button) => {
-      button.setAttribute("aria-pressed", String(button.dataset.catalogType === selectedType));
+      const isPart = button.dataset.catalogType === "Computer Part" && selectedType.startsWith("part:");
+      button.setAttribute("aria-pressed", String(isPart || button.dataset.catalogType === selectedType));
     });
     const selectedUse = useFilter.value;
     const selectedBrands = Array.from(document.querySelectorAll("[data-brand-filter]:checked")).map((input) => input.value);
@@ -574,7 +592,8 @@ function renderProductsPage() {
     const minimum = Number(minPrice.value) * currencyMultiplier;
     const maximum = Number(maxPrice.value) * currencyMultiplier;
     const filtered = catalogProducts().filter((product) => {
-      const typeMatch = selectedType === "all" || product.type === selectedType;
+      const typeMatch = selectedType === "all" || product.type === selectedType
+        || (selectedType.startsWith("part:") && product.type === "Computer Part" && product.partCategory === selectedType.slice(5));
       const useMatch = selectedUse === "all" || product.use === selectedUse;
       const brandMatch = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
       const minimumMatch = !minPrice.value || product.price >= minimum;
@@ -603,7 +622,7 @@ function renderProductsPage() {
     });
 
     const activeFilters = [
-      selectedType !== "all" ? selectedType : "",
+      selectedType !== "all" ? typeFilter.selectedOptions[0].textContent : "",
       selectedUse !== "all" ? selectedUse : "",
       selectedBrands.length ? `${selectedBrands.length} brand${selectedBrands.length === 1 ? "" : "s"}` : "",
       inStockFilter.checked ? "In stock" : "",

@@ -1,6 +1,18 @@
 // Product and PC part data are kept here so the website is easy to modify.
 // Each entry can also have a gallery: [{ src: "images/...", label: "Side view", shortLabel: "Side" }].
 // Use the productMedia map below to replace photos without changing product details.
+const computerPartCategories = [
+  { id: "cpu", label: "Processors (CPU)" },
+  { id: "gpu", label: "Graphics Cards (GPU)" },
+  { id: "motherboard", label: "Motherboards" },
+  { id: "ram", label: "Memory (RAM)" },
+  { id: "storage", label: "Storage (SSD / HDD)" },
+  { id: "psu", label: "Power Supplies (PSU)" },
+  { id: "cooling", label: "CPU Coolers" },
+  { id: "case", label: "PC Cases" },
+  { id: "fan", label: "Case Fans" }
+];
+
 const productMedia = {
   "lap-asus-gaming": {"gallery":[{"src":"images/products/asus-rog-g16-main.png","label":"ASUS ROG Strix G16 (2023) main view","shortLabel":"Main"},{"src":"images/products/asus-rog-g16-front.png","label":"ASUS ROG Strix G16 (2023) front view","shortLabel":"Front"},{"src":"images/products/asus-rog-g16-ports.png","label":"ASUS ROG Strix G16 (2023) ports view","shortLabel":"Ports"}]},
   "pc-creator": {"gallery":[{"src":"images/products/asus-proart-pd500tc.png","label":"ASUS ProArt Station PD5 PD500TC main view","shortLabel":"Main"},{"src":"images/products/asus-proart-pd500tc-alternate.png","label":"ASUS ProArt Station PD5 PD500TC angle view","shortLabel":"Angle"}]},
@@ -246,6 +258,114 @@ productVariants["part-ssd-1tb-nvme"].options.forEach((variant) => {
 });
 
 const products = [
+  {
+    id: "lap-dell-latitude-5440", name: "Dell Latitude 5440",
+    type: "Laptop", use: "Office", brand: "Dell", price: 59995, stock: 8,
+    image: "images/products/dell-latitude-5440-1.png",
+    specs: "Intel Core i5-1345U, Intel integrated graphics, 16GB RAM, 512GB SSD, 14-inch Full HD display",
+    gallery: [
+      { src: "images/products/dell-latitude-5440-1.png", label: "Dell Latitude 5440 main view", shortLabel: "Main" },
+      { src: "images/products/dell-latitude-5440-2.png", label: "Dell Latitude 5440 alternate angle", shortLabel: "Angle" },
+      { src: "images/products/dell-latitude-5440-3.png", label: "Dell Latitude 5440 side view", shortLabel: "Side" }
+    ]
+  },
+  {
+    id: "lap-dell-g15-5530", name: "Dell G15 5530 Gaming Laptop",
+    type: "Laptop", use: "Gaming", brand: "Dell", price: 84995, stock: 5,
+    image: "images/products/dell-g15-5530-1.png",
+    specs: "Intel Core i7-13650HX, RTX 4060 8GB, 16GB RAM, 512GB SSD, 15.6-inch Full HD 165Hz display",
+    gallery: [
+      { src: "images/products/dell-g15-5530-1.png", label: "Dell G15 5530 front angle", shortLabel: "Main" },
+      { src: "images/products/dell-g15-5530-2.png", label: "Dell G15 5530 keyboard and top view", shortLabel: "Top" }
+    ]
+  },
+  {
+    id: "pc-hp-pro-mini-400-g9", name: "HP Pro Mini 400 G9",
+    type: "Desktop PC", use: "Office", brand: "HP", price: 42995, stock: 9,
+    image: "images/products/hp-pro-mini-400-g9.png",
+    specs: "Intel Core i5-13500T, Intel UHD graphics, 16GB DDR4 RAM, 512GB SSD, compact mini desktop"
+  },
+  {
+    id: "part-corsair-4000d", name: "Corsair 4000D AIRFLOW Black",
+    type: "Computer Part", partCategory: "case", use: "Build", brand: "Corsair", price: 5495, stock: 12,
+    image: "images/products/corsair-4000d-1.webp",
+    specs: "ATX mid-tower case, tempered-glass side panel, 2 included 120mm fans, up to 360mm GPU clearance",
+    gallery: [
+      { src: "images/products/corsair-4000d-1.webp", label: "Corsair 4000D AIRFLOW black case", shortLabel: "Main" },
+      { src: "images/products/corsair-4000d-2.webp", label: "Corsair 4000D AIRFLOW alternate view", shortLabel: "Angle" },
+      { src: "images/products/corsair-4000d-3.webp", label: "Corsair 4000D AIRFLOW case detail", shortLabel: "Detail" }
+    ]
+  },
+  {
+    id: "part-corsair-ml120-red", name: "Corsair ML120 LED ELITE Red",
+    type: "Computer Part", partCategory: "fan", use: "Build", brand: "Corsair", price: 1495, stock: 24,
+    image: "images/products/corsair-ml120-red-1.webp",
+    specs: "Single 120mm PWM case fan, red LEDs, magnetic-levitation bearing, 4-pin PWM connector",
+    gallery: [
+      { src: "images/products/corsair-ml120-red-1.webp", label: "Corsair ML120 LED ELITE red fan", shortLabel: "Main" },
+      { src: "images/products/corsair-ml120-red-2.webp", label: "Corsair ML120 LED ELITE alternate view", shortLabel: "Angle" }
+    ]
+  },
+  {
+    id: "part-corsair-vengeance-32", name: "Corsair VENGEANCE 32GB DDR5-6000",
+    type: "Computer Part", partCategory: "ram", use: "Build", brand: "Corsair", price: 7495, stock: 14,
+    image: "images/products/corsair-vengeance-32gb-1.webp", photoCapacity: "32GB", moduleLayout: "2 x 16GB",
+    specs: "32GB kit (2 x 16GB), DDR5-6000 CL36, Intel XMP 3.0, CMK32GX5M2B6000C36",
+    gallery: [
+      { src: "images/products/corsair-vengeance-32gb-1.webp", label: "Corsair VENGEANCE 32GB kit with two 16GB modules", shortLabel: "Main" },
+      { src: "images/products/corsair-vengeance-32gb-2.webp", label: "Corsair VENGEANCE 2 x 16GB memory kit alternate view", shortLabel: "Angle" }
+    ]
+  },
+  {
+    id: "part-msi-b760-gaming-plus", name: "MSI B760 GAMING PLUS WIFI",
+    type: "Computer Part", partCategory: "motherboard", use: "Build", brand: "MSI", price: 10495, stock: 10,
+    image: "images/products/msi-b760-gaming-plus-1.webp",
+    specs: "Intel B760 chipset, LGA1700, ATX, DDR5 DIMM slots, Wi-Fi 6E, PCIe 4.0 M.2",
+    gallery: [
+      { src: "images/products/msi-b760-gaming-plus-1.webp", label: "MSI B760 GAMING PLUS WIFI motherboard", shortLabel: "Main" },
+      { src: "images/products/msi-b760-gaming-plus-2.webp", label: "MSI B760 GAMING PLUS WIFI alternate view", shortLabel: "Angle" },
+      { src: "images/products/msi-b760-gaming-plus-3.webp", label: "MSI B760 GAMING PLUS WIFI additional view", shortLabel: "Detail" }
+    ]
+  },
+  {
+    id: "part-msi-4070-super", name: "MSI GeForce RTX 4070 SUPER VENTUS 2X OC",
+    type: "Computer Part", partCategory: "gpu", use: "Build", brand: "MSI", price: 39995, stock: 6,
+    image: "images/products/msi-4070-super-1.webp",
+    specs: "12GB GDDR6X graphics memory, dual-fan cooling, PCIe 4.0, HDMI and DisplayPort outputs",
+    gallery: [
+      { src: "images/products/msi-4070-super-1.webp", label: "MSI RTX 4070 SUPER VENTUS 2X OC", shortLabel: "Main" },
+      { src: "images/products/msi-4070-super-2.webp", label: "MSI RTX 4070 SUPER alternate angle", shortLabel: "Angle" },
+      { src: "images/products/msi-4070-super-3.webp", label: "MSI RTX 4070 SUPER additional view", shortLabel: "Detail" }
+    ]
+  },
+  {
+    id: "part-samsung-990-pro-1tb", name: "Samsung 990 PRO 1TB NVMe SSD",
+    type: "Computer Part", partCategory: "storage", use: "Build", brand: "Samsung", price: 6995, stock: 18,
+    image: "images/products/samsung-990-pro-1tb.png", photoCapacity: "1TB",
+    specs: "1TB storage, M.2 2280, PCIe 4.0 x4 NVMe, MZ-V9P1T0BW"
+  },
+  {
+    id: "accessory-logitech-g502", name: "Logitech G502 HERO",
+    type: "Accessory", use: "Gaming", brand: "Logitech", price: 2495, stock: 22,
+    image: "images/products/logitech-g502-hero-1.png",
+    specs: "Wired USB gaming mouse, HERO sensor, adjustable weights, 11 programmable buttons",
+    gallery: [
+      { src: "images/products/logitech-g502-hero-1.png", label: "Logitech G502 HERO gaming mouse", shortLabel: "Main" },
+      { src: "images/products/logitech-g502-hero-2.png", label: "Logitech G502 HERO left side and thumb buttons", shortLabel: "Side" },
+      { src: "images/products/logitech-g502-hero-3.png", label: "Logitech G502 HERO underside", shortLabel: "Bottom" }
+    ]
+  },
+  {
+    id: "accessory-logitech-g435", name: "Logitech G435 LIGHTSPEED Black",
+    type: "Accessory", use: "Gaming", brand: "Logitech", price: 3495, stock: 16,
+    image: "images/products/logitech-g435-1.png",
+    specs: "Wireless gaming headset, LIGHTSPEED USB receiver and Bluetooth, built-in microphones, USB-C charging",
+    gallery: [
+      { src: "images/products/logitech-g435-1.png", label: "Logitech G435 black headset front angle", shortLabel: "Main" },
+      { src: "images/products/logitech-g435-2.png", label: "Logitech G435 black headset rear angle", shortLabel: "Rear" },
+      { src: "images/products/logitech-g435-3.png", label: "Logitech G435 included accessories", shortLabel: "Included" }
+    ]
+  },
   // New arrivals: keep each model's photographs together with its specifications.
   {
     id: "lap-microsoft-studio-2",

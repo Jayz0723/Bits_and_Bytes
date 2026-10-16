@@ -1,0 +1,109 @@
+{
+  "note": "Manufacturer product photographs; RAM shows 2 x 16GB and the Samsung SSD is the 1TB model.",
+  "assets": [
+    {
+      "file": "images/products/corsair-4000d-1.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Cases/base-4000d-airflow-config/Gallery/4000D_AF_BLACK_01.webp"
+    },
+    {
+      "file": "images/products/corsair-4000d-2.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Cases/base-4000d-airflow-config/Gallery/4000D_AF_BLACK_02.webp"
+    },
+    {
+      "file": "images/products/corsair-4000d-3.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Cases/base-4000d-airflow-config/Gallery/4000D_AF_BLACK_04.webp"
+    },
+    {
+      "file": "images/products/corsair-vengeance-32gb-1.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Memory/vengeance-ddr5-blk-config/Gallery/Vengeance-DDR5-2UP-16GB-BLACK_01.webp"
+    },
+    {
+      "file": "images/products/corsair-vengeance-32gb-2.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Memory/vengeance-ddr5-blk-config/Gallery/Vengeance-DDR5-2UP-16GB-BLACK_02.webp"
+    },
+    {
+      "file": "images/products/corsair-ml120-red-1.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Fans/CO-9050120-WW/Gallery/ML120_LED_ELITE_RED_BLACK_01.webp"
+    },
+    {
+      "file": "images/products/corsair-ml120-red-2.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Fans/CO-9050120-WW/Gallery/ML120_LED_ELITE_RED_BLACK_02.webp"
+    },
+    {
+      "file": "images/products/msi-b760-gaming-plus-1.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1681119032ad3897f62e91d9c4d3803c2413d1d520.webp"
+    },
+    {
+      "file": "images/products/msi-b760-gaming-plus-2.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1681119032d9d8578f0d4ca09c658bd1e0089398a4.webp"
+    },
+    {
+      "file": "images/products/msi-b760-gaming-plus-3.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_16811190344f11915135e34791e56454fcf43e8da3.webp"
+    },
+    {
+      "file": "images/products/msi-4070-super-1.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1704699649413398d807686f322a7a562d15b205df.webp"
+    },
+    {
+      "file": "images/products/msi-4070-super-2.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_170469964910b79aedd8da543d250c0c8aecf42b0f.webp"
+    },
+    {
+      "file": "images/products/msi-4070-super-3.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1704699652044a1802bd893b86b7a5fc3313b6fc22.webp"
+    },
+    {
+      "file": "images/products/samsung-990-pro-1tb.png",
+      "source": "https://images.samsung.com/is/image/samsung/p6pim/in/mz-v9p1t0bw/gallery/in-990pro-nvme-m2-ssd-mz-v9p1t0bw-534630671?fmt=png-alpha&wid=1200"
+    },
+    {
+      "file": "images/products/hp-pro-mini-400-g9.png",
+      "source": "https://hp.widen.net/content/t0hksv81kk/png/t0hksv81kk.png?w=1200&h=900&dpi=72&color=ffffff00"
+    },
+    {
+      "file": "images/products/dell-latitude-5440-1.png",
+      "source": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/latitude-notebooks/latitude-14-5440-laptop/media-gallery/gray/notebook-latitude-14-5440-nt-gray-gallery-2.psd?fmt=png-alpha&wid=1000"
+    },
+    {
+      "file": "images/products/dell-latitude-5440-2.png",
+      "source": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/latitude-notebooks/latitude-14-5440-laptop/media-gallery/gray/notebook-latitude-14-5440-nt-gray-gallery-6.psd?fmt=png-alpha&wid=1000"
+    },
+    {
+      "file": "images/products/dell-latitude-5440-3.png",
+      "source": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/latitude-notebooks/latitude-14-5440-laptop/media-gallery/gray/notebook-latitude-14-5440-nt-gray-gallery-7.psd?fmt=png-alpha&wid=1000"
+    },
+    {
+      "file": "images/products/dell-g15-5530-1.png",
+      "source": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/g-series/g15-5530/media-gallery/black/non-touch/gray-black-1-zone-coral-kb/notebook-g15-5530-nt-coral-black-gallery-1.psd?fmt=png-alpha&wid=1000"
+    },
+    {
+      "file": "images/products/dell-g15-5530-2.png",
+      "source": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/g-series/g15-5530/media-gallery/black/non-touch/gray-black-1-zone-coral-kb/notebook-g15-5530-nt-coral-black-gallery-3.psd?fmt=png-alpha&wid=1000"
+    },
+    {
+      "file": "images/products/logitech-g502-hero-1.png",
+      "source": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/gaming/en/non-braid/hyjal-g502-hero/2025/g502-hero-mouse-top-angle-gallery-1.png"
+    },
+    {
+      "file": "images/products/logitech-g502-hero-2.png",
+      "source": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/gaming/en/non-braid/hyjal-g502-hero/2025/g502-hero-mouse-profile-left-angle-gallery-2.png"
+    },
+    {
+      "file": "images/products/logitech-g502-hero-3.png",
+      "source": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/gaming/en/non-braid/hyjal-g502-hero/2025/g502-hero-mouse-bottom-angle-gallery-3.png"
+    },
+    {
+      "file": "images/products/logitech-g435-1.png",
+      "source": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/gaming/en/products/g435/2025/gallery/g435-3qtr-front-left-angle-black-gallery-1.png"
+    },
+    {
+      "file": "images/products/logitech-g435-2.png",
+      "source": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/gaming/en/products/g435/2025/gallery/g435-3qtr-back-left-angle-black-gallery-4.png"
+    },
+    {
+      "file": "images/products/logitech-g435-3.png",
+      "source": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/gaming/en/products/g435/2025/gallery/g435-in-the-box-black-gallery-5.png"
+    }
+  ]
+}

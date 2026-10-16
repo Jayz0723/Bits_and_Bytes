@@ -46,6 +46,7 @@ Bits-and-Bytes/
 | Interactive hardware guide | [pages/components.html](pages/components.html) |
 | About, policies, and downloads | `pages/about.html`, `pages/terms.html`, `pages/warranty.html`, `pages/downloads.html` |
 | Products, variants, galleries, and builder choices | [js/data.js](js/data.js) |
+| Component filter names (RAM, storage, and more) | `computerPartCategories` in [js/data.js](js/data.js) |
 | Shared shopping, accounts, navigation, and builder logic | [js/app.js](js/app.js) |
 | Product comparison | [js/shopping-tools.js](js/shopping-tools.js) |
 | Message drafts and attachment previews | [js/support-form.js](js/support-form.js) |
@@ -70,6 +71,8 @@ The catalog category buttons update the same filters as the sidebar. Brand and s
 Brand logos identify stocked product brands, not endorsements or formal partnerships.
 
 See [the image guide](docs/IMAGES.md) for photo locations and editing instructions.
+See [the catalog expansion guide](docs/CATALOG-EXPANSION.md) for the new products,
+manufacturer references, and instructions for assigning component categories.
 See [the classroom checklist](docs/CLASS_REQUIREMENTS.md) for the required HTML,
 CSS, and JavaScript features. The PDF is in [downloads/PC_GUIDE.pdf](downloads/PC_GUIDE.pdf).
 

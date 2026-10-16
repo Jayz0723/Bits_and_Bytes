@@ -208,6 +208,7 @@ body { font-family: "Inter", Arial, sans-serif; letter-spacing: 0; }
   .catalog-page .page-hero h1 { font-size: 28px; }
   .catalog-page .product-card img { padding: 12px; }
   .catalog-page .product-card-body { padding: 14px 12px; }
+  .catalog-page .product-grid > .product-card:only-child { grid-column: 1 / -1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .product-gallery-stage > img { transition: none; }
