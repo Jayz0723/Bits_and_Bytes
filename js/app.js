@@ -1237,6 +1237,59 @@ function wirePartnersDialog() {
   });
 }
 
+function wireBackgroundMusic() {
+  const audio = document.querySelector("#backgroundMusic");
+  const button = document.querySelector("#musicToggle");
+  if (!audio || !button) return;
+  const preferenceKey = "bits-bytes-music";
+  let enabled = true;
+  try { enabled = localStorage.getItem(preferenceKey) !== "off"; } catch {}
+  audio.volume = 0.2;
+
+  function updateButton() {
+    const playing = !audio.paused;
+    const label = playing ? "Pause background music" : "Play background music";
+    button.setAttribute("aria-label", label);
+    button.setAttribute("title", label);
+    button.setAttribute("aria-pressed", String(playing));
+    button.querySelector("img").src = playing ? "images/icons/pause.svg" : "images/icons/play.svg";
+  }
+
+  function stopRetrying() {
+    document.removeEventListener("click", retryPlayback);
+    document.removeEventListener("keydown", retryPlayback);
+  }
+
+  async function playMusic() {
+    if (!enabled) return;
+    try {
+      await audio.play();
+      stopRetrying();
+    } catch {
+      // Browsers can require a click or key press before audible playback.
+    }
+    updateButton();
+  }
+
+  function retryPlayback(event) {
+    if (button.contains(event.target) || event.repeat) return;
+    if (enabled && audio.paused) playMusic();
+  }
+
+  button.addEventListener("click", () => {
+    enabled = audio.paused;
+    try { localStorage.setItem(preferenceKey, enabled ? "on" : "off"); } catch {}
+    if (enabled) playMusic();
+    else { audio.pause(); stopRetrying(); }
+    updateButton();
+  });
+  audio.addEventListener("play", updateButton);
+  audio.addEventListener("pause", updateButton);
+  document.addEventListener("click", retryPlayback);
+  document.addEventListener("keydown", retryPlayback);
+  playMusic();
+}
+
 function wireReviewCarousel() {
   const track = document.querySelector("#reviewTrack");
   const previous = document.querySelector("#reviewPrevious");
@@ -2273,6 +2326,7 @@ wireFoldableNavigation();
 wireStoreControls();
 wireStickyStoreHeader();
 wireHomeVideo();
+wireBackgroundMusic();
 wirePartnersDialog();
 wirePromoCarousel();
 wireReviewCarousel();
