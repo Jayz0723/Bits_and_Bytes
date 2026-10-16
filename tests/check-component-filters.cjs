@@ -16,7 +16,7 @@ const root = path.resolve(__dirname, '..');
     const catalogUrl = pathToFileURL(path.join(root, 'pages/products.html')).href;
     await page.goto(catalogUrl);
     const catalog = await page.evaluate(() => catalogProducts());
-    assert.equal(catalog.length, 41, 'Eleven additions retain the thirty existing products');
+    assert.equal(catalog.length, 50, 'Nine more models retain all forty-one existing products');
     const categories = await page.evaluate(() => computerPartCategories);
     for (const product of catalog.filter(product => product.type === 'Computer Part')) {
       assert.ok(categories.some(category => category.id === product.partCategory), product.name + ' has a component category');
@@ -45,7 +45,9 @@ const root = path.resolve(__dirname, '..');
     await page.click('#resetFilters');
     assert.equal(await page.locator('.product-card').count(), catalog.length);
 
-    const additions = catalog.slice(0, 11);
+    const previousAdditionIds = ['lap-dell-latitude-5440', 'lap-dell-g15-5530', 'pc-hp-pro-mini-400-g9', 'part-corsair-4000d', 'part-corsair-ml120-red', 'part-corsair-vengeance-32', 'part-msi-b760-gaming-plus', 'part-msi-4070-super', 'part-samsung-990-pro-1tb', 'accessory-logitech-g502', 'accessory-logitech-g435'];
+    const additions = catalog.filter(product => previousAdditionIds.includes(product.id));
+    assert.equal(additions.length, previousAdditionIds.length);
     const photos = await page.evaluate(ids => catalogProducts().filter(product => ids.includes(product.id)).flatMap(product => [product.image, ...productGallery(product).map(view => view.src)]), additions.map(product => product.id));
     const broken = await page.evaluate(async sources => {
       return (await Promise.all([...new Set(sources)].map(src => new Promise(resolve => {
@@ -63,7 +65,7 @@ const root = path.resolve(__dirname, '..');
       if (width < 761) await page.click('#toggleFilters');
       await page.selectOption('#typeFilter', 'part:case');
       if (width < 761) await page.click('#toggleFilters');
-      assert.equal(await page.locator('.product-card').count(), 1);
+      assert.equal(await page.locator('.product-card').count(), catalog.filter(product => product.partCategory === 'case').length);
       await page.locator('#computer-parts').scrollIntoViewIfNeeded();
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       await page.screenshot({ path: path.join(root, 'images/previews/component-case-' + width + '.png') });
@@ -71,6 +73,6 @@ const root = path.resolve(__dirname, '..');
     await page.goto(pathToFileURL(path.join(root, 'pages/product.html')).href + '?id=part-samsung-990-pro-1tb');
     assert.equal(await page.locator('#detailPhotoCapacity .product-photo-capacity').innerText(), '1TB');
     assert.deepEqual(errors, []);
-    console.log('Passed 41 products, all 9 component filters, brand/search combinations, capacity labels, new product photos, cart persistence, URL filters, and desktop/mobile layouts.');
+    console.log('Passed 50 products, all 9 component filters, brand/search combinations, capacity labels, product photos, cart persistence, URL filters, and desktop/mobile layouts.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

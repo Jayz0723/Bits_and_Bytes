@@ -258,6 +258,108 @@ productVariants["part-ssd-1tb-nvme"].options.forEach((variant) => {
 });
 
 const products = [
+  // More models: each entry keeps its actual manufacturer photos beside its data.
+  {
+    id: "lap-msi-modern-14-c13m", name: "MSI Modern 14 C13M Beige Rose",
+    type: "Laptop", use: "Student", brand: "MSI", price: 37995, stock: 10,
+    image: "images/products/msi-modern-14-c13m-5.webp",
+    specs: "Intel Core i5-1335U, 16GB DDR4 memory, 512GB NVMe SSD, 14-inch Full HD display, Beige Rose",
+    gallery: [
+      { src: "images/products/msi-modern-14-c13m-5.webp", label: "Modern 14 C13M Beige Rose front angle", shortLabel: "Main" },
+      { src: "images/products/msi-modern-14-c13m-2.webp", label: "Modern 14 C13M Beige Rose rear angle and side connections", shortLabel: "Rear angle" }
+    ]
+  },
+  {
+    id: "lap-msi-cyborg-15-a13v", name: "MSI Cyborg 15 A13VF",
+    type: "Laptop", use: "Gaming", brand: "MSI", price: 67995, stock: 7,
+    image: "images/products/msi-cyborg-15-a13v-2.webp",
+    specs: "Intel Core i7-13620H, GeForce RTX 4060 8GB, 16GB DDR5 RAM, 512GB NVMe SSD, 15.6-inch Full HD 144Hz display",
+    gallery: [
+      { src: "images/products/msi-cyborg-15-a13v-2.webp", label: "MSI Cyborg 15 A13V front view", shortLabel: "Main" },
+      { src: "images/products/msi-cyborg-15-a13v-4.webp", label: "MSI Cyborg 15 A13V rear angle and side ports", shortLabel: "Rear angle" },
+      { src: "images/products/msi-cyborg-15-a13v-3.webp", label: "MSI Cyborg 15 A13V lid", shortLabel: "Lid" },
+      { src: "images/products/msi-cyborg-15-a13v-5.webp", label: "MSI Cyborg 15 A13V underside ventilation", shortLabel: "Underside" }
+    ]
+  },
+  {
+    id: "lap-dell-16-plus", name: "Dell 16 Plus DB16250",
+    type: "Laptop", use: "Office", brand: "Dell", price: 89995, stock: 6,
+    image: "images/products/dell-16-plus-1.png",
+    specs: "Intel Core Ultra 7 256V, Intel Arc graphics, 16GB LPDDR5X RAM, 1TB SSD, 16-inch 2560 x 1600 display, Ice Blue",
+    gallery: [
+      { src: "images/products/dell-16-plus-1.png", label: "Dell 16 Plus Ice Blue front angle", shortLabel: "Main" },
+      { src: "images/products/dell-16-plus-3.png", label: "Dell 16 Plus keyboard and touchpad", shortLabel: "Keyboard" },
+      { src: "images/products/dell-16-plus-4.png", label: "Dell 16 Plus opposite angle and side ports", shortLabel: "Side angle" }
+    ]
+  },
+  {
+    id: "pc-msi-codex-6-14", name: "MSI MAG Codex 6 14th",
+    type: "Desktop PC", use: "Gaming", brand: "MSI", price: 72995, stock: 5,
+    image: "images/products/msi-codex-6-14-3.webp",
+    specs: "Intel Core i5-14400F, GeForce RTX 4060 8GB, 16GB DDR5 RAM, 1TB NVMe SSD, air-cooled tower",
+    gallery: [
+      { src: "images/products/msi-codex-6-14-3.webp", label: "MSI MAG Codex 6 14th side angle", shortLabel: "Main" },
+      { src: "images/products/msi-codex-6-14-2.webp", label: "MSI MAG Codex 6 14th opposite angle", shortLabel: "Angle" },
+      { src: "images/products/msi-codex-6-14-4.webp", label: "MSI MAG Codex 6 14th front panel", shortLabel: "Front" },
+      { src: "images/products/msi-codex-6-14-5.webp", label: "MSI MAG Codex 6 14th rear connections", shortLabel: "Ports" }
+    ]
+  },
+  {
+    id: "monitor-msi-274qrf-qd-e2", name: "MSI MAG 274QRF QD E2",
+    type: "Monitor", use: "Gaming", brand: "MSI", price: 19995, stock: 12,
+    image: "images/products/msi-mag-274qrf-qd-e2-3.webp",
+    specs: "27-inch Rapid IPS Quantum Dot display, 2560 x 1440, 180Hz, 1ms GtG, adjustable stand",
+    gallery: [
+      { src: "images/products/msi-mag-274qrf-qd-e2-3.webp", label: "MSI MAG 274QRF QD E2 front angle", shortLabel: "Main" },
+      { src: "images/products/msi-mag-274qrf-qd-e2-2.webp", label: "MSI MAG 274QRF QD E2 rear view", shortLabel: "Rear" },
+      { src: "images/products/msi-mag-274qrf-qd-e2-5.webp", label: "MSI MAG 274QRF QD E2 side profile", shortLabel: "Side" }
+    ]
+  },
+  {
+    id: "part-msi-pro-b650-s", name: "MSI PRO B650-S WIFI",
+    type: "Computer Part", partCategory: "motherboard", use: "Build", brand: "MSI", price: 8995, stock: 10,
+    image: "images/products/msi-pro-b650-s-2.webp",
+    specs: "AMD B650 chipset, AM5 socket, ATX, DDR5 memory slots, Wi-Fi 6E, M.2 NVMe storage support",
+    gallery: [
+      { src: "images/products/msi-pro-b650-s-2.webp", label: "MSI PRO B650-S WIFI board layout", shortLabel: "Main" },
+      { src: "images/products/msi-pro-b650-s-3.webp", label: "MSI PRO B650-S WIFI angled view", shortLabel: "Angle" },
+      { src: "images/products/msi-pro-b650-s-5.webp", label: "MSI PRO B650-S WIFI rear I/O ports", shortLabel: "Ports" }
+    ]
+  },
+  {
+    id: "part-msi-4060-ti-gaming-x", name: "MSI GeForce RTX 4060 Ti GAMING X 8G",
+    type: "Computer Part", partCategory: "gpu", use: "Build", brand: "MSI", price: 27995, stock: 8,
+    image: "images/products/msi-4060-ti-gaming-x-2.webp",
+    specs: "8GB GDDR6 graphics memory, PCIe 4.0, TWIN FROZR 9 dual-fan cooler, HDMI and DisplayPort outputs",
+    gallery: [
+      { src: "images/products/msi-4060-ti-gaming-x-2.webp", label: "MSI RTX 4060 Ti GAMING X dual-fan view", shortLabel: "Main" },
+      { src: "images/products/msi-4060-ti-gaming-x-3.webp", label: "MSI RTX 4060 Ti GAMING X angled view", shortLabel: "Angle" },
+      { src: "images/products/msi-4060-ti-gaming-x-4.webp", label: "MSI RTX 4060 Ti GAMING X backplate", shortLabel: "Back" },
+      { src: "images/products/msi-4060-ti-gaming-x-5.webp", label: "MSI RTX 4060 Ti GAMING X display outputs", shortLabel: "Ports" }
+    ]
+  },
+  {
+    id: "part-corsair-3000d", name: "Corsair 3000D AIRFLOW Black",
+    type: "Computer Part", partCategory: "case", use: "Build", brand: "Corsair", price: 4495, stock: 14,
+    image: "images/products/corsair-3000d-1.webp",
+    specs: "ATX mid-tower case, mesh front panel, tempered-glass side panel, black finish",
+    gallery: [
+      { src: "images/products/corsair-3000d-1.webp", label: "Corsair 3000D AIRFLOW black case angle", shortLabel: "Main" },
+      { src: "images/products/corsair-3000d-2.webp", label: "Corsair 3000D AIRFLOW front mesh", shortLabel: "Front" },
+      { src: "images/products/corsair-3000d-3.webp", label: "Corsair 3000D AIRFLOW side panel", shortLabel: "Side" }
+    ]
+  },
+  {
+    id: "accessory-corsair-k65-plus", name: "Corsair K65 PLUS WIRELESS",
+    type: "Accessory", use: "Gaming", brand: "Corsair", price: 8995, stock: 16,
+    image: "images/products/corsair-k65-plus-1.webp",
+    specs: "75% RGB mechanical keyboard, US layout, pre-lubricated switches, wireless and USB connectivity",
+    gallery: [
+      { src: "images/products/corsair-k65-plus-1.webp", label: "Corsair K65 PLUS WIRELESS US keyboard layout", shortLabel: "Main" },
+      { src: "images/products/corsair-k65-plus-2.webp", label: "Corsair K65 PLUS WIRELESS manufacturer overview", shortLabel: "Overview" },
+      { src: "images/products/corsair-k65-plus-3.webp", label: "Corsair K65 PLUS WIRELESS compact desktop layout", shortLabel: "Desk setup" }
+    ]
+  },
   {
     id: "lap-dell-latitude-5440", name: "Dell Latitude 5440",
     type: "Laptop", use: "Office", brand: "Dell", price: 59995, stock: 8,

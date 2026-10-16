@@ -1,0 +1,150 @@
+{
+  "note": "Official model gallery sources; store prices and configured inventory are maintained locally.",
+  "assets": [
+    {
+      "file": "images/products/msi-modern-14-c13m-2.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1670318540e7a18bdcd7d0983486f4b492d46d1b57.webp",
+      "page": "https://www.msi.com/Business-Productivity/Modern-14-C13X/Gallery"
+    },
+    {
+      "file": "images/products/msi-modern-14-c13m-5.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1670318546e6d65b00bfe28e85917125d3a454b632.webp",
+      "page": "https://www.msi.com/Business-Productivity/Modern-14-C13X/Gallery"
+    },
+    {
+      "file": "images/products/msi-cyborg-15-a13v-2.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1710832427221ddfe311d964a72524b062853b9cf6.webp",
+      "page": "https://www.msi.com/Laptop/Cyborg-15-A13VX/Gallery"
+    },
+    {
+      "file": "images/products/msi-cyborg-15-a13v-3.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_166623067192bcedebe0e593705d46f080a4ba0a09.webp",
+      "page": "https://www.msi.com/Laptop/Cyborg-15-A13VX/Gallery"
+    },
+    {
+      "file": "images/products/msi-cyborg-15-a13v-4.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1666230671cfcf9af85b2fed6bd4d725febb0677a6.webp",
+      "page": "https://www.msi.com/Laptop/Cyborg-15-A13VX/Gallery"
+    },
+    {
+      "file": "images/products/msi-cyborg-15-a13v-5.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_16662306748071a16fe9336a450e6677396d0f9855.webp",
+      "page": "https://www.msi.com/Laptop/Cyborg-15-A13VX/Gallery"
+    },
+    {
+      "file": "images/products/msi-codex-6-14-2.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_170364413428ca92e1034841c1f6c9fe7af8dac66b.webp",
+      "page": "https://www.msi.com/Desktop/MAG-Codex-6-14th/Gallery"
+    },
+    {
+      "file": "images/products/msi-codex-6-14-3.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_17036441370d110b7cdb2c9c2a1c09b919e8afe32f.webp",
+      "page": "https://www.msi.com/Desktop/MAG-Codex-6-14th/Gallery"
+    },
+    {
+      "file": "images/products/msi-codex-6-14-4.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1703644137ac37d7b9b52559837941720c34c4e08f.webp",
+      "page": "https://www.msi.com/Desktop/MAG-Codex-6-14th/Gallery"
+    },
+    {
+      "file": "images/products/msi-codex-6-14-5.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_170364413987ab8ceba55c90502a56a59cd386bae5.webp",
+      "page": "https://www.msi.com/Desktop/MAG-Codex-6-14th/Gallery"
+    },
+    {
+      "file": "images/products/msi-mag-274qrf-qd-e2-2.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_16988250552efaa093406f011b9eddd931141cae72.webp",
+      "page": "https://www.msi.com/Monitor/MAG-274QRF-QD-E2/Gallery"
+    },
+    {
+      "file": "images/products/msi-mag-274qrf-qd-e2-3.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_169882505896fa01ab5e58dcbaf0a44a97398d5cdf.webp",
+      "page": "https://www.msi.com/Monitor/MAG-274QRF-QD-E2/Gallery"
+    },
+    {
+      "file": "images/products/msi-mag-274qrf-qd-e2-5.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1698825060ba6c05fa3c83de24f36cca55076f02d7.webp",
+      "page": "https://www.msi.com/Monitor/MAG-274QRF-QD-E2/Gallery"
+    },
+    {
+      "file": "images/products/msi-pro-b650-s-2.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1689239681b9a7cbdebdf29898d707f92463274c89.webp",
+      "page": "https://www.msi.com/Motherboard/PRO-B650-S-WIFI/Gallery"
+    },
+    {
+      "file": "images/products/msi-pro-b650-s-3.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1689239683c79bf03e571356dfd16af86eb429824c.webp",
+      "page": "https://www.msi.com/Motherboard/PRO-B650-S-WIFI/Gallery"
+    },
+    {
+      "file": "images/products/msi-pro-b650-s-5.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1689239685f3bcdfa9643cdddbfaa2311a0a989c43.webp",
+      "page": "https://www.msi.com/Motherboard/PRO-B650-S-WIFI/Gallery"
+    },
+    {
+      "file": "images/products/msi-4060-ti-gaming-x-2.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1684397602da3cd1649857371575ddf907fd77496f.webp",
+      "page": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-Ti-GAMING-X-8G/Gallery"
+    },
+    {
+      "file": "images/products/msi-4060-ti-gaming-x-3.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_1684397605d0c816f331e6932e4daaf492bc5b14d4.webp",
+      "page": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-Ti-GAMING-X-8G/Gallery"
+    },
+    {
+      "file": "images/products/msi-4060-ti-gaming-x-4.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_168439760544c32a2d252c493f68001f3b290a18de.webp",
+      "page": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-Ti-GAMING-X-8G/Gallery"
+    },
+    {
+      "file": "images/products/msi-4060-ti-gaming-x-5.webp",
+      "source": "https://storage-asset.msi.com/global/picture/product/product_168439760780ccc21f2c366aea00b54ef521de07b7.webp",
+      "page": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-Ti-GAMING-X-8G/Gallery"
+    },
+    {
+      "file": "images/products/corsair-3000d-1.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Cases/CC-9011251-WW/3000D_AF_BLACK_RENDER_01.webp",
+      "page": "https://www.corsair.com/us/en/p/pc-cases/cc-9011251-ww/3000d-airflow-mid-tower-pc-case-black-cc-9011251-ww"
+    },
+    {
+      "file": "images/products/corsair-3000d-2.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Cases/CC-9011251-WW/3000D_AF_BLACK_RENDER_02.webp",
+      "page": "https://www.corsair.com/us/en/p/pc-cases/cc-9011251-ww/3000d-airflow-mid-tower-pc-case-black-cc-9011251-ww"
+    },
+    {
+      "file": "images/products/corsair-3000d-3.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Cases/CC-9011251-WW/3000D_AF_BLACK_RENDER_03.webp",
+      "page": "https://www.corsair.com/us/en/p/pc-cases/cc-9011251-ww/3000d-airflow-mid-tower-pc-case-black-cc-9011251-ww"
+    },
+    {
+      "file": "images/products/corsair-k65-plus-1.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Gaming-Keyboards/base-k65-plus-wireless-config/gallery/CH-91D401L-NA/K65_PLUS_WIRELESS_01.webp",
+      "page": "https://www.corsair.com/us/en/p/keyboards/ch-91d401l-na/k65-plus-wireless-75-percent-rgb-mechanical-gaming-keyboard-ch-91d401l-na"
+    },
+    {
+      "file": "images/products/corsair-k65-plus-2.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Gaming-Keyboards/base-k65-plus-wireless-config/gallery/CH-91D401L-NA/K65_PLUS_WIRELESS_02_NA.webp",
+      "page": "https://www.corsair.com/us/en/p/keyboards/ch-91d401l-na/k65-plus-wireless-75-percent-rgb-mechanical-gaming-keyboard-ch-91d401l-na"
+    },
+    {
+      "file": "images/products/corsair-k65-plus-3.webp",
+      "source": "https://assets.corsair.com/image/upload/c_pad,q_auto,h_1024,w_1024,f_auto/products/Gaming-Keyboards/base-k65-plus-wireless-config/gallery/CH-91D401L-NA/K65_PLUS_WIRELESS_03.webp",
+      "page": "https://www.corsair.com/us/en/p/keyboards/ch-91d401l-na/k65-plus-wireless-75-percent-rgb-mechanical-gaming-keyboard-ch-91d401l-na"
+    },
+    {
+      "file": "images/products/dell-16-plus-1.png",
+      "source": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/dell-plus/db16250/media-gallery/fpr/notebook-db16250nt-fpr-bl-gallery-2.psd?fmt=png-alpha&wid=1200",
+      "page": "https://www.dell.com/en-us/shop/dell-laptops/dell-16-plus-laptop/spd/dell-db16250-laptop"
+    },
+    {
+      "file": "images/products/dell-16-plus-3.png",
+      "source": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/dell-plus/db16250/media-gallery/fpr/notebook-db16250nt-fpr-bl-gallery-4.psd?fmt=png-alpha&wid=1200",
+      "page": "https://www.dell.com/en-us/shop/dell-laptops/dell-16-plus-laptop/spd/dell-db16250-laptop"
+    },
+    {
+      "file": "images/products/dell-16-plus-4.png",
+      "source": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/dell-plus/db16250/media-gallery/fpr/notebook-db16250nt-fpr-bl-gallery-3.psd?fmt=png-alpha&wid=1200",
+      "page": "https://www.dell.com/en-us/shop/dell-laptops/dell-16-plus-laptop/spd/dell-db16250-laptop"
+    }
+  ]
+}
