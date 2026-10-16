@@ -2170,8 +2170,10 @@ function wireLoginForm() {
   togglePassword.addEventListener("click", () => {
     const visible = password.type === "text";
     password.type = visible ? "password" : "text";
-    togglePassword.textContent = visible ? "Show" : "Hide";
+    togglePassword.querySelector("img").src = visible ? "images/icons/eye.svg" : "images/icons/eye-off.svg";
     togglePassword.setAttribute("aria-label", visible ? "Show password" : "Hide password");
+    togglePassword.setAttribute("title", visible ? "Show password" : "Hide password");
+    togglePassword.setAttribute("aria-pressed", String(!visible));
   });
 
   document.getElementById("openRegistration").addEventListener("click", () => openAccountDialog("register"));

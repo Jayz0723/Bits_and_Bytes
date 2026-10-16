@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/storefront.css?v=20261016-review-carousel-v7">
+  <link rel="stylesheet" href="css/login.css?v=20261016-signin-v1">
 </head>
 <body class="utility-page">
   <header class="site-header" id="top">
@@ -41,24 +42,27 @@
         <span>Build ideas</span>
         <span>Order support</span>
       </div>
+      <img class="login-workspace" src="images/showcase/editorial-performance-workspace.png" alt="Desktop PC and monitor in a carefully arranged workspace" width="640" height="420">
     </section>
 
     <form class="login-card" id="loginForm">
-      <p class="eyebrow">Welcome back</p>
+      <div class="login-card-brand"><img src="images/branding/bitsandbyteslogo.png" width="42" height="42" alt=""><span>Bits &amp; Bytes <small>Your account</small></span></div>
       <h2>Sign in</h2>
-      <p class="form-note">Sign in with an account registered on this device. Use a password unique to this store.</p>
+      <p class="login-subtitle">Welcome back. Your next setup is waiting.</p>
       <label for="loginEmail">Email address</label>
       <input id="loginEmail" type="email" autocomplete="email" placeholder="you@email.com" required>
       <label for="loginPassword">Password</label>
       <div class="password-field">
         <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter your password" required>
-        <button id="togglePassword" type="button" aria-label="Show password">Show</button>
+        <button id="togglePassword" type="button" aria-label="Show password" title="Show password" aria-pressed="false"><img src="images/icons/eye.svg" width="20" height="20" alt=""></button>
       </div>
-      <label class="remember-me" for="rememberMe"><input id="rememberMe" type="checkbox"> Remember my email on this device</label>
-      <button class="button primary full-width" type="submit">Sign In</button>
-      <button class="button secondary full-width" id="openRegistration" type="button">Create an account</button>
+      <label class="remember-me" for="rememberMe"><input id="rememberMe" type="checkbox"> Remember my email</label>
+      <button class="button primary full-width" type="submit">Sign in <img src="images/icons/chevron-right.svg" width="18" height="18" alt=""></button>
       <p class="login-message" id="loginMessage" role="status"></p>
-      <p class="login-help">Need help with an order or account question? <a href="pages/contact.html">Contact support</a>.</p>
+      <div class="login-divider"><span>New to Bits &amp; Bytes?</span></div>
+      <button class="button secondary full-width" id="openRegistration" type="button">Create an account</button>
+      <p class="form-note login-device-note">Accounts are saved on this device. Sign in where you registered, and use a password unique to this store.</p>
+      <p class="login-help">Need a hand? <a href="pages/contact.html">Contact support &rarr;</a></p>
     </form>
     <section class="login-card" id="signedInAccount" hidden aria-labelledby="signedInTitle">
       <p class="eyebrow">Your account</p>
@@ -86,6 +90,6 @@
   </footer>
 
   <script src="js/data.js?v=20261016-catalog-v4"></script>
-  <script src="js/app.js?v=20261016-shop-nav-v8"></script>
+  <script src="js/app.js?v=20261016-signin-v9"></script>
 </body>
 </html>
