@@ -26,6 +26,7 @@ const { chromium } = require('./browser.cjs');
     assert.equal(await page.evaluate(() => window.musicAttempts), 1);
     await page.locator('#customerReviewsTitle').click();
     await page.waitForFunction(() => !document.querySelector('#backgroundMusic').paused);
+    await page.waitForFunction(() => document.querySelector('#musicToggle').getAttribute('aria-pressed') === 'true');
     assert.equal(await page.locator('#musicToggle').getAttribute('aria-pressed'), 'true');
     assert.equal(await page.locator('#backgroundMusic').evaluate(audio => audio.volume), 0.2);
     const time = await page.locator('#backgroundMusic').evaluate(audio => audio.currentTime);
@@ -40,10 +41,27 @@ const { chromium } = require('./browser.cjs');
     await page.locator('#customerReviewsTitle').click();
     await page.waitForFunction(() => !document.querySelector('#backgroundMusic').paused);
     assert.ok(await page.locator('#surfaceVideo').evaluate(video => video.muted), 'Video stays silent');
-    assert.ok(await page.locator('#reviewsEmpty').isVisible());
+    assert.ok(await page.locator('#reviewsEmpty').isHidden());
+    assert.ok(await page.locator('#sampleReviewsNote').isVisible());
     assert.ok(await page.locator('#googleReviewsLink').isHidden());
-    assert.equal(await page.locator('.google-review-card').count(), 0, 'No invented reviews');
+    assert.equal(await page.locator('.google-review-card').count(), 3, 'Three clearly labeled design samples');
+    assert.deepEqual(await page.locator('.google-review-card small').allTextContents(), ['Sample review', 'Sample review', 'Sample review']);
+    assert.equal(await page.locator('.review-google-logo').count(), 3);
     await page.locator('.google-review-source img').evaluate(image => image.decode());
+    const logoBytes = require('node:fs').readFileSync(path.resolve(__dirname, '../images/branding/google-transparent.svg'));
+    const transparent = await page.evaluate(async source => {
+      const image = new Image();
+      image.src = source;
+      await image.decode();
+      const canvas = document.createElement('canvas');
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+      const context = canvas.getContext('2d');
+      context.drawImage(image, 0, 0);
+      return context.getImageData(0, 0, 1, 1).data[3] === 0 &&
+        context.getImageData(Math.floor(canvas.width / 2), Math.floor(canvas.height * 0.35), 1, 1).data[3] === 0;
+    }, 'data:image/svg+xml;base64,' + logoBytes.toString('base64'));
+    assert.ok(transparent, 'Google logo has transparent corners and an open center');
     for (const width of [1440, 390]) {
       await page.setViewportSize({ width, height: 900 });
       await page.locator('.google-reviews').scrollIntoViewIfNeeded();
@@ -58,8 +76,9 @@ const { chromium } = require('./browser.cjs');
     assert.equal(await page.locator('.google-review-card strong').textContent(), '<b>Test</b>');
     assert.equal(await page.locator('.google-review-card script').count(), 0);
     assert.equal(await page.locator('.review-google-logo').count(), 0, 'Local feedback is not labeled Google feedback');
+    assert.ok(await page.locator('#sampleReviewsNote').isHidden());
     assert.ok(await page.locator('#reviewsEmpty').isHidden());
     assert.deepEqual(errors, []);
-    console.log('Passed blocked-autoplay fallback, real audio playback, pause persistence, silent video, honest review empty state, safe review rendering, and desktop/mobile layout.');
+    console.log('Passed audio playback, pause persistence, transparent Google logo, labeled sample reviews, safe real-review rendering, and desktop/mobile layout.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

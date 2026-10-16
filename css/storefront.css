@@ -15,6 +15,10 @@
 .google-review-card p { color: #d1dce1; font-size: 14px; line-height: 1.65; overflow-wrap: anywhere; }
 .google-review-card .review-person > div { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .review-google-logo { width: 20px; height: 20px; margin-left: auto; }
+.sample-reviews-note { margin: 12px 0 0; color: #9eafb8; font-size: 12px; }
+.google-review-card:nth-child(3n + 1) .review-avatar { background: #92c66c; color: #142b0d; }
+.google-review-card:nth-child(3n + 2) .review-avatar { background: #38c6b4; color: #07352f; }
+.google-review-card:nth-child(3n) .review-avatar { background: #8ab5ee; color: #112d53; }
 .google-review-card .review-avatar { position: relative; flex: 0 0 38px; width: 38px; height: 38px; overflow: hidden; }
 .review-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .google-review-card .review-stars { letter-spacing: 0; color: #ffc94b; font-size: 20px; }
