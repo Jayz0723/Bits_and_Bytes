@@ -1101,7 +1101,6 @@ function wireFoldableNavigation() {
         <a href="pages/products.html#laptops">Laptops</a>
         <a href="pages/products.html#accessories">Accessories</a>
         <a href="pages/products.html#computer-parts">Computer Parts</a>
-        <a href="pages/products.html?brand=Microsoft">Microsoft</a>
         ${linkMarkup("pages/build.html")}
         ${linkMarkup("pages/products.html")}
       </div>
