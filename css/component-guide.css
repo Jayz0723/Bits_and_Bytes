@@ -1,3 +1,47 @@
+/* Buying notes stay in aligned, unframed sections instead of uneven panels. */
+.component-notes { width: min(1180px, calc(100% - 48px)); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 36px 56px; margin: 56px auto 72px; }
+.upgrade-notes-heading { grid-column: 1 / -1; padding-bottom: 28px; border-bottom: 1px solid #384b54; }
+.upgrade-notes-heading .eyebrow { margin: 0 0 12px; color: #65dec7; font-size: 10px; }
+.component-notes .upgrade-notes-heading h2 { margin: 0 0 12px; color: #edf5f8; font-size: 30px; font-weight: 600; line-height: 1.25; }
+.upgrade-notes-heading > p:last-child { margin: 0; color: #aabfc9; font-size: 14px; line-height: 1.8; }
+.utility-page .component-notes > article, .utility-page .component-notes > aside { min-width: 0; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.component-notes h3 { margin: 0 0 24px; color: #e1edf2; font-size: 20px; font-weight: 500; line-height: 1.4; }
+.component-notes dl { margin: 0; }
+.component-notes dl > div { padding-block: 18px; border-bottom: 1px solid #31434c; }
+.component-notes dl > div:first-child { padding-top: 0; }
+.component-notes dt { margin: 0; color: #d3e5ed; font-size: 13px; font-weight: 500; line-height: 1.7; }
+.component-notes dfn { font-style: normal; color: #74e1cb; font-weight: 600; }
+.component-notes ruby { ruby-position: under; }
+.component-notes ruby rt { font-size: 9px; color: #9db6c1; }
+.component-notes dd { margin: 10px 0 0; color: #b1c4ce; font-size: 13px; line-height: 1.85; }
+.utility-page .component-notes > .upgrade-use-cases { padding-left: 40px; border-left: 1px solid #384b54; }
+.upgrade-use-cases dt { color: #d9e8ed; }
+.utility-page .component-notes > .purchase-checklist { grid-column: 1 / -1; padding-block: 32px; border-top: 1px solid #384b54; border-bottom: 1px solid #384b54; }
+.purchase-checklist-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+.purchase-checklist h4 { display: flex; align-items: center; gap: 12px; margin: 0 0 18px; color: #cee2e9; font-size: 13px; font-weight: 500; }
+.purchase-checklist h4 span { display: grid; place-items: center; flex: 0 0 28px; height: 28px; color: #79dfcd; background: #293e42; border-radius: 4px; font-size: 10px; }
+.purchase-checklist ol, .purchase-checklist ul { display: grid; gap: 12px; margin: 0; padding-left: 22px; }
+.purchase-checklist li { padding-left: 6px; color: #b8cbd5; font-size: 13px; font-weight: 400; line-height: 1.8; }
+.purchase-checklist li::marker { color: #6bdbc3; font-weight: 500; }
+.component-notes .lesson-table { grid-column: 1 / -1; width: 100%; max-width: none; margin: 0; table-layout: fixed; border: 1px solid #3b4e58; border-collapse: collapse; background: transparent; font-size: 13px; }
+.component-notes .lesson-table caption { padding: 0 0 20px; color: #e0edf2; background: transparent; border: 0; text-align: left; font-size: 20px; font-weight: 500; }
+.component-notes .lesson-table th, .component-notes .lesson-table td { padding: 17px 22px; text-align: left; vertical-align: top; border: 0; border-bottom: 1px solid #3b4e58; overflow-wrap: anywhere; line-height: 1.7; }
+.component-notes .lesson-table thead th { color: #b5cbd5; background: #25343b; font-size: 11px; font-weight: 500; }
+.component-notes .lesson-table thead th:first-child { width: 135px; }
+.component-notes .lesson-table tbody th { color: #72dfc8; background: #1c2b31; font-size: 12px; font-weight: 600; }
+.component-notes .lesson-table td { color: #bacdd6; background: #202c32; font-weight: 400; }
+@media (max-width: 900px) {
+  .component-notes { gap: 28px; }
+  .utility-page .component-notes > .upgrade-use-cases { padding-left: 28px; }
+}
+@media (max-width: 760px) {
+  .component-notes { width: min(560px, calc(100% - 32px)); grid-template-columns: minmax(0, 1fr); margin-block: 40px; }
+  .component-notes .upgrade-notes-heading h2 { font-size: 25px; }
+  .utility-page .component-notes > .upgrade-use-cases { padding: 28px 0 0; border-left: 0; border-top: 1px solid #384b54; }
+  .purchase-checklist-columns { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .component-notes .lesson-table th, .component-notes .lesson-table td { padding: 14px 12px; font-size: 12px; }
+  .component-notes .lesson-table thead th:first-child { width: 86px; }
+}
 /* Laptop preview: restrained surfaces and a stable frame when hidden. */
 .laptop-preview-section { width: min(1180px, calc(100% - 48px)); padding-block: 48px; border-top: 1px solid #3a4b54; border-bottom: 1px solid #3a4b54; }
 .utility-page .laptop-preview.toggle-panel { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; gap: 48px; max-width: none; margin: 0; padding: 0; text-align: left; background: transparent; background-image: none; border: 0; border-radius: 0; box-shadow: none; }

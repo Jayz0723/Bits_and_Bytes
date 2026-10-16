@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=20261003-interactive-guide">
   <link rel="stylesheet" href="css/storefront.css?v=20261016-review-carousel-v7">
-  <link rel="stylesheet" href="css/component-guide.css?v=20261016-laptop-preview-v2">
+  <link rel="stylesheet" href="css/component-guide.css?v=20261016-upgrade-notes-v3">
 </head>
 <body class="utility-page">
   <header class="site-header" id="top">
@@ -240,53 +240,78 @@
       </article>
     </section>
 
-    <section class="section component-notes">
-      <article>
-        <h2>Know your next upgrade</h2>
+    <section class="section component-notes" aria-labelledby="upgradeNotesTitle">
+      <header class="upgrade-notes-heading">
+        <p class="eyebrow">Buy with confidence</p>
+        <h2 id="upgradeNotesTitle">Plan your next upgrade</h2>
+        <p>A little preparation makes it easier to choose the right parts.</p>
+      </header>
+      <article class="upgrade-glossary">
+        <h3>Know your next upgrade</h3>
         <dl>
+          <div>
           <dt><dfn>CPU</dfn> &mdash; central processing unit</dt>
           <dd>The processor handles instructions. Match its socket to your motherboard before buying.</dd>
+          </div>
+          <div>
           <dt><dfn><ruby>RAM<rp> (</rp><rt>ram</rt><rp>)</rp></ruby></dfn> &mdash; random-access memory</dt>
           <dd>Working memory for open apps. DDR4 and DDR5 are not interchangeable, and laptop SO-DIMMs differ from desktop DIMMs.</dd>
+          </div>
+          <div>
           <dt><dfn>SSD</dfn> &mdash; solid-state drive</dt>
           <dd>Storage for files and games. Check the SATA or NVMe connection, physical size, and the slot your device supports.</dd>
+          </div>
         </dl>
       </article>
 
-      <aside>
-        <h2>Choose for your day</h2>
+      <aside class="upgrade-use-cases">
+        <h3>Choose for your day</h3>
         <dl>
+          <div>
           <dt>Study and office</dt>
           <dd>Start with 16GB RAM and a 512GB SSD for everyday multitasking; check battery life for portable work.</dd>
+          </div>
+          <div>
           <dt>Gaming and creative projects</dt>
           <dd>Compare graphics performance, display resolution, and project storage. A larger number alone does not guarantee a better fit.</dd>
+          </div>
         </dl>
       </aside>
 
-      <article>
-        <h2>Before and after checkout</h2>
+      <article class="purchase-checklist">
+        <h3>Before and after checkout</h3>
+        <div class="purchase-checklist-columns">
+        <div>
+        <h4><span>01</span> Before you buy</h4>
         <ol>
           <li>Check your current device model and upgrade slots.</li>
           <li>Compare compatible parts and the exact capacity.</li>
           <li>Review quantities, delivery details, and the warranty.</li>
         </ol>
+        </div>
+        <div>
+        <h4><span>02</span> After it arrives</h4>
         <ul>
           <li>Back up your files before changing storage.</li>
           <li>Install drivers from the manufacturer's website.</li>
           <li>Keep vents clear and save your purchase records.</li>
         </ul>
+        </div>
+        </div>
       </article>
 
       <table class="lesson-table">
         <caption>Upgrade compatibility checklist</caption>
-        <tr>
+        <thead><tr>
           <th scope="col">Upgrade</th>
           <th scope="col">Check before buying</th>
-        </tr>
-        <tr>
-          <th scope="row">CPU / RAM / SSD / GPU</th>
-          <td>Socket / DDR generation and form factor / connection and size / case clearance and power supply</td>
-        </tr>
+        </tr></thead>
+        <tbody>
+          <tr><th scope="row">CPU</th><td>Processor socket matches the motherboard.</td></tr>
+          <tr><th scope="row">RAM</th><td>Correct DDR generation and desktop DIMM or laptop SO-DIMM form factor.</td></tr>
+          <tr><th scope="row">SSD</th><td>Supported SATA or NVMe connection, slot, and physical drive size.</td></tr>
+          <tr><th scope="row">GPU</th><td>Enough case clearance and a suitable power supply.</td></tr>
+        </tbody>
       </table>
     </section>
   </main>
