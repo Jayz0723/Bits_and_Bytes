@@ -1499,7 +1499,7 @@ function wireStoreFooter() {
         </section>
         <section class="footer-location">
           <h2>Online Store Support</h2>
-          <p>Delivery, product advice, and checkout help<br>Philippines-wide service<br><a href="pages/contact.html">Send an enquiry</a></p>
+          <p>Delivery, product advice, and checkout help<br>Philippines-wide service<br><a href="pages/contact.html">Send an inquiry</a></p>
         </section>
       </div>
       <div class="footer-bottom">
