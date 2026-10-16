@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=20261004-editorial">
-  <link rel="stylesheet" href="css/storefront.css?v=20261016-review-samples-v6">
+  <link rel="stylesheet" href="css/storefront.css?v=20261016-review-carousel-v7">
 </head>
 <body class="home-page">
   <header class="site-header" id="top">
@@ -405,7 +405,14 @@
         <p id="sampleReviewsNote" class="sample-reviews-note">Sample reviews for illustration. Not published on Google.</p>
         <a id="googleReviewsLink" class="text-link" hidden target="_blank" rel="noopener noreferrer">View on Google</a>
       </div>
-      <div id="customerReviewCards" class="google-review-grid"></div>
+      <div class="google-review-viewport">
+        <div id="customerReviewCards" class="google-review-grid"></div>
+      </div>
+      <div id="customerReviewControls" class="customer-review-controls" aria-label="Customer review navigation">
+        <button id="customerReviewPrevious" type="button" aria-label="Previous reviews" title="Previous reviews"><img src="images/icons/chevron-left.svg" width="20" height="20" alt=""></button>
+        <span id="customerReviewPosition" aria-live="polite"></span>
+        <button id="customerReviewNext" type="button" aria-label="Next reviews" title="Next reviews"><img src="images/icons/chevron-right.svg" width="20" height="20" alt=""></button>
+      </div>
       <div id="reviewsEmpty" class="reviews-empty">
         <span class="review-avatar" aria-hidden="true">You</span>
         <div>
@@ -465,7 +472,7 @@
 
   <script src="js/data.js?v=20261016-catalog-v4"></script>
   <script src="js/app.js?v=20261016-music-reviews-v5"></script>
-  <script src="js/customer-reviews.js?v=20261016-review-samples-v6"></script>
+  <script src="js/customer-reviews.js?v=20261016-review-carousel-v7"></script>
   <script src="js/support-form.js"></script>
 
   <footer class="site-footer">

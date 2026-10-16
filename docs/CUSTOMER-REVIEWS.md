@@ -4,8 +4,11 @@
 
 Edit `js/customer-reviews.js` to add genuine customer feedback to the homepage.
 The list is intentionally empty until real feedback is available. While empty,
-the storefront shows three generic design examples from `sampleReviews`, clearly
-labeled as samples and not published on Google. Adding genuine feedback replaces
+the storefront shows six generic design examples from `sampleReviews`, with one
+section-level notice explaining they are not published on Google. Relative dates
+are illustrative, not actual posting dates. Left/right controls wrap through the
+reviews, showing three on desktop, two on tablets, and one on phones.
+Adding genuine feedback replaces
 these examples automatically. Remove or edit the examples in that same file.
 
 Each review accepts these fields:

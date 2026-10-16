@@ -44,9 +44,9 @@ const { chromium } = require('./browser.cjs');
     assert.ok(await page.locator('#reviewsEmpty').isHidden());
     assert.ok(await page.locator('#sampleReviewsNote').isVisible());
     assert.ok(await page.locator('#googleReviewsLink').isHidden());
-    assert.equal(await page.locator('.google-review-card').count(), 3, 'Three clearly labeled design samples');
-    assert.deepEqual(await page.locator('.google-review-card small').allTextContents(), ['Sample review', 'Sample review', 'Sample review']);
-    assert.equal(await page.locator('.review-google-logo').count(), 3);
+    assert.equal(await page.locator('.google-review-card').count(), 6, 'Six design examples with a section-level disclosure');
+    assert.deepEqual(await page.locator('.google-review-card small').allTextContents(), ['1 week ago', '3 weeks ago', '1 month ago', '2 months ago', '3 months ago', '4 months ago']);
+    assert.equal(await page.locator('.review-google-logo').count(), 6);
     await page.locator('.google-review-source img').evaluate(image => image.decode());
     const logoBytes = require('node:fs').readFileSync(path.resolve(__dirname, '../images/branding/google-transparent.svg'));
     const transparent = await page.evaluate(async source => {
@@ -65,6 +65,14 @@ const { chromium } = require('./browser.cjs');
     for (const width of [1440, 390]) {
       await page.setViewportSize({ width, height: 900 });
       await page.locator('.google-reviews').scrollIntoViewIfNeeded();
+      await page.locator('#customerReviewPrevious').click();
+      assert.equal(await page.locator('#customerReviewPosition').textContent(), width === 1440 ? '4-6 of 6' : '6-6 of 6');
+      await page.locator('#customerReviewNext').click();
+      assert.equal(await page.locator('#customerReviewPosition').textContent(), width === 1440 ? '1-3 of 6' : '1-1 of 6');
+      await page.locator('#customerReviewNext').click();
+      await page.locator('#customerReviewPrevious').click();
+      assert.equal(await page.locator('.google-review-card[aria-hidden="false"]').count(), width === 1440 ? 3 : 1);
+      await page.waitForTimeout(300);
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
       await page.screenshot({ path: path.resolve(__dirname, '../images/previews/reviews-' + width + '.png') });
     }
