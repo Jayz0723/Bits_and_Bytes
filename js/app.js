@@ -1506,6 +1506,7 @@ function wireStoreFooter() {
         <nav aria-label="Footer navigation">
           <a href="pages/about.html">About Us</a>
           <a href="pages/terms.html">Terms of Use</a>
+          <a href="pages/privacy.html">Privacy</a>
           <a href="pages/warranty.html">Warranty Info</a>
           <a href="pages/downloads.html">Downloads</a>
           <a href="pages/contact.html">Contact Us</a>
