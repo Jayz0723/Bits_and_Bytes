@@ -1,3 +1,35 @@
+/* Laptop preview: restrained surfaces and a stable frame when hidden. */
+.laptop-preview-section { width: min(1180px, calc(100% - 48px)); padding-block: 48px; border-top: 1px solid #3a4b54; border-bottom: 1px solid #3a4b54; }
+.utility-page .laptop-preview.toggle-panel { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; gap: 48px; max-width: none; margin: 0; padding: 0; text-align: left; background: transparent; background-image: none; border: 0; border-radius: 0; box-shadow: none; }
+.laptop-preview-stage { position: relative; min-width: 0; aspect-ratio: 4 / 3; overflow: hidden; background: #202a30; border: 1px solid #3a4b54; border-radius: 6px; }
+.laptop-preview #pc:not([hidden]) { display: grid; grid-template-rows: minmax(0, 1fr) auto; width: 100%; height: 100%; margin: 0; }
+.laptop-preview #pc[hidden] { display: none; }
+.utility-page .laptop-preview #pc img { display: block; width: 100%; height: 100%; max-height: none; min-height: 0; object-fit: cover; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; }
+.laptop-preview #pc figcaption { margin: 0; padding: 14px 18px; color: #b2c4cd; font-size: 11px; line-height: 1.6; }
+.laptop-preview-hidden { display: none; position: absolute; inset: 0; place-content: center; justify-items: center; gap: 14px; color: #afc3cd; font-size: 13px; }
+.laptop-preview-stage:has(#pc[hidden]) .laptop-preview-hidden { display: grid; }
+.utility-page .laptop-preview-hidden img { display: block; width: 28px; height: 28px; margin: 0; padding: 0; border: 0; filter: invert(1); opacity: .6; background: transparent; }
+.laptop-preview-copy { min-width: 0; }
+.laptop-preview-copy .eyebrow { margin: 0 0 14px; color: #63ddc5; font-size: 11px; }
+.utility-page .laptop-preview h2 { margin: 0 0 18px; color: #edf5f8; font-size: 32px; font-weight: 600; line-height: 1.2; }
+.laptop-preview-copy > p:not(.eyebrow) { margin: 0; color: #afc2cc; font-size: 14px; line-height: 1.8; }
+.laptop-shopping-points { margin: 24px 0 0; }
+.laptop-shopping-points div { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid #34454d; }
+.laptop-shopping-points dt { color: #8faab6; font-size: 11px; }
+.laptop-shopping-points dd { margin: 0; color: #d9e6ec; font-size: 12px; line-height: 1.6; }
+.laptop-preview-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.laptop-preview .laptop-preview-actions .button { display: inline-flex; align-items: center; justify-content: center; gap: 16px; min-height: 44px; min-width: 132px; padding: 12px 18px; border: 1px solid #4b626c; border-image: none; border-radius: 4px; font-size: 12px; font-weight: 600; box-shadow: none; }
+.laptop-preview .laptop-preview-actions .primary { color: #08251e; background: #60dcc3; border-color: #60dcc3; }
+.laptop-preview .laptop-preview-actions .primary:hover { background: #89e8d5; border-color: #89e8d5; }
+.laptop-preview .laptop-preview-actions .secondary { color: #c4d4dd; background: transparent; }
+.laptop-preview .laptop-preview-actions .secondary:hover { background: #26383e; border-color: #86aab3; }
+@media (max-width: 900px) { .utility-page .laptop-preview.toggle-panel { gap: 28px; } .utility-page .laptop-preview h2 { font-size: 28px; } }
+@media (max-width: 760px) {
+  .laptop-preview-section { width: min(560px, calc(100% - 32px)); padding-block: 32px; }
+  .utility-page .laptop-preview.toggle-panel { grid-template-columns: minmax(0, 1fr); }
+  .laptop-preview-copy { padding-inline: 4px; }
+  .laptop-preview-actions .button { flex: 1 1 130px; }
+}
 /* Equal image/text rows keep the four highlighted maps easy to compare. */
 .photo-component-guide { width: min(1180px, calc(100% - 48px)); margin: 24px auto 64px; }
 .photo-guide-heading { max-width: 720px; margin: 0 0 28px; text-align: left; }

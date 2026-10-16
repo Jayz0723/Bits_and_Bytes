@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=20261003-interactive-guide">
   <link rel="stylesheet" href="css/storefront.css?v=20261016-review-carousel-v7">
-  <link rel="stylesheet" href="css/component-guide.css?v=20261016-layout-v1">
+  <link rel="stylesheet" href="css/component-guide.css?v=20261016-laptop-preview-v2">
 </head>
 <body class="utility-page">
   <header class="site-header" id="top">
@@ -214,17 +214,29 @@
       <article class="part-info" id="partInfo"></article>
     </section>
 
-    <section class="section">
-      <article class="lesson-demo toggle-panel">
+    <section class="section laptop-preview-section" aria-labelledby="laptopPreviewTitle">
+      <article class="toggle-panel laptop-preview">
+        <div class="laptop-preview-stage">
+          <figure id="pc">
+            <img src="images/showcase/showcase-laptop.jpg" alt="Laptop with its display and keyboard visible" loading="lazy" decoding="async">
+            <figcaption>Look beyond performance. Find a laptop that feels right every day.</figcaption>
+          </figure>
+          <div class="laptop-preview-hidden" aria-hidden="true"><img src="images/icons/eye-off.svg" width="28" height="28" alt=""><span>Laptop preview hidden</span></div>
+        </div>
+        <div class="laptop-preview-copy">
         <p class="eyebrow">A closer look</p>
-        <h2>Space for work. Power to go.</h2>
+        <h2 id="laptopPreviewTitle">Space for work.<br>Power to go.</h2>
         <p>A laptop keeps your workspace portable. Check its display size, weight, and available connections before choosing.</p>
-        <button class="button small" id="laptopReveal" type="button" onclick="toggle()" aria-controls="pc" aria-expanded="true">Hide laptop</button>
-        <figure id="pc">
-          <img src="images/showcase/showcase-laptop.jpg" alt="Laptop with its display and keyboard visible">
-          <figcaption>Compare screen size and keyboard layout alongside performance.</figcaption>
-        </figure>
-        <a class="text-link" href="pages/products.html#laptops">Explore laptops &rarr;</a>
+        <dl class="laptop-shopping-points">
+          <div><dt>Comfort</dt><dd>Display size &amp; keyboard layout</dd></div>
+          <div><dt>Portability</dt><dd>Weight &amp; battery life</dd></div>
+          <div><dt>Connectivity</dt><dd>Ports for your everyday devices</dd></div>
+        </dl>
+        <div class="laptop-preview-actions">
+          <a class="button primary" href="pages/products.html#laptops">Explore laptops <span aria-hidden="true">&rarr;</span></a>
+          <button class="button secondary" id="laptopReveal" type="button" onclick="toggle()" aria-controls="pc" aria-expanded="true">Hide laptop</button>
+        </div>
+        </div>
       </article>
     </section>
 
