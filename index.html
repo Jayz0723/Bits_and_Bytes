@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=20261004-editorial">
-  <link rel="stylesheet" href="css/storefront.css?v=20261016-store-refresh">
+  <link rel="stylesheet" href="css/storefront.css?v=20261016-navigation-video-v2">
 </head>
 <body class="home-page">
   <header class="site-header" id="top">
@@ -114,20 +114,16 @@
       <div class="video-heading">
         <div>
           <p class="eyebrow">In focus / Microsoft Surface</p>
-          <h2 id="surfaceVideoTitle">See what's next from Surface</h2>
-          <p>Introducing Surface Laptop Ultra. A closer look, from Microsoft.</p>
+          <h2 id="surfaceVideoTitle">Ideas look different on Surface.</h2>
+          <p>Meet Surface Laptop Studio 2. Ready for work, sketching, and everything in between.</p>
         </div>
         <a class="text-link" href="pages/products.html?brand=Microsoft">Explore our Surface collection <span aria-hidden="true">&rarr;</span></a>
       </div>
       <div class="video-stage">
-        <button id="playSurfaceVideo" type="button" aria-label="Load the Microsoft Surface video player">
-          <img src="images/showcase/surface-video-preview.jpg" alt="Introducing Surface Laptop Ultra video preview" loading="lazy" width="1280" height="720">
-          <span class="video-play-label"><span class="store-icon play-icon" aria-hidden="true"></span>Watch the film</span>
-        </button>
-      </div>
-      <div class="video-note">
-        <p>Video by Microsoft Surface. Featured devices may differ from our current collection.</p>
-        <p><a href="https://www.youtube.com/watch?v=s1Oj792qc80" target="_blank" rel="noopener noreferrer">Watch on YouTube &nearr;</a></p>
+        <video id="surfaceVideo" autoplay muted loop playsinline preload="metadata" poster="images/products/surface-studio-2-ports.png" aria-label="Microsoft Surface Laptop Studio 2 product preview" disablepictureinpicture>
+          <source src="videos/surface-laptop-studio-2.mp4" type="video/mp4">
+        </video>
+        <button id="toggleSurfaceVideo" class="video-toggle" type="button" aria-label="Pause video" title="Pause video"><img src="images/icons/pause.svg" alt="" width="20" height="20"></button>
       </div>
     </section>
 
@@ -445,8 +441,8 @@
       
   </main>
 
-  <script src="js/data.js?v=20261016-store-refresh"></script>
-  <script src="js/app.js?v=20261016-store-refresh"></script>
+  <script src="js/data.js?v=20261016-navigation-video-v2"></script>
+  <script src="js/app.js?v=20261016-navigation-video-v2"></script>
   <script src="js/support-form.js"></script>
 
   <footer class="site-footer">

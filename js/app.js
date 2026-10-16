@@ -514,6 +514,11 @@ function renderProductsPage() {
     }
   ];
   if (!document.querySelector("#computerProductsGrid")) return;
+  const layout = document.querySelector(".product-page-layout");
+  // Keep the full buying guide and quick order available below the products.
+  layout.after(...document.querySelectorAll("main > .shopping-extra:not(#comparisonTool)"));
+  const accessoryChooser = layout.querySelector(".accessory-chooser");
+  if (accessoryChooser) accessoryChooser.parentElement.append(accessoryChooser);
 
   const typeFilter = document.querySelector("#typeFilter");
   const useFilter = document.querySelector("#useFilter");
@@ -560,6 +565,9 @@ function renderProductsPage() {
 
   function render() {
     const selectedType = typeFilter.value;
+    document.querySelectorAll("[data-catalog-type]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.catalogType === selectedType));
+    });
     const selectedUse = useFilter.value;
     const selectedBrands = Array.from(document.querySelectorAll("[data-brand-filter]:checked")).map((input) => input.value);
     const currencyMultiplier = currencyPreference() === "USD" ? 57 : 1;
@@ -613,6 +621,12 @@ function renderProductsPage() {
     control.addEventListener(control.type === "number" ? "input" : "change", render);
   });
   brandFilters.addEventListener("change", render);
+  document.querySelectorAll("[data-catalog-type]").forEach((button) => {
+    button.onclick = () => {
+      typeFilter.value = button.dataset.catalogType;
+      render();
+    };
+  });
   if (search) search.oninput = render;
   const searchForm = document.getElementById("catalogSearchForm");
   if (searchForm) searchForm.onsubmit = (event) => { event.preventDefault(); render(); };
@@ -1046,7 +1060,7 @@ function wireFoldableNavigation() {
     const link = getLink(href);
     const activeClass = link && link.classList.contains("active") ? " active" : "";
     const label = link ? link.textContent.replace(/\s+\d+$/, "").trim() : fallbackLabels[href] || href;
-    if (href === "pages/cart.html") return `<a class="${extraClass}${activeClass}" href="${href}" aria-label="Cart, 0 items" title="View cart"><span class="store-icon cart-icon" aria-hidden="true"></span><span id="cartCount" aria-live="polite">0</span></a>`;
+    if (href === "pages/cart.html") return `<a class="${extraClass}${activeClass}" href="${href}" aria-label="Cart, 0 items" title="View cart"><img class="cart-icon" src="images/icons/shopping-cart.svg" alt="" width="24" height="24"><span id="cartCount" aria-live="polite">0</span></a>`;
     return `<a class="${extraClass}${activeClass}" href="${href}">${label}</a>`;
   };
   const groupMarkup = (label, hrefs) => {
@@ -1136,43 +1150,58 @@ function wireStickyStoreHeader() {
   stickyHeader.append(nav, toolbar);
   header.before(stickyHeader);
 
-  // A second, non-sticky row makes the main collections one click away.
-  const browseBar = document.createElement("div");
-  browseBar.className = "store-browse-bar";
-  browseBar.innerHTML = `
-    <nav aria-label="Shop collections">
-      <a href="pages/products.html#computer-products">Desktops</a>
-      <a href="pages/products.html#laptops">Laptops</a>
-      <a href="pages/products.html#computer-parts">Components</a>
-      <a href="pages/products.html#accessories">Accessories</a>
-      <a href="pages/build.html">Build your PC <span aria-hidden="true">&rarr;</span></a>
-    </nav>
-    <form class="store-search" action="pages/products.html" method="get" role="search">
-      <input type="search" name="q" aria-label="Search products" placeholder="Search products, brands..." maxlength="100">
-      <button type="submit" aria-label="Search" title="Search products"><span class="store-icon search-icon" aria-hidden="true"></span></button>
-    </form>`;
-  stickyHeader.after(browseBar);
+  // Keep the header's layout space steady as the visible navigation shrinks.
+  const headerSpace = document.createElement("div");
+  headerSpace.className = "site-nav-space";
+  stickyHeader.before(headerSpace);
+  headerSpace.append(stickyHeader);
+  let compact = false;
+  function updateHeader() {
+    if (!compact && window.scrollY > 100) compact = true;
+    else if (compact && window.scrollY < 32) compact = false;
+    stickyHeader.classList.toggle("is-compact", compact);
+  }
+  window.addEventListener("scroll", updateHeader, { passive: true });
+  updateHeader();
 }
 
 function wireHomeVideo() {
-  const playButton = document.getElementById("playSurfaceVideo");
-  if (!playButton) return;
-  playButton.addEventListener("click", () => {
-    // File URLs cannot send the website referrer required by YouTube's player.
-    if (location.protocol === "file:") {
-      window.open("https://www.youtube.com/watch?v=s1Oj792qc80", "_blank", "noopener,noreferrer");
-      return;
-    }
-    // YouTube only receives a request when the visitor chooses to load the player.
-    const frame = document.createElement("iframe");
-    frame.src = "https://www.youtube-nocookie.com/embed/s1Oj792qc80?rel=0";
-    frame.title = "Introducing Surface Laptop Ultra - Microsoft Surface";
-    frame.allow = "encrypted-media; picture-in-picture; fullscreen";
-    frame.allowFullscreen = true;
-    frame.referrerPolicy = "strict-origin-when-cross-origin";
-    playButton.replaceWith(frame);
-    frame.focus();
+  const video = document.getElementById("surfaceVideo");
+  const button = document.getElementById("toggleSurfaceVideo");
+  if (!video || !button) return;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let userPaused = reducedMotion.matches;
+  let visible = false;
+  video.muted = true;
+  video.defaultMuted = true;
+  video.autoplay = !userPaused;
+
+  function updateButton() {
+    button.setAttribute("aria-label", video.paused ? "Play video" : "Pause video");
+    button.title = video.paused ? "Play video" : "Pause video";
+    button.classList.toggle("is-playing", !video.paused);
+    button.querySelector("img").src = video.paused ? "images/icons/play.svg" : "images/icons/pause.svg";
+  }
+  function updatePlayback() {
+    if (visible && !document.hidden && !userPaused) video.play().catch(updateButton);
+    else video.pause();
+  }
+  button.addEventListener("click", () => {
+    userPaused = !video.paused;
+    updatePlayback();
   });
+  video.addEventListener("play", updateButton);
+  video.addEventListener("pause", updateButton);
+  document.addEventListener("visibilitychange", updatePlayback);
+  reducedMotion.addEventListener("change", () => {
+    userPaused = reducedMotion.matches;
+    updatePlayback();
+  });
+  new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    updatePlayback();
+  }, { threshold: 0.25 }).observe(video);
+  updateButton();
 }
 
 function wirePartnersDialog() {

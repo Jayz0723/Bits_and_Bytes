@@ -22,6 +22,7 @@ Microsoft appears in the brand carousel, brand dialog, shop menu, product filter
 featured products, promotion carousel, and homepage video section. Brand display
 does not claim a formal commercial partnership.
 
-The supplied video is "Introducing Surface Laptop Ultra" by Microsoft Surface,
-verified using YouTube's oEmbed endpoint. It is a brand preview, not a specification
-video for the Surface Laptop Studio 2 in this catalog.
+The homepage now plays Microsoft's direct Surface Laptop Studio 2 product preview
+from `videos/`, silently and without a YouTube embed. See `image-sources/inline-video.json`
+for its manufacturer source. The earlier YouTube thumbnail is retained as a spare
+asset in `images/showcase/`.

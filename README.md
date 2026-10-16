@@ -23,6 +23,7 @@ Bits-and-Bytes/
     placeholders/         Spare image placeholders
     uploads/              Existing numbered pictures from the project
   audio/                  Background music and its original copy
+  videos/                 Local product previews for inline playback
   downloads/              PDF guide and text manuals
   docs/                   Project and classroom documentation
     image-sources/        Photo-source records and editing notes
@@ -56,14 +57,15 @@ Bits-and-Bytes/
 
 ## Images and Documents
 
-The homepage video uses the supplied Microsoft Surface YouTube link. Its player
-loads only after a click; a direct YouTube link remains available if embedding is
-blocked. When opening the HTML file directly, the play button opens YouTube because
-embedded players require a web referrer. Edit the thumbnail and caption in `index.html`, and the embed address in
-`wireHomeVideo()` in `js/app.js` together when changing the video.
+The homepage uses Microsoft's Surface Laptop Studio 2 product preview from its
+manufacturer page, saved in `videos/`. It plays silently in the page, including
+when opening the HTML file directly. Playback pauses offscreen and respects reduced
+motion settings. Edit the video source and caption in `index.html`; playback and
+the pause button are handled by `wireHomeVideo()` in `js/app.js`.
 
 Shared navigation and the cart badge are in `js/app.js`; their appearance and the
-full-width banners are in `css/storefront.css`. Brand and search shortcuts use
+full-width banners are in `css/storefront.css`. The navigation shrinks on scroll.
+The catalog category buttons update the same filters as the sidebar. Brand and search shortcuts use
 `pages/products.html?brand=Microsoft` and `pages/products.html?q=Mac+mini`.
 Brand logos identify stocked product brands, not endorsements or formal partnerships.
 
