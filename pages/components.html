@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=20261003-interactive-guide">
   <link rel="stylesheet" href="css/storefront.css?v=20261016-review-carousel-v7">
+  <link rel="stylesheet" href="css/component-guide.css?v=20261016-layout-v1">
 </head>
 <body class="utility-page">
   <header class="site-header" id="top">
@@ -45,13 +46,13 @@
         <p>Each supplied image highlights the exact component inside the same desktop build. Read the matching explanation and buying tip beside it.</p>
       </div>
       <nav class="component-guide-links" aria-label="Jump to a component">
-        <a href="pages/components.html#guideCPU">CPU</a>
-        <a href="pages/components.html#guideGPU">GPU</a>
-        <a href="pages/components.html#guideRAM">RAM</a>
-        <a href="pages/components.html#guideSSD">SSD</a>
+        <a href="pages/components.html#guideCPU"><span>01</span> CPU <small>Processor</small></a>
+        <a href="pages/components.html#guideGPU"><span>02</span> GPU <small>Graphics</small></a>
+        <a href="pages/components.html#guideRAM"><span>03</span> RAM <small>Memory</small></a>
+        <a href="pages/components.html#guideSSD"><span>04</span> SSD <small>Storage</small></a>
       </nav>
       <div class="focused-component-grid">
-        <article class="focused-component-card pointer-left" id="guideCPU">
+        <article class="focused-component-card" id="guideCPU">
           <div class="focused-component-image">
             <img class="focused-map-image" data-responsive-map src="images/guides/CPU.webp" usemap="#cpuFocusedMap" width="1200" height="1200" alt="CPU highlighted inside a desktop computer; click the highlighted processor for information">
             <map name="cpuFocusedMap">
@@ -67,10 +68,11 @@
               <div><dt>Important match</dt><dd>Motherboard socket</dd></div>
             </dl>
             <aside><strong>Buying tip</strong><span>Match the CPU socket with the motherboard socket before ordering.</span></aside>
+            <a class="text-link component-shop-link" href="pages/products.html?part=cpu">Explore processors <span aria-hidden="true">&rarr;</span></a>
           </div>
         </article>
 
-        <article class="focused-component-card pointer-bottom" id="guideGPU">
+        <article class="focused-component-card" id="guideGPU">
           <div class="focused-component-image">
             <img class="focused-map-image" data-responsive-map src="images/guides/GPU.webp" usemap="#gpuFocusedMap" width="1200" height="1200" alt="Graphics card highlighted inside a desktop computer; click the highlighted card for information">
             <map name="gpuFocusedMap">
@@ -86,10 +88,11 @@
               <div><dt>Important match</dt><dd>Power supply and case</dd></div>
             </dl>
             <aside><strong>Buying tip</strong><span>More powerful graphics cards require enough PSU wattage and physical case clearance.</span></aside>
+            <a class="text-link component-shop-link" href="pages/products.html?part=gpu">Explore graphics cards <span aria-hidden="true">&rarr;</span></a>
           </div>
         </article>
 
-        <article class="focused-component-card pointer-right" id="guideRAM">
+        <article class="focused-component-card" id="guideRAM">
           <div class="focused-component-image">
             <img class="focused-map-image" data-responsive-map src="images/guides/RAM.webp" usemap="#ramFocusedMap" width="1200" height="1200" alt="RAM modules highlighted inside a desktop computer; click the highlighted memory for information">
             <map name="ramFocusedMap">
@@ -105,10 +108,11 @@
               <div><dt>Important match</dt><dd>DDR generation and speed</dd></div>
             </dl>
             <aside><strong>Buying tip</strong><span>DDR5 memory requires a DDR5-compatible motherboard and processor platform.</span></aside>
+            <a class="text-link component-shop-link" href="pages/products.html?part=ram">Explore memory <span aria-hidden="true">&rarr;</span></a>
           </div>
         </article>
 
-        <article class="focused-component-card pointer-left" id="guideSSD">
+        <article class="focused-component-card" id="guideSSD">
           <div class="focused-component-image">
             <img class="focused-map-image" data-responsive-map src="images/guides/SSD.webp" usemap="#ssdFocusedMap" width="1200" height="1200" alt="NVMe SSD highlighted inside a desktop computer; click the highlighted drive for information">
             <map name="ssdFocusedMap">
@@ -124,6 +128,7 @@
               <div><dt>Important match</dt><dd>M.2 size and interface</dd></div>
             </dl>
             <aside><strong>Buying tip</strong><span>One terabyte is a practical starting capacity for most students, gamers, and office users.</span></aside>
+            <a class="text-link component-shop-link" href="pages/products.html?part=storage">Explore storage <span aria-hidden="true">&rarr;</span></a>
           </div>
         </article>
       </div>
