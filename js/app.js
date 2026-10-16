@@ -1082,7 +1082,7 @@ function wireFoldableNavigation() {
         <a href="pages/products.html#laptops">Laptops</a>
         <a href="pages/products.html#accessories">Accessories</a>
         <a href="pages/products.html#computer-parts">Computer Parts</a>
-        <a href="pages/products.html?brand=Microsoft">Microsoft Surface</a>
+        <a href="pages/products.html?brand=Microsoft">Microsoft</a>
         ${linkMarkup("pages/build.html")}
         ${linkMarkup("pages/products.html")}
       </div>
@@ -1311,8 +1311,6 @@ function wirePromoCarousel() {
     showSlide(Number(dot.dataset.promoSlide));
     startAutoScroll();
   });
-  carousel.addEventListener("mouseenter", stopAutoScroll);
-  carousel.addEventListener("mouseleave", startAutoScroll);
   carousel.addEventListener("focusin", stopAutoScroll);
   carousel.addEventListener("focusout", (event) => {
     if (!carousel.contains(event.relatedTarget)) startAutoScroll();

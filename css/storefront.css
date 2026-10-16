@@ -251,7 +251,10 @@ body { font-family: "Inter", Arial, sans-serif; letter-spacing: 0; }
 .home-page .microsoft-promo > img { position: absolute; right: 3%; top: 10%; width: 52%; height: 80%; object-fit: contain; background: transparent; }
 .home-page .microsoft-promo .promo-slide-content { width: 38%; }
 .brand-strip .partner-logo img { max-width: 135px; }
-.brand-strip .car-slide:hover, .brand-strip .car-slide:focus-within { animation-play-state: paused; }
+.brand-strip .carousel { overflow: hidden; }
+.brand-strip .car-slide { flex-shrink: 0; }
+/* Keep both copies synchronized when a keyboard user focuses a brand link. */
+.brand-strip .carousel:focus-within .car-slide { animation-play-state: paused; }
 
 /* Native video stays on the page and starts silently when it comes into view. */
 .home-video { width: min(1320px, calc(100% - 32px)); margin: 64px auto; padding: 38px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
