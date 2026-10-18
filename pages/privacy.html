@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy | Bits and Bytes</title>
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/storefront.css?v=20261016-review-carousel-v7">
+  <link rel="stylesheet" href="css/storefront.css?v=20261017-configure-link-v17">
 </head>
 <body class="utility-page">
   <header class="site-header" id="top">
@@ -38,7 +38,7 @@
       </section>
       <section>
         <h2>Account information</h2>
-        <p>Registration saves your name, email, a randomly generated salt, and a password hash in this browser. Your password is not saved as plain text. The signed-in email is kept in session storage. Accounts do not synchronize between browsers or devices. Use a password unique to this store and avoid registering on shared devices.</p>
+        <p>When the store runs through its local database server, registration stores your name, email, randomly generated salt, and password hash in SQLite on the server computer. Your password is not stored as plain text. An HttpOnly session cookie keeps you signed in for up to seven days. Addresses are associated with your account and can be accessed from other browsers connected to the same server after signing in. Use a password unique to this store and sign out on shared devices. Opening the HTML files directly uses the older browser-only account storage instead; those accounts are not automatically imported into the database.</p>
       </section>
       <section>
         <h2>Support messages and photos</h2>
@@ -46,22 +46,31 @@
       </section>
       <section>
         <h2>Checkout details</h2>
-        <p>Contact, delivery, and payment fields are used for an on-page order review. The current checkout does not submit an order or process a payment. Do not enter real card numbers or other sensitive payment credentials.</p>
+        <p>Completing sample checkout saves an order reference, item selections, recipient name, contact details, delivery address, amount, payment-method label, sample payment reference, and sample delivery events in this browser. These records are linked to the local signed-in account and remain until this website's site data is cleared. Card numbers, card security codes, wallet PINs, and OTPs are not saved in the order record. Do not enter real card credentials into the sample card form.</p>
+        <p>My account displays your local purchase history, recent delivery addresses, and favorites. Guest favorites move into the account when you sign in. Return/refund requests save an order reference, reason, description, amount, status, and timestamp on this device only. They are not automatically sent to the store and do not issue a refund. Do not include payment passwords or PINs in a request.</p>
+        <p>Your address book stores recipient names, phone numbers, delivery addresses, optional instructions, and a default-address choice. With the local server, these are stored in SQLite under your account, not only in browser storage. You can edit or remove saved addresses in My account. Signing out or clearing browser data does not erase database addresses. In direct-file mode they remain browser-only. Past orders retain their original delivery details. Orders, favorites and sample tracking still stay in the browser; they are not synchronized by the account database.</p>
+        <p>Sample verification does not contact GCash, a bank, or a courier. The owner-provided GCash QR is a public image on this website and is separate from the non-payable sample QR. Do not send money to test the site.</p>
       </section>
       <section>
         <h2>External services</h2>
         <p>Some pages request fonts from Google Fonts. Social links and manufacturer links open third-party websites with their own privacy practices. When the store is accessed through a hosting service, that service may receive request information such as your IP address and browser details. The website's own code does not include advertising or analytics scripts.</p>
+        <p>The delivery form includes a Google Maps preview. Loading or interacting with it connects your browser to Google, which may receive your IP address, browser details, website origin, selected general delivery area and map interactions. The store sends only your selected city, province or region and country to the map, not your name, phone number or typed street address. Store pickup shows the fictional collection-point coordinates. The embedded map does not fill your shipping address automatically; your delivery details are taken from the form. Google's privacy policy applies to its map service.</p>
       </section>
       <section>
         <h2>Managing your information</h2>
-        <p>Sign out from the account page to end the current sign-in. To remove the local account, saved cart, wishlist, and preferences, clear this website's site data in your browser settings. Clearing that data removes local accounts and saved shopping information; signing out alone does not. For questions about information you have shared through customer support, contact us using the contact page.</p>
+        <p>Sign out from the account page to end the current sign-in. To remove the local account, saved orders, delivery details, cart, wishlist, and preferences, clear this website's site data in your browser settings. Clearing that data removes local accounts and saved shopping information; signing out alone does not. Other people with access to your browser profile may be able to inspect its stored data. For questions about information you have shared through customer support, contact us using the contact page.</p>
         <a class="policy-contact" href="pages/contact.html">Contact Bits and Bytes</a>
       </section>
     </div>
   </main>
 
   <footer class="site-footer"><a href="pages/privacy.html">Privacy</a></footer>
-  <script src="js/data.js?v=20261016-more-products-v12"></script>
-  <script src="js/app.js?v=20261016-privacy-v11"></script>
+  <script src="js/international.js?v=20261017-receipts-v5"></script>
+  <script src="js/database.js?v=20261017-database-v1"></script>
+  <script src="js/store-selects.js?v=20261017-pickers-v1"></script>
+  <script src="js/data.js?v=20261017-descriptions-v14"></script>
+  <script src="js/localization.js?v=20261017-feedback-v2"></script>
+  <script src="js/product-descriptions.js?v=20261017-descriptions-v1"></script>
+  <script src="js/app.js?v=20261017-google-preview-v11"></script>
 </body>
 </html>

@@ -46,6 +46,7 @@ Bits-and-Bytes/
 | Interactive hardware guide | [pages/components.html](pages/components.html) |
 | About, policies, and downloads | `pages/about.html`, `pages/terms.html`, `pages/warranty.html`, `pages/downloads.html` |
 | Products, variants, galleries, and builder choices | [js/data.js](js/data.js) |
+| Product descriptions and manufacturer reference links | [js/product-descriptions.js](js/product-descriptions.js) |
 | Component filter names (RAM, storage, and more) | `computerPartCategories` in [js/data.js](js/data.js) |
 | Shared shopping, accounts, navigation, and builder logic | [js/app.js](js/app.js) |
 | Product comparison | [js/shopping-tools.js](js/shopping-tools.js) |
@@ -102,10 +103,13 @@ Screenshots go into `images/previews/`, which is kept out of GitHub.
 Temporary development tools in `tmp/` and duplicate photo backups in
 `images/originals/` also stay local. No original files were deleted during organization.
 
-## Demo Limitations
+## Store Limitations
 
-This is a frontend school project, not a live payment or messaging service.
-Checkout requires a local demo account. Registration saves a salted PBKDF2
-password hash, never a plaintext password. The session lasts for this browser tab;
-remembering an email does not sign the customer in. Do not use real passwords.
-Real accounts, orders, and payments require server-side authentication and validation.
+The connected version has server-checked accounts and database-backed addresses.
+Orders, tracking and payment verification are still browser-local samples, not real
+payments or courier bookings. Use a unique password, not a password reused elsewhere.
+Direct HTML previews retain browser-only accounts and tab-based sign-in.
+
+## Connected Accounts and Overseas Checkout
+
+Run `npm start` with Node.js 24+, then open `http://localhost:4173` for SQLite-backed accounts and address books. Opening HTML files directly uses browser-only storage. See [Database and overseas setup](docs/DATABASE-AND-OVERSEAS.md) for shipping settings, database location, and deployment limitations.

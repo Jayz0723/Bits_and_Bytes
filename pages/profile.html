@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="../">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account | Bits and Bytes</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/storefront.css?v=20261017-configure-link-v17">
+  <link rel="stylesheet" href="css/profile.css?v=20261016-addressbook-v2">
+  <link rel="stylesheet" href="css/receipts.css?v=20261017-receipts-v1">
+</head>
+<body class="utility-page profile-page">
+  <header class="site-header" id="top"><hgroup>
+    <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1><h2>My account</h2>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a><a href="pages/products.html">Products</a><a href="pages/build.html">Build Your Own PC</a>
+      <a href="pages/contact.html">Contact</a><a class="active" href="pages/profile.html">My account</a><a href="pages/login.html">Login</a>
+      <a class="cart-pill" href="pages/cart.html">Cart <span id="cartCount">0</span></a>
+    </nav>
+  </hgroup></header>
+  <main class="account-shell">
+    <section id="profileGate" class="account-gate" hidden>
+      <img src="images/icons/user-round.svg" width="40" height="40" alt="">
+      <p class="eyebrow">Your personal corner</p><h1>Everything for your next setup.</h1>
+      <p>Sign in to view your purchases, follow deliveries, and keep your favorite finds together.</p>
+      <button id="profileLogin" class="button primary" type="button">Sign in / Create an account</button>
+    </section>
+    <div id="profileAccount" hidden>
+      <header class="account-heading"><div><p class="eyebrow">My Bits &amp; Bytes</p><h1>Welcome back, <span id="profileGreeting"></span>.</h1><p>Your orders, saved finds, and a little less searching.</p></div><a class="button secondary" href="pages/products.html">Continue shopping <img src="images/icons/chevron-right.svg" alt="" width="18" height="18"></a></header>
+      <div class="account-layout">
+        <aside class="account-sidebar">
+          <div class="account-identity"><span id="profileAvatar" class="account-avatar"></span><div><strong id="profileName"></strong><small id="profileEmail"></small></div></div>
+          <nav class="account-navigation" aria-label="Account sections">
+            <a href="pages/profile.html#orders" data-account-section="orders"><img src="images/icons/package.svg" alt="">My purchases<span id="ordersCount"></span></a>
+            <a href="pages/profile.html#tracking" data-account-section="tracking"><img src="images/icons/truck.svg" alt="">Delivery tracking</a>
+            <a href="pages/profile.html#refunds" data-account-section="refunds"><img src="images/icons/rotate-ccw.svg" alt="">Returns &amp; refunds</a>
+            <a href="pages/profile.html#favorites" data-account-section="favorites"><img src="images/icons/heart.svg" alt="">My favorites<span id="favoritesCount"></span></a>
+            <a href="pages/profile.html#details" data-account-section="details"><img src="images/icons/user-round.svg" alt="">Account details</a>
+            <a href="pages/profile.html#addresses" data-account-section="addresses"><img src="images/icons/map-pin.svg" alt="">Address book</a>
+          </nav>
+          <a class="account-support" href="pages/contact.html">Need a hand? Contact support &rarr;</a>
+          <button id="profileLogout" class="account-logout" type="button"><img src="images/icons/log-out.svg" alt="">Sign out</button>
+        </aside>
+        <div class="account-content">
+          <p id="profileNotice" class="account-notice" role="status"></p>
+          <section id="ordersPanel" data-account-panel="orders" aria-labelledby="ordersTitle">
+            <div class="account-section-heading"><div><p class="eyebrow">Purchase history</p><h2 id="ordersTitle">My purchases</h2></div><label class="order-search"><img src="images/icons/search.svg" alt=""><input id="profileOrderSearch" type="search" placeholder="Search products or order number" aria-label="Search your orders"></label></div>
+            <div class="purchase-tabs" role="group" aria-label="Filter orders">
+              <button type="button" data-order-filter="all" aria-pressed="true">All orders <span id="allOrdersCount">0</span></button>
+              <button type="button" data-order-filter="receiving" aria-pressed="false">To receive <span id="receivingCount">0</span></button>
+              <button type="button" data-order-filter="completed" aria-pressed="false">Completed <span id="completedCount">0</span></button>
+            </div>
+            <p class="account-storage-note">Order history is saved in this browser. Sample payments and delivery updates are not live transactions.</p>
+            <div id="profileOrders" class="account-order-list"></div>
+          </section>
+          <section id="trackingPanel" data-account-panel="tracking" aria-labelledby="profileTrackingTitle" hidden>
+            <div class="account-section-heading"><div><p class="eyebrow">From our desk to yours</p><h2 id="profileTrackingTitle">Delivery tracking</h2></div></div>
+            <p class="account-storage-note">Follow your saved order timeline. No live courier is connected.</p><div id="profileDeliveries" class="account-order-list"></div>
+          </section>
+          <section id="refundsPanel" data-account-panel="refunds" aria-labelledby="refundsTitle" hidden>
+            <div class="account-section-heading"><div><p class="eyebrow">After your purchase</p><h2 id="refundsTitle">Returns &amp; refunds</h2></div><a class="text-link" href="pages/warranty.html">Warranty &amp; returns &rarr;</a></div>
+            <p class="account-storage-note">Requests are saved on this device only, not sent to the store. No money is returned automatically. Contact support for an actual return or refund.</p>
+            <div id="profileRefunds" class="account-order-list"></div>
+          </section>
+          <section id="favoritesPanel" data-account-panel="favorites" aria-labelledby="favoritesTitle" hidden>
+            <div class="account-section-heading"><div><p class="eyebrow">Worth coming back for</p><h2 id="favoritesTitle">My favorites</h2></div><a class="text-link" href="pages/products.html">Find something new &rarr;</a></div>
+            <div id="profileFavorites" class="account-favorites"></div>
+          </section>
+          <section id="addressesPanel" data-account-panel="addresses" aria-labelledby="addressesTitle" hidden>
+            <div class="account-section-heading"><div><p class="eyebrow">A place for every delivery</p><h2 id="addressesTitle">Address book</h2></div><button class="button primary" id="addProfileAddress" type="button">Add address</button></div>
+            <p class="account-storage-note">Save home, work, or another delivery address. Your default address is selected at checkout. Changes apply to future orders only.</p>
+            <div id="profileAddressBook" class="address-book-list"></div>
+          </section>
+          <section id="detailsPanel" data-account-panel="details" aria-labelledby="detailsTitle" hidden>
+            <div class="account-section-heading"><div><p class="eyebrow">The essentials</p><h2 id="detailsTitle">Account details</h2></div></div>
+            <form id="profileDetailsForm" class="account-details-form"><label for="profileDisplayName">Display name</label><input id="profileDisplayName" required maxlength="100" autocomplete="name"><label for="profileAccountEmail">Email address</label><input id="profileAccountEmail" type="email" readonly><p class="account-storage-note">Your email identifies orders saved to this account. Changing your display name does not change previous delivery recipients.</p><button class="button primary" type="submit">Save changes</button></form>
+            <h3 class="account-address-title"><img src="images/icons/map-pin.svg" width="20" height="20" alt="">Recent delivery addresses</h3><div id="profileAddresses"></div>
+            <p class="account-storage-note">Addresses come from your saved purchases. You can enter a different address at your next checkout.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"></footer>
+  <script src="js/international.js?v=20261017-receipts-v5"></script>
+  <script src="js/database.js?v=20261017-database-v1"></script>
+  <script src="js/store-selects.js?v=20261017-pickers-v1"></script>
+  <script src="js/data.js?v=20261017-descriptions-v14"></script>
+  <script src="js/orders.js?v=20261017-receipts-v5"></script>
+  <script src="js/receipts.js?v=20261017-receipts-v1"></script>
+  <script src="js/address-data.js?v=20261016-addresses-v1"></script>
+  <script src="js/addresses.js?v=20261017-overseas-v4"></script>
+  <script src="js/address-book.js?v=20261017-overseas-v4"></script>
+  <script src="js/localization.js?v=20261017-feedback-v2"></script>
+  <script src="js/product-descriptions.js?v=20261017-descriptions-v1"></script>
+  <script src="js/app.js?v=20261017-google-preview-v11"></script>
+  <script src="js/profile.js?v=20261017-receipts-v5"></script>
+</body>
+</html>

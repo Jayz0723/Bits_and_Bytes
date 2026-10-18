@@ -4,6 +4,7 @@ images/previews/
 images/originals/
 *.crdownload
 node_modules/
+data/
 .DS_Store
 Thumbs.db
 

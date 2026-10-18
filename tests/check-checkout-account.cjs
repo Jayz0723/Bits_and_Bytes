@@ -60,7 +60,7 @@ const { chromium } = require('./browser.cjs');
     assert.ok(await page.locator('#checkoutPanel').isVisible(), 'Registration resumes checkout');
     assert.equal(await page.inputValue('#checkoutEmail'), 'guest@example.com');
     const accounts = await page.evaluate(() => getDemoAccounts());
-    assert.equal(accounts.length, 1);
+    assert.equal(accounts.length, 2);
     assert.equal(accounts[0].password, undefined);
     assert.ok(accounts[0].salt && accounts[0].passwordHash.length === 64);
     assert.ok(!(await page.evaluate(() => JSON.stringify(localStorage))).includes('demo-password-123'));

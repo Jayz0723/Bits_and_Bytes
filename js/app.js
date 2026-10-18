@@ -1,8 +1,11 @@
 // Shared helper functions used by all pages.
 function getCart() {
-  const savedCart = JSON.parse(localStorage.getItem("bitsAndBytesCart")) || [];
+  let savedCart;
+  try { savedCart = JSON.parse(localStorage.getItem("bitsAndBytesCart")); }
+  catch { return []; }
+  if (!Array.isArray(savedCart)) return [];
 
-  return savedCart.map((item) => {
+  return savedCart.filter(item => item && typeof item.id === "string").map((item) => {
     const currentProduct = typeof catalogProducts === "function"
       ? catalogProducts().find((product) => product.id === (item.baseProductId || item.id))
       : undefined;
@@ -10,7 +13,7 @@ function getCart() {
     if (!currentProduct) return item;
     if (item.isConfigured) return { ...item, image: productWithVariant(currentProduct, item.variantId).image };
     return { ...item, ...productWithVariant(currentProduct, item.variantId), quantity: item.quantity };
-  });
+  }).filter(item => typeof item.name === "string" && Number.isFinite(item.price) && item.price >= 0 && Number.isSafeInteger(item.quantity) && item.quantity > 0);
 }
 
 function saveCart(cart) {
@@ -19,26 +22,51 @@ function saveCart(cart) {
 }
 
 function getWishlist() {
-  return JSON.parse(localStorage.getItem("bitsAndBytesWishlist")) || [];
+  try {
+    const saved = JSON.parse(localStorage.getItem(wishlistStorageKey()));
+    return Array.isArray(saved) ? saved.filter(id => typeof id === "string") : [];
+  } catch { return []; }
+}
+
+function wishlistStorageKey() {
+  const user = getSignedInUser();
+  return user ? "bitsAndBytesWishlist:" + user.email : "bitsAndBytesWishlist";
+}
+
+function adoptGuestWishlist() {
+  const key = wishlistStorageKey();
+  if (key === "bitsAndBytesWishlist") return;
+  try {
+    const guest = JSON.parse(localStorage.getItem("bitsAndBytesWishlist")) || [];
+    if (!Array.isArray(guest) || !guest.length) return;
+    saveWishlist([...new Set([...getWishlist(), ...guest.filter(id => typeof id === "string")])]);
+    localStorage.removeItem("bitsAndBytesWishlist");
+  } catch { /* Keep the guest list intact if browser storage is unavailable. */ }
 }
 
 function saveWishlist(wishlist) {
-  localStorage.setItem("bitsAndBytesWishlist", JSON.stringify(wishlist));
+  localStorage.setItem(wishlistStorageKey(), JSON.stringify(wishlist));
   updateWishlistCount();
+  window.dispatchEvent(new Event("store-wishlist-change"));
 }
 
+// Display-only conversion settings, not live exchange rates. Orders are paid in PHP.
+const displayCurrencyRates = { PHP: 1, USD: 1 / 57, JPY: 2.6, EUR: 0.016, CNY: 0.123 };
+
 function currencyPreference() {
-  return localStorage.getItem("bitsAndBytesCurrency") || "PHP";
+  const saved = localStorage.getItem("bitsAndBytesCurrency");
+  return Object.hasOwn(displayCurrencyRates, saved) ? saved : "PHP";
 }
 
 function money(amount) {
   const currency = currencyPreference();
-  const convertedAmount = currency === "USD" ? amount / 57 : amount;
+  const convertedAmount = amount * displayCurrencyRates[currency];
+  const locale = typeof storeLocale === "function" ? storeLocale() : "en-PH";
 
-  return new Intl.NumberFormat(currency === "USD" ? "en-US" : "en-PH", {
+  return new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
-    maximumFractionDigits: 0
+    maximumFractionDigits: ["EUR", "CNY"].includes(currency) ? 2 : 0
   }).format(convertedAmount);
 }
 
@@ -56,6 +84,89 @@ function productPriceMarkup(product, options = {}) {
       ${showBadge ? `<span class="discount-badge">Save ${discount}%</span>` : ""}
     </span>
   `;
+}
+
+// Small confirmations do not interrupt shopping or move keyboard focus.
+function animateStoreElement(element, keyframes) {
+  if (!element || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  element.getAnimations().forEach(animation => animation.cancel());
+  element.animate(keyframes, { duration: 480, easing: "cubic-bezier(.2,.8,.3,1)" });
+}
+
+function showShoppingFeedback(title, productName, destination = "cart", note = "") {
+  let toast = document.getElementById("shoppingFeedback");
+  if (!toast) {
+    toast = document.createElement("aside");
+    toast.id = "shoppingFeedback";
+    toast.className = "shopping-feedback";
+    toast.hidden = true;
+    toast.innerHTML = `<img class="shopping-feedback-icon" width="24" height="24" alt="">
+      <div class="shopping-feedback-copy" role="status" aria-live="polite" aria-atomic="true"><strong></strong><p translate="no"></p><small></small></div>
+      <a class="shopping-feedback-link"></a>
+      <button class="shopping-feedback-close" type="button" aria-label="Close" title="Close">&times;</button>`;
+    toast.dismiss = () => {
+      clearTimeout(toast.dismissTimer);
+      toast.classList.remove("is-visible");
+      clearTimeout(toast.hideTimer);
+      toast.hideTimer = setTimeout(() => { toast.hidden = true; }, 220);
+    };
+    toast.scheduleDismiss = () => {
+      clearTimeout(toast.dismissTimer);
+      toast.dismissTimer = setTimeout(toast.dismiss, 6000);
+    };
+    toast.querySelector("button").addEventListener("click", toast.dismiss);
+    toast.addEventListener("pointerenter", () => clearTimeout(toast.dismissTimer));
+    toast.addEventListener("pointerleave", () => {
+      if (!toast.contains(document.activeElement)) toast.scheduleDismiss();
+    });
+    toast.addEventListener("focusin", () => clearTimeout(toast.dismissTimer));
+    toast.addEventListener("focusout", event => {
+      if (!toast.contains(event.relatedTarget)) toast.scheduleDismiss();
+    });
+  }
+  // A quick-view dialog is in the browser's top layer; keep its confirmation visible.
+  (document.querySelector("dialog[open]") || document.body).append(toast);
+  clearTimeout(toast.hideTimer);
+  const text = value => typeof storeText === "function" ? storeText(value) : value;
+  toast.querySelector("strong").textContent = text(title);
+  toast.querySelector("p").textContent = productName;
+  toast.querySelector("small").textContent = note;
+  toast.querySelector("small").hidden = !note;
+  toast.querySelector("img").src = destination === "wishlist" ? "images/icons/heart.svg" : "images/icons/shopping-cart.svg";
+  const link = toast.querySelector("a");
+  link.href = destination === "wishlist" ? "pages/wishlist.html" : "pages/cart.html";
+  link.textContent = text(destination === "wishlist" ? "View wishlist" : "View cart");
+  toast.hidden = false;
+  requestAnimationFrame(() => toast.classList.add("is-visible"));
+  toast.scheduleDismiss();
+}
+
+function wireDeliveryMap() {
+  const map = document.getElementById("deliveryGoogleMap");
+  const link = document.getElementById("deliveryGoogleMapLink");
+  if (!map || !link) return;
+  function updateMap() {
+    // Share only the general delivery area, not the customer's name or street address.
+    const country = document.getElementById("countryRegion")?.value || "Philippines";
+    const international = country !== "Philippines";
+    const city = document.getElementById(international ? "internationalCity" : "citySelect")?.value;
+    const province = document.getElementById(international ? "internationalRegion" : "provinceSelect")?.value;
+    const area = [city, province, country].filter(Boolean).join(", ");
+    const pickup = selectedFulfillment() === "pickup";
+    const query = encodeURIComponent(pickup ? storePickupLocation.lat + "," + storePickupLocation.lng : area);
+    link.href = "https://www.google.com/maps/search/?api=1&query=" + query;
+    const source = "https://www.google.com/maps?q=" + query + "&output=embed";
+    if (map.getAttribute("src") !== source) map.src = source;
+    map.title = pickup ? "Google Maps fictional store pickup location" : "Google Maps delivery area: " + area;
+    document.getElementById("deliveryMapCaption").textContent = pickup
+      ? "Fictional collection point near Calamba City. Not an operating store."
+      : area;
+  }
+  document.getElementById("deliveryCheckoutForm")?.addEventListener("change", event => {
+    if (["provinceSelect", "citySelect", "countryRegion", "internationalRegion", "internationalCity", "checkoutSavedAddress"].includes(event.target.id)) updateMap();
+  });
+  window.addEventListener("store-destination-change", updateMap);
+  updateMap();
 }
 
 function updateCartCount() {
@@ -114,7 +225,10 @@ function addToCart(product, quantity = 1) {
 
   saveCart(cart);
   const stockNote = availableToAdd < quantity ? ` Only ${availableToAdd} item(s) were available.` : "";
-  alert(`${product.name} was added to the cart.${stockNote}`);
+  showShoppingFeedback("Added to your cart", product.name, "cart", stockNote.trim());
+  animateStoreElement(document.querySelector(".cart-pill"), [
+    { transform: "scale(1)" }, { transform: "scale(1.12)", offset: .4 }, { transform: "scale(1)" }
+  ]);
 }
 
 const computerPartProducts = [
@@ -237,13 +351,27 @@ const computerPartProducts = [
   }
 ];
 
+// Some size options are different models, so their descriptions need their own source.
+function productDescriptionFor(productId, variantId) {
+  const entry = productDescriptions[productId];
+  if (!entry) return {};
+  const copy = { ...entry, ...entry.variants?.[variantId] };
+  return {
+    description: copy.description,
+    descriptionSource: copy.source,
+    descriptionNote: copy.note || "",
+    ...(copy.specs ? { specs: copy.specs } : {})
+  };
+}
+
 function catalogProducts() {
   return [...products, ...computerPartProducts].map((product) => {
     const media = productMedia[product.id] || {};
     const variants = productVariants[product.id];
     const defaultVariant = variants?.options.find((option) => option.id === variants.defaultId);
     return {
-      ...product, ...media, ...defaultVariant, id: product.id, variants,
+      ...product, ...media, ...defaultVariant,
+      ...productDescriptionFor(product.id, variants?.defaultId), id: product.id, variants,
       image: defaultVariant?.image || media.image || product.image,
       photoCapacity: defaultVariant?.photoCapacity || product.photoCapacity,
       moduleLayout: defaultVariant?.moduleLayout || product.moduleLayout
@@ -251,17 +379,17 @@ function catalogProducts() {
   });
 }
 
-// Stable IDs keep different capacities separate in the saved cart.
+// Stable IDs keep capacities and colors separate in the saved cart.
 function productWithVariant(product, variantId) {
   if (!product.variants) return product;
   const variant = product.variants.options.find((option) => option.id === (variantId || product.variants.defaultId));
   if (!variant) return productWithVariant(product, product.variants.defaultId);
   const familyName = product.name.replace(/\b(?:8|16|32|64|128)GB\s*/i, "").trim();
   return {
-    ...product, ...variant,
+    ...product, ...variant, ...productDescriptionFor(product.baseProductId || product.id, variant.id),
     gallery: variant.gallery || (variant.image && variant.image !== product.image ? undefined : product.gallery),
     id: `${product.id}::${variant.id}`, baseProductId: product.id, variantId: variant.id,
-    name: variant.name || `${familyName} - ${variant.label}`, originalPrice: undefined
+    name: variant.name || `${familyName} - ${variant.label}`, originalPrice: product.variants.kind === "color" ? product.originalPrice : undefined
   };
 }
 
@@ -279,11 +407,32 @@ function productGallery(product) {
 function productVariantMarkup(product, variantId, id = "") {
   if (!product.variants) return "";
   const selectedId = variantId || product.variants.defaultId;
+  if (product.variants.kind === "color") {
+    const selected = product.variants.options.find(option => option.id === selectedId);
+    return `<div class="color-variant-picker"><p>Color: <strong data-selected-color>${selected.label}</strong></p>
+      <div class="color-swatches" role="group" aria-label="Color for ${product.name}">
+        ${product.variants.options.map(option => `<button type="button" class="color-swatch" data-product-color="${option.id}" aria-label="Color: ${option.label}" title="${option.label}" aria-pressed="${option.id === selectedId}">${option.swatches.map(color => `<span style="background-color:${color}"></span>`).join("")}</button>`).join("")}
+      </div><select ${id ? `id="${id}"` : ""} data-product-variant="${product.id}" aria-label="Product color" hidden>${product.variants.options.map(option => `<option value="${option.id}" ${option.id === selectedId ? "selected" : ""}>${option.label}</option>`).join("")}</select></div>`;
+  }
   return `<label class="product-variant-picker">${product.variants.label}
     <select ${id ? `id="${id}"` : ""} data-product-variant="${product.id}" aria-label="${product.variants.label} for ${product.name}">
       ${product.variants.options.map((variant) => `<option value="${variant.id}" ${variant.id === selectedId ? "selected" : ""}>${variant.label} - ${money(variant.price)}</option>`).join("")}
     </select>
   </label>`;
+}
+
+// Reuse the existing variant change handlers in catalog, quick view, and details.
+function wireColorSwatches() {
+  document.addEventListener("click", event => {
+    const button = event.target.closest("[data-product-color]");
+    if (!button) return;
+    const picker = button.closest(".color-variant-picker");
+    const select = picker.querySelector("[data-product-variant]");
+    select.value = button.dataset.productColor;
+    picker.querySelector("[data-selected-color]").textContent = select.selectedOptions[0].textContent;
+    picker.querySelectorAll("[data-product-color]").forEach(swatch => swatch.setAttribute("aria-pressed", String(swatch === button)));
+    select.dispatchEvent(new Event("change", { bubbles: true }));
+  });
 }
 
 function productPhotoLabel(product) {
@@ -301,6 +450,20 @@ function toggleWishlist(productId) {
   }
 
   saveWishlist(wishlist);
+  const saved = wishlist.includes(productId);
+  const product = catalogProducts().find(item => item.id === productId);
+  showShoppingFeedback(saved ? "Saved to your wishlist" : "Removed from your wishlist", product?.name || "", "wishlist");
+  requestAnimationFrame(() => {
+    const heart = document.querySelector(`[data-wishlist-product="${CSS.escape(productId)}"]`)
+      || document.getElementById("detailWishlistButton");
+    animateStoreElement(heart, saved ? [
+      { transform: "scale(1)" }, { transform: "scale(1.28) rotate(-12deg)", offset: .4 },
+      { transform: "scale(.94)", offset: .75 }, { transform: "scale(1)" }
+    ] : [{ transform: "scale(1)" }, { transform: "scale(.88)" }, { transform: "scale(1)" }]);
+    animateStoreElement(document.querySelector(".wishlist-pill"), [
+      { transform: "scale(1)" }, { transform: "scale(1.08)" }, { transform: "scale(1)" }
+    ]);
+  });
 }
 
 function wireQuickOrder() {
@@ -435,8 +598,15 @@ function wireProductButtons(root = document) {
       if (document.querySelector("#wishlistGrid")) {
         renderWishlist();
       } else {
-        renderFeaturedProducts();
-        renderProductsPage();
+        // Keep the selected color/capacity while updating matching heart buttons.
+        const selected = getWishlist().includes(button.dataset.wishlistProduct);
+        document.querySelectorAll("[data-wishlist-product]").forEach(heart => {
+          if (heart.dataset.wishlistProduct !== button.dataset.wishlistProduct) return;
+          const name = heart.closest(".product-card").querySelector("h3").textContent;
+          heart.classList.toggle("active", selected);
+          heart.setAttribute("aria-pressed", String(selected));
+          heart.setAttribute("aria-label", `${selected ? "Remove" : "Add"} ${name} ${selected ? "from" : "to"} wishlist`);
+        });
       }
     });
   });
@@ -474,7 +644,10 @@ function openProductDetails(product) {
         <p class="eyebrow">${product.type} / ${product.use}</p>
         <h2>${product.name}</h2>
         <p class="product-detail-brand">${product.brand}</p>
-        <p>${product.specs}</p>
+        <p class="product-description-copy">${product.description || product.specs}</p>
+        <p class="product-selected-specs">${product.specs}</p>
+        ${product.descriptionNote ? `<p class="product-description-note">${product.descriptionNote}</p>` : ""}
+        ${product.descriptionSource ? `<a class="product-description-source" href="${product.descriptionSource}" target="_blank" rel="noopener noreferrer">Manufacturer reference <span aria-hidden="true">&#8599;</span></a>` : ""}
         ${product.photoNote ? `<small class="product-photo-note">${product.photoNote}</small>` : ""}
         <dl class="product-spec-list">
           <div><dt>Availability</dt><dd>${product.stock} in stock</dd></div>
@@ -574,9 +747,10 @@ function renderProductsPage() {
     useFilter.value = query.get("use");
   }
 
-  const currencyLabel = currencyPreference() === "USD" ? "USD" : "PHP";
+  const currencyLabel = currencyPreference();
   minPrice.placeholder = `${currencyLabel} 0`;
   maxPrice.placeholder = "Any price";
+  minPrice.step = maxPrice.step = "any";
 
   function render() {
     const selectedType = typeFilter.value;
@@ -588,7 +762,7 @@ function renderProductsPage() {
     });
     const selectedUse = useFilter.value;
     const selectedBrands = Array.from(document.querySelectorAll("[data-brand-filter]:checked")).map((input) => input.value);
-    const currencyMultiplier = currencyPreference() === "USD" ? 57 : 1;
+    const currencyMultiplier = 1 / displayCurrencyRates[currencyPreference()];
     const minimum = Number(minPrice.value) * currencyMultiplier;
     const maximum = Number(maxPrice.value) * currencyMultiplier;
     const filtered = catalogProducts().filter((product) => {
@@ -772,6 +946,13 @@ function renderProductDetail() {
   overview.hidden = false;
   componentSection.hidden = false;
   configurator.hidden = false;
+  // Preserve the product and variant query parameters despite the page's base URL.
+  function updateConfigureProductLink() {
+    const target = new URL(window.location.href);
+    target.hash = "configureProduct";
+    document.querySelector("#configureProductLink").href = target.href;
+  }
+  updateConfigureProductLink();
   const galleryThumbnails = document.querySelector("#productGalleryThumbnails");
   function renderGallery() {
     const gallery = productGallery(product);
@@ -818,7 +999,18 @@ function renderProductDetail() {
   document.querySelector("#detailProductCategory").textContent = `${product.type} / ${product.use}`;
   document.querySelector("#detailProductName").textContent = product.name;
   document.querySelector("#detailProductBrand").textContent = product.brand;
-  document.querySelector("#detailProductDescription").textContent = product.specs;
+  function updateProductDescription() {
+    document.querySelector("#detailProductDescription").textContent = product.description || product.specs;
+    document.querySelector("#detailProductSelectedSpecs").textContent = product.specs;
+    const note = document.querySelector("#detailProductDescriptionNote");
+    note.textContent = product.descriptionNote || "";
+    note.hidden = !product.descriptionNote;
+    const source = document.querySelector("#detailProductDescriptionSource");
+    source.hidden = !product.descriptionSource;
+    if (product.descriptionSource) source.href = product.descriptionSource;
+    else source.removeAttribute("href");
+  }
+  updateProductDescription();
   document.querySelector("#detailProductStock").textContent = `${product.stock} in stock`;
   document.querySelector("#detailProductPrice").innerHTML = product.originalPrice > product.price
     ? `<del>${money(product.originalPrice)}</del> ${money(product.price)}`
@@ -827,9 +1019,8 @@ function renderProductDetail() {
 
   document.querySelector("#componentProductImage").src = product.image;
   document.querySelector("#componentProductImage").alt = product.name;
-  document.querySelector("#componentOrbitCards").innerHTML = specifications.map(([icon, label, value]) => `
+  document.querySelector("#componentOrbitCards").innerHTML = specifications.map(([, label, value]) => `
     <article class="orbit-spec-card">
-      <span class="orbit-spec-icon" aria-hidden="true">${icon}</span>
       <strong>${label}</strong>
       <small>${value}</small>
     </article>
@@ -847,19 +1038,26 @@ function renderProductDetail() {
     const url = new URL(window.location.href);
     url.searchParams.set("variant", product.variantId);
     history.replaceState(null, "", url);
+    updateConfigureProductLink();
     document.title = `${product.name} | Bits and Bytes`;
     document.querySelector("#detailProductName").textContent = product.name;
+    document.querySelector("#detailBreadcrumb").textContent = product.name;
+    document.querySelector("#detailProductCategory").textContent = `${product.type} / ${product.use}`;
     productImage.src = product.image;
     productImage.alt = product.name;
     document.querySelector("#componentProductImage").src = product.image;
+    document.querySelector("#componentProductImage").alt = product.name;
     document.querySelector("#configSummaryImage").src = product.image;
+    document.querySelector("#configSummaryImage").alt = product.name;
     renderGallery();
-    document.querySelector("#detailProductPrice").textContent = money(product.price);
-    document.querySelector("#detailProductDescription").textContent = product.specs;
+    document.querySelector("#detailProductPrice").innerHTML = product.originalPrice > product.price
+      ? `<del>${money(product.originalPrice)}</del> ${money(product.price)}`
+      : money(product.price);
+    updateProductDescription();
     document.querySelector("#detailProductStock").textContent = `${product.stock} in stock`;
     document.querySelector("#configSummaryName").textContent = product.name;
     document.querySelector("#detailKeySpecs").innerHTML = specifications.slice(0, 4).map(([, label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`).join("");
-    document.querySelector("#componentOrbitCards").innerHTML = specifications.map(([icon, label, value]) => `<article class="orbit-spec-card"><span class="orbit-spec-icon" aria-hidden="true">${icon}</span><strong>${label}</strong><small>${value}</small></article>`).join("");
+    document.querySelector("#componentOrbitCards").innerHTML = specifications.map(([, label, value]) => `<article class="orbit-spec-card"><strong>${label}</strong><small>${value}</small></article>`).join("");
     updateConfigurationSummary();
   });
 
@@ -1003,25 +1201,12 @@ function wireStoreControls() {
       <label class="store-control" for="languageSelect">
         <span>Language</span>
         <select id="languageSelect">
-          <optgroup label="Asian Languages">
+          <optgroup label="Languages">
             <option value="en">English</option>
-            <option value="fil">Filipino - Coming soon</option>
-            <option value="ja">Japanese - Coming soon</option>
-            <option value="zh">Chinese - Coming soon</option>
-            <option value="ko">Korean - Coming soon</option>
-          </optgroup>
-          <optgroup label="European Languages">
-            <option value="es">Spanish - Coming soon</option>
-            <option value="fr">French - Coming soon</option>
-            <option value="de">German - Coming soon</option>
-          </optgroup>
-          <optgroup label="African Languages">
-            <option value="sw">Swahili - Coming soon</option>
-            <option value="zu">Zulu - Coming soon</option>
-          </optgroup>
-          <optgroup label="Middle Eastern Languages">
-            <option value="ar">Arabic - Coming soon</option>
-            <option value="tr">Turkish - Coming soon</option>
+            <option value="ja">日本語</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="zh">简体中文</option>
           </optgroup>
         </select>
       </label>
@@ -1030,6 +1215,9 @@ function wireStoreControls() {
         <select id="currencySelect">
           <option value="PHP">PHP (P)</option>
           <option value="USD">USD ($)</option>
+          <option value="JPY">JPY (¥)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="CNY">CNY (CN¥)</option>
         </select>
       </label>
       <a class="wishlist-pill" href="pages/wishlist.html" aria-label="Wishlist"><span class="wishlist-link-label">Wishlist</span> <span id="wishlistCount">0</span></a>
@@ -1039,22 +1227,28 @@ function wireStoreControls() {
 
   const languageSelect = document.querySelector("#languageSelect");
   const currencySelect = document.querySelector("#currencySelect");
-  const status = document.querySelector("#controlStatus");
 
   currencySelect.value = currencyPreference();
-  languageSelect.value = localStorage.getItem("bitsAndBytesLanguage") || "en";
+  languageSelect.value = typeof storeLanguage === "function" ? storeLanguage() : "en";
 
   languageSelect.addEventListener("change", () => {
     localStorage.setItem("bitsAndBytesLanguage", languageSelect.value);
-    status.textContent = languageSelect.value === "en"
-      ? "English is active."
-      : `${languageSelect.options[languageSelect.selectedIndex].text} is not available yet.`;
+    const localCurrency = { ja: "JPY", es: "EUR", fr: "EUR", zh: "CNY" }[languageSelect.value];
+    if (localCurrency) localStorage.setItem("bitsAndBytesCurrency", localCurrency);
+    window.location.reload();
   });
 
   currencySelect.addEventListener("change", () => {
     localStorage.setItem("bitsAndBytesCurrency", currencySelect.value);
     window.location.reload();
   });
+
+  if (currencyPreference() !== "PHP") {
+    const note = document.createElement("p");
+    note.className = "currency-notice";
+    note.textContent = "Converted prices are estimates. Checkout and payments are in PHP.";
+    document.querySelector("main")?.prepend(note);
+  }
 }
 
 function wireFoldableNavigation() {
@@ -1073,6 +1267,8 @@ function wireFoldableNavigation() {
     "pages/downloads.html": "Downloads",
     "pages/contact.html": "Contact",
     "pages/login.html": "Login",
+    "pages/tracking.html": "Track Order",
+    "pages/profile.html": "My account",
     "pages/cart.html": "Cart"
   };
   const linkMarkup = (href, extraClass = "") => {
@@ -1115,7 +1311,16 @@ function wireFoldableNavigation() {
       ${linkMarkup("index.html", "nav-home")}
       ${shopMarkup}
       ${groupMarkup("Explore", ["pages/components.html", "pages/about.html", "pages/downloads.html"])}
-      ${groupMarkup("Support", ["pages/contact.html", "pages/login.html"])}
+      ${groupMarkup("Support", ["pages/contact.html", "pages/tracking.html", "pages/profile.html", "pages/login.html"])}
+      <details class="nav-group nav-account">
+        <summary title="Your account"><img src="images/icons/user-round.svg" alt="" width="20" height="20"><span class="nav-account-greeting">My account</span></summary>
+        <div class="nav-submenu">
+          <a href="pages/profile.html">Manage my account</a><a href="pages/profile.html#orders">My purchases</a>
+          <a href="pages/profile.html#addresses">Address book</a><a href="pages/profile.html#tracking">Delivery tracking</a>
+          <a href="pages/profile.html#favorites">My favorites</a><a href="pages/profile.html#refunds">Returns &amp; refunds</a>
+          <button class="nav-account-signout" type="button" hidden>Sign out</button>
+        </div>
+      </details>
       ${linkMarkup("pages/cart.html", "cart-pill")}
     </div>
   `;
@@ -1137,6 +1342,41 @@ function wireFoldableNavigation() {
       });
     });
   });
+  nav.querySelector(".nav-account-signout").addEventListener("click", () => {
+    signOutStoreAccount();
+    nav.querySelector(".nav-account").open = false;
+    window.dispatchEvent(new Event("store-account-change"));
+  });
+  nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+    nav.querySelectorAll(".nav-group").forEach(group => { group.open = false; });
+    nav.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+  }));
+  document.addEventListener("pointerdown", event => {
+    nav.querySelectorAll(".nav-group").forEach(group => { if (!group.contains(event.target)) group.open = false; });
+  });
+
+  function updateNavigationHighlight() {
+    const current = new URL(window.location.href);
+    let pathname = current.pathname.endsWith("/") ? current.pathname + "index.html" : current.pathname;
+    pathname = pathname.replace(/\/product\.html$/, "/products.html");
+    const accountPage = /\/(profile|login|wishlist)\.html$/.test(pathname);
+    const hash = pathname.endsWith("/wishlist.html") ? "#favorites" : current.hash;
+    if (accountPage) pathname = pathname.replace(/\/(login|wishlist)\.html$/, "/profile.html");
+    const anchors = [...nav.querySelectorAll("a:not(.nav-brand):not(.mobile-store-brand):not(.cart-pill)")];
+    anchors.forEach(link => { link.classList.remove("active"); link.removeAttribute("aria-current"); });
+    nav.querySelectorAll(".nav-group").forEach(group => group.classList.remove("current"));
+    const matches = anchors.filter(link => new URL(link.href).pathname === pathname && (!accountPage || link.closest(".nav-account")));
+    const selected = matches.find(link => new URL(link.href).hash === hash) || matches.find(link => !new URL(link.href).hash);
+    if (selected) {
+      selected.classList.add("active");
+      selected.setAttribute("aria-current", new URL(selected.href).hash ? "location" : "page");
+      selected.closest(".nav-group")?.classList.add("current");
+    }
+    if (accountPage) nav.querySelector(".nav-account").classList.add("current");
+  }
+  window.addEventListener("hashchange", updateNavigationHighlight);
+  updateNavigationHighlight();
 
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
@@ -1507,6 +1747,8 @@ function wireStoreFooter() {
           <a href="pages/about.html">About Us</a>
           <a href="pages/terms.html">Terms of Use</a>
           <a href="pages/privacy.html">Privacy</a>
+          <a href="pages/tracking.html">Track Order</a>
+          <a href="pages/profile.html">My account</a>
           <a href="pages/warranty.html">Warranty Info</a>
           <a href="pages/downloads.html">Downloads</a>
           <a href="pages/contact.html">Contact Us</a>
@@ -1570,7 +1812,7 @@ function wireBuilderTools() {
   const search = document.querySelector("#buildSearch");
   const choices = document.querySelectorAll("[data-builder-choice]");
   const presets = {
-    student: { cooling: 0, cpu: 2, motherboard: 2, gpu: 0, ram: 0, storage: 0, psu: 0, case: 1, monitor: 0, keyboard: 0, accessories: 0 },
+    student: { cooling: 0, cpu: 2, motherboard: 3, gpu: 0, ram: 0, storage: 0, psu: 0, case: 1, monitor: 0, keyboard: 0, accessories: 0 },
     gaming: { cooling: 1, cpu: 0, motherboard: 0, gpu: 1, ram: 1, storage: 1, psu: 1, case: 0, monitor: 1, keyboard: 1, accessories: 2 },
     creator: { cooling: 1, cpu: 3, motherboard: 2, gpu: 2, ram: 2, storage: 2, psu: 2, case: 2, monitor: 2, keyboard: 2, accessories: 1 }
   };
@@ -1712,6 +1954,7 @@ function renderCart() {
     const cart = getCart();
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     document.querySelector("#cartTotal").textContent = money(total);
+    if (typeof updateCheckoutTotals === "function") updateCheckoutTotals();
     const checkout = document.getElementById("checkoutButton");
     if (checkout) checkout.disabled = cart.length === 0;
     if (!cart.length) document.getElementById("checkoutPanel").hidden = true;
@@ -1774,59 +2017,11 @@ function wireDeliveryCheckout() {
   const form = document.querySelector("#deliveryCheckoutForm");
   if (!checkoutButton || !checkoutPanel || !form) return;
 
-  const locations = {
-    "Metro Manila": {
-      "Quezon City": { barangays: ["Bagumbayan", "Commonwealth", "Holy Spirit"], postalCode: "1100" },
-      "Makati City": { barangays: ["Bel-Air", "Poblacion", "San Antonio"], postalCode: "1200" },
-      "Manila City": { barangays: ["Ermita", "Malate", "Sampaloc"], postalCode: "1000" }
-    },
-    "Cavite": {
-      "Bacoor City": { barangays: ["Alima", "Molino III", "Talaba VII"], postalCode: "4102" },
-      "Dasmarinas City": { barangays: ["Burol", "Paliparan I", "Salawag"], postalCode: "4114" }
-    },
-    "Cebu": {
-      "Cebu City": { barangays: ["Apas", "Lahug", "Mabolo"], postalCode: "6000" },
-      "Lapu-Lapu City": { barangays: ["Basak", "Maribago", "Pusok"], postalCode: "6015" }
-    },
-    "Iloilo": {
-      "Iloilo City": { barangays: ["Jaro", "Mandurriao", "Molo"], postalCode: "5000" },
-      "Pavia": { barangays: ["Agtabo", "Pagsanga-an", "Pandac"], postalCode: "5001" }
-    },
-    "Davao del Sur": {
-      "Davao City": { barangays: ["Buhangin", "Matina", "Talomo"], postalCode: "8000" },
-      "Digos City": { barangays: ["Aplaya", "Dawis", "San Jose"], postalCode: "8002" }
-    }
-  };
-
-  const provinceSelect = document.querySelector("#provinceSelect");
-  const citySelect = document.querySelector("#citySelect");
-  const barangaySelect = document.querySelector("#barangaySelect");
-  const postalCode = document.querySelector("#postalCode");
+  wirePhilippineAddress();
+  wireSavedCheckoutAddresses();
+  wireDeliveryRates();
   const paymentDetail = document.querySelector("#paymentDetail");
   const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
-
-  function setOptions(select, placeholder, values) {
-    select.innerHTML = `<option value="">${placeholder}</option>${values.map((value) => `<option value="${value}">${value}</option>`).join("")}`;
-  }
-
-  setOptions(provinceSelect, "Select province or region", Object.keys(locations));
-
-  provinceSelect.addEventListener("change", () => {
-    const cities = provinceSelect.value ? Object.keys(locations[provinceSelect.value]) : [];
-    setOptions(citySelect, "Select city or municipality", cities);
-    setOptions(barangaySelect, "Select city first", []);
-    citySelect.disabled = cities.length === 0;
-    barangaySelect.disabled = true;
-    postalCode.value = "";
-  });
-
-  citySelect.addEventListener("change", () => {
-    const selectedCity = locations[provinceSelect.value]?.[citySelect.value];
-    const barangays = selectedCity ? selectedCity.barangays : [];
-    setOptions(barangaySelect, "Select barangay", barangays);
-    barangaySelect.disabled = barangays.length === 0;
-    postalCode.value = selectedCity ? selectedCity.postalCode : "";
-  });
 
   function continueToCheckout() {
     if (getCart().length === 0) {
@@ -1920,7 +2115,7 @@ function wireDeliveryCheckout() {
             <input id="walletMobile" type="tel" autocomplete="tel" inputmode="numeric" maxlength="11" pattern="09[0-9]{9}" placeholder="0917 123 4567" required>
           </div>
         </div>
-        <p class="payment-security-note">A real store would redirect you to the selected wallet for secure authorization and OTP confirmation.</p>
+        <p class="payment-security-note">GCash includes a QR option at the next step. Sample verification does not charge your wallet or confirm a real transfer. Never share an OTP or wallet PIN.</p>
       `;
     } else {
       paymentDetail.innerHTML = `
@@ -1929,6 +2124,10 @@ function wireDeliveryCheckout() {
           <div><strong>Pay when your order arrives</strong><p>Prepare the exact amount or follow the courier's accepted payment instructions. Some high-value orders may require confirmation before dispatch.</p></div>
         </div>
       `;
+      if (selectedFulfillment() === "pickup") {
+        paymentDetail.querySelector("strong").textContent = "Pay when you collect your order";
+        paymentDetail.querySelector("p").textContent = "Payment remains due at collection. This sample pickup does not reserve a real store collection.";
+      }
     }
 
     wirePaymentDetailFields();
@@ -1988,24 +2187,31 @@ function wireDeliveryCheckout() {
       return;
     }
     if (!getCart().length) return;
-    const address = `${document.querySelector("#streetAddress").value}, ${barangaySelect.value}, ${citySelect.value}, ${provinceSelect.value} ${postalCode.value}`;
-    const method = document.querySelector('input[name="paymentMethod"]:checked')?.value;
-    const provider = document.querySelector('input[name="walletProvider"]:checked')?.value;
-    const cardDigits = document.querySelector("#cardNumber")?.value.replace(/\D/g, "");
-    const paymentText = provider ? `${method} (${provider})` : cardDigits ? `${method} ending in ${cardDigits.slice(-4)}` : method;
-    alert(`Order review ready for: ${address}\nPreferred payment method: ${paymentText}\nNo order has been sent and no payment has been taken.`);
+    if (!form.reportValidity()) return;
+    startSampleCheckout(form);
   });
 }
 
 // Local demo accounts only. Production authentication must be checked by a server.
 function getDemoAccounts() {
+  // A test login for this static store, never an administrator or a real account.
+  const sampleAccount = {
+    name: "John Carlo Herrera",
+    email: "jcherrera0723@gmail.com",
+    salt: "10028767bf40ff97b6294984b3db32f4",
+    passwordHash: "3423c1e4197be86b9ced8ecfd3bfb15bc7dc34b20047e96e94c31ba0a822d7a9"
+  };
+  let accounts = [];
   try {
-    const accounts = JSON.parse(localStorage.getItem("bitsAndBytesAccounts"));
-    return Array.isArray(accounts) ? accounts : [];
-  } catch { return []; }
+    const saved = JSON.parse(localStorage.getItem("bitsAndBytesAccounts"));
+    if (Array.isArray(saved)) accounts = saved.filter(account => account && typeof account.name === "string" && typeof account.email === "string" && typeof account.salt === "string" && typeof account.passwordHash === "string" && /^[a-f0-9]{64}$/i.test(account.passwordHash));
+  } catch { /* An unreadable local store still allows the test login. */ }
+  if (!accounts.some(account => account.email === sampleAccount.email)) accounts.push(sampleAccount);
+  return accounts;
 }
 
 function getSignedInUser() {
+  if (typeof storeDatabase !== "undefined" && storeDatabase.enabled) return storeDatabase.user;
   try {
     const email = sessionStorage.getItem("bitsAndBytesSignedInEmail");
     const account = getDemoAccounts().find((account) => account.email === email);
@@ -2021,15 +2227,28 @@ async function hashAccountPassword(password, salt) {
 }
 
 async function signInDemoAccount(email, password) {
+  if (typeof storeDatabase !== "undefined" && storeDatabase.enabled) {
+    await storeDatabase.ready;
+    await storeDatabase.authenticate("/api/login", { email, password });
+    adoptGuestWishlist();
+    return;
+  }
   const account = getDemoAccounts().find((account) => account.email === email.trim().toLowerCase());
   if (!account || await hashAccountPassword(password, account.salt) !== account.passwordHash) {
     throw new Error("Email or password is incorrect. Register first if you do not have an account on this device.");
   }
   sessionStorage.setItem("bitsAndBytesSignedInEmail", account.email);
+  adoptGuestWishlist();
   window.dispatchEvent(new Event("store-account-change"));
 }
 
 async function registerDemoAccount(name, email, password) {
+  if (typeof storeDatabase !== "undefined" && storeDatabase.enabled) {
+    await storeDatabase.ready;
+    await storeDatabase.authenticate("/api/register", { name, email, password });
+    adoptGuestWishlist();
+    return;
+  }
   const accounts = getDemoAccounts();
   email = email.trim().toLowerCase();
   if (!name.trim()) throw new Error("Please enter your name.");
@@ -2040,14 +2259,29 @@ async function registerDemoAccount(name, email, password) {
   accounts.push({ name: name.trim(), email, salt, passwordHash });
   localStorage.setItem("bitsAndBytesAccounts", JSON.stringify(accounts));
   sessionStorage.setItem("bitsAndBytesSignedInEmail", email);
+  adoptGuestWishlist();
   window.dispatchEvent(new Event("store-account-change"));
+}
+
+async function signOutStoreAccount() {
+  try {
+    if (typeof storeDatabase !== "undefined" && storeDatabase.enabled) await storeDatabase.signOut();
+    sessionStorage.removeItem("bitsAndBytesSignedInEmail");
+    window.dispatchEvent(new Event("store-account-change"));
+  } catch (error) { alert(error.message || "Could not sign out. Please try again."); }
 }
 
 function updateAccountState() {
   const user = getSignedInUser();
-  document.querySelectorAll('.foldable-nav a[href="pages/login.html"]').forEach((link) => {
-    link.textContent = user ? "My account" : "Login";
+  document.querySelectorAll(".nav-account-greeting").forEach(label => {
+    label.textContent = user ? "Hi, " + user.name : "My account";
+    label.closest("summary").title = user ? "Hi, " + user.name : "Your account";
   });
+  document.querySelectorAll(".nav-account-signout").forEach(button => { button.hidden = !user; });
+  document.querySelectorAll('.foldable-nav a[href="pages/login.html"]').forEach((link) => {
+    link.textContent = user ? "Sign-in details" : "Login";
+  });
+  updateWishlistCount();
   const accountPanel = document.getElementById("signedInAccount");
   if (accountPanel) {
     accountPanel.hidden = !user;
@@ -2085,6 +2319,7 @@ function openAccountDialog(mode = "login", onSuccess) {
     </form>
     <p class="account-demo-note">Your account is saved on this device. Use a password unique to this store.</p>`;
   document.body.appendChild(dialog);
+  if (typeof storeDatabase !== "undefined" && storeDatabase.enabled) dialog.querySelector(".account-demo-note").textContent = "Your account and address book are saved in the store database. Use a password unique to this store.";
   const form = dialog.querySelector("form");
   const password = dialog.querySelector("#accountPassword");
   const confirm = dialog.querySelector("#accountConfirm");
@@ -2179,7 +2414,7 @@ function wireLoginForm() {
 
   document.getElementById("openRegistration").addEventListener("click", () => openAccountDialog("register"));
   document.getElementById("signOutAccount").addEventListener("click", () => {
-    sessionStorage.removeItem("bitsAndBytesSignedInEmail");
+    signOutStoreAccount();
     password.value = "";
     message.textContent = "You have signed out. Your cart is still saved on this device.";
     window.dispatchEvent(new Event("store-account-change"));
@@ -2326,6 +2561,7 @@ function wirePeripheralForm() {
 
 wireFoldableNavigation();
 wireStoreControls();
+if (typeof wireStorePickers === "function") wireStorePickers();
 wireStickyStoreHeader();
 wireHomeVideo();
 wireBackgroundMusic();
@@ -2337,6 +2573,7 @@ document.addEventListener("DOMContentLoaded", wireStoreFooter);
 updateCartCount();
 updateWishlistCount();
 wireQuickOrder();
+wireColorSwatches();
 renderFeaturedProducts();
 renderProductsPage();
 wireMobileFilters();
@@ -2345,6 +2582,7 @@ renderWishlist();
 renderBuilder();
 renderCart();
 wireDeliveryCheckout();
+wireDeliveryMap();
 wireLoginForm();
 window.addEventListener("store-account-change", updateAccountState);
 updateAccountState();

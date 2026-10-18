@@ -12,7 +12,7 @@ const { chromium } = require('./browser.cjs');
     await page.route(/^https?:/, route => route.abort());
     await page.goto(pathToFileURL(path.resolve(__dirname, '../pages/terms.html')).href);
     assert.equal(await page.locator('.policy-sections section').count(), 12);
-    assert.match(await page.locator('#orders').textContent(), /does not send an order, charge a card, or transfer money/);
+    assert.match(await page.locator('#orders').textContent(), /does not send an order to a merchant or courier, charge a card, or transfer money/);
     assert.match(await page.locator('#returns').textContent(), /repair, replacement, or refund/);
     assert.match(await page.locator('#updates').textContent(), /Nothing in these terms limits rights/);
     for (const width of [1440, 768, 390, 320]) {

@@ -26,7 +26,7 @@ for (const file of fs.readdirSync(path.join(root, 'css'))) {
   const css = fs.readFileSync(path.join(root, 'css', file), 'utf8');
   for (const match of css.matchAll(/url\(["']?([^"')]+)["']?\)/g)) checkReference(match[1], path.join(root, 'css'), 'css/' + file);
 }
-for (const file of fs.readdirSync(path.join(root, 'js'))) {
+for (const file of fs.readdirSync(path.join(root, 'js')).filter(file => file.endsWith('.js'))) {
   const js = fs.readFileSync(path.join(root, 'js', file), 'utf8');
   for (const match of js.matchAll(/["'`]((?:images|pages|downloads|audio)\/[^"'`<>]+)["'`]/g)) {
     if (match[1] !== 'images/...') checkReference(match[1], root, 'js/' + file);

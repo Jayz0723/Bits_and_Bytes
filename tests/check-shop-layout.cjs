@@ -12,6 +12,7 @@ const { chromium } = require('./browser.cjs');
     const page = await browser.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
+    await page.route('https://**/*', route => route.abort());
     await page.route('http://shop.test/**', route => {
       const file = path.resolve(root, decodeURIComponent(new URL(route.request().url()).pathname.slice(1)));
       if (!file.startsWith(root + path.sep) || !fs.existsSync(file)) {
@@ -21,6 +22,7 @@ const { chromium } = require('./browser.cjs');
       return route.fulfill({ body: fs.readFileSync(file), contentType: types[path.extname(file)] || 'application/octet-stream' });
     });
     for (const [index, width] of [1440, 390, 320].entries()) {
+      console.log('Checking catalog layout at ' + width + 'px');
       await page.setViewportSize({ width, height: 1000 });
       await page.goto('http://shop.test/pages/products.html');
       await page.locator('.product-card').first().waitFor();
@@ -38,6 +40,7 @@ const { chromium } = require('./browser.cjs');
       }
       const brokenImages = await page.evaluate(async () => {
         const images = [...document.querySelectorAll('.product-card img')];
+        images.forEach(image => { image.loading = 'eager'; });
         return (await Promise.all(images.map(async image => {
           try { await image.decode(); return null; } catch { return image.src; }
         }))).filter(Boolean);
@@ -90,13 +93,14 @@ const { chromium } = require('./browser.cjs');
     assert.equal(await page.evaluate(() => getCart().find(item => item.variantId === '64gb').price), 12995);
     await page.keyboard.press('Escape');
     for (const productId of ['part-ram-32gb-ddr5', 'part-kingston-fury-32', 'part-ssd-1tb-nvme', 'part-ssd-kingston-kc600']) {
+      console.log('Checking capacity photos: ' + productId);
       const card = page.locator('[data-product-id="' + productId + '"]');
       const variants = await page.evaluate(id => catalogProducts().find(item => item.id === id).variants.options, productId);
       for (const variant of variants) {
         await card.locator('select').selectOption(variant.id);
         assert.equal(await card.locator('img').getAttribute('src'), variant.image);
         assert.ok((await card.locator('.product-photo-capacity').innerText()).startsWith(variant.label));
-        await card.locator('img').evaluate(image => image.decode());
+        await card.locator('img').evaluate(image => { image.loading = 'eager'; return image.decode(); });
       }
     }
     await page.locator('#computer-parts').scrollIntoViewIfNeeded();
@@ -129,7 +133,7 @@ const { chromium } = require('./browser.cjs');
     await page.goto('http://shop.test/pages/product.html?id=part-corsair-psu-850&variant=650w');
     await page.selectOption('#detailVariant', '1000w');
     assert.ok((await page.locator('#detailProductImage').getAttribute('src')).endsWith('corsair-rm1000e.webp'));
-    await page.locator('#detailProductImage').evaluate(image => image.decode());
+    await page.locator('#detailProductImage').evaluate(image => { image.loading = 'eager'; return image.decode(); });
     // Audit every catalog item and capacity, not just the first visible row.
     await page.goto('http://shop.test/pages/products.html');
     const cases = await page.evaluate(() => catalogProducts().flatMap(base =>
@@ -137,6 +141,7 @@ const { chromium } = require('./browser.cjs');
         .map(product => ({ id: base.id, variant: product.variantId, name: product.name, brand: product.brand, image: product.image, gallery: productGallery(product) }))
     ));
     for (const item of cases) {
+      console.log('Checking gallery: ' + item.id + (item.variant ? ' / ' + item.variant : ''));
       assert.ok(!/Bits and Bytes|ViewMax|KeyLite|SwiftClick/.test(item.brand), item.name + ': real brand');
       assert.ok(item.gallery.length >= 2, item.name + ': useful alternative view');
       for (const photo of [{ src: item.image }, ...item.gallery]) {
@@ -145,11 +150,11 @@ const { chromium } = require('./browser.cjs');
       }
       await page.goto('http://shop.test/pages/product.html?id=' + item.id + (item.variant ? '&variant=' + item.variant : ''));
       assert.equal(await page.locator('#detailProductImage').getAttribute('src'), item.image);
-      await page.locator('#detailProductImage').evaluate(image => image.decode());
+      await page.locator('#detailProductImage').evaluate(image => { image.loading = 'eager'; return image.decode(); });
       for (const [index, photo] of item.gallery.entries()) {
         await page.locator('#productGalleryThumbnails button').nth(index).click();
         assert.equal(await page.locator('#detailProductImage').getAttribute('src'), photo.src);
-        await page.locator('#detailProductImage').evaluate(image => image.decode());
+        await page.locator('#detailProductImage').evaluate(image => { image.loading = 'eager'; return image.decode(); });
         const zoom = await page.locator('#detailProductImage').evaluate(image => image.style.transform);
         assert.equal(zoom, 'scale(' + (photo.zoom || 1) + ')');
       }
@@ -176,7 +181,7 @@ const { chromium } = require('./browser.cjs');
     await page.goto('http://shop.test/pages/product.html?id=part-cooler-master-240');
     await page.locator('#productGalleryThumbnails button').nth(1).click();
     assert.ok((await page.locator('#detailProductImage').getAttribute('src')).endsWith('cooler-master-ml240l-side.png'));
-    await page.locator('#detailProductImage').evaluate(image => image.decode());
+    await page.locator('#detailProductImage').evaluate(image => { image.loading = 'eager'; return image.decode(); });
     const mapped = await page.evaluate(() => catalogProducts().find(product => product.id === 'part-cpu-i5-14600k').image);
     assert.equal(mapped, 'images/products/intel-core-i5-14600k-cutout.png');
     for (const file of ['index.html', 'pages/build.html', 'pages/components.html', 'pages/about.html', 'pages/contact.html', 'pages/cart.html', 'pages/wishlist.html', 'pages/login.html']) {

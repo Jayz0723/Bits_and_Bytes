@@ -1,0 +1,7 @@
+{
+  "name": "bits-and-bytes",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": { "start": "node server.cjs", "test:database": "node tests/check-database.cjs" },
+  "engines": { "node": ">=24" }
+}

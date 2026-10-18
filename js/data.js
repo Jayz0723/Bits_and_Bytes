@@ -159,6 +159,7 @@ const productVariants = {
         "price": 29995,
         "stock": 6,
         "name": "ASUS ProArt PA329CV",
+        "use": "Creator",
         "specs": "32-inch 4K IPS display, 60Hz refresh rate",
         "image": "images/products/asus-pa329cv.png",
         "gallery": [
@@ -1165,3 +1166,57 @@ const componentInfo = {
     tip: "Wireless is clean, but wired is simple and reliable."
   }
 };
+
+// Color options only include finishes with matching photographs. Do not mix galleries.
+function addProductColorOptions(productId, familyName, defaultId, colors) {
+  const base = { ...products.find(product => product.id === productId), ...productMedia[productId] };
+  productVariants[productId] = {
+    kind: "color", label: "Color", defaultId,
+    options: colors.map(color => {
+      const image = color.image || base.image;
+      const gallery = color.gallery || (color.id === defaultId ? base.gallery : undefined) || [{ src: image, label: familyName + " " + color.label + " main view", shortLabel: "Main" }];
+      return { ...color, image, gallery, color: color.label, name: familyName + " - " + color.label, price: base.price, stock: base.stock, specs: base.specs.replace(/, black finish/i, "") + ", Color: " + color.label };
+    })
+  };
+}
+
+addProductColorOptions("lap-apple-creator", "Apple MacBook Air 13-inch M3", "midnight", [
+  { id: "midnight", label: "Midnight", swatches: ["#303b49"] },
+  ...[
+    ["silver", "Silver", "#d5d7d8"],
+    ["spacegray", "Space Gray", "#7c7e80"],
+    ["starlight", "Starlight", "#e4d7c2"]
+  ].map(([id, label, color]) => ({
+    id, label, swatches: [color], image: `images/products/colors/mba13-m3-${id}-main.png`,
+    gallery: [
+      { src: `images/products/colors/mba13-m3-${id}-main.png`, label: `MacBook Air M3 ${label} front view`, shortLabel: "Front" },
+      { src: `images/products/colors/mba13-m3-${id}-lid.png`, label: `MacBook Air M3 ${label} closed lid`, shortLabel: "Lid" },
+      { src: `images/products/colors/mba13-m3-${id}-side.png`, label: `MacBook Air M3 ${label} side profiles`, shortLabel: "Side" },
+      { src: `images/products/colors/mba13-m3-${id}-ports.png`, label: `MacBook Air M3 ${label} connections`, shortLabel: "Ports" }
+    ]
+  }))
+]);
+
+for (const model of ["3000d", "4000d"]) {
+  addProductColorOptions("part-corsair-" + model, "Corsair " + model.toUpperCase() + " AIRFLOW", "black", [
+    { id: "black", label: "Black", swatches: ["#24282b"] },
+    { id: "white", label: "White", swatches: ["#eeeeee"], image: `images/products/colors/corsair-${model}-white-1.webp`,
+      gallery: [1, 2, 4].map((number, index) => ({ src: `images/products/colors/corsair-${model}-white-${number}.webp`, label: `Corsair ${model.toUpperCase()} AIRFLOW White manufacturer view ${index + 1}`, shortLabel: ["Main", "Front", "Side"][index] })) }
+  ]);
+}
+
+addProductColorOptions("accessory-logitech-g435", "Logitech G435 LIGHTSPEED", "black", [
+  { id: "black", label: "Black and Neon Yellow", swatches: ["#24272b", "#d7ee2d"] },
+  { id: "blue", label: "Blue and Raspberry", swatches: ["#126794", "#d52f85"], image: "images/products/colors/g435-blue-main.jpg" },
+  { id: "white", label: "Off-White and Lilac", swatches: ["#ebece6", "#9197bf"], image: "images/products/colors/g435-white-clean.png" }
+]);
+
+addProductColorOptions("mouse-wireless", "Logitech MX Master 3S", "palegray", [
+  { id: "palegray", label: "Pale Gray", swatches: ["#d9d9d4"] },
+  { id: "graphite", label: "Graphite", swatches: ["#3d4145"], image: "images/products/colors/mx3s-graphite-top.png",
+    gallery: [
+      { src: "images/products/colors/mx3s-graphite-top.png", label: "MX Master 3S Graphite top view", shortLabel: "Top" },
+      { src: "images/products/colors/mx3s-graphite-side-view.png", label: "MX Master 3S Graphite thumb-wheel side", shortLabel: "Side" },
+      { src: "images/products/colors/mx3s-graphite-front-view.png", label: "MX Master 3S Graphite front view", shortLabel: "Front" }
+    ] }
+]);
