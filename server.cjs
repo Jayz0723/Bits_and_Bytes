@@ -7,12 +7,14 @@ const { promisify } = require('node:util');
 const { DatabaseSync } = require('node:sqlite');
 const { validInternationalAddress } = require('./js/international.js');
 const { createMapService } = require('./map-service.cjs');
+const { createChatService } = require('./chat-service.cjs');
 const pbkdf2 = promisify(crypto.pbkdf2);
 const root = __dirname;
 if (fs.existsSync(path.join(root, '.env'))) process.loadEnvFile(path.join(root, '.env'));
 
-function createStoreServer(databaseFile = path.join(root, 'data/store.sqlite')) {
+function createStoreServer(databaseFile = path.join(root, 'data/store.sqlite'), options = {}) {
   const reverseMapAddress = createMapService();
+  const chat = createChatService(options.chat);
   if (databaseFile !== ':memory:') fs.mkdirSync(path.dirname(databaseFile), { recursive: true });
   const db = new DatabaseSync(databaseFile);
   db.exec(`PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL;
@@ -76,6 +78,7 @@ function createStoreServer(databaseFile = path.join(root, 'data/store.sqlite')) 
           if (!req.headers['content-type']?.startsWith('application/json')) throw fail('JSON required.', 415);
         }
         const user = account(req);
+        if (pathname === '/api/chat' && req.method === 'POST') return reply(200, await chat(await readBody(req), req.socket.remoteAddress));
         if (pathname === '/api/map-config' && req.method === 'GET') return reply(200, { tileUrl: process.env.MAP_TILE_URL || 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', attribution: process.env.MAP_TILE_ATTRIBUTION || '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' });
         if (pathname === '/api/session' && req.method === 'GET') return reply(200, payload(user));
         if (['/api/login', '/api/register'].includes(pathname) && req.method === 'POST') {

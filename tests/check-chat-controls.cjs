@@ -42,7 +42,7 @@ const overlaps = (a, b) => a.x < b.x + b.width && a.x + a.width > b.x && a.y < b
       assert.equal(await launcher.getAttribute('aria-expanded'), 'true');
       await page.fill('#supportChatInput', 'Help me choose a laptop');
       await page.locator('#supportChatForm').getByRole('button', { name: 'Send', exact: true }).click();
-      assert.match(await page.locator('#supportChatMessages').textContent(), /Build Your Own PC/);
+      assert.match(await page.locator('#supportChatMessages').textContent(), /AI chat needs the store server/);
       await page.locator('#supportChatInput').press('Escape');
       assert.ok(await page.locator('#supportChatPanel').isHidden());
       assert.equal(await launcher.evaluate(node => document.activeElement === node), true);

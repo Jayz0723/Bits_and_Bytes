@@ -1652,7 +1652,7 @@ function wireSupportChat() {
           <button class="support-chat-close" id="supportChatClose" type="button" aria-label="Close customer service chat">Close</button>
         </header>
         <div class="support-chat-messages" id="supportChatMessages" aria-live="polite">
-          <p class="support-message agent">Hello. Ask about products, delivery, a custom PC build, or payment options.</p>
+          <p class="support-message agent">Hello. I'm your AI shopping assistant. Ask about products, delivery, a custom PC build, or payment options. Messages are sent to OpenAI; please don't share sensitive information.</p>
         </div>
         <div class="support-chat-topics" aria-label="Common questions">
           <button type="button" data-chat-topic="Where is my order?">Order status</button>
@@ -1661,7 +1661,7 @@ function wireSupportChat() {
         </div>
         <form class="support-chat-form" id="supportChatForm">
           <label class="sr-only" for="supportChatInput">Your message</label>
-          <input id="supportChatInput" type="text" placeholder="Type your question" autocomplete="off" required>
+          <input id="supportChatInput" type="text" placeholder="Type your question" autocomplete="off" maxlength="2000" required>
           <button type="submit">Send</button>
         </form>
       </section>
@@ -1734,15 +1734,47 @@ function wireSupportChat() {
     message.textContent = text;
     messages.append(message);
     messages.scrollTop = messages.scrollHeight;
+    return message;
   }
 
-  function respond(message) {
-    const normalized = message.toLowerCase();
-    let reply = "Thanks for your message. This store assistant can point you to products, build advice, and support.";
-    if (normalized.includes("order") || normalized.includes("deliver")) reply = "For delivery details, open Cart and continue to checkout. You can choose your province, city, and barangay there.";
-    if (normalized.includes("payment") || normalized.includes("gcash") || normalized.includes("maya")) reply = "At checkout, you can choose Cash on Delivery, card payment, GCash, or Maya.";
-    if (normalized.includes("pc") || normalized.includes("build") || normalized.includes("laptop")) reply = "For recommendations, browse Products or use Build Your Own PC to check compatible parts.";
-    appendMessage("agent", reply);
+  let pending = false;
+  let history = [];
+  async function respond(message) {
+    if (pending || !message || message.length > 2000) return;
+    appendMessage("visitor", message);
+    if (!/^https?:$/.test(location.protocol)) {
+      appendMessage("agent", "AI chat needs the store server. Open http://localhost:4173/ to chat, or contact support.");
+      return;
+    }
+    pending = true;
+    const controls = [form.querySelector("button"), ...panel.querySelectorAll("[data-chat-topic]")];
+    controls.forEach(control => { control.disabled = true; });
+    const indicator = appendMessage("agent", "Thinking...");
+    messages.setAttribute("aria-busy", "true");
+    const conversation = [...history.slice(-8), { role: "user", content: message }];
+    while (conversation.reduce((size, entry) => size + entry.content.length, 0) > 12000) conversation.splice(0, 2);
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: conversation }), signal: AbortSignal.timeout(35000)
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || "AI chat is unavailable. Open the store through its server or contact support.");
+      if (typeof data.reply !== "string" || !data.reply.trim()) throw new Error("The AI returned an empty reply. Please try again.");
+      indicator.textContent = data.reply;
+      history = [...conversation, { role: "assistant", content: data.reply.slice(0, 2000) }];
+    } catch (error) {
+      indicator.textContent = error.name === "TimeoutError" || error.name === "AbortError"
+        ? "The AI took too long to reply. Please try again."
+        : error instanceof TypeError ? "Cannot reach chat. Check your connection and try again." : error.message;
+      if (!input.value) input.value = message;
+    } finally {
+      pending = false;
+      indicator.classList.add("chat-reply");
+      controls.forEach(control => { control.disabled = false; });
+      messages.removeAttribute("aria-busy");
+      messages.scrollTop = messages.scrollHeight;
+    }
   }
 
   launcher.addEventListener("click", () => setOpen(panel.hidden));
@@ -1753,15 +1785,13 @@ function wireSupportChat() {
   document.querySelectorAll("[data-chat-topic]").forEach((button) => {
     button.addEventListener("click", () => {
       const question = button.dataset.chatTopic;
-      appendMessage("visitor", question);
       respond(question);
     });
   });
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const message = input.value.trim();
-    if (!message) return;
-    appendMessage("visitor", message);
+    if (!message || pending) return;
     input.value = "";
     respond(message);
   });

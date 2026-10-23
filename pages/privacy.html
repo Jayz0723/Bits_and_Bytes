@@ -42,7 +42,7 @@
       </section>
       <section>
         <h2>Support messages and photos</h2>
-        <p>The contact form prepares a message in the page for you to review; it does not send it automatically. Selected photos are previewed locally and are not uploaded by the form. The store chat provides automated guidance within the page, not a live conversation with a support agent. Information you choose to send through an external social platform is handled by that platform.</p>
+        <p>The contact form prepares a message in the page for you to review; it does not send it automatically. Selected photos are previewed locally and are not uploaded by the form. The store chat is an AI assistant, not a live support agent. When you send a chat message, the server sends that message and a limited recent conversation history to OpenAI to generate a reply. Chat history stays in page memory and is cleared on reload; it is not saved in the store database. Requests use OpenAI's store:false option, but OpenAI's applicable service retention and privacy terms still apply. The store does not automatically include account details, addresses, passwords or orders in AI requests. Do not type sensitive information into chat. Information you choose to send through an external social platform is handled by that platform.</p>
       </section>
       <section>
         <h2>Checkout details</h2>
@@ -71,6 +71,6 @@
   <script src="js/data.js?v=20261017-descriptions-v14"></script>
   <script src="js/localization.js?v=20261017-feedback-v2"></script>
   <script src="js/product-descriptions.js?v=20261017-descriptions-v1"></script>
-  <script src="js/app.js?v=20261023-voucher-footer-v13"></script>
+  <script src="js/app.js?v=20261024-ai-chat-v14"></script>
 </body>
 </html>
