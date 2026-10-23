@@ -1480,6 +1480,9 @@ function wireBackgroundMusic() {
   const audio = document.querySelector("#backgroundMusic");
   const button = document.querySelector("#musicToggle");
   if (!audio || !button) return;
+  // Keep the existing audio and playback preferences; only move its control.
+  const nav = document.querySelector(".sticky-site-nav .foldable-nav");
+  if (nav) nav.append(button.closest(".background-music"));
   const preferenceKey = "bits-bytes-music";
   let enabled = true;
   try { enabled = localStorage.getItem(preferenceKey) !== "off"; } catch {}
@@ -1662,7 +1665,15 @@ function wireSupportChat() {
           <button type="submit">Send</button>
         </form>
       </section>
-      <button class="support-chat-launcher" id="supportChatLauncher" type="button" aria-label="Chat with us" title="Chat with us" aria-expanded="false" aria-controls="supportChatPanel"><span class="chat-launcher-icon" aria-hidden="true"></span><span class="chat-launcher-label">Chat with us</span></button>
+      <div class="support-chat-nudge" id="supportChatNudge" role="status" hidden>
+        <p id="supportChatNudgeText"></p>
+        <button id="dismissChatNudge" type="button" aria-label="Dismiss chat message" title="Dismiss message"><img src="images/icons/x.svg" width="16" height="16" alt=""></button>
+      </div>
+      <button class="support-chat-launcher" id="supportChatLauncher" type="button" aria-label="Chat with us" title="Chat with us" aria-expanded="false" aria-controls="supportChatPanel">
+        <img class="chat-robot-normal" src="images/branding/support-robot-normal.png" width="64" height="64" alt="">
+        <img class="chat-robot-hover" src="images/branding/support-robot-hover.png" width="64" height="64" alt="">
+        <span class="chat-notification-dot" aria-hidden="true"></span>
+      </button>
     </aside>
   `);
 
@@ -1672,11 +1683,41 @@ function wireSupportChat() {
   const form = document.querySelector("#supportChatForm");
   const input = document.querySelector("#supportChatInput");
   const messages = document.querySelector("#supportChatMessages");
+  const nudge = document.querySelector("#supportChatNudge");
+  const nudgeKey = "bitsAndBytesChatWelcomeSeen";
+  let welcomeTimer, dismissTimer;
+
+  function dismissNudge() {
+    clearTimeout(welcomeTimer);
+    clearTimeout(dismissTimer);
+    nudge.hidden = true;
+    launcher.classList.remove("has-notification");
+    try { sessionStorage.setItem(nudgeKey, "yes"); } catch { /* Chat remains usable without browser storage. */ }
+  }
+  let welcomeSeen = false;
+  try { welcomeSeen = sessionStorage.getItem(nudgeKey) === "yes"; } catch {}
+  if (!welcomeSeen) {
+    welcomeTimer = setTimeout(() => {
+      if (!panel.hidden || document.querySelector("dialog[open]")) return;
+      const onSupportPage = /contact|warranty|support/.test(location.pathname);
+      document.querySelector("#supportChatNudgeText").textContent = onSupportPage
+        ? "Need a hand? Ask about your order, delivery, or payment anytime."
+        : "Hi! Looking for a PC, laptop, or the right upgrade? Ask me anytime.";
+      nudge.hidden = false;
+      launcher.classList.add("has-notification");
+      try { sessionStorage.setItem(nudgeKey, "yes"); } catch {}
+      dismissTimer = setTimeout(dismissNudge, 12000);
+    }, 1800);
+  }
+  document.querySelector("#dismissChatNudge").addEventListener("click", () => {
+    dismissNudge();
+    launcher.focus();
+  });
 
   function setOpen(open) {
     panel.hidden = !open;
     launcher.setAttribute("aria-expanded", String(open));
-    launcher.querySelector(".chat-launcher-label").textContent = open ? "Close chat" : "Chat with us";
+    if (open) dismissNudge();
     launcher.setAttribute("aria-label", open ? "Close chat" : "Chat with us");
     launcher.title = open ? "Close chat" : "Chat with us";
     if (open) input.focus();
@@ -1700,7 +1741,10 @@ function wireSupportChat() {
   }
 
   launcher.addEventListener("click", () => setOpen(panel.hidden));
-  close.addEventListener("click", () => setOpen(false));
+  close.addEventListener("click", () => { setOpen(false); launcher.focus(); });
+  panel.addEventListener("keydown", event => {
+    if (event.key === "Escape") { setOpen(false); launcher.focus(); }
+  });
   document.querySelectorAll("[data-chat-topic]").forEach((button) => {
     button.addEventListener("click", () => {
       const question = button.dataset.chatTopic;
