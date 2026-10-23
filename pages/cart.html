@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/storefront.css?v=20261023-chat-nav-v18">
-  <link rel="stylesheet" href="css/checkout-flow.css?v=20261017-google-preview-v7">
+  <link rel="stylesheet" href="css/storefront.css?v=20261023-voucher-footer-v19">
+  <link rel="stylesheet" href="css/checkout-flow.css?v=20261023-vouchers-v8">
   <link rel="stylesheet" href="css/receipts.css?v=20261017-receipts-v1">
 </head>
 <body class="utility-page">
@@ -49,6 +49,15 @@
           <span>Items subtotal</span>
           <strong id="cartTotal">PHP 0</strong>
         </div>
+        <form id="voucherForm" class="voucher-form" novalidate>
+          <label for="voucherCode">Promo code or voucher</label>
+          <div class="voucher-entry"><input id="voucherCode" name="voucher" type="text" maxlength="24" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Enter code" aria-describedby="voucherStatus"><button class="button secondary" type="submit">Apply</button></div>
+          <p id="voucherStatus" class="voucher-status" role="status"></p>
+          <div id="activeVoucher" class="active-voucher" hidden><strong id="activeVoucherCode"></strong><button id="removeVoucher" type="button" aria-label="Remove voucher" title="Remove voucher"><img src="images/icons/x.svg" alt="" width="16" height="16"></button></div>
+          <details class="voucher-offers"><summary>Available offers</summary><p><strong>WELCOME10</strong>: 10% off items from PHP 5,000, up to PHP 1,500.</p><p><strong>SAVE500</strong>: PHP 500 off items from PHP 10,000.</p><p>One voucher per order. Delivery fees are excluded.</p></details>
+        </form>
+        <div class="total-row voucher-discount" id="cartDiscountRow" hidden><span>Voucher discount</span><strong id="cartDiscount"></strong></div>
+        <div class="total-row"><span>Items total</span><strong id="cartDiscountedTotal">PHP 0</strong></div>
         <p class="form-note">Delivery fees are shown at checkout before you confirm.</p>
         <button class="button primary full-width" id="checkoutButton" type="button">Continue to Delivery</button>
         <button class="button secondary full-width" id="clearCart" type="button">Clear Cart</button>
@@ -168,7 +177,7 @@
           <p class="form-note">Sample delivery fees. No courier is booked and no arrival date is guaranteed.</p>
         </fieldset>
         <p id="overseasShippingNote" class="overseas-shipping-note" hidden>Overseas shipping includes an additional destination charge. Import duties and taxes are not included. These are configured estimates; carrier availability and final costs must be confirmed. Cash on delivery is available only within the Philippines.</p>
-        <dl class="checkout-costs" aria-live="polite"><div><dt>Items subtotal</dt><dd id="checkoutSubtotal"></dd></div><div><dt id="checkoutDeliveryLabel">Standard delivery</dt><dd id="checkoutDeliveryFee"></dd></div><div hidden><dt>Overseas destination charge</dt><dd id="checkoutOverseasFee"></dd></div><div class="checkout-grand-total"><dt>Total (PHP)</dt><dd id="checkoutGrandTotal"></dd></div></dl>
+        <dl class="checkout-costs" aria-live="polite"><div><dt>Items subtotal</dt><dd id="checkoutSubtotal"></dd></div><div class="voucher-discount" id="checkoutDiscountRow" hidden><dt>Voucher discount</dt><dd id="checkoutDiscount"></dd></div><div><dt id="checkoutDeliveryLabel">Standard delivery</dt><dd id="checkoutDeliveryFee"></dd></div><div hidden><dt>Overseas destination charge</dt><dd id="checkoutOverseasFee"></dd></div><div class="checkout-grand-total"><dt>Total (PHP)</dt><dd id="checkoutGrandTotal"></dd></div></dl>
         <fieldset class="payment-methods">
           <legend>Payment method</legend>
           <label class="payment-option">
@@ -214,12 +223,13 @@
   <script src="js/addresses.js?v=20261017-overseas-v4"></script>
   <script src="js/address-book.js?v=20261017-overseas-v4"></script>
   <script src="js/vendor/qrcode.js"></script>
-  <script src="js/orders.js?v=20261017-receipts-v5"></script>
-  <script src="js/receipts.js?v=20261017-receipts-v1"></script>
-  <script src="js/checkout-flow.js?v=20261017-receipts-v5"></script>
+  <script src="js/vouchers.js?v=20261023-vouchers-v1"></script>
+  <script src="js/orders.js?v=20261023-vouchers-v6"></script>
+  <script src="js/receipts.js?v=20261023-vouchers-v2"></script>
+  <script src="js/checkout-flow.js?v=20261023-vouchers-v6"></script>
   <script src="js/localization.js?v=20261017-feedback-v2"></script>
   <script src="js/product-descriptions.js?v=20261017-descriptions-v1"></script>
-  <script src="js/app.js?v=20261023-chat-nav-v12"></script>
+  <script src="js/app.js?v=20261023-voucher-footer-v13"></script>
   <script src="js/location-picker.js?v=20261017-google-preview-v4"></script>
 </body>
 </html>

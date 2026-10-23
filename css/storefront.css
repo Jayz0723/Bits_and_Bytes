@@ -530,6 +530,34 @@ body .account-shell .account-navigation a, body .account-shell .saved-address p,
 body .address-book-dialog input, body .address-book-dialog select, body .address-book-dialog textarea { font-size: 16px; min-height: 44px; }
 body .address-book-dialog input[type="checkbox"] { min-height: 0; }
 /* One compact chat launcher stays clear of navigation controls and shopping feedback. */
+.site-footer[data-store-footer="ready"] { padding-bottom: 104px; }
+.site-footer .footer-main { min-height: 0; padding-bottom: 32px; gap: 28px; }
+.site-footer .footer-main > section { padding-left: 24px; border-left: 1px solid #34444b; }
+.site-footer .footer-bottom { grid-template-columns: minmax(0, 1fr) auto; gap: 24px; padding-block: 24px; }
+.site-footer .footer-bottom nav { gap: 12px 0; }
+.site-footer .footer-bottom nav a { padding-inline: 14px; border-left: 1px solid #3b4d56; font-size: 13px; font-weight: 500; line-height: 1.6; }
+.site-footer .footer-bottom nav a:first-child { padding-left: 0; border-left: 0; }
+.footer-legal { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: 18px 28px; padding-top: 20px; border-top: 1px solid #34444b; }
+.site-footer .footer-legal p { margin: 0; color: #aebfc7; font-size: 13px; line-height: 1.7; }
+.footer-legal nav { display: flex; gap: 0; }
+.footer-legal nav a { padding-inline: 16px; font-size: 13px; line-height: 1.7; }
+.footer-legal nav a:first-child { padding-left: 0; }
+.footer-legal nav a + a { border-left: 1px solid #3b4d56; }
+.site-footer a:not(.social-icon):not(.footer-brand) { position: relative; text-decoration: none; }
+.site-footer a:not(.social-icon):not(.footer-brand)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: var(--teal); transform: scaleX(0); transform-origin: left center; transition: transform 220ms ease; pointer-events: none; }
+.site-footer a:not(.social-icon):not(.footer-brand):is(:hover, :focus-visible)::after { transform: scaleX(1); }
+@media (max-width: 1100px) {
+  .site-footer .footer-bottom { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .site-footer .footer-main > section { padding: 20px 0 0; border-left: 0; border-top: 1px solid #34444b; }
+  .site-footer .footer-bottom nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 0; }
+  .site-footer .footer-bottom nav a:nth-child(odd) { padding-left: 0; border-left: 0; }
+  .footer-legal { align-items: flex-start; flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-footer a:not(.social-icon):not(.footer-brand)::after { transition: none; }
+}
 .support-chat { right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); }
 .support-chat #supportChatLauncher { position: relative; display: block; width: 64px; height: 64px; min-height: 64px; padding: 0; border: 0; border-radius: 50%; background: transparent; box-shadow: none; transition: transform 180ms ease; }
 .support-chat #supportChatLauncher:hover { background: transparent; transform: translateY(-3px); }

@@ -51,7 +51,7 @@ function createOrderReceipt(order) {
   const totals = document.createElement("dl"); totals.className = "receipt-totals";
   const fee = order.delivery?.fee || 0;
   const surcharge = order.delivery?.surcharge || 0;
-  for (const [label, amount] of [["Items subtotal", order.subtotal ?? order.total - fee], [pickup ? "Pickup fee" : "Delivery fee", order.delivery?.baseFee ?? fee], ...(surcharge ? [["Overseas destination charge", surcharge]] : []), ["Total (PHP)", order.total]]) {
+  for (const [label, amount] of [["Items subtotal", order.subtotal ?? order.total - fee], ...(order.discount > 0 ? [["Voucher " + (order.voucher?.code || "discount"), -order.discount]] : []), [pickup ? "Pickup fee" : "Delivery fee", order.delivery?.baseFee ?? fee], ...(surcharge ? [["Overseas destination charge", surcharge]] : []), ["Total (PHP)", order.total]]) {
     const row = document.createElement("div"); row.append(receiptText("dt", label), receiptText("dd", paymentAmount(amount))); totals.append(row);
   }
   receipt.append(totals);

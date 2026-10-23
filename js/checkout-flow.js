@@ -27,9 +27,12 @@ function startSampleCheckout(form) {
   if (!Number.isFinite(subtotal) || subtotal <= 0) { status.textContent = "Please review the items and amount in your cart."; return; }
   const service = selectedDeliveryService();
   const delivery = selectedDeliveryRate();
-  const total = subtotal + delivery.fee;
+  const pricing = checkoutPricing(items);
+  const discount = pricing.discount;
+  const voucher = discount ? { code: pricing.voucher.code, discount } : null;
+  const total = pricing.total;
   const order = {
-    id: orderIdentifier(), accountEmail: user.email, items, subtotal, delivery, total, paymentMethod,
+    id: orderIdentifier(), accountEmail: user.email, items, subtotal, discount, voucher, delivery, total, paymentMethod,
     recipient: { firstName: value("checkoutFirstName"), middleName: value("checkoutMiddleName"), surname: value("checkoutSurname"), suffix: value("checkoutSuffix") },
     contact: { email: value("checkoutEmail"), phone: value("checkoutPhone") },
     address: pickup ? { ...storePickupLocation, street: storePickupLocation.address, barangay: "", postalCode: "", fictional: true } : readDeliveryAddressForm().address
@@ -77,7 +80,7 @@ function startSampleCheckout(form) {
   document.body.append(dialog);
   dialog.querySelector("#samplePaymentTitle").textContent = paymentMethod === "GCash" ? "GCash QR payment" : paymentMethod === "Cash on Delivery" ? "Confirm your order" : paymentMethod + " sample payment";
   dialog.querySelector("#samplePaymentAmount").textContent = paymentAmount(total);
-  dialog.querySelector("#sampleDeliveryBreakdown").textContent = "Items " + paymentAmount(subtotal) + " + " + delivery.label + " " + paymentAmount(delivery.fee);
+  dialog.querySelector("#sampleDeliveryBreakdown").textContent = "Items " + paymentAmount(subtotal) + (discount ? " - Voucher " + voucher.code + " " + paymentAmount(discount) : "") + " + " + delivery.label + " " + paymentAmount(delivery.fee);
   dialog.querySelector("#sampleOrderReference").textContent = order.id;
   const cod = paymentIsDeferred(paymentMethod);
   dialog.querySelector("#completeSamplePayment").hidden = cod;

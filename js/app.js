@@ -1685,6 +1685,8 @@ function wireSupportChat() {
   const messages = document.querySelector("#supportChatMessages");
   const nudge = document.querySelector("#supportChatNudge");
   const nudgeKey = "bitsAndBytesChatWelcomeSeen";
+  const footer = document.querySelector(".site-footer");
+  const footerIsVisible = () => footer && footer.getBoundingClientRect().top < innerHeight && footer.getBoundingClientRect().bottom > 0;
   let welcomeTimer, dismissTimer;
 
   function dismissNudge() {
@@ -1698,7 +1700,7 @@ function wireSupportChat() {
   try { welcomeSeen = sessionStorage.getItem(nudgeKey) === "yes"; } catch {}
   if (!welcomeSeen) {
     welcomeTimer = setTimeout(() => {
-      if (!panel.hidden || document.querySelector("dialog[open]")) return;
+      if (!panel.hidden || document.querySelector("dialog[open]") || footerIsVisible()) return;
       const onSupportPage = /contact|warranty|support/.test(location.pathname);
       document.querySelector("#supportChatNudgeText").textContent = onSupportPage
         ? "Need a hand? Ask about your order, delivery, or payment anytime."
@@ -1713,6 +1715,9 @@ function wireSupportChat() {
     dismissNudge();
     launcher.focus();
   });
+  if (footer) new IntersectionObserver(entries => {
+    if (entries.some(entry => entry.isIntersecting) && !nudge.hidden) dismissNudge();
+  }).observe(footer);
 
   function setOpen(open) {
     panel.hidden = !open;
@@ -1789,8 +1794,6 @@ function wireStoreFooter() {
       <div class="footer-bottom">
         <nav aria-label="Footer navigation">
           <a href="pages/about.html">About Us</a>
-          <a href="pages/terms.html">Terms of Use</a>
-          <a href="pages/privacy.html">Privacy</a>
           <a href="pages/tracking.html">Track Order</a>
           <a href="pages/profile.html">My account</a>
           <a href="pages/warranty.html">Warranty Info</a>
@@ -1807,7 +1810,10 @@ function wireStoreFooter() {
             <a class="social-icon youtube" href="https://www.youtube.com/@johncarloherrera8540" target="_blank" rel="noopener noreferrer" aria-label="YouTube: johncarloherrera8540" title="YouTube"><img src="images/social/youtube.svg" alt="" width="24" height="24"></a>
           </div>
         </div>
+      </div>
+      <div class="footer-legal">
         <p>&copy; 2026 Herrera Corporation. All rights reserved.</p>
+        <nav aria-label="Legal information"><a href="pages/terms.html">Terms of Use</a><a href="pages/privacy.html">Privacy Policy</a></nav>
       </div>
     `;
     // A base URL shares assets across pages; top links still target this page.

@@ -160,6 +160,22 @@
 @media (max-width: 480px) { .fulfillment-methods { grid-template-columns: minmax(0,1fr); } }
 
 /* Keep Google's map colors and attribution intact inside the dark checkout layout. */
+.voucher-form { margin: 22px 0; padding: 20px 0; border-top: 1px solid #344d58; border-bottom: 1px solid #344d58; }
+.voucher-form label { display: block; margin-bottom: 10px; color: #e2edf1; font-size: 14px; }
+.voucher-entry { display: flex; gap: 8px; }
+.voucher-entry input { width: 100%; min-width: 0; flex: 1; min-height: 44px; margin: 0; font-size: 16px; text-transform: uppercase; }
+.voucher-entry .button { flex: 0 0 auto; margin: 0; min-height: 44px; padding: 10px 14px; }
+.voucher-status { margin: 10px 0 0; color: #83e8cd; font-size: 14px; line-height: 1.65; }
+.voucher-status:empty { display: none; }
+.voucher-status.is-error { color: #ffb8ac; }
+.active-voucher { display: flex; align-items: center; gap: 10px; margin-top: 12px; color: #a1efdc; font-size: 14px; }
+.active-voucher button { display: grid; place-items: center; width: 32px; height: 32px; min-height: 32px; padding: 0; border: 1px solid #45636b; border-radius: 4px; background: #20343b; cursor: pointer; }
+.active-voucher img { width: 16px; height: 16px; padding: 0; background: transparent; filter: brightness(0) invert(1); }
+.voucher-offers { margin-top: 14px; color: #b7cbd3; font-size: 13px; line-height: 1.7; }
+.voucher-offers summary { color: #75dbc6; cursor: pointer; }
+.voucher-offers p { margin: 10px 0 0; }
+.voucher-discount { color: #87e3cb; }
+.voucher-discount[hidden], .active-voucher[hidden] { display: none; }
 .delivery-location-map { height: 360px; }
 @media (max-width: 480px) { .delivery-location-map { height: 320px; } }
 /* Larger type and a compact step indicator keep longer international forms readable. */

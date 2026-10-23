@@ -28,10 +28,26 @@ function selectedDeliveryRate() {
   return { ...base, method: "delivery", service, country, baseFee: base.fee, surcharge, fee: base.fee + surcharge };
 }
 
+// One calculation is shared by the cart, payment review and payment validation.
+function checkoutPricing(cart = getCart()) {
+  const subtotal = Math.round(cart.reduce((sum, item) => sum + item.price * item.quantity, 0) * 100) / 100;
+  const voucher = typeof evaluateCartVoucher === "function"
+    ? evaluateCartVoucher(cart, selectedVoucherCode()) : { code: "", discount: 0, error: "" };
+  const delivery = selectedDeliveryRate();
+  const total = subtotal > 0 ? Math.round((subtotal - voucher.discount + delivery.fee) * 100) / 100 : 0;
+  return { subtotal, discount: voucher.discount, voucher, delivery, total };
+}
+
 function updateCheckoutTotals() {
   if (!document.getElementById("checkoutGrandTotal")) return;
-  const subtotal = getCart().reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const delivery = selectedDeliveryRate();
+  const { subtotal, discount, voucher, delivery, total } = checkoutPricing();
+  if (typeof syncVoucherControls === "function") syncVoucherControls(voucher);
+  for (const prefix of ["cart", "checkout"]) {
+    const row = document.getElementById(prefix + "DiscountRow");
+    if (row) { row.hidden = !discount; document.getElementById(prefix + "Discount").textContent = "-" + (prefix === "cart" ? money(discount) : paymentAmount(discount)); }
+  }
+  const itemsTotal = document.getElementById("cartDiscountedTotal");
+  if (itemsTotal) itemsTotal.textContent = money(subtotal - discount);
   document.getElementById("checkoutSubtotal").textContent = paymentAmount(subtotal);
   document.getElementById("checkoutDeliveryLabel").textContent = delivery.label;
   document.getElementById("checkoutDeliveryFee").textContent = paymentAmount(subtotal > 0 ? delivery.baseFee : 0);
@@ -49,10 +65,11 @@ function updateCheckoutTotals() {
       if (alternative) { alternative.checked = true; alternative.dispatchEvent(new Event("change")); }
     }
   }
-  document.getElementById("checkoutGrandTotal").textContent = paymentAmount(subtotal > 0 ? subtotal + delivery.fee : 0);
+  document.getElementById("checkoutGrandTotal").textContent = paymentAmount(total);
 }
 
 function wireDeliveryRates() {
+  if (typeof wireVoucherControls === "function") wireVoucherControls();
   document.querySelectorAll('[name="deliveryService"]').forEach(input => input.addEventListener("change", updateCheckoutTotals));
   updateCheckoutTotals();
 }
@@ -92,14 +109,16 @@ function samplePaymentProblem(attempt) {
   if (!user || user.email !== attempt.order.accountEmail) return "Please sign in to the account that started this checkout.";
   if (Date.now() > attempt.expiresAt) return "This sample payment has expired. Close it and start checkout again.";
   if (cartSignature() !== attempt.cartSignature) return "Your cart has changed. Close this payment and review your cart again.";
-  const subtotal = getCart().reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const pricing = checkoutPricing();
+  const subtotal = pricing.subtotal;
+  if ((attempt.order.voucher?.code || "") !== (pricing.voucher.discount ? pricing.voucher.code : "") || (attempt.order.discount || 0) !== pricing.discount) return "The voucher has changed. Close this payment and review your order again.";
   let fee = 0;
   if (attempt.order.delivery) {
     const rate = selectedDeliveryRate();
     if (!rate || rate.fee !== attempt.order.delivery.fee || rate.service !== attempt.order.delivery.service || rate.country !== (attempt.order.delivery.country || "Philippines")) return "The delivery service has changed or the destination was updated. Close this payment and review your order again.";
     fee = rate.fee;
   }
-  const total = subtotal + fee;
+  const total = Math.round((subtotal - pricing.discount + fee) * 100) / 100;
   if (!getCart().length || !Number.isFinite(total) || Math.round(total * 100) !== Math.round(attempt.order.total * 100)) return "The order amount no longer matches your cart.";
   if (!paymentIsDeferred(attempt.order.paymentMethod)) {
     const receipt = attempt.receipt;
@@ -125,6 +144,7 @@ function recordSampleOrder(attempt) {
   localStorage.setItem(storeOrdersKey, JSON.stringify([order, ...savedStoreOrders()]));
   attempt.completed = true;
   attempt.order = order;
+  if (typeof saveVoucherCode === "function") saveVoucherCode("");
   saveCart([]);
   return order;
 }

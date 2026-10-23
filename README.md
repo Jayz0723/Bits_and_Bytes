@@ -47,6 +47,7 @@ Bits-and-Bytes/
 | About, policies, and downloads | `pages/about.html`, `pages/terms.html`, `pages/warranty.html`, `pages/downloads.html` |
 | Products, variants, galleries, and builder choices | [js/data.js](js/data.js) |
 | Product descriptions and manufacturer reference links | [js/product-descriptions.js](js/product-descriptions.js) |
+| Promo/voucher codes, minimums, and discount limits | [js/vouchers.js](js/vouchers.js), [voucher notes](docs/VOUCHERS.md) |
 | Component filter names (RAM, storage, and more) | `computerPartCategories` in [js/data.js](js/data.js) |
 | Shared shopping, accounts, navigation, and builder logic | [js/app.js](js/app.js) |
 | Product comparison | [js/shopping-tools.js](js/shopping-tools.js) |

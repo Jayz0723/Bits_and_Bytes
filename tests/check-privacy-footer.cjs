@@ -16,10 +16,10 @@ const root = path.resolve(__dirname, '..');
     for (const file of files) {
       if (!fs.readFileSync(path.join(root, file), 'utf8').includes('class="site-footer"')) continue;
       await page.goto(pathToFileURL(path.join(root, file)).href);
-      assert.equal(await page.locator('.footer-bottom nav a[href="pages/privacy.html"]').count(), 1, file + ' has a Privacy link');
+      assert.equal(await page.locator('.footer-legal nav a[href="pages/privacy.html"]').count(), 1, file + ' has a Privacy link');
     }
     await page.setViewportSize({ width: 390, height: 900 });
-    await page.locator('.footer-bottom nav a[href="pages/privacy.html"]').click();
+    await page.locator('.footer-legal nav a[href="pages/privacy.html"]').click();
     assert.ok(page.url().endsWith('/pages/privacy.html'));
     assert.equal(await page.locator('main h1').textContent(), 'Privacy');
     assert.equal(await page.locator('.policy-sections section').count(), 6);

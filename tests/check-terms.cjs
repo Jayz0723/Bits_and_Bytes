@@ -32,7 +32,7 @@ const { chromium } = require('./browser.cjs');
     }
     assert.equal(await page.locator('.policy-sections a[href="pages/privacy.html"]').count(), 1);
     assert.equal(await page.locator('.policy-sections a[href="pages/warranty.html"]').count(), 1);
-    assert.equal(await page.locator('.footer-bottom a[href="pages/terms.html"]').count(), 1);
+    assert.equal(await page.locator('.footer-legal a[href="pages/terms.html"]').count(), 1);
     assert.deepEqual(errors, []);
     console.log('Passed 12 terms sections, checkout disclosures, consumer-rights safeguards, section navigation, related policy links, and responsive layouts at four widths.');
   } finally { await browser.close(); }
