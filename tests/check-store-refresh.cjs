@@ -47,7 +47,7 @@ const root = path.resolve(__dirname, '..');
           await page.evaluate(() => scrollTo(0, 0));
         }
         if (file === 'pages/components.html' || file === 'index.html') {
-          const banner = await page.locator('.site-header > img').boundingBox();
+          const banner = await page.locator(file === 'index.html' ? '#promoCarousel .promo-slide > img' : '.site-header > img').first().boundingBox();
           assert.ok(Math.abs(banner.width - width) < 1 && banner.height >= 200, 'Full-width banner has a useful height');
         }
         assert.ok(!/\bdemo\b/i.test(await page.locator('body').innerText()), 'No demo wording in storefront copy');

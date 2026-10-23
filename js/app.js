@@ -1265,6 +1265,7 @@ function wireFoldableNavigation() {
     "pages/components.html": "Interactive Guide",
     "pages/about.html": "About",
     "pages/downloads.html": "Downloads",
+    "pages/articles.html": "Articles",
     "pages/contact.html": "Contact",
     "pages/login.html": "Login",
     "pages/tracking.html": "Track Order",
@@ -1310,7 +1311,7 @@ function wireFoldableNavigation() {
       <a class="nav-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
       ${linkMarkup("index.html", "nav-home")}
       ${shopMarkup}
-      ${groupMarkup("Explore", ["pages/components.html", "pages/about.html", "pages/downloads.html"])}
+      ${groupMarkup("Explore", ["pages/articles.html", "pages/components.html", "pages/about.html", "pages/downloads.html"])}
       ${groupMarkup("Support", ["pages/contact.html", "pages/tracking.html", "pages/profile.html", "pages/login.html"])}
       <details class="nav-group nav-account">
         <summary title="Your account"><img src="images/icons/user-round.svg" alt="" width="20" height="20"><span class="nav-account-greeting">My account</span></summary>
@@ -1360,6 +1361,7 @@ function wireFoldableNavigation() {
     const current = new URL(window.location.href);
     let pathname = current.pathname.endsWith("/") ? current.pathname + "index.html" : current.pathname;
     pathname = pathname.replace(/\/product\.html$/, "/products.html");
+    pathname = pathname.replace(/\/article\.html$/, "/articles.html");
     const accountPage = /\/(profile|login|wishlist)\.html$/.test(pathname);
     const hash = pathname.endsWith("/wishlist.html") ? "#favorites" : current.hash;
     if (accountPage) pathname = pathname.replace(/\/(login|wishlist)\.html$/, "/profile.html");
@@ -1577,16 +1579,25 @@ function wirePromoCarousel() {
   if (!carousel || !track || !previous || !next || !dots) return;
 
   const slides = Array.from(track.querySelectorAll(".promo-slide"));
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
   let activeIndex = 0;
-  let autoScroll;
+  let elapsed = 0, lastTime = 0, frame = 0;
+  let manuallyPaused = motionPreference.matches;
+  let focused = false, inView = true;
+  const pause = document.createElement("button");
+  pause.type = "button";
+  pause.id = "promoPause";
+  pause.className = "promo-pause";
+  carousel.append(pause);
 
   dots.innerHTML = slides.map((_, index) => `
-    <button type="button" data-promo-slide="${index}" aria-label="Show promotion ${index + 1}"></button>
+    <button type="button" data-promo-slide="${index}" aria-label="Show promotion ${index + 1}"><span></span></button>
   `).join("");
 
   function showSlide(index) {
     activeIndex = (index + slides.length) % slides.length;
+    elapsed = 0;
+    lastTime = 0;
     track.style.transform = `translateX(-${activeIndex * 100}%)`;
     slides.forEach((slide, slideIndex) => {
       const isActive = slideIndex === activeIndex;
@@ -1599,17 +1610,38 @@ function wirePromoCarousel() {
       const isActive = dotIndex === activeIndex;
       dot.classList.toggle("active", isActive);
       dot.setAttribute("aria-current", isActive ? "true" : "false");
+      dot.querySelector("span").style.transform = `scaleX(${dotIndex < activeIndex ? 1 : 0})`;
     });
   }
 
   function stopAutoScroll() {
-    window.clearInterval(autoScroll);
+    cancelAnimationFrame(frame);
+    frame = 0;
+    lastTime = 0;
   }
 
   function startAutoScroll() {
     stopAutoScroll();
-    if (!reduceMotion) autoScroll = window.setInterval(() => showSlide(activeIndex + 1), 5000);
+    const paused = manuallyPaused || focused || document.hidden || !inView;
+    carousel.dataset.paused = String(paused);
+    pause.setAttribute("aria-label", manuallyPaused ? "Play promotions" : "Pause promotions");
+    pause.title = manuallyPaused ? "Play promotions" : "Pause promotions";
+    pause.setAttribute("aria-pressed", String(manuallyPaused));
+    const icon = manuallyPaused ? "play" : "pause";
+    if (pause.dataset.icon !== icon) {
+      pause.dataset.icon = icon;
+      pause.innerHTML = `<img src="images/icons/${icon}.svg" width="18" height="18" alt="">`;
+    }
+    if (!paused) frame = requestAnimationFrame(tick);
   }
+  function tick(time) {
+    if (lastTime) elapsed += time - lastTime;
+    lastTime = time;
+    if (elapsed >= 5000) showSlide(activeIndex + 1);
+    dots.querySelector("button.active span").style.transform = `scaleX(${Math.min(elapsed / 5000, 1)})`;
+    frame = requestAnimationFrame(tick);
+  }
+  pause.addEventListener("click", () => { manuallyPaused = !manuallyPaused; focused = false; startAutoScroll(); });
 
   previous.addEventListener("click", () => {
     showSlide(activeIndex - 1);
@@ -1625,14 +1657,15 @@ function wirePromoCarousel() {
     showSlide(Number(dot.dataset.promoSlide));
     startAutoScroll();
   });
-  carousel.addEventListener("focusin", stopAutoScroll);
+  carousel.addEventListener("focusin", () => { focused = true; startAutoScroll(); });
   carousel.addEventListener("focusout", (event) => {
-    if (!carousel.contains(event.relatedTarget)) startAutoScroll();
+    if (!carousel.contains(event.relatedTarget)) { focused = false; startAutoScroll(); }
   });
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) stopAutoScroll();
-    else startAutoScroll();
+    startAutoScroll();
   });
+  motionPreference.addEventListener("change", () => { manuallyPaused = motionPreference.matches; startAutoScroll(); });
+  new IntersectionObserver(entries => { inView = entries[0].isIntersecting; startAutoScroll(); }, { threshold: 0.1 }).observe(carousel);
 
   showSlide(0);
   startAutoScroll();
@@ -1824,6 +1857,7 @@ function wireStoreFooter() {
       <div class="footer-bottom">
         <nav aria-label="Footer navigation">
           <a href="pages/about.html">About Us</a>
+          <a href="pages/articles.html">The Journal</a>
           <a href="pages/tracking.html">Track Order</a>
           <a href="pages/profile.html">My account</a>
           <a href="pages/warranty.html">Warranty Info</a>
@@ -2647,6 +2681,7 @@ wireHomeVideo();
 wireBackgroundMusic();
 wirePartnersDialog();
 wirePromoCarousel();
+if (typeof wireSiteExperience === "function") wireSiteExperience();
 wireReviewCarousel();
 wireSupportChat();
 document.addEventListener("DOMContentLoaded", wireStoreFooter);
