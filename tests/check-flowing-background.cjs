@@ -8,17 +8,19 @@ catch { ({ PNG } = require(path.join(process.env.USERPROFILE || process.env.HOME
 
 function backgroundDifference(first, second) {
   const a = PNG.sync.read(first), b = PNG.sync.read(second);
-  let change = 0, count = 0, brightness = 0;
+  let change = 0, count = 0, brightness = 0, chroma = 0;
   // The outer gutter contains only the backdrop, not text, images or chat controls.
   for (let y = 220; y < 800; y += 4) for (let x = 3; x < 12; x += 2) {
     const pixel = (y * a.width + x) * 4;
+    const color = Array.from(b.data.subarray(pixel, pixel + 3));
+    chroma = Math.max(chroma, Math.max(...color) - Math.min(...color));
     for (let channel = 0; channel < 3; channel++) {
       change += Math.abs(a.data[pixel + channel] - b.data[pixel + channel]);
       brightness += b.data[pixel + channel];
       count++;
     }
   }
-  return { change: change / count, brightness: brightness / count };
+  return { change: change / count, brightness: brightness / count, chroma };
 }
 
 (async () => {
@@ -43,8 +45,9 @@ function backgroundDifference(first, second) {
       assert.notEqual(firstLayer.before, nextLayer.before, 'Base colors travel');
       assert.notEqual(firstLayer.after, nextLayer.after, 'Second layer moves independently');
       const pixels = backgroundDifference(before, after);
-      assert.ok(pixels.change > 1.5, 'Visible background pixels change: ' + JSON.stringify(pixels));
-      assert.ok(pixels.brightness < 100, 'Backdrop retains dark-theme brightness');
+      assert.ok(pixels.change > 2.5, 'Visible charcoal shades change: ' + JSON.stringify(pixels));
+      assert.ok(pixels.brightness < 65, 'Backdrop stays close to the reference charcoal brightness: ' + JSON.stringify(pixels));
+      assert.ok(pixels.chroma <= 25, 'Backdrop avoids saturated color shifts: ' + JSON.stringify(pixels));
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
       await page.click('#siteSearchToggle');
       await page.fill('#siteSearchInput', 'memory');

@@ -42,10 +42,10 @@ body.search-is-open { overflow: hidden; }
 .filter-tabs { display: flex; flex-wrap: wrap; gap: 0; border-bottom: 1px solid #42555e; margin: 28px 0; }
 .filter-tabs button { background: transparent; color: #b5cad3; border: 0; border-bottom: 2px solid transparent; border-radius: 0; padding: 14px 20px; font: inherit; font-size: 15px; cursor: pointer; }
 .filter-tabs button[aria-pressed="true"] { border-bottom-color: #43dfbe; color: #43dfbe; }
-.store-gradient { --journey: 0; position: relative; isolation: isolate; background: #080e12; }
+.store-gradient { --journey: 0; position: relative; isolation: isolate; background: #242c2e; }
 .store-gradient::before, .store-gradient::after { content: ''; position: fixed; inset: -35%; pointer-events: none; }
-.store-gradient::before { z-index: -3; background-image: linear-gradient(115deg, #080f17 4%, #12545e 23%, #263c52 42%, #472c56 60%, #15504b 80%, #091319 98%); background-size: 210% 190%; animation: ambient-drift 10s ease-in-out infinite alternate; }
-.store-gradient::after { z-index: -2; background-image: linear-gradient(65deg, #070e1600 7%, #249d8e55 27%, #317a9355 43%, #080e1600 55%, #8b4d9255 72%, #070e1600 94%); background-size: 180% 180%; mix-blend-mode: screen; opacity: .65; animation: ambient-current 13s ease-in-out infinite alternate; }
+.store-gradient::before { z-index: -3; background-image: linear-gradient(115deg, #11191b 3%, #242c2e 19%, #344244 36%, #172124 52%, #303c3f 70%, #141e20 87%, #242c2e 100%); background-size: 200% 190%; animation: ambient-drift 7s ease-in-out infinite alternate; }
+.store-gradient::after { z-index: -2; background-image: linear-gradient(65deg, #02060900 7%, #8da7a72e 27%, #26393a00 47%, #748a9626 69%, #02060900 94%); background-size: 180% 180%; mix-blend-mode: screen; opacity: .65; animation: ambient-current 11s ease-in-out infinite alternate; }
 @keyframes ambient-drift {
   0% { background-position: 0% 12%; transform: translate3d(-4%, calc(var(--journey) * -8%), 0) scale(1.04); }
   50% { background-position: 75% 90%; transform: translate3d(4%, calc(var(--journey) * -8% - 4%), 0) scale(1.1); }
