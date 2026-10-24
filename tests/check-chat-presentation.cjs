@@ -56,6 +56,16 @@ const { chromium } = require('./browser.cjs');
       await page.mouse.move(1, 300);
       await page.hover('#supportChatLauncher');
       assert.ok(await page.locator('#supportChatNudge').isVisible(), 'Hover can reopen dismissed prompt');
+      const secondLine = await page.locator('#supportChatNudgeText .sr-only').textContent();
+      assert.notEqual(secondLine, full, 'A returning prompt uses a different line');
+      const seenLines = new Set([full, secondLine]);
+      for (let repeat = 0; repeat < 2; repeat++) {
+        await page.click('#dismissChatNudge');
+        await page.mouse.move(1, 300);
+        await page.hover('#supportChatLauncher');
+        seenLines.add(await page.locator('#supportChatNudgeText .sr-only').textContent());
+      }
+      assert.equal(seenLines.size, 4, 'All four lines appear before repeating');
       await page.click('#supportChatLauncher');
       await page.fill('#supportChatInput', 'Can you help choose a laptop?');
       await page.click('#supportChatForm button');

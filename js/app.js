@@ -1774,12 +1774,52 @@ function wireSupportChat() {
   }
   let welcomeSeen = false;
   try { welcomeSeen = sessionStorage.getItem(nudgeKey) === "yes"; } catch {}
+  const welcomeLines = {
+    shop: [
+      "Hi! Looking for a PC, laptop, or the right upgrade? Ask me anytime.",
+      "Tell me your budget and what you use your computer for. Let's find a good fit.",
+      "Comparing a few products? Ask me about their specs and what to look for.",
+      "Planning a new setup? I can help you narrow down your options."
+    ],
+    build: [
+      "Building your first PC? Tell me your budget and where you'd like to start.",
+      "Unsure which parts go together? Ask me about sockets, memory, and case sizes.",
+      "Gaming, studying, or creating? Let's talk about the parts your build needs.",
+      "Choosing your next upgrade? Tell me what is already inside your PC."
+    ],
+    delivery: [
+      "Questions about delivery or pickup? I can help you find the right checkout option.",
+      "Need help with a voucher or payment option? Ask me before you check out.",
+      "Sending an order overseas? Checkout shows the available services and extra fees.",
+      "Looking for an order update? Open My account or Tracking to see your order details."
+    ],
+    support: [
+      "Need a hand? Ask about your order, delivery, or payment anytime.",
+      "Have a warranty question? I can point you toward the right information.",
+      "Something not going as expected? Tell me what happened and I'll help you find support.",
+      "Need to contact the store? I can help you find the support and inquiry options."
+    ],
+    journal: [
+      "Reading up on your next upgrade? Ask me to explain a term or component.",
+      "Want to turn a setup idea into a shopping list? Tell me what you have in mind.",
+      "Not sure where to start? Ask about laptops, memory, storage, or building a PC.",
+      "A guide caught your eye? I can help you compare the hardware in the catalog."
+    ]
+  };
+  const lineGroup = /contact|warranty|support/.test(location.pathname) ? "support"
+    : /cart|tracking|profile/.test(location.pathname) ? "delivery"
+    : /build|components/.test(location.pathname) ? "build"
+    : /articles?\.html/.test(location.pathname) ? "journal" : "shop";
+  const lines = welcomeLines[lineGroup];
+  const cursorKey = "bitsAndBytesChatLine-" + lineGroup;
+  let lineCursor = 0;
+  try { lineCursor = Number(sessionStorage.getItem(cursorKey)) || 0; } catch {}
+  if (!Number.isSafeInteger(lineCursor) || lineCursor < 0) lineCursor = 0;
   function showNudge() {
       if (!panel.hidden || !nudge.hidden || document.querySelector("dialog[open]") || footerIsVisible()) return;
-      const onSupportPage = /contact|warranty|support/.test(location.pathname);
-      const text = onSupportPage
-        ? "Need a hand? Ask about your order, delivery, or payment anytime."
-        : "Hi! Looking for a PC, laptop, or the right upgrade? Ask me anytime.";
+      const text = lines[lineCursor % lines.length];
+      lineCursor = (lineCursor + 1) % lines.length;
+      try { sessionStorage.setItem(cursorKey, String(lineCursor)); } catch {}
       nudge.hidden = false;
       typeChatText(document.querySelector("#supportChatNudgeText"), text);
       launcher.classList.add("has-notification");

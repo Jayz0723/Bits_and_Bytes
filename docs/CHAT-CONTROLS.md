@@ -36,4 +36,6 @@ interaction, welcome-session behavior, music placement and the retained chat.
 
 ## October 25 visibility and motion update
 
+The robot cycles through four different prompts for each page context: shopping, building, delivery/account, support and the journal (20 lines total). Each new welcome/hover appearance advances to the next line; it does not interrupt a visible or currently typing prompt. The per-context position survives page navigation in session storage, with an in-memory fallback when storage is unavailable.
+
 The welcome prompt still appears automatically once per tab, but hovering over the robot or focusing it from the keyboard can bring it back. Opening chat, dismissing the prompt or entering the footer hides it. Prompt text, the first chat greeting and assistant replies reveal progressively. A hidden layout copy reserves the text height to prevent jumping; screen readers receive the full message once. Reduced motion shows text immediately. Failed API requests retain their actual error messages and are not replaced with invented replies.
