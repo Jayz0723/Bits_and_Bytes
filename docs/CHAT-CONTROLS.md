@@ -33,3 +33,7 @@ https://github.com/lucide-icons/lucide/blob/main/icons/x.svg .
 
 Run `node tests/check-chat-controls.cjs` to check desktop/mobile spacing, keyboard
 interaction, welcome-session behavior, music placement and the retained chat.
+
+## October 25 visibility and motion update
+
+The welcome prompt still appears automatically once per tab, but hovering over the robot or focusing it from the keyboard can bring it back. Opening chat, dismissing the prompt or entering the footer hides it. Prompt text, the first chat greeting and assistant replies reveal progressively. A hidden layout copy reserves the text height to prevent jumping; screen readers receive the full message once. Reduced motion shows text immediately. Failed API requests retain their actual error messages and are not replaced with invented replies.

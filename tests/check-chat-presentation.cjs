@@ -1,0 +1,100 @@
+const assert = require('node:assert/strict');
+const path = require('node:path');
+const { pathToFileURL } = require('node:url');
+const { createStoreServer } = require('../server.cjs');
+const { chromium } = require('./browser.cjs');
+
+(async () => {
+  const server = createStoreServer(':memory:');
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  const origin = 'http://127.0.0.1:' + server.address().port;
+  let browser;
+  try {
+    browser = await chromium.launch({ channel: 'msedge', headless: true });
+    for (const width of [1440, 390, 320]) {
+      const page = await browser.newPage({ viewport: { width, height: 1000 } });
+      const errors = [];
+      page.on('pageerror', error => errors.push(error.message));
+      await page.addInitScript(() => sessionStorage.setItem('bitsAndBytesChatWelcomeSeen', 'yes'));
+      await page.route('**/*', route => route.request().url().startsWith(origin) ? route.continue() : route.abort());
+      const reply = 'Sure! Tell me your budget and whether you need a laptop for study, work or gaming.';
+      await page.route('**/api/chat', route => route.fulfill({ json: { reply } }));
+      await page.goto(origin);
+      const icon = page.locator('#siteSearchToggle img');
+      await icon.evaluate(image => image.decode());
+      assert.equal(await icon.evaluate(image => image.naturalWidth > 0 && getComputedStyle(image).maskImage === 'none'), true);
+      assert.equal((await icon.boundingBox()).width, 22);
+      const header = await page.locator('.sticky-site-nav').boundingBox();
+      const toolbar = await page.locator('.store-toolbar').boundingBox();
+      assert.ok(toolbar.y + toolbar.height <= header.y + header.height, 'Toolbar remains inside header');
+      if (width <= 380) {
+        const brand = await page.locator('.mobile-store-brand').boundingBox();
+        const search = await page.locator('#siteSearchToggle').boundingBox();
+        assert.ok(Math.abs(brand.y + brand.height / 2 - search.y - search.height / 2) < 3, 'Narrow mobile controls stay on one row');
+      }
+      await page.click('#siteSearchToggle');
+      await page.fill('#siteSearchInput', 'RAM');
+      assert.ok(await page.locator('.site-search-result').count() > 0);
+      await page.press('#siteSearchInput', 'Escape');
+      await page.waitForFunction(() => !document.body.classList.contains('search-is-open'));
+      assert.ok(await page.locator('#supportChatNudge').isHidden(), 'No repeated automatic prompt');
+      await page.hover('#supportChatLauncher');
+      await page.locator('#supportChatNudge:not([hidden])').waitFor();
+      const visible = page.locator('#supportChatNudgeText .typewriter-text');
+      const full = await page.locator('#supportChatNudgeText .sr-only').textContent();
+      const initial = (await visible.textContent()).length;
+      const initialBox = await page.locator('#supportChatNudge').boundingBox();
+      assert.ok(initial < full.length, 'Prompt starts with partial text');
+      await page.waitForTimeout(180);
+      assert.ok((await visible.textContent()).length > initial, 'Prompt reveals letters progressively');
+      await page.waitForFunction(() => !document.querySelector('#supportChatNudgeText').classList.contains('is-typing'));
+      assert.equal(await visible.textContent(), full);
+      assert.equal((await page.locator('#supportChatNudge').boundingBox()).height, initialBox.height, 'Bubble reserves full text height');
+      await page.screenshot({ path: path.join(__dirname, '../images/previews/chat-motion-' + width + '.png') });
+      await page.click('#dismissChatNudge');
+      assert.ok(await page.locator('#supportChatNudge').isHidden());
+      await page.mouse.move(1, 300);
+      await page.hover('#supportChatLauncher');
+      assert.ok(await page.locator('#supportChatNudge').isVisible(), 'Hover can reopen dismissed prompt');
+      await page.click('#supportChatLauncher');
+      await page.fill('#supportChatInput', 'Can you help choose a laptop?');
+      await page.click('#supportChatForm button');
+      await page.locator('#supportChatMessages .is-typing').last().waitFor();
+      await page.waitForFunction(() => document.querySelector('#supportChatMessages .agent:last-child .typewriter-text')?.textContent.length > 2);
+      assert.ok((await page.locator('#supportChatMessages .agent').last().locator('.typewriter-text').textContent()).length < reply.length);
+      assert.equal(await page.locator('#supportChatForm button').isDisabled(), true);
+      await page.locator('.chat-reply').waitFor();
+      assert.equal(await page.locator('.chat-reply .typewriter-text').textContent(), reply);
+      assert.equal(await page.locator('#supportChatForm button').isEnabled(), true);
+      await page.click('#supportChatClose');
+      await page.goto(origin + '/pages/articles.html');
+      assert.equal(await page.locator('body').evaluate(node => node.classList.contains('store-gradient')), true);
+      const first = await page.locator('body').evaluate(node => getComputedStyle(node, '::before').backgroundPosition);
+      await page.waitForTimeout(250);
+      assert.notEqual(await page.locator('body').evaluate(node => getComputedStyle(node, '::before').backgroundPosition), first);
+      await page.evaluate(() => scrollTo({ top: 600, behavior: 'instant' }));
+      await page.waitForFunction(() => Number(document.body.style.getPropertyValue('--journey')) > 0);
+      await page.screenshot({ path: path.join(__dirname, '../images/previews/gradient-motion-' + width + '.png') });
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      assert.equal(await page.locator('body').evaluate(node => getComputedStyle(node, '::before').animationName), 'none');
+      await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+      await page.hover('#supportChatLauncher');
+      await page.locator('#supportChatNudge:not([hidden])').waitFor();
+      assert.equal(await page.locator('#supportChatNudgeText .typewriter-text').textContent(), await page.locator('#supportChatNudgeText .sr-only').textContent());
+      assert.equal(await page.locator('#supportChatNudgeText').evaluate(node => node.classList.contains('is-typing')), false);
+      assert.deepEqual(errors, []);
+      await page.close();
+    }
+    const filePage = await browser.newPage();
+    await filePage.route(/^https?:/, route => route.abort());
+    await filePage.goto(pathToFileURL(path.join(__dirname, '../index.html')).href);
+    await filePage.locator('#siteSearchToggle img').evaluate(image => image.decode());
+    await filePage.click('#siteSearchToggle');
+    assert.ok(await filePage.locator('#siteSearchDialog').isVisible(), 'Icon works in direct-file preview');
+    console.log('Passed image-based search icon on HTTP and file previews, returning-user hover prompts, progressive letters, stable bubble height, animated replies, reduced motion, themed gradient/scroll motion and mobile layouts.');
+  } finally {
+    if (browser) await browser.close();
+    await new Promise(resolve => server.close(resolve));
+  }
+})().catch(error => { console.error(error); process.exitCode = 1; });

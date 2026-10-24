@@ -75,13 +75,13 @@ function wireSiteExperience() {
   searchButton.title = 'Search the website';
   searchButton.setAttribute('aria-label', 'Search the website');
   searchButton.setAttribute('aria-haspopup', 'dialog');
-  searchButton.innerHTML = '<span class="store-icon search-icon" aria-hidden="true"></span>';
+  searchButton.innerHTML = '<img class="site-search-icon" src="images/icons/search.svg" width="22" height="22" alt="">';
   nav.append(searchButton);
   const dialog = document.createElement('dialog');
   dialog.className = 'site-search-dialog';
   dialog.id = 'siteSearchDialog';
   dialog.setAttribute('aria-label', 'Search Bits and Bytes');
-  dialog.innerHTML = `<div class="site-search-inner"><form id="siteSearchForm" action="pages/search.html"><label class="sr-only" for="siteSearchInput">Search products, articles and support</label><div class="site-search-field"><span class="store-icon search-icon" aria-hidden="true"></span><input id="siteSearchInput" name="q" type="search" maxlength="150" placeholder="Search products, articles and support" autocomplete="off" required><button type="submit" title="Show all results" aria-label="Show all search results"><span aria-hidden="true">&rarr;</span></button></div><button type="button" id="closeSiteSearch" title="Close search" aria-label="Close search"><img src="images/icons/x.svg" alt="" width="24" height="24"></button></form><p id="siteSearchStatus" role="status">Popular searches</p><div id="siteSearchResults"></div><a id="allSearchResults" hidden>View all results &rarr;</a></div>`;
+  dialog.innerHTML = `<div class="site-search-inner"><form id="siteSearchForm" action="pages/search.html"><label class="sr-only" for="siteSearchInput">Search products, articles and support</label><div class="site-search-field"><img class="site-search-icon" src="images/icons/search.svg" width="22" height="22" alt=""><input id="siteSearchInput" name="q" type="search" maxlength="150" placeholder="Search products, articles and support" autocomplete="off" required><button type="submit" title="Show all results" aria-label="Show all search results"><span aria-hidden="true">&rarr;</span></button></div><button type="button" id="closeSiteSearch" title="Close search" aria-label="Close search"><img src="images/icons/x.svg" alt="" width="24" height="24"></button></form><p id="siteSearchStatus" role="status">Popular searches</p><div id="siteSearchResults"></div><a id="allSearchResults" hidden>View all results &rarr;</a></div>`;
   document.body.append(dialog);
   const input = dialog.querySelector('input');
   const results = dialog.querySelector('#siteSearchResults');
@@ -118,6 +118,15 @@ function wireSiteExperience() {
 
   const main = document.querySelector('main');
   const carousel = document.querySelector('#promoCarousel');
+  document.body.classList.add('store-gradient');
+  let scheduled = false;
+  const updateBackdrop = () => {
+    const progress = scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    document.body.style.setProperty('--journey', String(progress));
+    scheduled = false;
+  };
+  addEventListener('scroll', () => { if (!scheduled) { scheduled = true; requestAnimationFrame(updateBackdrop); } }, { passive: true });
+  updateBackdrop();
   if (document.body.classList.contains('home-page')) {
     if (carousel) main.prepend(carousel);
     const journal = document.createElement('section');
@@ -130,14 +139,6 @@ function wireSiteExperience() {
     wordmark.setAttribute('aria-hidden', 'true');
     wordmark.textContent = 'BITS & BYTES';
     document.body.prepend(wordmark);
-    let scheduled = false;
-    const updateBackdrop = () => {
-      const progress = scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight);
-      document.body.style.setProperty('--journey', String(progress));
-      scheduled = false;
-    };
-    addEventListener('scroll', () => { if (!scheduled) { scheduled = true; requestAnimationFrame(updateBackdrop); } }, { passive: true });
-    updateBackdrop();
   }
 
   const articleGrid = document.querySelector('#articleGrid');

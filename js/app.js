@@ -1405,6 +1405,7 @@ function wireStickyStoreHeader() {
   const mobileBrand = document.createElement("a");
   mobileBrand.className = "mobile-store-brand";
   mobileBrand.href = "index.html";
+  mobileBrand.setAttribute("aria-label", "Bits and Bytes home");
   mobileBrand.innerHTML = '<img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span>';
   nav.prepend(mobileBrand);
   stickyHeader.append(nav, toolbar);
@@ -1721,29 +1722,73 @@ function wireSupportChat() {
   const footer = document.querySelector(".site-footer");
   const footerIsVisible = () => footer && footer.getBoundingClientRect().top < innerHeight && footer.getBoundingClientRect().bottom > 0;
   let welcomeTimer, dismissTimer;
+  const typingAnimations = new WeakMap();
+  const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+
+  function typeChatText(node, text) {
+    typingAnimations.get(node)?.();
+    const accessible = document.createElement("span");
+    accessible.className = "sr-only";
+    accessible.textContent = text;
+    const reserve = document.createElement("span");
+    reserve.className = "typewriter-reserve";
+    reserve.setAttribute("aria-hidden", "true");
+    reserve.textContent = text;
+    const visible = document.createElement("span");
+    visible.className = "typewriter-text";
+    visible.setAttribute("aria-hidden", "true");
+    node.replaceChildren(accessible, reserve, visible);
+    node.classList.add("typewriter-message");
+    if (motionPreference.matches) { visible.textContent = text; return Promise.resolve(); }
+    const characters = Array.from(text);
+    const duration = Math.min(6500, characters.length * 22);
+    node.classList.add("is-typing");
+    return new Promise(resolve => {
+      let frame, started;
+      const finish = () => {
+        cancelAnimationFrame(frame);
+        visible.textContent = text;
+        node.classList.remove("is-typing");
+        typingAnimations.delete(node);
+        resolve();
+      };
+      typingAnimations.set(node, finish);
+      const tick = time => {
+        started ??= time;
+        const count = Math.min(characters.length, Math.floor((time - started) / Math.max(1, duration) * characters.length) + 1);
+        visible.textContent = characters.slice(0, count).join("");
+        if (count >= characters.length || motionPreference.matches) finish();
+        else frame = requestAnimationFrame(tick);
+      };
+      frame = requestAnimationFrame(tick);
+    });
+  }
 
   function dismissNudge() {
     clearTimeout(welcomeTimer);
     clearTimeout(dismissTimer);
+    typingAnimations.get(document.querySelector("#supportChatNudgeText"))?.();
     nudge.hidden = true;
     launcher.classList.remove("has-notification");
     try { sessionStorage.setItem(nudgeKey, "yes"); } catch { /* Chat remains usable without browser storage. */ }
   }
   let welcomeSeen = false;
   try { welcomeSeen = sessionStorage.getItem(nudgeKey) === "yes"; } catch {}
-  if (!welcomeSeen) {
-    welcomeTimer = setTimeout(() => {
-      if (!panel.hidden || document.querySelector("dialog[open]") || footerIsVisible()) return;
+  function showNudge() {
+      if (!panel.hidden || !nudge.hidden || document.querySelector("dialog[open]") || footerIsVisible()) return;
       const onSupportPage = /contact|warranty|support/.test(location.pathname);
-      document.querySelector("#supportChatNudgeText").textContent = onSupportPage
+      const text = onSupportPage
         ? "Need a hand? Ask about your order, delivery, or payment anytime."
         : "Hi! Looking for a PC, laptop, or the right upgrade? Ask me anytime.";
       nudge.hidden = false;
+      typeChatText(document.querySelector("#supportChatNudgeText"), text);
       launcher.classList.add("has-notification");
       try { sessionStorage.setItem(nudgeKey, "yes"); } catch {}
       dismissTimer = setTimeout(dismissNudge, 12000);
-    }, 1800);
   }
+  if (!welcomeSeen) welcomeTimer = setTimeout(showNudge, 1800);
+  launcher.addEventListener("pointerenter", showNudge);
+  launcher.addEventListener("focus", event => { if (launcher.matches(":focus-visible") && !event.relatedTarget?.closest("#supportChat")) showNudge(); });
   document.querySelector("#dismissChatNudge").addEventListener("click", () => {
     dismissNudge();
     launcher.focus();
@@ -1752,6 +1797,7 @@ function wireSupportChat() {
     if (entries.some(entry => entry.isIntersecting) && !nudge.hidden) dismissNudge();
   }).observe(footer);
 
+  let greeted = false;
   function setOpen(open) {
     panel.hidden = !open;
     launcher.setAttribute("aria-expanded", String(open));
@@ -1759,6 +1805,11 @@ function wireSupportChat() {
     launcher.setAttribute("aria-label", open ? "Close chat" : "Chat with us");
     launcher.title = open ? "Close chat" : "Chat with us";
     if (open) input.focus();
+    if (open && !greeted) {
+      greeted = true;
+      const greeting = messages.querySelector(".agent");
+      typeChatText(greeting, greeting.textContent);
+    }
   }
 
   function appendMessage(kind, text) {
@@ -1776,7 +1827,8 @@ function wireSupportChat() {
     if (pending || !message || message.length > 2000) return;
     appendMessage("visitor", message);
     if (!/^https?:$/.test(location.protocol)) {
-      appendMessage("agent", "AI chat needs the store server. Open http://localhost:4173/ to chat, or contact support.");
+      const text = "AI chat needs the store server. Open http://localhost:4173/ to chat, or contact support.";
+      typeChatText(appendMessage("agent", ""), text);
       return;
     }
     pending = true;
@@ -1794,12 +1846,13 @@ function wireSupportChat() {
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.error || "AI chat is unavailable. Open the store through its server or contact support.");
       if (typeof data.reply !== "string" || !data.reply.trim()) throw new Error("The AI returned an empty reply. Please try again.");
-      indicator.textContent = data.reply;
+      await typeChatText(indicator, data.reply);
       history = [...conversation, { role: "assistant", content: data.reply.slice(0, 2000) }];
     } catch (error) {
-      indicator.textContent = error.name === "TimeoutError" || error.name === "AbortError"
+      const errorText = error.name === "TimeoutError" || error.name === "AbortError"
         ? "The AI took too long to reply. Please try again."
         : error instanceof TypeError ? "Cannot reach chat. Check your connection and try again." : error.message;
+      await typeChatText(indicator, errorText);
       if (!input.value) input.value = message;
     } finally {
       pending = false;

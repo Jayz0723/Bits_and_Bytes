@@ -1,5 +1,7 @@
 # Search, homepage and journal
 
+October 25: search controls now use direct local Lucide SVG images instead of CSS masks, including direct-file previews. Shared asset versions were bumped to refresh cached pages. The animated gradient now applies across the store, mixing dark teal, graphite, green and muted plum with separate moving linear-gradient layers and scroll offset. Reduced-motion preferences stop the background animation. On very narrow screens the mobile brand uses the logo plus an accessible name so music, search and Menu stay on one row.
+
 - Navigation magnifier: opens a full-width modal, live product/article/page results, popular queries, and a full results link. Enter opens `pages/search.html?q=...`. All text is escaped; product IDs and query strings are encoded.
 - Search matches every typed word, without case or accent sensitivity. Product data includes brands, specs, use, component categories and variants. Primary product/category matches rank above incidental specification matches. Results page filters All, Products, Articles and Pages.
 - Original guides: edit the `storeArticles` array in `js/site-experience.js`. Each guide has a stable ID, category, local image, summary, sections and a shopping query. The homepage shows five highlights, the journal indexes six guides with category filters, and article pages include contents anchors, a related-reading grid and a relevant CTA. These are store-written buying guides, not republished ASUS articles or externally sourced news.
