@@ -46,7 +46,7 @@ function backgroundDifference(first, second) {
       assert.notEqual(firstLayer.after, nextLayer.after, 'Second layer moves independently');
       const pixels = backgroundDifference(before, after);
       assert.ok(pixels.change > 2.5, 'Visible charcoal shades change: ' + JSON.stringify(pixels));
-      assert.ok(pixels.brightness < 65, 'Backdrop stays close to the reference charcoal brightness: ' + JSON.stringify(pixels));
+      assert.ok(pixels.brightness < 40, 'Backdrop stays close to the dark card surfaces: ' + JSON.stringify(pixels));
       assert.ok(pixels.chroma <= 25, 'Backdrop avoids saturated color shifts: ' + JSON.stringify(pixels));
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
       await page.click('#siteSearchToggle');
