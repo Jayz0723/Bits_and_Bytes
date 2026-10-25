@@ -563,9 +563,22 @@ body .address-book-dialog input[type="checkbox"] { min-height: 0; }
 .support-chat #supportChatLauncher:hover { background: transparent; transform: translateY(-3px); }
 .support-chat #supportChatLauncher:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
 .support-chat #supportChatLauncher img { position: absolute; inset: 0; display: block; width: 64px; height: 64px; max-width: none; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; object-fit: contain; transition: opacity 160ms ease; }
-.chat-robot-hover { opacity: 0; }
-#supportChatLauncher:is(:hover, :focus-visible, [aria-expanded="true"]) .chat-robot-hover { opacity: 1; }
-#supportChatLauncher:is(:hover, :focus-visible, [aria-expanded="true"]) .chat-robot-normal { opacity: 0; }
+.chat-robot-normal { animation: support-robot-idle 4s ease-in-out infinite; transform-origin: 50% 75%; }
+.chat-robot-hover { opacity: 0; transform-origin: 50% 75%; }
+#supportChatLauncher:is(:hover, :focus-visible, [aria-expanded="true"]) .chat-robot-hover { opacity: 1; animation: support-robot-greet 480ms ease-out both; }
+#supportChatLauncher:is(:hover, :focus-visible, [aria-expanded="true"]) .chat-robot-normal { opacity: 0; animation-play-state: paused; }
+/* Each half of the loop is a two-second pose; only the artwork moves, not the hit area. */
+@keyframes support-robot-idle {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  25% { transform: translateY(-4px) rotate(0deg); }
+  50% { transform: translateY(0) rotate(5deg); }
+  75% { transform: translateY(-4px) rotate(0deg); }
+}
+@keyframes support-robot-greet {
+  0% { transform: translateY(2px) rotate(-6deg) scale(.96); }
+  65% { transform: translateY(-2px) rotate(3deg) scale(1.04); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
 .chat-notification-dot { display: none; position: absolute; top: 3px; right: 4px; width: 10px; height: 10px; border: 2px solid #0b1418; border-radius: 50%; background: #43dfbe; }
 .has-notification .chat-notification-dot { display: block; }
 .support-chat-nudge { position: absolute; right: 80px; bottom: 8px; width: min(270px, calc(100vw - 116px)); padding: 16px 36px 16px 18px; color: #e2edf0; background: #25343b; border: 1px solid #4a6069; border-radius: 8px; box-shadow: 0 10px 28px #0005; animation: chat-welcome-in 220ms ease-out; }
@@ -595,6 +608,7 @@ body:has(.shopping-feedback.is-visible) .support-chat-nudge { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .support-chat #supportChatLauncher, .support-chat #supportChatLauncher img { transition: none; }
+  .support-chat #supportChatLauncher img { animation: none; transform: none; }
   .support-chat #supportChatLauncher:hover { transform: none; }
   .support-chat-nudge { animation: none; }
 }

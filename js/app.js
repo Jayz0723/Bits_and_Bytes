@@ -1704,8 +1704,8 @@ function wireSupportChat() {
         <button id="dismissChatNudge" type="button" aria-label="Dismiss chat message" title="Dismiss message"><img src="images/icons/x.svg" width="16" height="16" alt=""></button>
       </div>
       <button class="support-chat-launcher" id="supportChatLauncher" type="button" aria-label="Chat with us" title="Chat with us" aria-expanded="false" aria-controls="supportChatPanel">
-        <img class="chat-robot-normal" src="images/branding/support-robot-normal.png" width="64" height="64" alt="">
-        <img class="chat-robot-hover" src="images/branding/support-robot-hover.png" width="64" height="64" alt="">
+        <img class="chat-robot-normal" src="images/branding/support-robot-hover.png" width="64" height="64" alt="" aria-hidden="true">
+        <img class="chat-robot-hover" src="images/branding/support-robot-normal.png" width="64" height="64" alt="" aria-hidden="true">
         <span class="chat-notification-dot" aria-hidden="true"></span>
       </button>
     </aside>
