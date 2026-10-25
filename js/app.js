@@ -1703,6 +1703,9 @@ function wireSupportChat() {
         <p id="supportChatNudgeText"></p>
         <button id="dismissChatNudge" type="button" aria-label="Dismiss chat message" title="Dismiss message"><img src="images/icons/x.svg" width="16" height="16" alt=""></button>
       </div>
+      <button class="store-back-to-top" id="storeBackToTop" type="button" aria-label="Back to top" title="Back to top" hidden>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 15 7-7 7 7"/></svg>
+      </button>
       <button class="support-chat-launcher" id="supportChatLauncher" type="button" aria-label="Chat with us" title="Chat with us" aria-expanded="false" aria-controls="supportChatPanel">
         <img class="chat-robot-normal" src="images/branding/support-robot-hover.png" width="64" height="64" alt="" aria-hidden="true">
         <img class="chat-robot-hover" src="images/branding/support-robot-normal.png" width="64" height="64" alt="" aria-hidden="true">
@@ -1724,6 +1727,17 @@ function wireSupportChat() {
   let welcomeTimer, dismissTimer;
   const typingAnimations = new WeakMap();
   const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+  const activeDialogue = new Set();
+  const backToTop = document.querySelector("#storeBackToTop");
+  function updateSpeaking() {
+    launcher.classList.toggle("is-speaking", !nudge.hidden || (!panel.hidden && (activeDialogue.size > 0 || messages.hasAttribute("aria-busy"))));
+  }
+  function updateBackToTop() {
+    backToTop.hidden = scrollY < 400 || !panel.hidden;
+  }
+  addEventListener("scroll", updateBackToTop, { passive: true });
+  backToTop.addEventListener("click", () => scrollTo({ top: 0, behavior: motionPreference.matches ? "instant" : "smooth" }));
+  updateBackToTop();
 
   function typeChatText(node, text) {
     typingAnimations.get(node)?.();
@@ -1743,6 +1757,8 @@ function wireSupportChat() {
     const characters = Array.from(text);
     const duration = Math.min(6500, characters.length * 22);
     node.classList.add("is-typing");
+    activeDialogue.add(node);
+    updateSpeaking();
     return new Promise(resolve => {
       let frame, started;
       const finish = () => {
@@ -1750,6 +1766,8 @@ function wireSupportChat() {
         visible.textContent = text;
         node.classList.remove("is-typing");
         typingAnimations.delete(node);
+        activeDialogue.delete(node);
+        updateSpeaking();
         resolve();
       };
       typingAnimations.set(node, finish);
@@ -1769,6 +1787,7 @@ function wireSupportChat() {
     clearTimeout(dismissTimer);
     typingAnimations.get(document.querySelector("#supportChatNudgeText"))?.();
     nudge.hidden = true;
+    updateSpeaking();
     launcher.classList.remove("has-notification");
     try { sessionStorage.setItem(nudgeKey, "yes"); } catch { /* Chat remains usable without browser storage. */ }
   }
@@ -1821,6 +1840,7 @@ function wireSupportChat() {
       lineCursor = (lineCursor + 1) % lines.length;
       try { sessionStorage.setItem(cursorKey, String(lineCursor)); } catch {}
       nudge.hidden = false;
+      updateSpeaking();
       typeChatText(document.querySelector("#supportChatNudgeText"), text);
       launcher.classList.add("has-notification");
       try { sessionStorage.setItem(nudgeKey, "yes"); } catch {}
@@ -1841,6 +1861,8 @@ function wireSupportChat() {
   function setOpen(open) {
     panel.hidden = !open;
     launcher.setAttribute("aria-expanded", String(open));
+    updateBackToTop();
+    updateSpeaking();
     if (open) dismissNudge();
     launcher.setAttribute("aria-label", open ? "Close chat" : "Chat with us");
     launcher.title = open ? "Close chat" : "Chat with us";
@@ -1876,6 +1898,7 @@ function wireSupportChat() {
     controls.forEach(control => { control.disabled = true; });
     const indicator = appendMessage("agent", "Thinking...");
     messages.setAttribute("aria-busy", "true");
+    updateSpeaking();
     const conversation = [...history.slice(-8), { role: "user", content: message }];
     while (conversation.reduce((size, entry) => size + entry.content.length, 0) > 12000) conversation.splice(0, 2);
     try {
@@ -1899,6 +1922,7 @@ function wireSupportChat() {
       indicator.classList.add("chat-reply");
       controls.forEach(control => { control.disabled = false; });
       messages.removeAttribute("aria-busy");
+      updateSpeaking();
       messages.scrollTop = messages.scrollHeight;
     }
   }

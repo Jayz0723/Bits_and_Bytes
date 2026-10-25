@@ -562,6 +562,15 @@ body .address-book-dialog input[type="checkbox"] { min-height: 0; }
 .support-chat #supportChatLauncher { position: relative; display: block; width: 64px; height: 64px; min-height: 64px; padding: 0; border: 0; border-radius: 50%; background: transparent; box-shadow: none; transition: transform 180ms ease; }
 .support-chat #supportChatLauncher:hover { background: transparent; transform: translateY(-3px); }
 .support-chat #supportChatLauncher:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
+.support-chat #supportChatLauncher::before { content: ""; position: absolute; inset: -5px; border: 2px solid #8edfff; border-radius: 50%; opacity: 0; pointer-events: none; }
+.support-chat #supportChatLauncher.is-speaking::before { opacity: 1; border-color: #8edfff #56bde8 #8edfff transparent; box-shadow: 0 0 12px #64d4ff88, inset 0 0 7px #64d4ff44; animation: support-robot-speaking 2s linear infinite; }
+@keyframes support-robot-speaking { to { transform: rotate(360deg); } }
+.support-chat .store-back-to-top { position: absolute; right: 8px; bottom: 86px; display: grid; place-items: center; width: 48px; height: 48px; min-height: 48px; padding: 0; color: #dcecf3; background: #2c383fe8; border: 1px solid #50646f; border-radius: 50%; box-shadow: 0 4px 18px #0004; cursor: pointer; transition: background 180ms ease, transform 180ms ease; }
+.support-chat .store-back-to-top[hidden] { display: none; }
+.support-chat .store-back-to-top:hover { background: #3b5360; transform: translateY(-3px); }
+.support-chat .store-back-to-top:focus-visible { outline: 2px solid #8edfff; outline-offset: 4px; }
+.store-back-to-top svg { display: block; pointer-events: none; }
+body:has(.shopping-feedback.is-visible) .store-back-to-top { visibility: hidden; pointer-events: none; }
 .support-chat #supportChatLauncher img { position: absolute; inset: 0; display: block; width: 64px; height: 64px; max-width: none; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; object-fit: contain; transition: opacity 160ms ease; }
 .chat-robot-normal { animation: support-robot-idle 4s ease-in-out infinite; transform-origin: 50% 75%; }
 .chat-robot-hover { opacity: 0; transform-origin: 50% 75%; }
@@ -609,6 +618,9 @@ body:has(.shopping-feedback.is-visible) .support-chat-nudge { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .support-chat #supportChatLauncher, .support-chat #supportChatLauncher img { transition: none; }
   .support-chat #supportChatLauncher img { animation: none; transform: none; }
+  .support-chat #supportChatLauncher.is-speaking::before { animation: none; }
+  .support-chat .store-back-to-top { transition: none; }
+  .support-chat .store-back-to-top:hover { transform: none; }
   .support-chat #supportChatLauncher:hover { transform: none; }
   .support-chat-nudge { animation: none; }
 }
