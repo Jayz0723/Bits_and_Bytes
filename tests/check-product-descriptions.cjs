@@ -13,7 +13,7 @@ const { chromium } = require('./browser.cjs');
     const detail = pathToFileURL(path.resolve(__dirname, '../pages/product.html')).href;
     await page.goto(detail + '?id=part-ssd-1tb-nvme');
     const products = await page.evaluate(() => catalogProducts());
-    assert.equal(products.length, 50);
+    assert.equal(products.length, 60);
     assert.equal(await page.evaluate(() => Object.keys(productDescriptions).length), products.length);
     const allowed = ['msi.com', 'dell.com', 'delltechnologies.com', 'hp.com', 'corsair.com', 'samsung.com', 'logitechg.com', 'microsoft.com', 'apple.com', 'acer.com', 'asus.com', 'lenovo.com', 'keychron.com', 'logitech.com', 'elgato.com', 'kingston.com', 'intel.com', 'amd.com', 'gigabyte.com', 'coolermaster.com'];
     let variants = 0;
@@ -66,6 +66,6 @@ const { chromium } = require('./browser.cjs');
       await page.screenshot({ path: path.resolve(__dirname, '../images/previews/descriptions-' + width + '.png'), fullPage: false });
     }
     assert.deepEqual(errors, []);
-    console.log(`Passed descriptions and manufacturer references for all 50 products, ${variants} options, full pages, Quick View, model-switching, configuration notes, and responsive layouts.`);
+    console.log(`Passed descriptions and manufacturer references for all 60 products, ${variants} options, full pages, Quick View, model-switching, configuration notes, and responsive layouts.`);
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

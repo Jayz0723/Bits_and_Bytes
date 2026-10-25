@@ -82,7 +82,7 @@ function wireProfilePage() {
 
   function productImage(product) {
     const image = document.createElement("img");
-    if (typeof product.image === "string" && /^images\/[\w/.-]+$/.test(product.image) && !product.image.includes("..")) image.src = product.image;
+    if (typeof product.image === "string" && /^images\/[\w/.-]+$/.test(product.image) && !product.image.includes("..")) image.src = typeof transparentProductPhoto === "function" ? transparentProductPhoto(product.image) : product.image;
     image.alt = product.name;
     image.loading = "lazy";
     return image;

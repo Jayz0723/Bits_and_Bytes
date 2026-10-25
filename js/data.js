@@ -259,6 +259,275 @@ productVariants["part-ssd-1tb-nvme"].options.forEach((variant) => {
 });
 
 const products = [
+  {
+    "id": "monitor-msi-g244f-e2",
+    "name": "MSI G244F E2",
+    "type": "Monitor",
+    "use": "Gaming",
+    "price": 8995,
+    "stock": 15,
+    "specs": "23.8-inch Rapid IPS, 1920 x 1080 Full HD, 180Hz, 1ms GtG, HDMI and DisplayPort",
+    "brand": "MSI",
+    "image": "images/products/new-arrivals/monitor-msi-g244f-e2-1.webp",
+    "gallery": [
+      {
+        "src": "images/products/new-arrivals/monitor-msi-g244f-e2-1.webp",
+        "label": "MSI G244F E2 manufacturer product view 1",
+        "shortLabel": "Main"
+      },
+      {
+        "src": "images/products/new-arrivals/monitor-msi-g244f-e2-2.webp",
+        "label": "MSI G244F E2 manufacturer product view 2",
+        "shortLabel": "View 2"
+      },
+      {
+        "src": "images/products/new-arrivals/monitor-msi-g244f-e2-3.webp",
+        "label": "MSI G244F E2 manufacturer product view 3",
+        "shortLabel": "View 3"
+      }
+    ]
+  },
+  {
+    "id": "part-msi-a650bn",
+    "name": "MSI MAG A650BN 650W",
+    "type": "Computer Part",
+    "partCategory": "psu",
+    "use": "Build",
+    "price": 3295,
+    "stock": 18,
+    "specs": "650W ATX power supply, 80 PLUS Bronze, 120mm fan, fixed cables",
+    "brand": "MSI",
+    "image": "images/products/new-arrivals/part-msi-a650bn-1.webp",
+    "gallery": [
+      {
+        "src": "images/products/new-arrivals/part-msi-a650bn-1.webp",
+        "label": "MSI MAG A650BN 650W manufacturer product view 1",
+        "shortLabel": "Main"
+      },
+      {
+        "src": "images/products/new-arrivals/part-msi-a650bn-2.webp",
+        "label": "MSI MAG A650BN 650W manufacturer product view 2",
+        "shortLabel": "View 2"
+      },
+      {
+        "src": "images/products/new-arrivals/part-msi-a650bn-3.webp",
+        "label": "MSI MAG A650BN 650W manufacturer product view 3",
+        "shortLabel": "View 3"
+      }
+    ]
+  },
+  {
+    "id": "accessory-msi-gh20",
+    "name": "MSI IMMERSE GH20",
+    "type": "Accessory",
+    "use": "Gaming",
+    "price": 1495,
+    "stock": 20,
+    "specs": "Wired 3.5mm headset, 40mm drivers, adjustable microphone, inline audio controls, 245g",
+    "brand": "MSI",
+    "image": "images/products/new-arrivals/accessory-msi-gh20-1.webp",
+    "gallery": [
+      {
+        "src": "images/products/new-arrivals/accessory-msi-gh20-1.webp",
+        "label": "MSI IMMERSE GH20 manufacturer product view 1",
+        "shortLabel": "Main"
+      },
+      {
+        "src": "images/products/new-arrivals/accessory-msi-gh20-2.webp",
+        "label": "MSI IMMERSE GH20 manufacturer product view 2",
+        "shortLabel": "View 2"
+      },
+      {
+        "src": "images/products/new-arrivals/accessory-msi-gh20-3.webp",
+        "label": "MSI IMMERSE GH20 manufacturer product view 3",
+        "shortLabel": "View 3"
+      }
+    ]
+  },
+  {
+    "id": "accessory-msi-gm11",
+    "name": "MSI CLUTCH GM11",
+    "type": "Accessory",
+    "use": "Gaming",
+    "price": 995,
+    "stock": 24,
+    "specs": "USB wired optical mouse, PixArt PMW-3325, up to 5000 DPI, six programmable buttons, RGB",
+    "brand": "MSI",
+    "image": "images/products/new-arrivals/accessory-msi-gm11-3.webp",
+    "gallery": [
+      {
+        "src": "images/products/new-arrivals/accessory-msi-gm11-3.webp",
+        "label": "MSI CLUTCH GM11 front angle",
+        "shortLabel": "Main"
+      },
+      {
+        "src": "images/products/new-arrivals/accessory-msi-gm11-2.webp",
+        "label": "MSI CLUTCH GM11 side profile",
+        "shortLabel": "Side"
+      }
+    ]
+  },
+  {
+    "id": "part-msi-m450-1tb",
+    "name": "MSI SPATIUM M450 1TB",
+    "type": "Computer Part",
+    "partCategory": "storage",
+    "use": "Build",
+    "price": 3495,
+    "stock": 16,
+    "specs": "1TB M.2 2280 NVMe SSD, PCIe 4.0 x4, up to 3600MB/s read and 3000MB/s write",
+    "brand": "MSI",
+    "image": "images/products/new-arrivals/part-msi-m450-1tb-1.webp",
+    "gallery": [
+      {
+        "src": "images/products/new-arrivals/part-msi-m450-1tb-1.webp",
+        "label": "MSI SPATIUM M450 1TB manufacturer product view 1",
+        "shortLabel": "Main"
+      },
+      {
+        "src": "images/products/new-arrivals/part-msi-m450-1tb-2.webp",
+        "label": "MSI SPATIUM M450 1TB manufacturer product view 2",
+        "shortLabel": "View 2"
+      },
+      {
+        "src": "images/products/new-arrivals/part-msi-m450-1tb-3.webp",
+        "label": "MSI SPATIUM M450 1TB manufacturer product view 3",
+        "shortLabel": "View 3"
+      }
+    ]
+  },
+  {
+    "id": "part-msi-m100r-white",
+    "name": "MSI MAG FORGE M100R White",
+    "type": "Computer Part",
+    "partCategory": "case",
+    "use": "Build",
+    "price": 3495,
+    "stock": 12,
+    "specs": "White Micro-ATX tower, Micro-ATX / Mini-ITX support, four 120mm ARGB fans, 300mm GPU clearance",
+    "brand": "MSI",
+    "image": "images/products/new-arrivals/part-msi-m100r-white-3.webp",
+    "gallery": [
+      {
+        "src": "images/products/new-arrivals/part-msi-m100r-white-3.webp",
+        "label": "MSI MAG FORGE M100R White manufacturer product view 1",
+        "shortLabel": "Main"
+      },
+      {
+        "src": "images/products/new-arrivals/part-msi-m100r-white-5.webp",
+        "label": "MSI MAG FORGE M100R White manufacturer product view 2",
+        "shortLabel": "View 2"
+      }
+    ]
+  },
+  {
+    "id": "part-msi-h610m-g",
+    "name": "MSI PRO H610M-G DDR4",
+    "type": "Computer Part",
+    "partCategory": "motherboard",
+    "use": "Build",
+    "price": 4995,
+    "stock": 14,
+    "specs": "Intel H610, LGA1700, Micro-ATX, two DDR4 slots, M.2 storage, Gigabit LAN",
+    "brand": "MSI",
+    "image": "images/products/new-arrivals/part-msi-h610m-g-1.webp",
+    "gallery": [
+      {
+        "src": "images/products/new-arrivals/part-msi-h610m-g-1.webp",
+        "label": "MSI PRO H610M-G DDR4 manufacturer product view 1",
+        "shortLabel": "Main"
+      },
+      {
+        "src": "images/products/new-arrivals/part-msi-h610m-g-2.webp",
+        "label": "MSI PRO H610M-G DDR4 manufacturer product view 2",
+        "shortLabel": "View 2"
+      },
+      {
+        "src": "images/products/new-arrivals/part-msi-h610m-g-3.webp",
+        "label": "MSI PRO H610M-G DDR4 manufacturer product view 3",
+        "shortLabel": "View 3"
+      }
+    ]
+  },
+  {
+    "id": "accessory-msi-gk30",
+    "name": "MSI VIGOR GK30",
+    "type": "Accessory",
+    "use": "Gaming",
+    "price": 1695,
+    "stock": 19,
+    "specs": "Full-size USB keyboard, plunger switches, RGB lighting, 6-key rollover, 20-key anti-ghosting",
+    "brand": "MSI",
+    "image": "images/products/new-arrivals/accessory-msi-gk30-1.webp",
+    "gallery": [
+      {
+        "src": "images/products/new-arrivals/accessory-msi-gk30-1.webp",
+        "label": "MSI VIGOR GK30 manufacturer product view 1",
+        "shortLabel": "Main"
+      },
+      {
+        "src": "images/products/new-arrivals/accessory-msi-gk30-2.webp",
+        "label": "MSI VIGOR GK30 manufacturer product view 2",
+        "shortLabel": "View 2"
+      },
+      {
+        "src": "images/products/new-arrivals/accessory-msi-gk30-3.webp",
+        "label": "MSI VIGOR GK30 manufacturer product view 3",
+        "shortLabel": "View 3"
+      }
+    ]
+  },
+  {
+    "id": "lap-msi-thin-15-b13ve",
+    "name": "MSI Thin 15 B13VE",
+    "type": "Laptop",
+    "use": "Gaming",
+    "price": 52995,
+    "stock": 8,
+    "specs": "13th Gen Intel Core platform, GeForce RTX 4050 Laptop GPU 6GB, DDR4 memory support, 15.6-inch Full HD 144Hz",
+    "brand": "MSI",
+    "image": "images/products/new-arrivals/lap-msi-thin-15-b13ve-2.webp",
+    "gallery": [
+      {
+        "src": "images/products/new-arrivals/lap-msi-thin-15-b13ve-2.webp",
+        "label": "MSI Thin 15 B13VE manufacturer product view 1",
+        "shortLabel": "Main"
+      },
+      {
+        "src": "images/products/new-arrivals/lap-msi-thin-15-b13ve-3.webp",
+        "label": "MSI Thin 15 B13VE manufacturer product view 2",
+        "shortLabel": "View 2"
+      },
+      {
+        "src": "images/products/new-arrivals/lap-msi-thin-15-b13ve-1.webp",
+        "label": "MSI Thin 15 B13VE manufacturer product view 3",
+        "shortLabel": "View 3"
+      }
+    ]
+  },
+  {
+    "id": "lap-msi-modern-15-b13m",
+    "name": "MSI Modern 15 B13M Star Blue",
+    "type": "Laptop",
+    "use": "Office",
+    "price": 36995,
+    "stock": 10,
+    "specs": "13th Gen Intel Core platform, onboard DDR4 memory support, 15.6-inch Full HD IPS-level display, Star Blue",
+    "brand": "MSI",
+    "image": "images/products/new-arrivals/lap-msi-modern-15-b13m-2.webp",
+    "gallery": [
+      {
+        "src": "images/products/new-arrivals/lap-msi-modern-15-b13m-2.webp",
+        "label": "MSI Modern 15 B13M Star Blue manufacturer product view 1",
+        "shortLabel": "Main"
+      },
+      {
+        "src": "images/products/new-arrivals/lap-msi-modern-15-b13m-3.webp",
+        "label": "MSI Modern 15 B13M Star Blue manufacturer product view 2",
+        "shortLabel": "View 2"
+      }
+    ]
+  },
   // More models: each entry keeps its actual manufacturer photos beside its data.
   {
     id: "lap-msi-modern-14-c13m", name: "MSI Modern 14 C13M Beige Rose",
@@ -1220,3 +1489,86 @@ addProductColorOptions("mouse-wireless", "Logitech MX Master 3S", "palegray", [
       { src: "images/products/colors/mx3s-graphite-front-view.png", label: "MX Master 3S Graphite front view", shortLabel: "Front" }
     ] }
 ]);
+
+// Only audited transparent product views are served; originals remain available in the repository.
+const productPhotoReplacements = {
+  "images/products/corsair-k65-plus-2.webp": "images/products/corsair-k65-plus-top-cutout.png",
+  "images/products/surface-studio-2-main.png": "images/products/surface-studio-2-cutout.png",
+  "images/products/surface-studio-2-front.png": "images/products/surface-studio-2-cutout.png",
+  "images/products/mac-mini-m4.jpg": "images/products/mac-mini-m4-cutout.png",
+  "images/products/mac-mini-m4-front.jpg": "images/products/mac-mini-m4-cutout.png",
+  "images/products/acer-aspire-14.jpg": "images/products/acer-aspire-14-cutout.png",
+  "images/products/lenovo-thinkbook-14-g6.jpg": "images/products/lenovo-thinkbook-14-g6-cutout.png",
+  "images/products/keychron-k8-pro.jpg": "images/products/keychron-k8-pro-cutout.png",
+  "images/products/elgato-facecam-mk2.jpg": "images/products/elgato-facecam-mk2-cutout.png",
+  "images/products/colors/g435-blue-main.jpg": "images/products/colors/g435-blue-cutout.png"
+};
+const opaqueProductGalleryPhotos = new Set([
+  "images/products/corsair-k65-plus-2.webp",
+  "images/products/corsair-k65-plus-3.webp",
+  "images/products/corsair-ml120-red-2.webp",
+  "images/products/corsair-vengeance-32gb-2.webp",
+  "images/products/colors/g435-blue-main.jpg",
+  "images/products/surface-studio-2-main.png",
+  "images/products/surface-studio-2-front.png",
+  "images/products/surface-studio-2-ports.png",
+  "images/products/mac-mini-m4.jpg",
+  "images/products/mac-mini-m4-front.jpg",
+  "images/products/mac-mini-m4-back.jpg",
+  "images/products/acer-aspire-14.jpg",
+  "images/products/gallery-acer-as14h53-rear-angle.jpg",
+  "images/products/gallery-acer-as14h53-ports.jpg",
+  "images/products/lenovo-thinkbook-14-g6.jpg",
+  "images/products/gallery-lenovo-thinkbook14-g6-irl-angle.jpg",
+  "images/products/gallery-lenovo-thinkbook14-g6-irl-rear.jpg",
+  "images/products/gallery-lenovo-thinkbook14-g6-irl-ports.jpg",
+  "images/products/gallery-apple-mba13-m3-midnight-lid.jpg",
+  "images/products/gallery-apple-mba13-m3-midnight-side.jpg",
+  "images/products/gallery-apple-mba13-m3-midnight-ports.jpg",
+  "images/products/lenovo-neo-50t-angle.jpg",
+  "images/products/lenovo-neo50t-view-001.webp",
+  "images/products/lenovo-neo50t-view-003.webp",
+  "images/products/asus-vg27aq-rear-ports.jpg",
+  "images/products/keychron-k8-pro.jpg",
+  "images/products/keychron-k8pro-usbc.jpg",
+  "images/products/gallery-asus-k6602vv-angle.jpg",
+  "images/products/gallery-asus-k6602vv-rear.jpg",
+  "images/products/gallery-asus-k6602vv-ports.jpg",
+  "images/products/elgato-facecam-mk2.jpg",
+  "images/products/gallery-elgato-facecam-mk2-angle.jpg",
+  "images/products/gallery-elgato-facecam-mk2-usbc.jpg",
+  "images/products/gallery-hp-14-ew1010nr-angle.jpg",
+  "images/products/gallery-hp-14-ew1010nr-rear.jpg",
+  "images/products/gallery-hp-14-ew1010nr-right-ports.jpg",
+  "images/products/gallery-hp-14-ew1010nr-left-ports.jpg",
+  "images/products/gallery-dell-7440-angle.jpg",
+  "images/products/gallery-dell-7440-rear.jpg",
+  "images/products/gallery-dell-7440-right-ports.jpg",
+  "images/products/gallery-dell-7440-left-ports.jpg",
+  "images/products/kingston-kc600-256gb-view-1.jpg",
+  "images/products/kingston-kc600-256gb-view-2.jpg",
+  "images/products/kingston-kc600-sata-connectors.jpg",
+  "images/products/kingston-kc600-512gb-view-1.jpg",
+  "images/products/kingston-kc600-512gb-view-2.jpg",
+  "images/products/kingston-kc600-1024gb-view-1.jpg",
+  "images/products/kingston-kc600-1024gb-view-2.jpg",
+  "images/products/kingston-kc600-2048gb-view-1.jpg",
+  "images/products/kingston-kc600-2048gb-view-2.jpg",
+  "images/products/intel-i5-14600k-chip.png",
+  "images/products/amd-7700x-chip.jpg"
+]);
+function transparentProductPhoto(source) {
+  return productPhotoReplacements[source] || source;
+}
+function cleanProductPhotoRecord(record) {
+  if (record.image) record.image = transparentProductPhoto(record.image);
+  if (record.gallery) {
+    const seen = new Set();
+    record.gallery = record.gallery.map(view => ({ ...view, src: transparentProductPhoto(view.src) }))
+      .filter(view => !opaqueProductGalleryPhotos.has(view.src) && !seen.has(view.src) && seen.add(view.src));
+    if (!record.gallery.length) delete record.gallery;
+  }
+}
+products.forEach(cleanProductPhotoRecord);
+Object.values(productMedia).forEach(cleanProductPhotoRecord);
+Object.values(productVariants).forEach(variants => variants.options.forEach(cleanProductPhotoRecord));
