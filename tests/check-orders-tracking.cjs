@@ -69,15 +69,18 @@ const root = path.resolve(__dirname, '..');
     await page.click('#verifySamplePayment');
     assert.match(await page.locator('#samplePaymentError').textContent(), /Complete the sample payment/);
     assert.equal(await page.evaluate(() => savedStoreOrders().length), 0);
-    await page.locator('.provided-gcash-qr summary').click();
     await page.locator('.provided-gcash-qr img').evaluate(image => image.decode());
-    assert.match(await page.locator('.provided-gcash-qr p').textContent(), /cannot be automatically verified/);
-    await page.locator('.provided-gcash-qr summary').click();
+    assert.ok(await page.locator('.provided-gcash-qr img').isVisible(), 'Original owner QR is visible without expanding a menu');
+    assert.equal(await page.locator('.provided-gcash-qr img').getAttribute('src'), 'images/uploads/gcash-owner-qr.png');
+    assert.match(await page.locator('.provided-gcash-qr').textContent(), /cannot verify/);
+    assert.match(await page.locator('#paymentRecipient').textContent(), /Maria/);
+    assert.equal(await page.locator('#paymentItems li').count(), 1);
     for (const width of [1440, 390, 320]) {
       await page.setViewportSize({ width, height: 1000 });
       const box = await page.locator('#samplePaymentDialog').boundingBox();
       assert.ok(box.x >= 0 && box.x + box.width <= width + 1);
       assert.ok(await page.locator('#samplePaymentDialog').evaluate(element => element.scrollWidth <= element.clientWidth));
+      await page.locator('.provided-gcash-qr img').scrollIntoViewIfNeeded();
       await page.screenshot({ path: path.join(root, 'images/previews/gcash-qr-' + width + '.png') });
     }
     await page.click('#completeSamplePayment');

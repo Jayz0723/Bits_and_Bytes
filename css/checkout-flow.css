@@ -187,3 +187,71 @@
 .checkout-costs > div[hidden], #internationalAddressFields[hidden] { display: none; }
 .unavailable-payment { opacity: .5; }
 .delivery-checkout-form .address-grid > div[hidden] { display: none; }
+
+/* A clear visual path from delivery details to the final amount. */
+.checkout-page .cart-summary { padding: 28px; border: 1px solid #3b515d; border-radius: 16px; background: #18252e; }
+.checkout-page .checkout-panel { gap: 30px; align-items: start; padding-top: 28px; border-top: 1px solid #344a56; }
+.checkout-page .delivery-map-card { padding: 26px; border: 1px solid #334a55; border-radius: 16px; background: linear-gradient(140deg, #1c3038, #141f28); top: 100px; }
+.checkout-page .delivery-map-card h2 { font-size: 28px; }
+.checkout-guide { display: grid; gap: 10px; margin-block: 24px; }
+.checkout-guide a { display: flex; align-items: center; gap: 12px; color: #d5e5ec; text-decoration: none; font-size: 14px; padding: 10px 0; }
+.checkout-guide span { display: grid; place-items: center; width: 32px; height: 32px; color: #87e2d0; border: 1px solid #40646a; border-radius: 50%; font-size: 12px; }
+.checkout-guide a:hover { color: #8ee7d4; }
+.checkout-page .delivery-checkout-form { padding: 28px; border: 1px solid #344b57; border-radius: 16px; background: #15212be8; }
+.checkout-page .delivery-checkout-form > h2 { font-size: 32px; letter-spacing: -.6px; }
+.checkout-page .delivery-checkout-form fieldset.checkout-form-section, .checkout-page .delivery-checkout-form .payment-methods { margin-top: 28px; padding: 24px 20px; border: 1px solid #354f5b; border-radius: 12px; background: #192a34; }
+.checkout-page .delivery-checkout-form legend { font-size: 18px; font-weight: 600; padding-inline: 8px; }
+.checkout-page .delivery-checkout-form label { font-size: 14px; line-height: 1.6; }
+.checkout-page .delivery-checkout-form :is(input, select, textarea) { font-size: 16px; background: #101d26; border-radius: 8px; min-height: 46px; }
+.checkout-page .delivery-checkout-form input[type="radio"], .checkout-page .delivery-checkout-form input[type="checkbox"] { min-height: 0; accent-color: #72dec8; }
+.checkout-page .delivery-checkout-form .form-note, .checkout-page .address-hint, .checkout-page .payment-option small { font-size: 14px; line-height: 1.7; }
+.checkout-page .payment-option { padding: 16px; border: 1px solid #415a65; border-radius: 10px; background: #13232c; }
+.checkout-page .payment-option:has(input:checked), .checkout-page .fulfillment-methods label:has(input:checked) { background: #203e40; border-color: #76d9c9; box-shadow: inset 3px 0 #76d9c9; }
+.checkout-page .payment-option strong { font-size: 16px; }
+.checkout-page .checkout-review { margin-top: 28px; padding: 24px; border: 1px solid #4c7678; border-radius: 12px; background: linear-gradient(125deg, #203b40, #192a35); }
+.checkout-review h3 { font-size: 22px; margin: 8px 0; }
+.checkout-page .checkout-costs { margin-bottom: 0; border-bottom: 0; }
+.checkout-page .checkout-costs > div { font-size: 15px; }
+.checkout-page .checkout-costs .checkout-grand-total { font-size: 23px; color: #a0efdb; }
+.checkout-page #reviewOrderButton { min-height: 54px; font-size: 16px; border-radius: 9px; }
+.checkout-page :is(#checkoutContact, #checkoutPayment, #checkoutReview) { scroll-margin-top: 110px; }
+.sample-payment-dialog { width: min(620px, calc(100% - 32px)); border-radius: 16px; padding: 32px; background: #172630; }
+.sample-payment-dialog.has-gcash { width: min(900px, calc(100% - 32px)); }
+.sample-payment-dialog .payment-flow-note, .sample-payment-dialog .sample-order-reference, .sample-payment-dialog #samplePaymentState { font-size: 14px; }
+.sample-payment-dialog .sample-payment-total { padding: 22px; border: 1px solid #4e727c; border-radius: 12px; background: #213c44; }
+.sample-payment-dialog .sample-payment-total span { font-size: 15px; }
+.sample-payment-dialog .sample-payment-total strong { font-size: 28px; color: #9aebd7; }
+.payment-order-review { padding: 20px; border: 1px solid #3e5865; background: #12212a; border-radius: 12px; margin: 22px 0; }
+.payment-order-review h3 { margin: 0 0 12px; font-size: 18px; }
+.payment-order-review p { margin: 8px 0; font-size: 14px; line-height: 1.7; color: #bdd0da; overflow-wrap: anywhere; }
+#paymentItems { padding: 12px 0 0; margin: 16px 0 0; list-style: none; border-top: 1px solid #3b535f; }
+#paymentItems li { display: flex; justify-content: space-between; gap: 18px; padding-block: 8px; font-size: 14px; line-height: 1.6; }
+#paymentItems li span { overflow-wrap: anywhere; }
+#paymentItems li strong { flex-shrink: 0; color: #b4e5db; }
+.provided-gcash-qr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 290px); gap: 28px; align-items: start; padding: 24px; border: 1px solid #42616d; border-radius: 12px; background: #1c303b; }
+.provided-gcash-qr h3 { margin: 8px 0 16px; font-size: 24px; }
+.provided-gcash-qr p, .gcash-instructions { color: #c4d7e1; font-size: 14px; line-height: 1.8; }
+.gcash-instructions { padding-left: 22px; }.gcash-instructions li { padding: 7px 0; }
+.provided-gcash-qr .qr-transfer-note { color: #f3d7a7; padding: 14px; background: #3b352d; border-radius: 8px; }
+.provided-gcash-qr img { width: 100%; height: auto; max-height: none; margin: 0; border-radius: 10px; object-fit: contain; }
+.practice-qr { margin-block: 20px; font-size: 14px; color: #b2c9d4; }.practice-qr summary { cursor: pointer; padding: 12px 0; }
+.sample-payment-actions { margin-top: 22px; padding-top: 20px; border-top: 1px solid #3f5d69; }
+.sample-payment-dialog .button { font-size: 15px; min-height: 48px; border-radius: 8px; }
+@media (max-width: 900px) {
+  .checkout-page .checkout-panel { grid-template-columns: minmax(0, 1fr); }
+  .checkout-page .delivery-map-card { position: static; }
+  .checkout-page .delivery-location-map { height: 220px; min-height: 220px; }
+  .checkout-guide { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .checkout-guide a { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 600px) {
+  .checkout-page .delivery-checkout-form, .checkout-page .delivery-map-card { padding: 20px 16px; }
+  .checkout-page .delivery-checkout-form fieldset.checkout-form-section, .checkout-page .delivery-checkout-form .payment-methods { padding: 18px 12px; }
+  .checkout-page .checkout-review { padding: 18px 14px; }
+  .checkout-page .delivery-checkout-form .address-grid { grid-template-columns: minmax(0, 1fr); }
+  .sample-payment-dialog { padding: 28px 16px; }
+  .provided-gcash-qr { grid-template-columns: minmax(0, 1fr); padding: 18px 14px; gap: 20px; }
+  .provided-gcash-qr img { width: min(100%, 290px); justify-self: center; }
+  .sample-payment-dialog .sample-payment-total { flex-wrap: wrap; padding: 16px; }
+  #paymentItems li { flex-wrap: wrap; gap: 6px; }
+}

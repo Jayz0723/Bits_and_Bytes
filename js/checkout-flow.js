@@ -51,14 +51,17 @@ function startSampleCheckout(form) {
       <div class="sample-payment-total"><span>Order total (PHP)</span><strong id="samplePaymentAmount"></strong></div>
       <p id="sampleDeliveryBreakdown" class="sample-order-reference"></p>
       <p class="sample-order-reference" id="sampleOrderReference"></p>
+      <section class="payment-order-review" aria-label="Review order"><h3>Order details</h3><p id="paymentRecipient"></p><p id="paymentDestination"></p><ul id="paymentItems"></ul></section>
       <div id="sampleQrPanel" hidden>
-        <div class="sample-qr-frame"><img id="samplePaymentQr" alt="Non-payable sample payment QR code" width="240" height="240"></div>
-        <p class="sample-qr-caption">Non-payable sample QR. It contains an order reference, not GCash payment instructions.</p>
-        <details class="provided-gcash-qr">
-          <summary>View provided GCash QR</summary>
-          <p>This owner-provided QR can receive real money. Do not send money to test this checkout. Transfers to it cannot be automatically verified here.</p>
-          <img src="images/uploads/gcash-owner-qr.png" alt="Owner-provided GCash QR; real transfers are not verified by this website" loading="lazy">
-        </details>
+        <section class="provided-gcash-qr" aria-labelledby="providedQrTitle"><div>
+          <p class="eyebrow">GCash / InstaPay</p><h3 id="providedQrTitle">Your GCash QR code</h3>
+          <p>This is the QR provided by the store owner. Real transfers require confirmation from the store; this checkout cannot verify them.</p>
+          <ol class="gcash-instructions"><li>Open GCash and choose Scan QR.</li><li>Check the recipient shown in GCash and the exact PHP amount above.</li><li>Contact the store with your transfer reference for actual payment confirmation.</li></ol>
+          <p class="qr-transfer-note">For this sample checkout, use the sample payment buttons below. Do not send money to test the website.</p>
+          <a class="button secondary" href="images/uploads/gcash-owner-qr.png" target="_blank" rel="noopener">Open full-size QR &nearr;</a></div>
+          <img src="images/uploads/gcash-owner-qr.png" alt="Owner-provided GCash QR; real transfers are not verified by this website" width="1066" height="2046">
+        </section>
+        <details class="practice-qr"><summary>View non-payable practice QR</summary><div class="sample-qr-frame"><img id="samplePaymentQr" alt="Non-payable sample payment QR code" width="240" height="240"></div><p class="sample-qr-caption">Contains only the sample order reference. This is not a GCash payment code.</p></details>
       </div>
       <p id="samplePaymentState" role="status">Awaiting sample payment.</p>
       <div class="sample-payment-actions">
@@ -82,6 +85,17 @@ function startSampleCheckout(form) {
   dialog.querySelector("#samplePaymentAmount").textContent = paymentAmount(total);
   dialog.querySelector("#sampleDeliveryBreakdown").textContent = "Items " + paymentAmount(subtotal) + (discount ? " - Voucher " + voucher.code + " " + paymentAmount(discount) : "") + " + " + delivery.label + " " + paymentAmount(delivery.fee);
   dialog.querySelector("#sampleOrderReference").textContent = order.id;
+  dialog.querySelector('#paymentRecipient').textContent = 'Recipient: ' + Object.values(order.recipient).filter(Boolean).join(' ');
+  dialog.querySelector('#paymentDestination').textContent = (pickup ? 'Store pickup: ' : 'Deliver to: ') + [order.address.street, order.address.barangay, order.address.city, order.address.province, order.address.postalCode, order.address.country].filter(Boolean).join(', ');
+  for (const item of items) {
+    const row = document.createElement('li');
+    const label = document.createElement('span');
+    label.textContent = item.quantity + ' × ' + item.name;
+    const amount = document.createElement('strong');
+    amount.textContent = paymentAmount(item.price * item.quantity);
+    row.append(label, amount);
+    dialog.querySelector('#paymentItems').append(row);
+  }
   const cod = paymentIsDeferred(paymentMethod);
   dialog.querySelector("#completeSamplePayment").hidden = cod;
   if (cod) {
@@ -89,6 +103,7 @@ function startSampleCheckout(form) {
     dialog.querySelector("#verifySamplePayment").textContent = "Confirm sample order";
   }
   if (paymentMethod === "GCash") {
+    dialog.classList.add('has-gcash');
     dialog.querySelector("#sampleQrPanel").hidden = false;
     const qr = qrcode(0, "M");
     qr.addData(JSON.stringify({ type: "BITS_AND_BYTES_SAMPLE_ONLY", order: order.id, amount: total, currency: "PHP" }));

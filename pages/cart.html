@@ -11,11 +11,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/storefront.css?v=20261026-dialogue-ring-v21">
-  <link rel="stylesheet" href="css/checkout-flow.css?v=20261023-vouchers-v8">
+  <link rel="stylesheet" href="css/checkout-flow.css?v=20261027-clear-checkout-v9">
   <link rel="stylesheet" href="css/receipts.css?v=20261017-receipts-v1">
   <link rel="stylesheet" href="css/site-experience.css?v=20261026-cutouts-v6">
 </head>
-<body class="utility-page">
+<body class="utility-page checkout-page">
   <header class="site-header" id="top">
     <img src="images/showcase/home-banner.jpg" width="900" height="260" alt="Bits and Bytes Banner">
     <hgroup>
@@ -70,6 +70,7 @@
         <p class="eyebrow">Nationwide delivery</p>
         <h2>Delivered across the Philippines</h2>
         <p>Choose your delivery location, then add the street address for your PC, laptop, or accessories.</p>
+        <nav class="checkout-guide" aria-label="Checkout shortcuts"><a href="pages/cart.html#checkoutContact"><span>01</span> Contact &amp; address</a><a href="pages/cart.html#checkoutPayment"><span>02</span> Choose payment</a><a href="pages/cart.html#checkoutReview"><span>03</span> Review your total</a></nav>
         <div class="delivery-location-map">
           <iframe id="deliveryGoogleMap" title="Google Maps delivery area" src="https://www.google.com/maps?q=Philippines&amp;output=embed" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
@@ -92,7 +93,7 @@
         </fieldset>
         <section id="storePickupDetails" class="store-pickup-details" hidden><h3>Bits &amp; Bytes collection point</h3><p>Sample collection point, Calamba City, Laguna, Philippines</p><p class="pickup-disclaimer">Fictional location for sample pickup orders. This is not an operating store; no pickup reservation is created. Wait for confirmation before travelling.</p></section>
 
-        <fieldset class="checkout-form-section">
+        <fieldset class="checkout-form-section" id="checkoutContact">
           <legend>Contact information</legend>
           <div class="address-grid">
             <div>
@@ -178,8 +179,7 @@
           <p class="form-note">Sample delivery fees. No courier is booked and no arrival date is guaranteed.</p>
         </fieldset>
         <p id="overseasShippingNote" class="overseas-shipping-note" hidden>Overseas shipping includes an additional destination charge. Import duties and taxes are not included. These are configured estimates; carrier availability and final costs must be confirmed. Cash on delivery is available only within the Philippines.</p>
-        <dl class="checkout-costs" aria-live="polite"><div><dt>Items subtotal</dt><dd id="checkoutSubtotal"></dd></div><div class="voucher-discount" id="checkoutDiscountRow" hidden><dt>Voucher discount</dt><dd id="checkoutDiscount"></dd></div><div><dt id="checkoutDeliveryLabel">Standard delivery</dt><dd id="checkoutDeliveryFee"></dd></div><div hidden><dt>Overseas destination charge</dt><dd id="checkoutOverseasFee"></dd></div><div class="checkout-grand-total"><dt>Total (PHP)</dt><dd id="checkoutGrandTotal"></dd></div></dl>
-        <fieldset class="payment-methods">
+        <fieldset class="payment-methods" id="checkoutPayment">
           <legend>Payment method</legend>
           <label class="payment-option">
             <input type="radio" name="paymentMethod" value="Cash on Delivery" checked>
@@ -195,6 +195,8 @@
           </label>
         </fieldset>
         <div class="payment-detail" id="paymentDetail" aria-live="polite">Cash on Delivery selected. Prepare the exact amount when your order arrives.</div>
+        <section class="checkout-review" id="checkoutReview" aria-labelledby="checkoutReviewTitle"><p class="eyebrow">One last look</p><h3 id="checkoutReviewTitle">Your order total</h3><p class="form-note">Review the item total, discount, and delivery charge before continuing.</p>
+        <dl class="checkout-costs" aria-live="polite"><div><dt>Items subtotal</dt><dd id="checkoutSubtotal"></dd></div><div class="voucher-discount" id="checkoutDiscountRow" hidden><dt>Voucher discount</dt><dd id="checkoutDiscount"></dd></div><div><dt id="checkoutDeliveryLabel">Standard delivery</dt><dd id="checkoutDeliveryFee"></dd></div><div hidden><dt>Overseas destination charge</dt><dd id="checkoutOverseasFee"></dd></div><div class="checkout-grand-total"><dt>Total (PHP)</dt><dd id="checkoutGrandTotal"></dd></div></dl></section>
         <button class="button primary" id="reviewOrderButton" type="submit">Continue to payment</button>
         <p class="checkout-status" id="checkoutStatus" role="status"></p>
       </form>
@@ -227,7 +229,7 @@
   <script src="js/vouchers.js?v=20261023-vouchers-v1"></script>
   <script src="js/orders.js?v=20261023-vouchers-v6"></script>
   <script src="js/receipts.js?v=20261023-vouchers-v2"></script>
-  <script src="js/checkout-flow.js?v=20261023-vouchers-v6"></script>
+  <script src="js/checkout-flow.js?v=20261027-clear-checkout-v7"></script>
   <script src="js/localization.js?v=20261017-feedback-v2"></script>
   <script src="js/product-descriptions.js?v=20261026-catalog-v2"></script>
   <script src="js/site-experience.js?v=20261025-motion-v2"></script>
