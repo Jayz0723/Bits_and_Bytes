@@ -29,6 +29,11 @@ const storeDatabase = {
     const result = await this.request("/api/profile", "PATCH", { name });
     this.user = result.user;
     window.dispatchEvent(new Event("store-account-change"));
+  },
+  async updateAvatar(avatar) {
+    const result = await this.request("/api/profile", "PATCH", { avatar });
+    this.user = result.user;
+    window.dispatchEvent(new Event("store-account-change"));
   }
 };
 storeDatabase.ready = storeDatabase.enabled ? storeDatabase.request("/api/session").then(result => {

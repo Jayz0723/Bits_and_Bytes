@@ -2446,7 +2446,7 @@ function getSignedInUser() {
   try {
     const email = sessionStorage.getItem("bitsAndBytesSignedInEmail");
     const account = getDemoAccounts().find((account) => account.email === email);
-    return account ? { name: account.name, email: account.email } : null;
+    return account ? { name: account.name, email: account.email, avatar: account.avatar || '' } : null;
   } catch { return null; }
 }
 

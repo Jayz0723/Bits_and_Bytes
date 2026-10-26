@@ -125,3 +125,42 @@
   .account-order-actions { width: 100%; } .account-order-actions .button { flex: 1; text-align: center; }
 }
 @media (max-width: 380px) { .account-favorites { grid-template-columns: minmax(0, 1fr); } .purchase-tabs { gap: 12px; } .purchase-tabs span { margin-left: 3px; } .account-navigation a { gap: 7px; } }
+
+/* Profile surfaces keep the store's graphite, cyan and mint palette. */
+.profile-page .account-heading { padding: 30px; border: 1px solid #334951; border-radius: 16px; background: linear-gradient(120deg, #1e3038, #151f27 70%); }
+.profile-page .account-sidebar { padding: 22px 16px; border: 1px solid #334951; border-radius: 14px; background: #17232bd9; }
+.profile-page .account-content { padding: 28px; border: 1px solid #334951; border-radius: 14px; background: #152029e8; }
+.profile-page .account-avatar { width: 64px; height: 64px; overflow: hidden; text-decoration: none; font-size: 20px; background: linear-gradient(135deg, #294a50, #1b353b); border: 2px solid #75dcca; }
+.profile-page .account-avatar img { display: block; width: 100%; height: 100%; padding: 0; object-fit: cover; border-radius: inherit; }
+.profile-page .account-identity { align-items: center; flex-wrap: wrap; padding-bottom: 24px; margin-bottom: 12px; border-bottom: 1px solid #334951; }
+.profile-page .account-identity strong { font-size: 16px; line-height: 1.5; }
+.profile-page .account-identity small { font-size: 13px; }
+.profile-edit-link { display: inline-block; margin-top: 10px; font-size: 13px; color: #80d9ee; text-decoration: none; }
+.profile-page .account-navigation a, .profile-page .account-logout { font-size: 14px; border-radius: 8px; }
+.profile-page .account-navigation a[aria-current="page"] { box-shadow: inset 3px 0 #78e0cb; background: #23413f; }
+.profile-page .account-storage-note, .profile-page .account-details-form label { font-size: 14px; }
+.profile-page .account-details-form input { font-size: 16px; min-height: 48px; background: #101b23; border-radius: 8px; }
+.profile-page .account-empty { border: 1px dashed #3a525e; border-radius: 12px; background: #19283180; }
+.profile-page .saved-address { padding: 24px; border: 1px solid #354e58; border-radius: 10px; background: #192831; }
+.profile-photo-editor { display: flex; align-items: center; gap: 24px; margin-bottom: 30px; padding: 24px; background: #1c3039; border: 1px solid #3c5964; border-radius: 12px; }
+.profile-page .profile-photo-preview { width: 112px; height: 112px; font-size: 30px; }
+.profile-photo-controls { min-width: 0; }
+.profile-photo-controls h3 { font-size: 20px; margin: 0 0 8px; }
+.profile-photo-controls p { font-size: 14px; color: #b3cad4; line-height: 1.6; margin: 8px 0 14px; }
+.profile-photo-controls label { display: none; }
+.profile-photo-controls input[type="file"] { display: block; max-width: 100%; width: 100%; color: #bdd0d9; font: inherit; font-size: 14px; padding: 0; border: 0; background: transparent; }
+.profile-photo-controls input::file-selector-button { padding: 11px 16px; margin-right: 12px; color: #c7f8ed; background: #264744; border: 1px solid #648f89; border-radius: 7px; cursor: pointer; font: inherit; }
+.profile-photo-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.profile-remove-photo { background: transparent; border: 0; color: #ffd0c7; font: inherit; font-size: 14px; min-height: 44px; padding: 8px; cursor: pointer; }
+#profilePhotoStatus:empty { display: none; }
+#profilePhotoStatus { color: #a4e8da; overflow-wrap: anywhere; }
+.profile-page button:disabled { opacity: .55; cursor: wait; }
+@media (max-width: 760px) {
+  .profile-page .account-heading { padding: 24px 20px; }
+  .profile-page .account-content { padding: 22px 16px; }
+  .profile-photo-editor { padding: 20px 16px; flex-direction: column; align-items: flex-start; gap: 18px; }
+  .profile-photo-controls { width: 100%; }
+  .profile-page .account-navigation a { font-size: 13px; }
+  .profile-page .account-support { font-size: 13px; }
+  .profile-page .account-logout { float: none; }
+}

@@ -8,6 +8,7 @@ const { DatabaseSync } = require('node:sqlite');
 const { validInternationalAddress } = require('./js/international.js');
 const { createMapService } = require('./map-service.cjs');
 const { createChatService } = require('./chat-service.cjs');
+const { validateProfilePhoto } = require('./profile-photo.cjs');
 const pbkdf2 = promisify(crypto.pbkdf2);
 const root = __dirname;
 if (fs.existsSync(path.join(root, '.env'))) process.loadEnvFile(path.join(root, '.env'));
@@ -21,6 +22,7 @@ function createStoreServer(databaseFile = path.join(root, 'data/store.sqlite'), 
     CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, email TEXT UNIQUE NOT NULL, name TEXT NOT NULL, salt TEXT NOT NULL, password_hash TEXT NOT NULL);
     CREATE TABLE IF NOT EXISTS sessions (token_hash TEXT PRIMARY KEY, user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE, expires INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS address_books (user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE, body TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 0);`);
+  db.exec('CREATE TABLE IF NOT EXISTS profile_photos (user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE, photo TEXT NOT NULL)');
   // Preserve the existing requested sample login without keeping a plaintext password.
   db.prepare('INSERT OR IGNORE INTO users (email,name,salt,password_hash) VALUES (?,?,?,?)').run('jcherrera0723@gmail.com', 'John Carlo Herrera', '10028767bf40ff97b6294984b3db32f4', '3423c1e4197be86b9ced8ecfd3bfb15bc7dc34b20047e96e94c31ba0a822d7a9');
   const attempts = new Map();
@@ -34,7 +36,7 @@ function createStoreServer(databaseFile = path.join(root, 'data/store.sqlite'), 
     const row = db.prepare('SELECT body,revision FROM address_books WHERE user_id=?').get(user.id);
     return row ? { ...JSON.parse(row.body), revision: row.revision } : { addresses: [], defaultId: '', revision: 0 };
   };
-  const payload = user => ({ user: user ? { email: user.email, name: user.name } : null, book: user ? bookFor(user) : { addresses: [], defaultId: '', revision: 0 } });
+  const payload = user => ({ user: user ? { email: user.email, name: user.name, avatar: db.prepare('SELECT photo FROM profile_photos WHERE user_id=?').get(user.id)?.photo || '' } : null, book: user ? bookFor(user) : { addresses: [], defaultId: '', revision: 0 } });
   const fail = (message, status = 400) => Object.assign(new Error(message), { status });
   async function readBody(req) {
     let size = 0, body = '';
@@ -128,6 +130,12 @@ function createStoreServer(databaseFile = path.join(root, 'data/store.sqlite'), 
         }
         if (pathname === '/api/profile' && req.method === 'PATCH') {
           const body = await readBody(req);
+          if (Object.hasOwn(body, 'avatar')) {
+            if (!validateProfilePhoto(body.avatar)) throw fail('Choose a valid profile photo of up to 60 KB after resizing.');
+            if (body.avatar) db.prepare('INSERT INTO profile_photos VALUES (?,?) ON CONFLICT(user_id) DO UPDATE SET photo=excluded.photo').run(user.id, body.avatar);
+            else db.prepare('DELETE FROM profile_photos WHERE user_id=?').run(user.id);
+            return reply(200, payload(user));
+          }
           if (typeof body.name !== 'string' || !body.name.trim() || body.name.length > 100) throw fail('Enter your name.');
           db.prepare('UPDATE users SET name=? WHERE id=?').run(body.name.trim(), user.id);
           return reply(200, payload({ ...user, name: body.name.trim() }));

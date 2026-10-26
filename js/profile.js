@@ -63,6 +63,73 @@ function wireProfilePage() {
   if (!document.getElementById("profileAccount")) return;
   let filter = "all";
   const notice = document.getElementById("profileNotice");
+  let pendingPhoto = '', photoOwner = '', photoBusy = false;
+  const photoFile = document.getElementById('profilePhotoFile');
+  const photoStatus = document.getElementById('profilePhotoStatus');
+  const photoSave = document.getElementById('saveProfilePhoto');
+  const photoCancel = document.getElementById('cancelProfilePhoto');
+  const photoRemove = document.getElementById('removeProfilePhoto');
+  function paintAvatar(node, user, source = user?.avatar) {
+    node.replaceChildren();
+    if (source && /^data:image\/jpeg;base64,[A-Za-z0-9+/]+=*$/.test(source)) {
+      const image = document.createElement('img');
+      image.src = source;
+      image.alt = 'Profile photo';
+      node.append(image);
+    } else node.textContent = user?.name.split(/\s+/).slice(0, 2).map(word => word[0]).join('').toUpperCase() || '';
+  }
+  function resetPhoto(user) {
+    pendingPhoto = ''; photoOwner = ''; photoFile.value = '';
+    photoSave.hidden = photoCancel.hidden = true;
+    photoRemove.hidden = !user?.avatar;
+    paintAvatar(document.getElementById('profilePhotoPreview'), user);
+    photoStatus.textContent = '';
+  }
+  photoFile.addEventListener('change', async () => {
+    const file = photoFile.files[0], user = getSignedInUser();
+    if (!file || !user || photoBusy) return;
+    resetPhoto(user);
+    photoBusy = true;
+    photoFile.disabled = true;
+    let bitmap;
+    try {
+      if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) throw new Error('Choose a JPG, PNG or WebP image smaller than 5 MB.');
+      bitmap = await createImageBitmap(file);
+      if (bitmap.width * bitmap.height > 40000000) throw new Error('Choose a photo smaller than 40 megapixels.');
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas.height = 256;
+      const context = canvas.getContext('2d');
+      context.fillStyle = '#18232b'; context.fillRect(0, 0, 256, 256);
+      const side = Math.min(bitmap.width, bitmap.height);
+      context.drawImage(bitmap, (bitmap.width - side) / 2, (bitmap.height - side) / 2, side, side, 0, 0, 256, 256);
+      if (getSignedInUser()?.email !== user.email) return;
+      pendingPhoto = canvas.toDataURL('image/jpeg', .85);
+      photoOwner = user.email;
+      paintAvatar(document.getElementById('profilePhotoPreview'), user, pendingPhoto);
+      photoSave.hidden = photoCancel.hidden = false;
+      photoStatus.textContent = 'Preview ready. Save your photo to update your profile.';
+    } catch (error) { photoStatus.textContent = error.message || 'This image could not be opened. Try another photo.'; }
+    finally { bitmap?.close(); photoBusy = false; photoFile.disabled = false; }
+  });
+  photoCancel.addEventListener('click', () => resetPhoto(getSignedInUser()));
+  async function savePhoto(remove = false) {
+    const user = getSignedInUser();
+    if (!user || photoBusy || (!remove && (photoOwner !== user.email || !pendingPhoto))) return;
+    photoBusy = true;
+    photoSave.disabled = photoRemove.disabled = photoCancel.disabled = photoFile.disabled = true;
+    try {
+      const avatar = remove ? '' : pendingPhoto;
+      if (typeof storeDatabase !== 'undefined' && storeDatabase.enabled) await storeDatabase.updateAvatar(avatar);
+      else {
+        localStorage.setItem('bitsAndBytesAccounts', JSON.stringify(getDemoAccounts().map(account => account.email === user.email ? { ...account, avatar } : account)));
+        window.dispatchEvent(new Event('store-account-change'));
+      }
+      photoStatus.textContent = remove ? 'Profile photo removed.' : 'Your profile photo has been saved.';
+    } catch (error) { photoStatus.textContent = error.message || 'Your photo could not be saved. Try again.'; }
+    finally { photoBusy = false; photoSave.disabled = photoRemove.disabled = photoCancel.disabled = photoFile.disabled = false; }
+  }
+  photoSave.addEventListener('click', () => savePhoto());
+  photoRemove.addEventListener('click', () => savePhoto(true));
 
   function action(label, href) {
     const link = profileText("a", label, "button secondary");
@@ -230,6 +297,7 @@ function wireProfilePage() {
     notice.textContent = "";
     document.getElementById("profileGate").hidden = !!user;
     document.getElementById("profileAccount").hidden = !user;
+    resetPhoto(user);
     if (!user) {
       document.getElementById("refundDialog")?.close();
       document.getElementById("addressBookDialog")?.close();
@@ -247,7 +315,7 @@ function wireProfilePage() {
     document.getElementById("profileGreeting").textContent = user.name.split(" ")[0];
     document.getElementById("profileName").textContent = user.name;
     document.getElementById("profileEmail").textContent = user.email;
-    document.getElementById("profileAvatar").textContent = user.name.split(/\s+/).slice(0, 2).map(word => word[0]).join("").toUpperCase();
+    paintAvatar(document.getElementById('profileAvatar'), user);
     document.getElementById("profileDisplayName").value = user.name;
     document.getElementById("profileAccountEmail").value = user.email;
     const orders = accountStoreOrders().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
