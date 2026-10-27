@@ -4,12 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bits and Bytes | PC and Laptop Store</title>
+  <meta name="description" content="Find your next desktop, laptop, and PC upgrade at Bits & Bytes. Explore hardware, compare products, and build a compatible setup around your day.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=20261004-editorial">
   <link rel="stylesheet" href="css/storefront.css?v=20261026-dialogue-ring-v21">
   <link rel="stylesheet" href="css/site-experience.css?v=20261026-cutouts-v6">
+  <link rel="stylesheet" href="css/landing.css?v=20261028-v1">
 </head>
 <body class="home-page">
   <header class="site-header" id="top">
@@ -31,24 +33,20 @@
   </header>
 
   <main>
-    <section class="hero showcase-hero">
-      <div class="hero-copy">
-        <p class="eyebrow">The right tools. Your next chapter.</p>
-        <h2>PCs, laptops &amp; components</h2>
-        <p>For the game you want to play, the project you want to finish, and everything
-          you do in between. Find your next setup here.</p>
-        <div class="hero-actions">
-          <a class="button primary" href="pages/products.html">Shop Products</a>
-          <a class="button secondary" href="pages/build.html">Build Your Own PC</a>
-        </div>
+    <section class="landing-hero" id="landingHero" aria-labelledby="landingTitle">
+      <div class="landing-copy">
+        <p class="eyebrow"><span aria-hidden="true"></span> Great hardware. More possibility.</p>
+        <h1 id="landingTitle">Your next setup.<br><span>Your next level.</span></h1>
+        <p class="landing-description">Big ideas. Late-night games. Everyday wins. Find the PC, laptop, or upgrade that makes it all feel effortless.</p>
+        <div class="landing-actions"><a class="button primary" href="pages/products.html">Find your setup <span aria-hidden="true">&rarr;</span></a><a class="button secondary" href="pages/build.html">Build your own PC</a></div>
+        <nav class="landing-intents" aria-label="Shop by purpose"><span>Made for your day</span><a href="pages/products.html?use=Gaming">Gaming &nearr;</a><a href="pages/products.html?use=Office">Work &amp; study &nearr;</a><a href="pages/products.html?use=Creator">Creating &nearr;</a></nav>
+        <div class="landing-assurance"><a href="pages/components.html"><img src="images/icons/cpu.svg" alt="" width="20" height="20">Understand every part</a><a href="pages/contact.html"><img src="images/icons/truck.svg" alt="" width="20" height="20">Delivery across the Philippines</a></div>
       </div>
-      <div class="hero-grid" aria-label="Shop by collection">
-        <a href="pages/products.html#computer-products"><img src="images/products/asus-rog-g22ch.png" alt="ASUS ROG G22CH desktop"><span>Desktop systems <b aria-hidden="true">&rarr;</b></span></a>
-        <a href="pages/products.html#laptops"><img src="images/products/asus-vivobook-k6602.png" alt="ASUS Vivobook Pro 16 OLED"><span>Laptops <b aria-hidden="true">&rarr;</b></span></a>
-        <a href="pages/products.html#computer-parts"><img src="images/products/msi-rtx-4060-main.webp" alt="MSI GeForce RTX 4060 graphics card"><span>Components <b aria-hidden="true">&rarr;</b></span></a>
-        <a href="pages/products.html#accessories"><img src="images/products/logitech-mx-master-3s.png" alt="Logitech MX Master 3S mouse"><span>Desk essentials <b aria-hidden="true">&rarr;</b></span></a>
-
-
+      <div class="landing-visual">
+        <img class="landing-photo" src="images/showcase/real-desktop-setup.jpg" width="1600" height="1067" alt="A desktop workspace with a glass-sided PC, monitor and keyboard" fetchpriority="high" decoding="async">
+        <span class="landing-photo-label">A little inspiration for your next setup</span>
+        <a class="landing-photo-card" href="pages/products.html#computer-products"><span class="landing-status"><i aria-hidden="true"></i> Desktop collection</span><strong>Make room for<br>something powerful.</strong><span>Explore desktop systems <b aria-hidden="true">&rarr;</b></span></a>
+        <span class="landing-vertical" aria-hidden="true">BITS &amp; BYTES / MAKE IT YOURS</span>
       </div>
     </section>
 
@@ -60,7 +58,7 @@
             <div class="promo-slide-overlay"></div>
             <div class="promo-slide-content">
               <p class="eyebrow">Gaming systems</p>
-              <h1>Bits &amp; Bytes</h1>
+              <h2>Performance for your play.</h2>
               <p>Explore RGB-ready gaming PCs with balanced processors, graphics, memory, and cooling.</p>
               <a class="button primary" href="pages/products.html#computer-products">Shop Gaming PCs</a>
             </div>
@@ -245,7 +243,7 @@
       </div>
     </dialog>
 
-    <section class="section">
+    <section class="section landing-collections" id="shopCollections">
       <div class="section-heading">
         <hr>
         <p class="eyebrow"><strong>Browse by collection</strong></p>
@@ -289,10 +287,11 @@
       <a class="button primary" href="pages/build.html">Start Building</a>
     </section>
 
-    <section class="section">
+    <section class="section landing-featured">
       <div class="section-heading">
         <p class="eyebrow">Featured picks</p>
-        <h2>Selected for your next setup</h2>
+        <h2>Good picks. Great possibilities.</h2>
+        <p>Explore desktops, laptops, and the details that complete your desk.</p><a class="text-link" href="pages/products.html">View all products &rarr;</a>
       </div>
       <div class="product-grid" id="featuredProducts"></div>
     </section>
@@ -476,8 +475,8 @@
   <script src="js/data.js?v=20261026-transparent-v15"></script>
   <script src="js/localization.js?v=20261017-feedback-v2"></script>
   <script src="js/product-descriptions.js?v=20261026-catalog-v2"></script>
-  <script src="js/site-experience.js?v=20261025-motion-v2"></script>
-  <script src="js/app.js?v=20261027-profile-photo-v20"></script>
+  <script src="js/site-experience.js?v=20261028-landing-v3"></script>
+  <script src="js/app.js?v=20261028-landing-v21"></script>
   <script src="js/customer-reviews.js?v=20261016-review-carousel-v7"></script>
   <script src="js/support-form.js"></script>
 

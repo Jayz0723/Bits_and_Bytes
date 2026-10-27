@@ -672,7 +672,10 @@ function renderFeaturedProducts() {
   const container = document.querySelector("#featuredProducts");
   if (!container) return;
 
-  container.innerHTML = catalogProducts().slice(0, 6).map(productCard).join("");
+  const catalog = catalogProducts();
+  const picks = ['pc-msi-codex-6-14', 'lap-dell-16-plus', 'lap-microsoft-studio-2', 'monitor-msi-g244f-e2', 'part-msi-m450-1tb', 'accessory-msi-gm11'];
+  const selected = picks.map(id => catalog.find(product => product.id === id)).filter(Boolean);
+  container.innerHTML = (selected.length ? selected : catalog.slice(0, 6)).map(productCard).join("");
   wireProductButtons();
 }
 

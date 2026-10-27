@@ -16,6 +16,16 @@ const { chromium } = require('./browser.cjs');
       page.on('pageerror', error => errors.push(error.message));
       await page.route('**/*', route => route.request().url().startsWith(origin) ? route.continue() : route.abort());
       await page.goto(origin);
+      assert.equal(await page.locator('main > section').first().getAttribute('id'), 'landingHero', 'Landing introduction leads the homepage');
+      assert.ok(await page.locator('#landingTitle').isVisible());
+      await page.locator('.landing-photo').evaluate(image => image.decode());
+      assert.equal(await page.locator('#featuredProducts .product-card').count(), 6);
+      assert.ok(await page.locator('#featuredProducts').textContent().then(text => text.includes('Dell') && text.includes('Microsoft')));
+      for (const href of await page.locator('.landing-hero a').evaluateAll(links => links.map(link => link.getAttribute('href')))) {
+        assert.equal((await page.request.get(origin + '/' + href)).status(), 200, 'Landing action opens: ' + href);
+      }
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, 'Landing fits ' + width);
+      await page.screenshot({ path: path.join(__dirname, '../images/previews/landing-' + width + '.png') });
       await page.locator('#siteSearchToggle').click();
       assert.equal(await page.locator('#siteSearchInput').evaluate(node => document.activeElement === node), true);
       await page.fill('#siteSearchInput', 'RAM');
