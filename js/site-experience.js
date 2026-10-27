@@ -128,13 +128,7 @@ function wireSiteExperience() {
   addEventListener('scroll', () => { if (!scheduled) { scheduled = true; requestAnimationFrame(updateBackdrop); } }, { passive: true });
   updateBackdrop();
   if (document.body.classList.contains('home-page')) {
-    const landing = document.querySelector('#landingHero');
-    if (landing) {
-      let previous = landing;
-      for (const section of [document.querySelector('.brand-strip'), document.querySelector('.landing-collections'), document.querySelector('.landing-featured'), carousel]) {
-        if (section) { previous.after(section); previous = section; }
-      }
-    } else if (carousel) main.prepend(carousel);
+    if (carousel) main.prepend(carousel);
     const journal = document.createElement('section');
     journal.className = 'journal-section';
     journal.setAttribute('aria-labelledby', 'journalHeading');
