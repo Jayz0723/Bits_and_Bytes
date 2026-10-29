@@ -2030,10 +2030,15 @@ function renderBuilder() {
           <option value="${index}">${part.name} - ${money(part.price)}</option>
         `).join("")}
       </select>
+      <div class="builder-part-preview" hidden><button class="builder-part-photo" type="button" data-preview-part="${key}"><img alt="" width="120" height="120"><span>View picture &nearr;</span></button><div><strong class="builder-part-name"></strong><span class="builder-part-price"></span><p class="builder-part-details"></p><p class="builder-part-caption"></p></div></div>
     </div>
   `).join("");
 
   fields.addEventListener("change", updateBuildSummary);
+  fields.addEventListener('click', event => {
+    const button = event.target.closest('[data-preview-part]');
+    if (button) openBuilderPartPreview(button.dataset.previewPart);
+  });
   document.querySelector("#addBuildToCart").addEventListener("click", addBuildToCart);
   wireBuilderTools();
   updateBuildSummary();
@@ -2057,14 +2062,18 @@ function wireBuilderTools() {
 
   document.querySelectorAll("[data-builder-part]").forEach((button) => {
     button.addEventListener("click", () => {
+      if (search) search.value = '';
+      choices.forEach(choice => { choice.hidden = false; });
       const field = document.querySelector(`#${button.dataset.builderPart}`);
-      field?.scrollIntoView({ behavior: "smooth", block: "center" });
+      field?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: "center" });
       field?.focus({ preventScroll: true });
     });
   });
 
   document.querySelectorAll("[data-build-preset]").forEach((button) => {
     button.addEventListener("click", () => {
+      if (search) search.value = '';
+      choices.forEach(choice => { choice.hidden = false; });
       Object.entries(presets[button.dataset.buildPreset]).forEach(([key, value]) => {
         const field = document.querySelector(`#${key}`);
         if (field) field.value = value;
@@ -2121,6 +2130,7 @@ function getCompatibilityMessages(parts) {
 }
 
 function updateBuildSummary() {
+  if (typeof updateBuilderPartPreviews === 'function') updateBuilderPartPreviews();
   const parts = selectedBuildParts();
   const buildList = document.querySelector("#buildList");
   const total = Object.values(parts).reduce((sum, part) => sum + part.price, 0);
