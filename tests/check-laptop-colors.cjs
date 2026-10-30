@@ -18,6 +18,7 @@ const { chromium } = require('./browser.cjs');
         await page.locator('.product-gallery-stage > img').evaluate(image => image.decode());
         photos.add(await page.locator('.product-gallery-stage > img').getAttribute('src'));
         if (option === 'performance-blue') {
+          assert.match(await page.locator('#detailVariants [data-selected-color]').textContent(), /Performance Blue/);
           assert.match(await page.locator('#detailProductSelectedSpecs').textContent(), /7445HS.*12GB.*512GB.*4050/);
           await page.evaluate(() => openProductDetails(productWithVariant(catalogProducts().find(p => p.id === 'lap-hp-victus-15'), 'performance-blue')));
           await page.locator('#productDetailsDialog [data-detail-add]').click();

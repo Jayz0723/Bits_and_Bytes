@@ -423,6 +423,14 @@ function productVariantMarkup(product, variantId, id = "") {
 
 // Reuse the existing variant change handlers in catalog, quick view, and details.
 function wireColorSwatches() {
+  document.addEventListener('change', event => {
+    const select = event.target;
+    if (select.tagName !== 'SELECT') return;
+    const picker = select.closest('.color-variant-picker');
+    if (!picker) return;
+    picker.querySelector('[data-selected-color]').textContent = select.selectedOptions[0]?.textContent || '';
+    picker.querySelectorAll('[data-product-color]').forEach(swatch => swatch.setAttribute('aria-pressed', String(swatch.dataset.productColor === select.value)));
+  });
   document.addEventListener("click", event => {
     const button = event.target.closest("[data-product-color]");
     if (!button) return;
