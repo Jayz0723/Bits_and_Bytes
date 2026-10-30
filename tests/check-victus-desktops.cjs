@@ -21,6 +21,30 @@ const { chromium } = require('./browser.cjs');
         assert.match(await page.locator('.product-gallery-stage > img').getAttribute('src'), /white/);
       }
     }
+    for (const id of ['lap-hp-victus-15', 'lap-msi-modern-14-c13m', 'lap-apple-creator']) {
+      await page.goto(origin + '/pages/product.html?id=' + id);
+      const options = await page.evaluate(id => catalogProducts().find(p => p.id === id).variants.options.map(v => v.id), id);
+      assert.ok(options.length >= 2);
+      const images = new Set();
+      for (const option of options) {
+        await page.locator('#detailVariant').evaluate((select, value) => { select.value = value; select.dispatchEvent(new Event('change', { bubbles: true })); }, option);
+        await page.locator('.product-gallery-stage > img').evaluate(image => image.decode());
+        images.add(await page.locator('.product-gallery-stage > img').getAttribute('src'));
+        if (option === 'performance-blue') {
+          assert.match(await page.locator('#detailProductSelectedSpecs').textContent(), /7445HS.*12GB.*512GB.*4050/);
+          assert.match(await page.locator('#detailProductName').textContent(), /fb3105na/);
+          assert.match(await page.locator('#detailProductDescription').textContent(), /7445HS/);
+          await page.evaluate(() => openProductDetails(productWithVariant(catalogProducts().find(p => p.id === 'lap-hp-victus-15'), 'performance-blue')));
+          await page.locator('#productDetailsDialog [data-detail-add]').click();
+          const saved = await page.evaluate(() => getCart().find(item => item.name.includes('fb3105na')));
+          assert.match(saved.image, /victus-blue/);
+          assert.match(saved.specs, /12GB.*512GB.*4050/);
+          assert.equal(saved.price, 69995);
+          await page.keyboard.press('Escape');
+        }
+      }
+      assert.equal(images.size, options.length, 'Every color has its own photo');
+    }
     for (const width of [1440, 390, 320]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(origin + '/pages/products.html');

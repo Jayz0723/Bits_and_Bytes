@@ -1585,6 +1585,21 @@ for (const id of ['foundation', 'core', 'apex']) {
     { id: 'white', label: 'White', swatches: ['#eeeeee'], image: 'images/products/colors/corsair-4000d-white-1.webp', gallery: [{ src: 'images/products/colors/corsair-4000d-white-1.webp', label: 'White Corsair 4000D enclosure reference; assembled internal components are not pictured', shortLabel: 'Case' }] }
   ]);
 }
+// Color photos are isolated per option; the blue Victus is a different regional SKU.
+const victusSilver = products.find(product => product.id === 'lap-hp-victus-15');
+productVariants['lap-hp-victus-15'] = {
+  kind: 'color', label: 'Color / configuration', defaultId: 'mica-silver', options: [
+    { id: 'mica-silver', label: 'Mica Silver · Core 7 / RTX 5060', color: 'Mica Silver', swatches: ['#57595c'], name: 'HP Victus 15-fa2007na — Mica Silver', price: victusSilver.price, stock: victusSilver.stock, specs: victusSilver.specs, image: victusSilver.image, gallery: [{ src: victusSilver.image, label: 'Victus 15-fa2007na Mica Silver front view', shortLabel: 'Front' }] },
+    { id: 'performance-blue', label: 'Performance Blue · Ryzen 7 / RTX 4050', color: 'Performance Blue', swatches: ['#28445f'], name: 'HP Victus 15-fb3105na — Performance Blue', price: 69995, stock: 6, specs: 'AMD Ryzen 7 7445HS, 12GB RAM, 512GB SSD, RTX 4050 Laptop 6GB, 15.6-inch FHD 144Hz, Performance Blue, UK keyboard', image: 'images/products/colors/victus-blue.png', gallery: [{ src: 'images/products/colors/victus-blue.png', label: 'Victus 15-fb3105na Performance Blue front view', shortLabel: 'Front' }] }
+  ]
+};
+const modern14 = products.find(product => product.id === 'lap-msi-modern-14-c13m');
+modern14.specs = modern14.specs.replace(/, Beige Rose$/, '');
+addProductColorOptions(modern14.id, 'MSI Modern 14 C13M', 'beige-rose', [
+  { id: 'beige-rose', label: 'Beige Rose', swatches: ['#cfaeaa'], image: modern14.image, gallery: [...modern14.gallery, { src: 'images/products/colors/modern14-rose.png', label: 'Modern 14 C13M Beige Rose lid', shortLabel: 'Lid' }] },
+  { id: 'urban-silver', label: 'Urban Silver', swatches: ['#c9cccf'], image: 'images/products/colors/modern14-silver.png', gallery: [{ src: 'images/products/colors/modern14-silver.png', label: 'Modern 14 C13M Urban Silver lid', shortLabel: 'Lid' }] },
+  { id: 'classic-black', label: 'Classic Black', swatches: ['#29292b'], image: 'images/products/colors/modern14-black.png', gallery: [{ src: 'images/products/colors/modern14-black.png', label: 'Modern 14 C13M Classic Black open view', shortLabel: 'Open' }] }
+]);
 products.forEach(cleanProductPhotoRecord);
 Object.values(productMedia).forEach(cleanProductPhotoRecord);
 Object.values(productVariants).forEach(variants => variants.options.forEach(cleanProductPhotoRecord));
