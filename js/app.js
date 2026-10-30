@@ -647,7 +647,7 @@ function openProductDetails(product) {
         <p class="product-description-copy">${product.description || product.specs}</p>
         <p class="product-selected-specs">${product.specs}</p>
         ${product.descriptionNote ? `<p class="product-description-note">${product.descriptionNote}</p>` : ""}
-        ${product.descriptionSource ? `<a class="product-description-source" href="${product.descriptionSource}" target="_blank" rel="noopener noreferrer">Manufacturer reference <span aria-hidden="true">&#8599;</span></a>` : ""}
+        ${product.descriptionSource ? `<a class="product-description-source" href="${product.descriptionSource}" target="_blank" rel="noopener noreferrer">${product.id.startsWith('pc-bb-') ? 'Build reference' : 'Manufacturer reference'} <span aria-hidden="true">&#8599;</span></a>` : ""}
         ${product.photoNote ? `<small class="product-photo-note">${product.photoNote}</small>` : ""}
         <dl class="product-spec-list">
           <div><dt>Availability</dt><dd>${product.stock} in stock</dd></div>
@@ -1009,6 +1009,7 @@ function renderProductDetail() {
     source.hidden = !product.descriptionSource;
     if (product.descriptionSource) source.href = product.descriptionSource;
     else source.removeAttribute("href");
+    source.textContent = product.id.startsWith('pc-bb-') ? 'Build reference ↗' : 'Manufacturer reference ↗';
   }
   updateProductDescription();
   document.querySelector("#detailProductStock").textContent = `${product.stock} in stock`;
@@ -2818,6 +2819,7 @@ wireQuickOrder();
 wireColorSwatches();
 renderFeaturedProducts();
 renderProductsPage();
+if (typeof wireStorePickers === 'function') wireStorePickers();
 wireMobileFilters();
 renderProductDetail();
 renderWishlist();

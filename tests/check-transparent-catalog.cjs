@@ -18,8 +18,8 @@ const newIds = ['monitor-msi-g244f-e2', 'part-msi-a650bn', 'accessory-msi-gh20',
     await page.route('**/*', route => route.request().url().startsWith(origin) ? route.continue() : route.abort());
     await page.goto(origin + '/pages/products.html');
     const catalog = await page.evaluate(() => catalogProducts());
-    assert.equal(catalog.length, 60);
-    assert.equal(new Set(catalog.map(item => item.id)).size, 60);
+    assert.equal(catalog.length, 64);
+    assert.equal(new Set(catalog.map(item => item.id)).size, 64);
     const files = await page.evaluate(() => [...new Set(catalogProducts().flatMap(product => {
       const options = product.variants ? product.variants.options.map(option => productWithVariant(product, option.id)) : [product];
       return options.flatMap(item => [item.image, ...productGallery(item).map(view => view.src)]);
@@ -54,7 +54,7 @@ const newIds = ['monitor-msi-g244f-e2', 'part-msi-a650bn', 'accessory-msi-gh20',
     await page.locator('#detailVariant').evaluate(select => { select.value = 'blue'; select.dispatchEvent(new Event('change', { bubbles: true })); });
     assert.match(await page.locator('.product-gallery-stage > img').getAttribute('src'), /g435-blue-cutout/);
     assert.deepEqual(errors, []);
-    console.log('Passed 60 products, ' + files.length + ' transparent main/gallery/variant assets, ten sourced descriptions, working galleries, no image backgrounds, new-product search/cart, exact color photo and three responsive widths.');
+    console.log('Passed 64 products, ' + files.length + ' transparent main/gallery/variant assets, ten sourced descriptions, working galleries, no image backgrounds, new-product search/cart, exact color photo and three responsive widths.');
   } finally {
     if (browser) await browser.close();
     await new Promise(resolve => server.close(resolve));

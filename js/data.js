@@ -1569,6 +1569,22 @@ function cleanProductPhotoRecord(record) {
     if (!record.gallery.length) delete record.gallery;
   }
 }
+// Store-configured desktop builds. Photos show the selected enclosure, not assembled internals.
+products.unshift(
+  { id: 'lap-hp-victus-15', name: 'HP Victus 15-fa2007na', type: 'Laptop', use: 'Gaming', brand: 'HP', price: 89995, stock: 8, image: 'images/products/hp-victus-15-fa2007na.png', specs: 'Intel Core 7 240H, 24GB RAM, 1TB SSD, RTX 5060 Laptop 8GB, 15.6-inch FHD 144Hz, Mica Silver, UK keyboard' },
+  ...[
+    ['foundation', 'Foundation', 'Entry-level', 'Office', 32995, 'Ryzen 5 7600, integrated graphics, 16GB DDR5, 1TB NVMe SSD, AM5 motherboard, 550W PSU'],
+    ['core', 'Core', 'Mid-range', 'Gaming', 69995, 'Core i5-14600K, RTX 4060 8GB, 32GB DDR5, 1TB NVMe SSD, LGA1700 motherboard, 650W PSU'],
+    ['apex', 'Apex', 'High-end', 'Creator', 129995, 'Core i7-14700K, RTX 4070 Super, 64GB DDR5, 2TB NVMe SSD, LGA1700 motherboard, 850W PSU']
+  ].map(([id, name, tier, use, price, specs]) => ({ id: 'pc-bb-' + id, name: 'Bits & Bytes ' + name + ' Desktop', type: 'Desktop PC', use, brand: 'Bits and Bytes', price, stock: 6, image: 'images/products/corsair-4000d-1.webp', specs: tier + ' desktop, ' + specs + ', Corsair 4000D Airflow case; monitor and peripherals excluded', gallery: [{ src: 'images/products/corsair-4000d-1.webp', label: 'Black Corsair 4000D enclosure reference; assembled internal components are not pictured', shortLabel: 'Case' }] }))
+);
+for (const id of ['foundation', 'core', 'apex']) {
+  const product = products.find(product => product.id === 'pc-bb-' + id);
+  addProductColorOptions(product.id, product.name, 'black', [
+    { id: 'black', label: 'Black', swatches: ['#25282b'] },
+    { id: 'white', label: 'White', swatches: ['#eeeeee'], image: 'images/products/colors/corsair-4000d-white-1.webp', gallery: [{ src: 'images/products/colors/corsair-4000d-white-1.webp', label: 'White Corsair 4000D enclosure reference; assembled internal components are not pictured', shortLabel: 'Case' }] }
+  ]);
+}
 products.forEach(cleanProductPhotoRecord);
 Object.values(productMedia).forEach(cleanProductPhotoRecord);
 Object.values(productVariants).forEach(variants => variants.options.forEach(cleanProductPhotoRecord));

@@ -13,16 +13,18 @@ const { chromium } = require('./browser.cjs');
     const detail = pathToFileURL(path.resolve(__dirname, '../pages/product.html')).href;
     await page.goto(detail + '?id=part-ssd-1tb-nvme');
     const products = await page.evaluate(() => catalogProducts());
-    assert.equal(products.length, 60);
+    assert.equal(products.length, 64);
     assert.equal(await page.evaluate(() => Object.keys(productDescriptions).length), products.length);
     const allowed = ['msi.com', 'dell.com', 'delltechnologies.com', 'hp.com', 'corsair.com', 'samsung.com', 'logitechg.com', 'microsoft.com', 'apple.com', 'acer.com', 'asus.com', 'lenovo.com', 'keychron.com', 'logitech.com', 'elgato.com', 'kingston.com', 'intel.com', 'amd.com', 'gigabyte.com', 'coolermaster.com'];
     let variants = 0;
     for (const product of products) {
       assert.ok(product.description.length > 100, product.id + ' has a meaningful description');
       assert.notEqual(product.description, product.specs);
+      if (!product.id.startsWith('pc-bb-')) {
       const url = new URL(product.descriptionSource);
       assert.equal(url.protocol, 'https:');
       assert.ok(allowed.some(host => url.hostname === host || url.hostname.endsWith('.' + host)), product.id + ' links to the manufacturer');
+      } else assert.equal(product.descriptionSource, 'pages/build.html');
       await page.goto(detail + '?id=' + product.id);
       assert.equal(await page.locator('#detailProductDescription').textContent(), product.description);
       assert.equal(await page.locator('#detailProductSelectedSpecs').textContent(), product.specs);
@@ -66,6 +68,6 @@ const { chromium } = require('./browser.cjs');
       await page.screenshot({ path: path.resolve(__dirname, '../images/previews/descriptions-' + width + '.png'), fullPage: false });
     }
     assert.deepEqual(errors, []);
-    console.log(`Passed descriptions and manufacturer references for all 60 products, ${variants} options, full pages, Quick View, model-switching, configuration notes, and responsive layouts.`);
+    console.log(`Passed descriptions and manufacturer references for all 64 products, ${variants} options, full pages, Quick View, model-switching, configuration notes, and responsive layouts.`);
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

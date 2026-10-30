@@ -17,8 +17,8 @@ const ids = ['lap-msi-modern-14-c13m', 'lap-msi-cyborg-15-a13v', 'lap-dell-16-pl
     const detailUrl = pathToFileURL(path.join(root, 'pages/product.html')).href;
     await page.goto(catalogUrl);
     const catalog = await page.evaluate(() => catalogProducts());
-    assert.equal(catalog.length, 60);
-    assert.equal(new Set(catalog.map(product => product.id)).size, 60, 'No duplicate product IDs');
+    assert.equal(catalog.length, 64);
+    assert.equal(new Set(catalog.map(product => product.id)).size, 64, 'No duplicate product IDs');
     const additions = catalog.filter(product => ids.includes(product.id));
     assert.equal(additions.length, 9);
     const photos = await page.evaluate(() => catalogProducts().flatMap(product => [product.image, ...(product.gallery || []).map(photo => photo.src)]));
@@ -66,6 +66,6 @@ const ids = ['lap-msi-modern-14-c13m', 'lap-msi-cyborg-15-a13v', 'lap-dell-16-pl
       await page.screenshot({ path: path.join(root, 'images/previews/dell-16-plus-' + width + '.png') });
     }
     assert.deepEqual(errors, []);
-    console.log('Passed 60 unique products, every catalog photo, all nine existing expansion galleries, retained close-ups, quick views, wishlist/cart persistence, and responsive browsing.');
+    console.log('Passed 64 unique products, every catalog photo, all nine existing expansion galleries, retained close-ups, quick views, wishlist/cart persistence, and responsive browsing.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

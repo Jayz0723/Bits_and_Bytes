@@ -1,19 +1,23 @@
 // Keep native preference values while giving the menus a consistent dark appearance.
 function wireStorePickers() {
-  for (const id of ["languageSelect", "currencySelect"]) {
+  for (const id of ["languageSelect", "currencySelect", "typeFilter", "useFilter", "sortFilter"]) {
     const select = document.getElementById(id);
     if (!select || select.dataset.enhanced) continue;
+    if (['typeFilter', 'useFilter', 'sortFilter'].includes(id) && !document.querySelector('#partTypeOptions option')) continue;
     select.dataset.enhanced = "true";
     select.classList.add("enhanced-native-select");
     select.tabIndex = -1;
     select.setAttribute("aria-hidden", "true");
     const picker = document.createElement("div");
     picker.className = "store-picker";
+    const catalogPicker = ['typeFilter', 'useFilter', 'sortFilter'].includes(id);
+    if (catalogPicker) picker.classList.add('catalog-picker');
+    const pickerLabel = catalogPicker ? document.querySelector('label[for="' + id + '"]')?.textContent || 'Filter' : id === 'languageSelect' ? 'Language' : 'Currency';
     const trigger = document.createElement("button");
     trigger.className = "store-picker-trigger";
     trigger.type = "button";
     trigger.id = id + "Trigger";
-    trigger.setAttribute("aria-label", id === "languageSelect" ? "Language" : "Currency");
+    trigger.setAttribute("aria-label", pickerLabel);
     trigger.setAttribute("aria-haspopup", "listbox");
     trigger.setAttribute("aria-expanded", "false");
     trigger.setAttribute("aria-controls", id + "Options");
@@ -28,9 +32,12 @@ function wireStorePickers() {
     menu.className = "store-picker-options";
     menu.id = id + "Options";
     menu.setAttribute("role", "listbox");
-    menu.setAttribute("aria-label", id === "languageSelect" ? "Language" : "Currency");
+    menu.setAttribute('aria-label', pickerLabel);
     menu.hidden = true;
     const buttons = [...select.options].map(option => {
+      if (catalogPicker && option.parentElement.tagName === 'OPTGROUP' && option === option.parentElement.firstElementChild) {
+        const heading = document.createElement('div'); heading.className = 'picker-group-heading'; heading.textContent = option.parentElement.label; heading.setAttribute('role', 'presentation'); menu.append(heading);
+      }
       const button = document.createElement("button");
       button.type = "button";
       button.setAttribute("role", "option");
@@ -71,6 +78,13 @@ function wireStorePickers() {
         menu.style.left = "0";
         menu.style.right = "auto";
       }
+      if (catalogPicker) {
+        const rect = trigger.getBoundingClientRect();
+        menu.style.position = 'fixed'; menu.style.left = Math.max(12, rect.left) + 'px'; menu.style.right = 'auto'; menu.style.width = Math.min(rect.width, innerWidth - 24) + 'px';
+        const below = innerHeight - rect.bottom - 16;
+        menu.style.maxHeight = Math.min(360, Math.max(180, below)) + 'px';
+        menu.style.top = (below > 180 ? rect.bottom + 6 : Math.max(12, rect.top - 366)) + 'px';
+      }
       buttons[select.selectedIndex]?.focus();
     }
     trigger.addEventListener("click", event => { event.preventDefault(); menu.hidden ? open() : close(); });
@@ -97,5 +111,9 @@ function wireStorePickers() {
     });
     picker.append(trigger, menu);
     select.after(picker);
+    if (catalogPicker) {
+      document.getElementById('resetFilters')?.addEventListener('click', () => requestAnimationFrame(() => select.dispatchEvent(new Event('change', { bubbles: true }))));
+      window.addEventListener('scroll', event => { if (!menu.contains(event.target)) close(); }, true);
+    }
   }
 }

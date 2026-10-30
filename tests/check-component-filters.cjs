@@ -16,7 +16,7 @@ const root = path.resolve(__dirname, '..');
     const catalogUrl = pathToFileURL(path.join(root, 'pages/products.html')).href;
     await page.goto(catalogUrl);
     const catalog = await page.evaluate(() => catalogProducts());
-    assert.equal(catalog.length, 60, 'Ten more models retain all fifty existing products');
+    assert.equal(catalog.length, 64, 'Ten more models retain all fifty existing products');
     const categories = await page.evaluate(() => computerPartCategories);
     for (const product of catalog.filter(product => product.type === 'Computer Part')) {
       assert.ok(categories.some(category => category.id === product.partCategory), product.name + ' has a component category');
@@ -73,6 +73,6 @@ const root = path.resolve(__dirname, '..');
     await page.goto(pathToFileURL(path.join(root, 'pages/product.html')).href + '?id=part-samsung-990-pro-1tb');
     assert.equal(await page.locator('#detailPhotoCapacity .product-photo-capacity').innerText(), '1TB');
     assert.deepEqual(errors, []);
-    console.log('Passed 60 products, all 9 component filters, brand/search combinations, capacity labels, product photos, cart persistence, URL filters, and desktop/mobile layouts.');
+    console.log('Passed 64 products, all 9 component filters, brand/search combinations, capacity labels, product photos, cart persistence, URL filters, and desktop/mobile layouts.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });
