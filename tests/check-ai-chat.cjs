@@ -14,6 +14,9 @@ const { chromium } = require('./browser.cjs');
   assert.equal(sent.url, 'https://api.openai.com/v1/responses');
   assert.equal(sent.body.store, false);
   assert.match(sent.body.instructions, /MSI/);
+  assert.match(sent.body.instructions, /LS24DG302EEXXP/);
+  assert.match(sent.body.instructions, /RTX 5080/);
+  assert.match(sent.body.instructions, /19495/);
   assert.equal(sent.body.input[0].content, request.messages[0].content);
   assert.equal(sent.options.headers.Authorization, 'Bearer test-only-secret');
   for (const messages of [[], [{ role: 'system', content: 'x' }], [{ role: 'user', content: 'x'.repeat(2001) }], [{ role: 'assistant', content: 'x' }]]) {

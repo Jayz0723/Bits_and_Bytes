@@ -365,6 +365,7 @@ function productDescriptionFor(productId, variantId) {
 }
 
 function catalogProducts() {
+  applyCheckedCatalogPrices(computerPartProducts);
   return [...products, ...computerPartProducts].map((product) => {
     const media = productMedia[product.id] || {};
     const variants = productVariants[product.id];
@@ -964,6 +965,8 @@ function renderProductDetail() {
   const galleryThumbnails = document.querySelector("#productGalleryThumbnails");
   function renderGallery() {
     const gallery = productGallery(product);
+    const video = productVideoPreviews[product.baseProductId || product.id];
+    if (video) gallery.splice(1, 0, { ...video, kind: 'video', shortLabel: 'Video' });
     let activeImage = 0;
     document.querySelector("#detailPhotoCapacity").innerHTML = productPhotoLabel(product);
     const note = document.querySelector("#detailPhotoNote");
@@ -971,18 +974,34 @@ function renderProductDetail() {
     note.hidden = !product.photoNote;
     galleryThumbnails.innerHTML = gallery.map((image, index) => `
       <button class="${index === 0 ? "active" : ""}" type="button" data-product-image-src="${image.src}" aria-label="Show ${image.shortLabel}">
-        <img src="${image.src}" alt="">
+        ${image.kind === 'video' ? '<span class="gallery-play-icon" aria-hidden="true">▶</span>' : `<img src="${image.src}" alt="">`}
         <span>${image.shortLabel}</span>
       </button>`).join("");
     function showImage(index) {
       activeImage = (index + gallery.length) % gallery.length;
       const image = gallery[activeImage];
-      productImage.src = image.src;
-      productImage.alt = image.label;
-      productImage.style.transform = `scale(${image.zoom || 1})`;
+      const stage = productImage.parentElement;
+      const previousVideo = stage.querySelector('video');
+      if (previousVideo) { previousVideo.pause(); previousVideo.remove(); }
+      productImage.hidden = image.kind === 'video';
+      if (image.kind === 'video') {
+        const player = document.createElement('video');
+        player.controls = true;
+        player.playsInline = true;
+        player.preload = 'metadata';
+        player.src = image.src;
+        player.setAttribute('aria-label', image.label);
+        player.className = 'product-gallery-video';
+        stage.append(player);
+      } else {
+        productImage.src = image.src;
+        productImage.alt = image.label;
+        productImage.style.transform = `scale(${image.zoom || 1})`;
+      }
       document.querySelector("#galleryViewCaption").textContent = image.note || image.label;
       document.querySelector("#galleryImageCount").textContent = `${activeImage + 1} / ${gallery.length}`;
       document.querySelector("#galleryOriginal").href = image.src;
+      document.querySelector('#galleryOriginal').setAttribute('aria-label', image.kind === 'video' ? 'Open product video' : 'Open full-resolution product photograph');
       galleryThumbnails.querySelectorAll("button").forEach((button, i) => {
         button.classList.toggle("active", i === activeImage);
         button.setAttribute("aria-pressed", String(i === activeImage));
@@ -997,7 +1016,8 @@ function renderProductDetail() {
     galleryThumbnails.onkeydown = (event) => {
       if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
       event.preventDefault();
-      showImage(activeImage + (event.key === "ArrowRight" ? 1 : -1));
+      const focusedIndex = [...galleryThumbnails.querySelectorAll('button')].indexOf(event.target.closest('button'));
+      showImage((focusedIndex < 0 ? activeImage : focusedIndex) + (event.key === "ArrowRight" ? 1 : -1));
       galleryThumbnails.querySelectorAll("button")[activeImage].focus();
     };
     showImage(0);
@@ -1018,6 +1038,7 @@ function renderProductDetail() {
     if (product.descriptionSource) source.href = product.descriptionSource;
     else source.removeAttribute("href");
     source.textContent = product.id.startsWith('pc-bb-') ? 'Build reference ↗' : 'Manufacturer reference ↗';
+    renderCatalogPriceReference(product);
   }
   updateProductDescription();
   document.querySelector("#detailProductStock").textContent = `${product.stock} in stock`;
@@ -2008,6 +2029,12 @@ function wireStoreFooter() {
     `;
     // A base URL shares assets across pages; top links still target this page.
     footer.querySelector("[data-back-to-top]").href = window.location.href.split("#")[0] + "#top";
+    footer.querySelectorAll('a:not(.social-icon):not(.footer-brand)').forEach(link => {
+      const label = document.createElement('span');
+      label.className = 'footer-link-label';
+      label.append(...link.childNodes);
+      link.append(label);
+    });
   });
 }
 
@@ -2815,6 +2842,7 @@ if (typeof wireStorePickers === "function") wireStorePickers();
 wireStickyStoreHeader();
 wireHomeVideo();
 wireBackgroundMusic();
+renderCatalogBrands();
 wirePartnersDialog();
 wirePromoCarousel();
 if (typeof wireSiteExperience === "function") wireSiteExperience();
@@ -2838,6 +2866,7 @@ wireDeliveryMap();
 wireLoginForm();
 window.addEventListener("store-account-change", updateAccountState);
 updateAccountState();
+renderExpandedComponentGuide();
 renderComponentGuide();
 wireFocusedComponentMaps();
 wirePeripheralForm();

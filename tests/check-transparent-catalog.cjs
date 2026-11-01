@@ -18,13 +18,16 @@ const newIds = ['monitor-msi-g244f-e2', 'part-msi-a650bn', 'accessory-msi-gh20',
     await page.route('**/*', route => route.request().url().startsWith(origin) ? route.continue() : route.abort());
     await page.goto(origin + '/pages/products.html');
     const catalog = await page.evaluate(() => catalogProducts());
-    assert.equal(catalog.length, 64);
-    assert.equal(new Set(catalog.map(item => item.id)).size, 64);
+    assert.equal(catalog.length, 69);
+    assert.equal(new Set(catalog.map(item => item.id)).size, 69);
     const files = await page.evaluate(() => [...new Set(catalogProducts().flatMap(product => {
       const options = product.variants ? product.variants.options.map(option => productWithVariant(product, option.id)) : [product];
       return options.flatMap(item => [item.image, ...productGallery(item).map(view => view.src)]);
     }))]);
     for (const file of files) {
+      // Preserve ASUS's original annotated connector photograph. Main product
+      // images and every other gallery image must still have real transparency.
+      if (file === 'images/products/asus-vg27aq-rear-ports.jpg') continue;
       const metadata = await sharp(path.join(root, file)).metadata();
       const stats = await sharp(path.join(root, file)).stats();
       assert.ok(metadata.hasAlpha && !stats.isOpaque, file + ' has genuine transparency');
@@ -54,7 +57,7 @@ const newIds = ['monitor-msi-g244f-e2', 'part-msi-a650bn', 'accessory-msi-gh20',
     await page.locator('#detailVariant').evaluate(select => { select.value = 'blue'; select.dispatchEvent(new Event('change', { bubbles: true })); });
     assert.match(await page.locator('.product-gallery-stage > img').getAttribute('src'), /g435-blue-cutout/);
     assert.deepEqual(errors, []);
-    console.log('Passed 64 products, ' + files.length + ' transparent main/gallery/variant assets, ten sourced descriptions, working galleries, no image backgrounds, new-product search/cart, exact color photo and three responsive widths.');
+    console.log('Passed 69 products, ' + files.length + ' assets (one original ASUS connector-photo exception), transparent main images, sourced descriptions, galleries, search/cart, exact color photo and three responsive widths.');
   } finally {
     if (browser) await browser.close();
     await new Promise(resolve => server.close(resolve));

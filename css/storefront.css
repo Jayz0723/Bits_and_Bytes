@@ -555,8 +555,28 @@ body .address-book-dialog input[type="checkbox"] { min-height: 0; }
 .footer-legal nav a:first-child { padding-left: 0; }
 .footer-legal nav a + a { border-left: 1px solid #3b4d56; }
 .site-footer a:not(.social-icon):not(.footer-brand) { position: relative; text-decoration: none; }
-.site-footer a:not(.social-icon):not(.footer-brand)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: var(--teal); transform: scaleX(0); transform-origin: left center; transition: transform 220ms ease; pointer-events: none; }
-.site-footer a:not(.social-icon):not(.footer-brand):is(:hover, :focus-visible)::after { transform: scaleX(1); }
+.site-footer .footer-link-label { position: relative; display: inline-block; width: fit-content; }
+.product-gallery-stage > img[hidden] { display: none; }
+.product-gallery-video { display: block; width: 100%; max-height: 540px; aspect-ratio: 16 / 9; object-fit: contain; background: #090f13; border-radius: 12px; }
+.product-gallery-thumbnails .gallery-play-icon { display: grid; place-items: center; min-height: 80px; color: #76e0d1; font-size: 30px; }
+.catalog-price-reference { color: #b2c6cf; font-size: 14px; line-height: 1.7; }
+.catalog-brand-wordmark { color: #dceaf0; font-size: 21px; font-weight: 750; letter-spacing: .02em; text-align: center; }
+.gpu-range-guide { max-width: 1320px; margin: 64px auto; }
+.gpu-range-guide > p:not(.eyebrow) { max-width: 850px; color: #b2c6cf; line-height: 1.8; }
+.gpu-range-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+.gpu-range-card { display: flex; flex-direction: column; padding: 20px; background: #172129; border: 1px solid #344952; border-radius: 14px; color: #dfedf3; text-decoration: none; transition: border-color 180ms ease, transform 180ms ease; }
+.gpu-range-card:hover { border-color: #67dccf; transform: translateY(-4px); }
+.gpu-range-card img { width: 100%; height: 150px; object-fit: contain; margin-bottom: 20px; }
+.gpu-range-card small { color: #6bddcb; font-weight: 700; }
+.gpu-range-card h3 { font-size: 17px; line-height: 1.5; margin-block: 10px; }
+.gpu-range-card p { font-size: 14px; color: #b8cbd3; line-height: 1.7; }
+.gpu-range-card strong { margin-top: auto; padding-top: 16px; color: #e4f3f8; }
+@media (max-width: 1100px) { .gpu-range-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .gpu-range-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .gpu-range-card { padding: 14px; } }
+@media (max-width: 380px) { .gpu-range-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .gpu-range-card { transition: none; } .gpu-range-card:hover { transform: none; } }
+.site-footer .footer-link-label::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: var(--teal); transform: scaleX(0); transform-origin: left center; transition: transform 220ms ease; pointer-events: none; }
+.site-footer a:is(:hover, :focus-visible) .footer-link-label::after { transform: scaleX(1); }
 @media (max-width: 1100px) {
   .site-footer .footer-bottom { grid-template-columns: minmax(0, 1fr); }
 }
@@ -567,7 +587,7 @@ body .address-book-dialog input[type="checkbox"] { min-height: 0; }
   .footer-legal { align-items: flex-start; flex-direction: column; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .site-footer a:not(.social-icon):not(.footer-brand)::after { transition: none; }
+  .site-footer .footer-link-label::after { transition: none; }
 }
 .support-chat { right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); }
 .support-chat #supportChatLauncher { position: relative; display: block; width: 64px; height: 64px; min-height: 64px; padding: 0; border: 0; border-radius: 50%; background: transparent; box-shadow: none; transition: transform 180ms ease; }

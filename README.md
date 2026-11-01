@@ -38,6 +38,7 @@ Bits-and-Bytes/
 | Homepage, banner, and showcase | [index.html](index.html) |
 | Product list and filters | [pages/products.html](pages/products.html) |
 | Product details and configurations | [pages/product.html](pages/product.html) |
+| New monitors/GPUs, retail price sources, media and catalog brands | [js/catalog-updates.js](js/catalog-updates.js) |
 | Build Your Own PC | [pages/build.html](pages/build.html) |
 | Cart and checkout | [pages/cart.html](pages/cart.html) |
 | Login and registration | [pages/login.html](pages/login.html) |

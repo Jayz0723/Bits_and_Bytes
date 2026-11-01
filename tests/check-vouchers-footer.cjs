@@ -100,15 +100,16 @@ const root = path.resolve(__dirname, '..');
       const privacy = page.locator('.footer-legal a[href="pages/privacy.html"]');
       await privacy.evaluate(node => node.scrollIntoView({ behavior: 'instant', block: 'center' }));
       await privacy.hover();
-      await page.waitForFunction(() => getComputedStyle(document.querySelector('.footer-legal a[href="pages/privacy.html"]'), '::after').transform === 'matrix(1, 0, 0, 1, 0, 0)');
-      assert.equal(await privacy.evaluate(node => getComputedStyle(node, '::after').transform), 'matrix(1, 0, 0, 1, 0, 0)');
-      assert.equal(await privacy.evaluate(node => getComputedStyle(node, '::after').transformOrigin.split(' ')[0]), '0px');
+      const label = privacy.locator('.footer-link-label');
+      await page.waitForFunction(() => getComputedStyle(document.querySelector('.footer-legal a[href="pages/privacy.html"] .footer-link-label'), '::after').transform === 'matrix(1, 0, 0, 1, 0, 0)');
+      assert.equal(await label.evaluate(node => getComputedStyle(node, '::after').transform), 'matrix(1, 0, 0, 1, 0, 0)');
+      assert.equal(await label.evaluate(node => getComputedStyle(node, '::after').transformOrigin.split(' ')[0]), '0px');
       assert.equal(await page.locator('.site-footer a[href="pages/terms.html"]').count(), 1);
       assert.equal(await page.locator('.site-footer a[href="pages/privacy.html"]').count(), 1);
       await page.screenshot({ path: path.join(root, 'images/previews/footer-dividers-' + width + '.png') });
     }
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    assert.equal(await page.locator('.footer-legal a').first().evaluate(node => getComputedStyle(node, '::after').transitionDuration), '0s');
+    assert.equal(await page.locator('.footer-legal .footer-link-label').first().evaluate(node => getComputedStyle(node, '::after').transitionDuration), '0s');
     assert.deepEqual(errors, []);
     console.log('Passed voucher validation, minimums/caps, case normalization, replacement/removal, persistence, delivery/express/overseas/pickup totals, payment-change rejection, saved discounts/receipts, empty/ineligible carts, footer links/dividers/underline, reduced motion and four responsive widths.');
   } finally { await browser.close(); }

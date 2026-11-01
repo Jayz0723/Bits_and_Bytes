@@ -6,8 +6,21 @@ const fail = (message, status) => Object.assign(new Error(message), { status });
 
 function catalogContext() {
   // Evaluate only our checked-in catalog, never visitor-supplied JavaScript.
-  const source = fs.readFileSync(path.join(__dirname, 'js/data.js'), 'utf8');
-  const catalog = vm.runInNewContext(source + '\nJSON.stringify(products.map(p => ({id:p.id,name:p.name,brand:p.brand,price:p.price,stock:p.stock,specs:p.specs,variants:productVariants[p.id]})))', {}, { timeout: 1000 });
+  const source = ['data.js', 'product-descriptions.js', 'catalog-updates.js']
+    .map(file => fs.readFileSync(path.join(__dirname, 'js', file), 'utf8')).join('\n');
+  const app = fs.readFileSync(path.join(__dirname, 'js/app.js'), 'utf8');
+  const parts = app.match(/const computerPartProducts = \[[\s\S]*?\n\];/)?.[0];
+  if (!parts) throw new Error('The component catalog could not be loaded.');
+  const catalog = vm.runInNewContext(source + '\n' + parts + `
+    applyCheckedCatalogPrices(computerPartProducts);
+    JSON.stringify([...products, ...computerPartProducts].map(product => {
+      const variants = productVariants[product.id];
+      const selected = variants?.options.find(option => option.id === variants.defaultId);
+      const item = { ...product, ...productMedia[product.id], ...selected };
+      return { id: product.id, name: item.name, brand: item.brand, price: item.price,
+        stock: item.stock, specs: item.specs, variants,
+        priceReference: catalogPriceReferences[product.id] || null };
+    }))`, {}, { timeout: 1000 });
   return 'Store catalog (prices in PHP; configuration availability may vary): ' + catalog;
 }
 
