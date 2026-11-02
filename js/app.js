@@ -412,8 +412,8 @@ function productVariantMarkup(product, variantId, id = "") {
     const selected = product.variants.options.find(option => option.id === selectedId);
     return `<div class="color-variant-picker"><p>Color: <strong data-selected-color>${selected.label}</strong></p>
       <div class="color-swatches" role="group" aria-label="Color for ${product.name}">
-        ${product.variants.options.map(option => `<button type="button" class="color-swatch" data-product-color="${option.id}" aria-label="Color: ${option.label}" title="${option.label}" aria-pressed="${option.id === selectedId}">${option.swatches.map(color => `<span style="background-color:${color}"></span>`).join("")}</button>`).join("")}
-      </div><select ${id ? `id="${id}"` : ""} data-product-variant="${product.id}" aria-label="Product color" hidden>${product.variants.options.map(option => `<option value="${option.id}" ${option.id === selectedId ? "selected" : ""}>${option.label}</option>`).join("")}</select></div>`;
+        ${product.variants.options.map(option => `<button type="button" class="color-swatch" data-product-color="${option.id}" aria-label="Color: ${option.label}" title="${option.label}: ${option.stockUnconfirmed ? 'Check availability' : option.stock + ' in stock'}" aria-pressed="${option.id === selectedId}">${option.swatches.map(color => `<span style="background-color:${color}"></span>`).join("")}</button>`).join("")}
+      </div><p class="color-stock-list">${product.variants.options.map(option => `${option.label}: ${option.stockUnconfirmed ? 'Check availability' : option.stock + ' in stock'}`).join(' · ')}</p><select ${id ? `id="${id}"` : ""} data-product-variant="${product.id}" aria-label="Product color" hidden>${product.variants.options.map(option => `<option value="${option.id}" ${option.id === selectedId ? "selected" : ""}>${option.label}</option>`).join("")}</select></div>`;
   }
   return `<label class="product-variant-picker">${product.variants.label}
     <select ${id ? `id="${id}"` : ""} data-product-variant="${product.id}" aria-label="${product.variants.label} for ${product.name}">
@@ -502,7 +502,7 @@ function wireQuickOrder() {
     specs.textContent = `${product.brand} - ${product.specs}`;
     document.getElementById("quickOrderPrice").value = product.price;
     total.textContent = money(Number(multiply(quantityInput, document.getElementById("quickOrderPrice"))));
-    stock.textContent = `${product.stock} in stock`;
+    stock.textContent = product.stockUnconfirmed ? 'Check color availability' : `${product.stock} in stock`;
   }
 
   productSelect.addEventListener("change", updateQuickOrder);
@@ -1041,7 +1041,7 @@ function renderProductDetail() {
     renderCatalogPriceReference(product);
   }
   updateProductDescription();
-  document.querySelector("#detailProductStock").textContent = `${product.stock} in stock`;
+  document.querySelector("#detailProductStock").textContent = product.stockUnconfirmed ? 'Check color availability' : `${product.stock} in stock`;
   document.querySelector("#detailProductPrice").innerHTML = product.originalPrice > product.price
     ? `<del>${money(product.originalPrice)}</del> ${money(product.price)}`
     : money(product.price);
@@ -1084,7 +1084,7 @@ function renderProductDetail() {
       ? `<del>${money(product.originalPrice)}</del> ${money(product.price)}`
       : money(product.price);
     updateProductDescription();
-    document.querySelector("#detailProductStock").textContent = `${product.stock} in stock`;
+    document.querySelector("#detailProductStock").textContent = product.stockUnconfirmed ? 'Check color availability' : `${product.stock} in stock`;
     document.querySelector("#configSummaryName").textContent = product.name;
     document.querySelector("#detailKeySpecs").innerHTML = specifications.slice(0, 4).map(([, label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`).join("");
     document.querySelector("#componentOrbitCards").innerHTML = specifications.map(([, label, value]) => `<article class="orbit-spec-card"><strong>${label}</strong><small>${value}</small></article>`).join("");

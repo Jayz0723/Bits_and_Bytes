@@ -1,4 +1,28 @@
 // Catalog expansion: exact model media, Philippine retail references and guide content.
+// Additional finishes use their original manufacturer photos. New inventory is
+// unconfirmed until the owner supplies a count; zero prevents accidental orders.
+const modern15Base = products.find(product => product.id === 'lap-msi-modern-15-b13m');
+addProductColorOptions(modern15Base.id, 'MSI Modern 15 B13M', 'star-blue', [
+  { id: 'star-blue', label: 'Star Blue', swatches: ['#283747'], stock: modern15Base.stock },
+  { id: 'classic-black', label: 'Classic Black', swatches: ['#26282b'], stock: 0, stockUnconfirmed: true,
+    specs: modern15Base.specs.replace(/, Star Blue$/, ''),
+    image: 'images/products/colors/modern15-vibe-nb-Classic-Black.png',
+    gallery: [
+      { src: 'images/products/colors/modern15-vibe-nb-Classic-Black.png', label: 'Modern 15 B13M Classic Black angled view', shortLabel: 'Angle' }
+    ] }
+]);
+const vivobookBase = products.find(product => product.id === 'lap-creator-pro');
+addProductColorOptions(vivobookBase.id, 'ASUS Vivobook Pro 16 OLED K6602', 'quiet-blue', [
+  ...[
+    ['quiet-blue', 'Quiet Blue', '#243446', [2761, 2765]],
+    ['cool-silver', 'Cool Silver', '#c6c8ca', [2810, 2815]]
+  ].map(([id, label, swatch, photos]) => ({
+    id, label, swatches: [swatch], stock: id === 'quiet-blue' ? vivobookBase.stock : 0,
+    stockUnconfirmed: id !== 'quiet-blue',
+    image: `images/products/colors/k6602-${id}-${photos[0]}.png`,
+    gallery: photos.map((photo, index) => ({ src: `images/products/colors/k6602-${id}-${photo}.png`, label: `Vivobook Pro 16 OLED K6602 ${label} view ${index + 1}`, shortLabel: index ? 'Angle' : 'Main' }))
+  }))
+]);
 // Keep source data separate from the storefront's rendering and checkout behavior.
 const catalogExpansionFolder = 'images/products/expansion/';
 const catalogPriceCheckedOn = '2026-10-31';

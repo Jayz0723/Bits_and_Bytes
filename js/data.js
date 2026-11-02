@@ -1444,7 +1444,7 @@ function addProductColorOptions(productId, familyName, defaultId, colors) {
     options: colors.map(color => {
       const image = color.image || base.image;
       const gallery = color.gallery || (color.id === defaultId ? base.gallery : undefined) || [{ src: image, label: familyName + " " + color.label + " main view", shortLabel: "Main" }];
-      return { ...color, image, gallery, color: color.label, name: familyName + " - " + color.label, price: base.price, stock: base.stock, specs: base.specs.replace(/, black finish/i, "") + ", Color: " + color.label };
+      return { ...color, image, gallery, color: color.label, name: familyName + " - " + color.label, price: color.price ?? base.price, stock: color.stock ?? base.stock, specs: (color.specs || base.specs).replace(/, black finish/i, "") + ", Color: " + color.label };
     })
   };
 }

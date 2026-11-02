@@ -1,5 +1,9 @@
 # Verified laptop color options
 
+Additional verified finishes (November 3): MSI Modern 15 B13M Star Blue / Classic Black and ASUS Vivobook Pro 16 OLED K6602 Quiet Blue / Cool Silver. Each finish has its own photo gallery and stock field. Existing default-color store counts are retained; newly added finishes have `stock: 0, stockUnconfirmed: true` until the owner confirms inventory. Their UI says “Check availability” and they cannot be ordered. Manufacturer color availability is not proof of store inventory.
+
+Sources: https://kr.msi.com/Business-Productivity/Modern-15-B13X and https://www.asus.com/ro/laptops/for-creators/vivobook/vivobook-pro-16-oled-k6602/ . Original photo URLs are available in these pages' color galleries. MSI photo: `https://storage-asset.msi.com/global/picture/image/feature/nb/Modern/Modern15B13M/vibe-nb-Classic-Black.png`. ASUS images: `https://dlcdnwebimgs.asus.com/gain/11d7f969-9f0f-4842-9711-825f625505b5/` and `https://dlcdnwebimgs.asus.com/gain/c27f75c7-34a6-4a96-b1a4-4011e02a9f99/` (Silver); `https://dlcdnwebimgs.asus.com/gain/a83cf4a6-2e4b-44b0-991d-a63db1a5e16a/` and `https://dlcdnwebimgs.asus.com/gain/6995ff5e-4ded-462b-88a8-9b19e08dfec8/` (Blue). Photos are unchanged transparent manufacturer assets.
+
 The Victus listing offers Mica Silver (15-fa2007na, Core 7 / RTX 5060 / 24GB / 1TB) and Performance Blue (15-fb3105na, Ryzen 7 7445HS / RTX 4050 / 12GB / 512GB). These are distinct UK configurations, not interchangeable color shells. Prices and stock remain store-configured values. A visible note explains hardware differences. Existing silver cart entries retain their saved configuration.
 
 Blue model details and unmodified transparent photograph:
