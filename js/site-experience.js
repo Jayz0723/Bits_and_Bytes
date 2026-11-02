@@ -65,6 +65,21 @@ function searchResultsMarkup(entries) {
   return entries.map(entry => `<a class="site-search-result" href="${experienceEscape(entry.url)}">${entry.image ? `<img src="${experienceEscape(entry.image)}" alt="" width="64" height="64">` : '<span class="result-page-icon" aria-hidden="true">&rarr;</span>'}<span><small>${entry.kind}</small><strong>${experienceEscape(entry.title)}</strong><span>${experienceEscape(entry.detail)}</span></span><span aria-hidden="true">&rarr;</span></a>`).join('');
 }
 
+async function searchWebsiteBackend(query, kind = 'All') {
+  if (!query.trim() || location.protocol === 'file:') return searchWebsite(query, kind);
+  try {
+    const params = new URLSearchParams({ q: query, kind });
+    const response = await fetch('/api/search?' + params, { signal: AbortSignal.timeout(6500) });
+    if (!response.ok) throw new Error('Search unavailable');
+    const data = await response.json();
+    if (!Array.isArray(data.results)) throw new Error('Invalid search results');
+    return data.results;
+  } catch {
+    // Direct-file/static hosting and temporary server failures retain local search.
+    return searchWebsite(query, kind);
+  }
+}
+
 function wireSiteExperience() {
   const nav = document.querySelector('.foldable-nav');
   if (!nav) return;
@@ -87,7 +102,9 @@ function wireSiteExperience() {
   const results = dialog.querySelector('#siteSearchResults');
   const status = dialog.querySelector('#siteSearchStatus');
   const all = dialog.querySelector('#allSearchResults');
-  function updateSearch() {
+  let searchVersion = 0;
+  async function updateSearch() {
+    const version = ++searchVersion;
     const query = input.value.trim();
     all.hidden = !query;
     all.href = 'pages/search.html?q=' + encodeURIComponent(query);
@@ -97,7 +114,10 @@ function wireSiteExperience() {
       results.querySelectorAll('button').forEach(button => button.addEventListener('click', () => { input.value = button.textContent; updateSearch(); }));
       return;
     }
-    const matches = searchWebsite(query);
+    status.textContent = 'Searching…';
+    results.replaceChildren();
+    const matches = await searchWebsiteBackend(query);
+    if (version !== searchVersion || input.value.trim() !== query) return;
     status.textContent = matches.length ? `${matches.length} results for "${query}"` : 'No matches. Try a product name, component or support topic.';
     results.innerHTML = searchResultsMarkup(matches.slice(0, 6));
   }
@@ -114,7 +134,12 @@ function wireSiteExperience() {
     if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); dialog.close(); }
   });
   dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
-  input.addEventListener('input', updateSearch);
+  let searchDelay;
+  input.addEventListener('input', () => {
+    searchVersion++;
+    clearTimeout(searchDelay);
+    searchDelay = setTimeout(updateSearch, 180);
+  });
 
   const main = document.querySelector('main');
   const carousel = document.querySelector('#promoCarousel');
@@ -169,8 +194,11 @@ function wireSiteExperience() {
   if (searchPage) {
     const query = new URLSearchParams(location.search).get('q')?.slice(0, 150) || '';
     document.querySelector('#resultsQuery').value = query;
-    const render = kind => {
-      const entries = searchWebsite(query, kind);
+    let resultVersion = 0;
+    const render = async kind => {
+      const version = ++resultVersion;
+      const entries = await searchWebsiteBackend(query, kind);
+      if (version !== resultVersion) return;
       document.querySelector('#resultsCount').textContent = query ? `${entries.length} results for "${query}"` : 'Search for a product, article or support topic.';
       searchPage.innerHTML = entries.length ? searchResultsMarkup(entries) : '<p class="search-empty">No results yet. Try fewer words, a brand name, RAM, storage or delivery.</p>';
     };

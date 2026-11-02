@@ -5,6 +5,9 @@ This repository contains only the Bits and Bytes store, not AgrikAIzen.
 
 ## Folder Map
 
+Python powers the server-side website search. See [Python backend processes](docs/PYTHON-BACKEND.md)
+for setup, request flow, file responsibilities and testing.
+
 ```text
 Bits-and-Bytes/
   index.html              Homepage and starting point

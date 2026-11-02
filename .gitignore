@@ -4,6 +4,8 @@ images/previews/
 images/originals/
 *.crdownload
 node_modules/
+__pycache__/
+*.pyc
 data/
 .DS_Store
 Thumbs.db
