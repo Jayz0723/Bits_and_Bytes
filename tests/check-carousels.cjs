@@ -10,8 +10,11 @@ const { chromium } = require('./browser.cjs');
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'no-preference' });
     await page.route(/^https?:/, route => route.abort());
     await page.goto(pathToFileURL(path.resolve(__dirname, '../index.html')).href);
-    const expected = ['Microsoft', 'AMD', 'Cooler Master', 'Corsair', 'Gigabyte', 'Intel', 'Kingston', 'NVIDIA', 'HP', 'MSI', 'ASUS', 'Lenovo', 'Dell', 'Apple'];
-    assert.deepEqual(await page.locator('.car-slide').first().locator('img').evaluateAll(images => images.map(image => image.alt)), expected);
+    const expected = await page.evaluate(() => [...new Set(catalogProducts().map(product => product.brand))].sort());
+    assert.deepEqual(await page.locator('.car-slide').first().locator('a').evaluateAll(links => links.map(link => link.dataset.catalogBrand)), expected);
+    assert.equal(await page.locator('.car-slide').first().locator('img').count(), expected.length);
+    await page.locator('.car-slide img, .promo-slide img').evaluateAll(images =>
+      Promise.all(images.map(image => { image.loading = 'eager'; return image.decode(); })));
     const copies = await page.locator('.car-slide').evaluateAll(strips => strips.map(strip => [...strip.querySelectorAll('img')].map(image => image.getAttribute('src'))));
     assert.deepEqual(copies[0], copies[1], 'Both copies contain every brand in the same order');
     await page.locator('.brand-strip .carousel').hover();
@@ -33,6 +36,6 @@ const { chromium } = require('./browser.cjs');
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       await page.screenshot({ path: path.resolve(__dirname, '../images/previews/carousel-fixed-' + width + '.png') });
     }
-    console.log('Passed continuous hover playback, synchronized logo copies, all 14 brands, Microsoft labels, and responsive carousel layouts.');
+    console.log('Passed local image decoding for every promotion and brand, continuous hover playback, synchronized strips and responsive layouts.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

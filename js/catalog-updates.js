@@ -229,6 +229,10 @@ function renderCatalogBrands() {
     Elgato: 'https://www.elgato.com/', 'Bits and Bytes': 'pages/about.html',
     'Bits and Bytes Select': 'pages/about.html'
   };
+  const brandPhotos = new Map();
+  for (const product of catalogProducts()) {
+    if (product.image && !brandPhotos.has(product.brand)) brandPhotos.set(product.brand, product.image);
+  }
   const brands = [...new Set(catalogProducts().map(product => product.brand))].sort();
   function brandLink(brand, className, duplicate = false) {
     const existing = originalLinks.get(brand);
@@ -244,6 +248,14 @@ function renderCatalogBrands() {
     if (existing?.querySelector('img')) {
       link.append(existing.querySelector('img').cloneNode());
     } else {
+      link.classList.add('partner-with-product');
+      const photo = document.createElement('img');
+      photo.src = brandPhotos.get(brand) || 'images/branding/bitsandbyteslogo.png';
+      photo.alt = '';
+      photo.decoding = 'async';
+      link.append(photo);
+    }
+    if (!existing?.querySelector('img') || className === 'partner-card') {
       const wordmark = document.createElement('span');
       wordmark.className = 'catalog-brand-wordmark';
       wordmark.textContent = brand;
