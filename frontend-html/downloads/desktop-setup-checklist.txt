@@ -1,0 +1,12 @@
+BITS AND BYTES - DESKTOP SETUP CHECKLIST
+
+1. Place the desktop on a stable surface with clear airflow around every vent.
+2. Connect the monitor to the graphics card when the PC includes a dedicated GPU.
+3. Connect the keyboard, mouse, network cable, and audio devices.
+4. Connect the power cable through a quality surge protector or UPS.
+5. Complete Windows setup and install current operating-system updates.
+6. Install current graphics, chipset, network, and peripheral drivers.
+7. Confirm the monitor is using its intended resolution and refresh rate.
+8. Keep product packaging and warranty information for future support.
+
+This sample manual is intended as a replaceable download for the storefront project.

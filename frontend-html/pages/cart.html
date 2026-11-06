@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<!-- Bits & Bytes, HTML and CSS edition. Open this folder’s index.html to start. -->
+<html lang="en">
+  <head>
+    <!-- Resolve shared files from the project root, including on local file URLs. -->
+    <base href="../">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | Bits and Bytes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/storefront.css?v=20261031-catalog-v23">
+    <link rel="stylesheet" href="css/checkout-flow.css?v=20261027-clear-checkout-v9">
+    <link rel="stylesheet" href="css/receipts.css?v=20261017-receipts-v1">
+    <link rel="stylesheet" href="css/site-experience.css?v=20261026-cutouts-v6">
+    <!-- Shared storefront styles above retain the original layout. Static controls below use native HTML and CSS. -->
+    <link rel="stylesheet" href="css/static-edition.css">
+  </head>
+  <body class="utility-page checkout-page store-gradient" style="--journey: 0;">
+    <div class="site-nav-space">
+      <div class="sticky-site-nav" aria-label="Sticky site navigation">
+        <nav class="main-nav foldable-nav" id="horizontal" aria-label="Main navigation">
+          <a class="mobile-store-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+          <!--  The mobile menu opens when its native checkbox is checked.  -->
+          <input id="static-nav-toggle" class="sr-only" type="checkbox" aria-label="Main menu" aria-controls="primaryNavMenu">
+          <label class="nav-toggle" for="static-nav-toggle">Menu</label>
+          <div class="nav-menu" id="primaryNavMenu">
+            <a class="nav-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+            <a class="nav-home" href="index.html">Home</a>
+            <details class="nav-group">
+              <summary>Shop Now</summary>
+              <div class="nav-submenu shop-submenu">
+                <a href="pages/products.html#computer-products">Computer Products</a>
+                <a href="pages/products.html#laptops">Laptops</a>
+                <a href="pages/products.html#accessories">Accessories</a>
+                <a href="pages/products.html#computer-parts">Computer Parts</a>
+                <a class="" href="pages/build.html">Build Your Own PC</a>
+                <a class="" href="pages/products.html">Products</a>
+              </div>
+            </details>
+            <details class="nav-group">
+              <summary>Explore</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/articles.html">Articles</a>
+                <a class="" href="pages/components.html">Interactive Guide</a>
+                <a class="" href="pages/about.html">About</a>
+                <a class="" href="pages/downloads.html">Downloads</a>
+              </div>
+            </details>
+            <details class="nav-group">
+              <summary>Support</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/contact.html">Contact</a>
+                <a class="" href="pages/tracking.html">Track Order</a>
+                <a class="" href="pages/profile.html">My account</a>
+                <a class="" href="pages/login.html">Login</a>
+              </div>
+            </details>
+            <details class="nav-group nav-account">
+              <summary title="Your account"><img src="images/icons/user-round.svg" alt="" width="20" height="20"><span class="nav-account-greeting">My account</span></summary>
+              <div class="nav-submenu">
+                <a href="pages/profile.html">Manage my account</a>
+                <a href="pages/profile.html#orders">My purchases</a>
+                <a href="pages/profile.html#addresses">Address book</a>
+                <a href="pages/profile.html#tracking">Delivery tracking</a>
+                <a href="pages/profile.html#favorites">My favorites</a>
+                <a href="pages/profile.html#refunds">Returns &amp; refunds</a>
+                <button class="nav-account-signout" type="button" hidden="" disabled="">Sign out</button>
+              </div>
+            </details>
+          </div>
+          <a href="pages/search.html" class="site-search-toggle" id="siteSearchToggle" title="Search the website" aria-label="Search the website"><img class="site-search-icon" src="images/icons/search.svg" width="22" height="22" alt=""></a>
+        </nav>
+        <div class="store-toolbar" aria-label="Store controls">
+          <a class="cart-pill active" href="pages/cart.html" aria-label="Cart, 0 items" title="View cart"><img class="cart-icon" src="images/icons/shopping-cart.svg" alt="" width="24" height="24"><span id="cartCount" aria-live="polite">0</span></a>
+          <label class="store-control" for="languageSelect">
+        <span>Language</span>
+        <select id="languageSelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <optgroup label="Languages">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="zh">简体中文</option>
+          </optgroup>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="languageSelectTrigger" aria-label="Language" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageSelectOptions" disabled=""><b>English</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="languageSelectOptions" role="listbox" aria-label="Language" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>EN</b><strong translate="no">English</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JA</b><strong translate="no">日本語</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ES</b><strong translate="no">Español</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>FR</b><strong translate="no">Français</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ZH</b><strong translate="no">简体中文</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <label class="store-control" for="currencySelect">
+        <span>Currency</span>
+        <select id="currencySelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <option value="PHP">PHP (P)</option>
+          <option value="USD">USD ($)</option>
+          <option value="JPY">JPY (¥)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="CNY">CNY (CN¥)</option>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="currencySelectTrigger" aria-label="Currency" aria-haspopup="listbox" aria-expanded="false" aria-controls="currencySelectOptions" disabled=""><b>PHP (P)</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="currencySelectOptions" role="listbox" aria-label="Currency" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>PHP</b><strong translate="no">PHP (P)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>USD</b><strong translate="no">USD ($)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JPY</b><strong translate="no">JPY (¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>EUR</b><strong translate="no">EUR (€)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>CNY</b><strong translate="no">CNY (CN¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <a class="wishlist-pill" href="pages/wishlist.html" aria-label="Wishlist"><span class="wishlist-link-label">Wishlist</span> <span id="wishlistCount">0</span></a>
+          <p class="control-status" id="controlStatus" role="status"></p>
+        </div>
+      </div>
+    </div>
+    <!--  Site header and navigation. Links point to pages inside this standalone edition.  -->
+    <header class="site-header" id="top">
+      <img src="images/showcase/home-banner.jpg" width="900" height="260" alt="Bits and Bytes Banner">
+      <hgroup>
+
+
+      <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1>
+      <h2>Shopping Cart</h2>
+
+    </hgroup>
+    </header>
+    <!--  Page content. Product cards, articles and other catalog data below are written directly into this HTML.  -->
+    <main>
+      <p class="static-preview-note">Frontend preview. Live account, ordering and form features are available in the original storefront.</p>
+      <section class="page-hero compact">
+        <p class="eyebrow">Shopping cart</p>
+        <h1>Your selected items</h1>
+        <p>Review your exact models, adjust quantities, and make room for your next upgrade. Your cart stays saved on this device.</p>
+      </section>
+      <section class="cart-layout">
+        <div id="cartItems" class="cart-items">
+          <p>Your cart is empty. Add products or create a custom build.</p>
+        </div>
+        <aside class="cart-summary">
+          <h2>Order Summary</h2>
+          <p class="form-note" id="cartUpdateStatus" role="status"></p>
+          <div class="total-row">
+            <span>Items subtotal</span>
+            <strong id="cartTotal">₱0</strong>
+          </div>
+          <form id="voucherForm" class="voucher-form" novalidate="" data-bound="yes">
+            <label for="voucherCode">Promo code or voucher</label>
+            <div class="voucher-entry">
+              <input id="voucherCode" name="voucher" type="text" maxlength="24" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Enter code" aria-describedby="voucherStatus" disabled="">
+              <button class="button secondary" type="submit" disabled="">Apply</button>
+            </div>
+            <p id="voucherStatus" class="voucher-status" role="status"></p>
+            <div id="activeVoucher" class="active-voucher" hidden="">
+              <strong id="activeVoucherCode"></strong>
+              <button id="removeVoucher" type="button" aria-label="Remove voucher" title="Remove voucher" disabled=""><img src="images/icons/x.svg" alt="" width="16" height="16"></button>
+            </div>
+            <details class="voucher-offers">
+              <summary>Available offers</summary>
+              <p><strong>WELCOME10</strong>: 10% off items from PHP 5,000, up to PHP 1,500.</p>
+              <p><strong>SAVE500</strong>: PHP 500 off items from PHP 10,000.</p>
+              <p>One voucher per order. Delivery fees are excluded.</p>
+            </details>
+          </form>
+          <div class="total-row voucher-discount" id="cartDiscountRow" hidden="">
+            <span>Voucher discount</span>
+            <strong id="cartDiscount">-₱0</strong>
+          </div>
+          <div class="total-row">
+            <span>Items total</span>
+            <strong id="cartDiscountedTotal">₱0</strong>
+          </div>
+          <p class="form-note">Delivery fees are shown at checkout before you confirm.</p>
+          <button class="button primary full-width" id="checkoutButton" type="button" disabled="">Continue to Delivery</button>
+          <button class="button secondary full-width" id="clearCart" type="button" disabled="">Clear Cart</button>
+        </aside>
+      </section>
+      <section class="checkout-panel" id="checkoutPanel" hidden="" aria-labelledby="deliveryTitle">
+        <div class="delivery-map-card">
+          <p class="eyebrow">Nationwide delivery</p>
+          <h2>Delivered across the Philippines</h2>
+          <p>Choose your delivery location, then add the street address for your PC, laptop, or accessories.</p>
+          <nav class="checkout-guide" aria-label="Checkout shortcuts">
+            <a href="pages/cart.html#checkoutContact"><span>01</span> Contact &amp; address</a>
+            <a href="pages/cart.html#checkoutPayment"><span>02</span> Choose payment</a>
+            <a href="pages/cart.html#checkoutReview"><span>03</span> Review your total</a>
+          </nav>
+          <div class="delivery-location-map">
+            <iframe id="deliveryGoogleMap" title="Google Maps delivery area: Philippines" src="https://www.google.com/maps?q=Philippines&amp;output=embed" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+          </div>
+          <p id="deliveryMapCaption" class="map-address-status" aria-live="polite" translate="no">Philippines</p>
+          <a id="deliveryGoogleMapLink" class="text-link delivery-map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Philippines" target="_blank" rel="noopener noreferrer">Open in Google Maps <span aria-hidden="true">→</span></a>
+          <div class="island-legend" aria-label="Delivery coverage">
+            <span>Luzon</span>
+            <span>Visayas</span>
+            <span>Mindanao</span>
+          </div>
+          <p class="international-delivery-note">Overseas delivery is also available to Japan, China, Spain, France, and the United States.</p>
+        </div>
+        <form class="delivery-checkout-form" id="deliveryCheckoutForm">
+          <ol class="checkout-steps" aria-label="Checkout steps">
+            <li class="is-current">
+              <span>1</span>
+               Delivery
+            </li>
+            <li>
+              <span>2</span>
+               Payment
+            </li>
+            <li>
+              <span>3</span>
+               Tracking
+            </li>
+          </ol>
+          <p class="eyebrow">Checkout</p>
+          <h2 id="deliveryTitle">Delivery and payment</h2>
+          <p class="form-note">Complete a sample checkout and follow its delivery timeline on this device. No payment is charged and no courier shipment is created.</p>
+          <fieldset class="fulfillment-methods" disabled=""><legend>Receive your order</legend>
+          <label><input type="radio" name="fulfillmentMethod" value="delivery" checked="" disabled=""><span><strong>Delivery</strong><small>Ship to your address</small></span></label>
+          <label><input type="radio" name="fulfillmentMethod" value="pickup" disabled=""><span><strong>Store pickup</strong><small>No shipping fee</small></span></label>
+        </fieldset>
+          <section id="storePickupDetails" class="store-pickup-details" hidden="">
+            <h3>Bits &amp; Bytes collection point</h3>
+            <p>Sample collection point, Calamba City, Laguna, Philippines</p>
+            <p class="pickup-disclaimer">Fictional location for sample pickup orders. This is not an operating store; no pickup reservation is created. Wait for confirmation before travelling.</p>
+          </section>
+          <fieldset class="checkout-form-section" id="checkoutContact" disabled="">
+          <legend>Contact information</legend>
+          <div class="address-grid">
+            <div>
+              <label for="checkoutEmail">Email address</label>
+              <input id="checkoutEmail" type="email" autocomplete="email" placeholder="you@example.com" required="" disabled="">
+            </div>
+            <div>
+              <label for="checkoutPhone">Mobile number</label>
+              <input id="checkoutPhone" type="tel" autocomplete="tel" inputmode="tel" pattern="[+0-9 ]{7,30}" placeholder="Include country code for overseas" required="" disabled="">
+            </div>
+          </div>
+        </fieldset>
+          <fieldset class="checkout-form-section" disabled="">
+          <legend>Delivery address</legend>
+          <div class="saved-address-choice"><label for="checkoutSavedAddress">Use a saved address</label><select id="checkoutSavedAddress" disabled=""><option value="">Enter a new address</option></select><a class="text-link" href="pages/profile.html#addresses">Manage address book →</a></div>
+          <div class="address-grid">
+            <div>
+              <label for="checkoutFirstName">First name</label>
+              <input id="checkoutFirstName" type="text" autocomplete="given-name" maxlength="80" required="" disabled="">
+            </div>
+            <div>
+              <label for="checkoutMiddleName">Middle name <span class="optional-label">Optional</span></label>
+              <input id="checkoutMiddleName" type="text" autocomplete="additional-name" maxlength="80" disabled="">
+            </div>
+            <div>
+              <label for="checkoutSurname">Surname</label>
+              <input id="checkoutSurname" type="text" autocomplete="family-name" maxlength="80" required="" disabled="">
+            </div>
+            <div>
+              <label for="checkoutSuffix">Suffix <span class="optional-label">Optional</span></label>
+              <select id="checkoutSuffix" autocomplete="honorific-suffix" disabled="">
+                <option value="">None</option><option>Jr.</option><option>Sr.</option><option>II</option><option>III</option><option>IV</option><option>V</option>
+              </select>
+            </div>
+            <div>
+              <label for="countryRegion">Country or region</label>
+              <select id="countryRegion" autocomplete="country-name" required="" disabled=""><option value="">Choose country</option><option value="Philippines">Philippines</option><option value="Japan">Japan</option><option value="China">China</option><option value="Spain">Spain</option><option value="France">France</option><option value="United States">United States</option></select>
+            </div>
+          </div>
+          <label for="streetAddress">House number, street name, and subdivision</label>
+          <input id="streetAddress" type="text" autocomplete="address-line1" placeholder="House number, street, and subdivision" required="" disabled="">
+          <label for="addressLineTwo">Apartment, suite, building, or floor <span class="optional-label">Optional</span></label>
+          <input id="addressLineTwo" type="text" autocomplete="address-line2" placeholder="Unit 4B, Byte Tower" disabled="">
+          <div id="internationalAddressFields" class="address-grid address-editor-grid" hidden=""><div><label for="internationalRegion">State / region / prefecture</label><input id="internationalRegion" list="internationalRegions" autocomplete="address-level1" maxlength="100" disabled=""><datalist id="internationalRegions"></datalist></div><div><label for="internationalCity">City / town</label><input id="internationalCity" list="internationalCities" autocomplete="address-level2" maxlength="100" disabled=""><datalist id="internationalCities"></datalist></div></div><div class="address-grid">
+            <div>
+              <label for="provinceSelect">Province / Region</label>
+              <select id="provinceSelect" autocomplete="address-level1" required="" disabled=""><option value="">Select province or Metro Manila</option><option value="Abra">Abra</option><option value="Agusan del Norte">Agusan del Norte</option><option value="Agusan del Sur">Agusan del Sur</option><option value="Aklan">Aklan</option><option value="Albay">Albay</option><option value="Antique">Antique</option><option value="Apayao">Apayao</option><option value="Aurora">Aurora</option><option value="Basilan">Basilan</option><option value="Bataan">Bataan</option><option value="Batanes">Batanes</option><option value="Batangas">Batangas</option><option value="Benguet">Benguet</option><option value="Biliran">Biliran</option><option value="Bohol">Bohol</option><option value="Bukidnon">Bukidnon</option><option value="Bulacan">Bulacan</option><option value="Cagayan">Cagayan</option><option value="Camarines Norte">Camarines Norte</option><option value="Camarines Sur">Camarines Sur</option><option value="Camiguin">Camiguin</option><option value="Capiz">Capiz</option><option value="Catanduanes">Catanduanes</option><option value="Cavite">Cavite</option><option value="Cebu">Cebu</option><option value="Cotabato">Cotabato</option><option value="Davao de Oro">Davao de Oro</option><option value="Davao del Norte">Davao del Norte</option><option value="Davao del Sur">Davao del Sur</option><option value="Davao Occidental">Davao Occidental</option><option value="Davao Oriental">Davao Oriental</option><option value="Dinagat Islands">Dinagat Islands</option><option value="Eastern Samar">Eastern Samar</option><option value="Guimaras">Guimaras</option><option value="Ifugao">Ifugao</option><option value="Ilocos Norte">Ilocos Norte</option><option value="Ilocos Sur">Ilocos Sur</option><option value="Iloilo">Iloilo</option><option value="Isabela">Isabela</option><option value="Kalinga">Kalinga</option><option value="La Union">La Union</option><option value="Laguna">Laguna</option><option value="Lanao del Norte">Lanao del Norte</option><option value="Lanao del Sur">Lanao del Sur</option><option value="Leyte">Leyte</option><option value="Maguindanao del Norte">Maguindanao del Norte</option><option value="Maguindanao del Sur">Maguindanao del Sur</option><option value="Marinduque">Marinduque</option><option value="Masbate">Masbate</option><option value="Metro Manila">Metro Manila</option><option value="Misamis Occidental">Misamis Occidental</option><option value="Misamis Oriental">Misamis Oriental</option><option value="Mountain Province">Mountain Province</option><option value="Negros Occidental">Negros Occidental</option><option value="Negros Oriental">Negros Oriental</option><option value="Northern Samar">Northern Samar</option><option value="Nueva Ecija">Nueva Ecija</option><option value="Nueva Vizcaya">Nueva Vizcaya</option><option value="Occidental Mindoro">Occidental Mindoro</option><option value="Oriental Mindoro">Oriental Mindoro</option><option value="Palawan">Palawan</option><option value="Pampanga">Pampanga</option><option value="Pangasinan">Pangasinan</option><option value="Quezon">Quezon</option><option value="Quirino">Quirino</option><option value="Rizal">Rizal</option><option value="Romblon">Romblon</option><option value="Samar">Samar</option><option value="Sarangani">Sarangani</option><option value="Siquijor">Siquijor</option><option value="Sorsogon">Sorsogon</option><option value="South Cotabato">South Cotabato</option><option value="Southern Leyte">Southern Leyte</option><option value="Sultan Kudarat">Sultan Kudarat</option><option value="Sulu">Sulu</option><option value="Surigao del Norte">Surigao del Norte</option><option value="Surigao del Sur">Surigao del Sur</option><option value="Tarlac">Tarlac</option><option value="Tawi-Tawi">Tawi-Tawi</option><option value="Zambales">Zambales</option><option value="Zamboanga del Norte">Zamboanga del Norte</option><option value="Zamboanga del Sur">Zamboanga del Sur</option><option value="Zamboanga Sibugay">Zamboanga Sibugay</option></select>
+            </div>
+            <div>
+              <label for="citySelect">City / Municipality</label>
+              <select id="citySelect" autocomplete="address-level2" required="" disabled="">
+                <option value="">Select province first</option>
+              </select>
+            </div>
+            <div>
+              <label for="barangaySelect">Barangay</label>
+              <select id="barangaySelect" autocomplete="address-level3" required="" disabled="">
+                <option value="">Select city first</option>
+              </select>
+            </div>
+            <div>
+              <label for="postalCode">Postal code</label>
+              <input id="postalCode" type="text" autocomplete="postal-code" inputmode="numeric" pattern="\d{4}" maxlength="4" placeholder="1100" required="" disabled="">
+              <small id="postalCodeHint" class="address-hint" aria-live="polite">Suggested by city or area, not province. Confirm it for your exact address.</small>
+            </div>
+          </div>
+          <div id="otherBarangayField" hidden=""><label for="otherBarangay">Barangay name</label><input id="otherBarangay" type="text" maxlength="120" autocomplete="address-level3" disabled=""></div>
+          <label for="deliveryLandmark">Nearby landmark <span class="optional-label">Optional</span></label>
+          <input id="deliveryLandmark" type="text" placeholder="Near a school, mall, or recognizable building" disabled="">
+          <label for="deliveryInstructions">Delivery instructions <span class="optional-label">Optional</span></label>
+          <textarea id="deliveryInstructions" rows="2" placeholder="Gate instructions, preferred delivery time, or directions" disabled=""></textarea>
+        </fieldset>
+          <fieldset class="checkout-form-section delivery-services" disabled="">
+          <legend>Delivery service</legend>
+          <label class="payment-option"><input type="radio" name="deliveryService" value="standard" checked="" disabled=""><span><strong>Standard delivery <b>₱150</b></strong><small>Our regular delivery option.</small></span></label>
+          <label class="payment-option"><input type="radio" name="deliveryService" value="express" disabled=""><span><strong>Express delivery <b>₱300</b></strong><small>Higher-priced priority service. Availability and timing must be confirmed by the store.</small></span></label>
+          <p class="form-note">Sample delivery fees. No courier is booked and no arrival date is guaranteed.</p>
+        </fieldset>
+          <p id="overseasShippingNote" class="overseas-shipping-note" hidden="">Overseas shipping includes an additional destination charge. Import duties and taxes are not included. These are configured estimates; carrier availability and final costs must be confirmed. Cash on delivery is available only within the Philippines.</p>
+          <fieldset class="payment-methods" id="checkoutPayment" disabled="">
+          <legend>Payment method</legend>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="Cash on Delivery" checked="" disabled="">
+            <span><strong>Cash on Delivery</strong><small>Pay when the order arrives. Available for eligible locations and order totals.</small></span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="Card Payment" disabled="">
+            <span><strong>Credit or debit card</strong><small>Visa, Mastercard, American Express, JCB, and supported bank-issued cards.</small></span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="E-wallet" disabled="">
+            <span><strong>E-wallet</strong><small>Pay using your registered GCash or Maya mobile account.</small></span>
+          </label>
+        </fieldset>
+          <div class="payment-detail" id="paymentDetail" aria-live="polite">
+            <div class="cod-payment-message">
+              <span class="cod-payment-mark" aria-hidden="true">COD</span>
+              <div>
+                <strong>Pay when your order arrives</strong>
+                <p>Prepare the exact amount or follow the courier's accepted payment instructions. Some high-value orders may require confirmation before dispatch.</p>
+              </div>
+            </div>
+          </div>
+          <section class="checkout-review" id="checkoutReview" aria-labelledby="checkoutReviewTitle">
+            <p class="eyebrow">One last look</p>
+            <h3 id="checkoutReviewTitle">Your order total</h3>
+            <p class="form-note">Review the item total, discount, and delivery charge before continuing.</p>
+            <dl class="checkout-costs" aria-live="polite"><div><dt>Items subtotal</dt><dd id="checkoutSubtotal">₱0.00</dd></div><div class="voucher-discount" id="checkoutDiscountRow" hidden=""><dt>Voucher discount</dt><dd id="checkoutDiscount">-₱0.00</dd></div><div><dt id="checkoutDeliveryLabel">Standard delivery</dt><dd id="checkoutDeliveryFee">₱0.00</dd></div><div hidden=""><dt>Overseas destination charge</dt><dd id="checkoutOverseasFee">₱0.00</dd></div><div class="checkout-grand-total"><dt>Total (PHP)</dt><dd id="checkoutGrandTotal">₱0.00</dd></div></dl>
+          </section>
+          <button class="button primary" id="reviewOrderButton" type="submit" disabled="">Continue to payment</button>
+          <p class="checkout-status" id="checkoutStatus" role="status"></p>
+        </form>
+      </section>
+    </main>
+    <!--  Shared footer. These links work without a server or JavaScript.  -->
+    <footer class="site-footer" data-store-footer="ready" id="storeFooter">
+      <div class="footer-main">
+        <a class="footer-brand" href="index.html" aria-label="Bits and Bytes home">
+          <img class="footer-brand-mark" src="images/branding/bitsandbyteslogo.png" alt="Bits and Bytes logo">
+          <span><strong>Bits and Bytes</strong><small>PC and Laptop Store</small></span>
+        </a>
+        <section class="footer-location">
+          <h2>Bits and Bytes Manila</h2>
+          <p>Computer and laptop support desk<br>Quezon City, Metro Manila<br><a href="pages/contact.html"><span class="footer-link-label">Contact customer service</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Bits and Bytes Cebu</h2>
+          <p>PC build and pickup support<br>Cebu City, Cebu<br><a href="pages/contact.html"><span class="footer-link-label">Ask about availability</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Online Store Support</h2>
+          <p>Delivery, product advice, and checkout help<br>Philippines-wide service<br><a href="pages/contact.html"><span class="footer-link-label">Send an inquiry</span></a></p>
+        </section>
+      </div>
+      <div class="footer-bottom">
+        <nav aria-label="Footer navigation">
+          <a href="pages/about.html"><span class="footer-link-label">About Us</span></a>
+          <a href="pages/articles.html"><span class="footer-link-label">The Journal</span></a>
+          <a href="pages/tracking.html"><span class="footer-link-label">Track Order</span></a>
+          <a href="pages/profile.html"><span class="footer-link-label">My account</span></a>
+          <a href="pages/warranty.html"><span class="footer-link-label">Warranty Info</span></a>
+          <a href="pages/downloads.html"><span class="footer-link-label">Downloads</span></a>
+          <a href="pages/contact.html"><span class="footer-link-label">Contact Us</span></a>
+          <a data-back-to-top="" href="pages/cart.html#top"><span class="footer-link-label">Back to top ↑</span></a>
+        </nav>
+        <div class="footer-social">
+          <span>Follow us on</span>
+          <div class="social-links" aria-label="Follow Bits and Bytes on social media">
+            <a class="social-icon facebook" href="https://www.facebook.com/johncarlo.herrera.58" target="_blank" rel="noopener noreferrer" aria-label="Facebook: John Carlo Herrera" title="Facebook"><img src="images/social/facebook.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon instagram" href="https://www.instagram.com/jayzzzz0723/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: jayzzzz0723" title="Instagram"><img src="images/social/instagram.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon x-twitter" href="https://x.com/Jayzee20202" target="_blank" rel="noopener noreferrer" aria-label="X: Jayzee20202" title="X"><img src="images/social/x.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon youtube" href="https://www.youtube.com/@johncarloherrera8540" target="_blank" rel="noopener noreferrer" aria-label="YouTube: johncarloherrera8540" title="YouTube"><img src="images/social/youtube.svg" alt="" width="24" height="24"></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>© 2026 Herrera Corporation. All rights reserved.</p>
+        <nav aria-label="Legal information">
+          <a href="pages/terms.html"><span class="footer-link-label">Terms of Use</span></a>
+          <a href="pages/privacy.html"><span class="footer-link-label">Privacy Policy</span></a>
+        </nav>
+      </div>
+    </footer>
+    <aside class="support-chat" id="supportChat" aria-label="Customer service chat">
+      <button class="store-back-to-top" id="storeBackToTop" type="button" aria-label="Back to top" title="Back to top" hidden="" disabled="">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 15 7-7 7 7"></path></svg>
+      </button>
+      <a href="pages/contact.html" class="support-chat-launcher" id="supportChatLauncher" title="Chat with us" aria-label="Chat with us">
+        <img class="chat-robot-normal" src="images/branding/support-robot-hover.png" width="64" height="64" alt="" aria-hidden="true">
+        <img class="chat-robot-hover" src="images/branding/support-robot-normal.png" width="64" height="64" alt="" aria-hidden="true">
+        <span class="chat-notification-dot" aria-hidden="true"></span>
+      </a>
+    </aside>
+  </body>
+</html>

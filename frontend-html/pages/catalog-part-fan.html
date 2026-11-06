@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<!-- Bits & Bytes, HTML and CSS edition. Open this folder’s index.html to start. -->
+<html lang="en">
+  <head>
+    <!-- Resolve shared files from the project root, including on local file URLs. -->
+    <base href="../">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Bits and Bytes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=20261004-editorial">
+    <link rel="stylesheet" href="css/shop.css?v=20261012-capacity-photos">
+    <link rel="stylesheet" href="css/shopping-tools.css">
+    <link rel="stylesheet" href="css/storefront.css?v=20261031-catalog-v23">
+    <link rel="stylesheet" href="css/site-experience.css?v=20261026-cutouts-v6">
+    <!-- Shared storefront styles above retain the original layout. Static controls below use native HTML and CSS. -->
+    <link rel="stylesheet" href="css/static-edition.css">
+  </head>
+  <body class="catalog-page store-gradient" style="--journey: 0;">
+    <div class="site-nav-space">
+      <div class="sticky-site-nav" aria-label="Sticky site navigation">
+        <nav class="main-nav foldable-nav" id="horizontal" aria-label="Main navigation">
+          <a class="mobile-store-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+          <!--  The mobile menu opens when its native checkbox is checked.  -->
+          <input id="static-nav-toggle" class="sr-only" type="checkbox" aria-label="Main menu" aria-controls="primaryNavMenu">
+          <label class="nav-toggle" for="static-nav-toggle">Menu</label>
+          <div class="nav-menu" id="primaryNavMenu">
+            <a class="nav-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+            <a class="nav-home" href="index.html">Home</a>
+            <details class="nav-group current">
+              <summary>Shop Now</summary>
+              <div class="nav-submenu shop-submenu">
+                <a href="pages/products.html#computer-products">Computer Products</a>
+                <a href="pages/products.html#laptops">Laptops</a>
+                <a href="pages/products.html#accessories">Accessories</a>
+                <a href="pages/products.html#computer-parts">Computer Parts</a>
+                <a class="" href="pages/build.html">Build Your Own PC</a>
+                <a class="active" href="pages/products.html" aria-current="page">Products</a>
+              </div>
+            </details>
+            <details class="nav-group">
+              <summary>Explore</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/articles.html">Articles</a>
+                <a class="" href="pages/components.html">Interactive Guide</a>
+                <a class="" href="pages/about.html">About</a>
+                <a class="" href="pages/downloads.html">Downloads</a>
+              </div>
+            </details>
+            <details class="nav-group">
+              <summary>Support</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/contact.html">Contact</a>
+                <a class="" href="pages/tracking.html">Track Order</a>
+                <a class="" href="pages/profile.html">My account</a>
+                <a class="" href="pages/login.html">Login</a>
+              </div>
+            </details>
+            <details class="nav-group nav-account">
+              <summary title="Your account"><img src="images/icons/user-round.svg" alt="" width="20" height="20"><span class="nav-account-greeting">My account</span></summary>
+              <div class="nav-submenu">
+                <a href="pages/profile.html">Manage my account</a>
+                <a href="pages/profile.html#orders">My purchases</a>
+                <a href="pages/profile.html#addresses">Address book</a>
+                <a href="pages/profile.html#tracking">Delivery tracking</a>
+                <a href="pages/profile.html#favorites">My favorites</a>
+                <a href="pages/profile.html#refunds">Returns &amp; refunds</a>
+                <button class="nav-account-signout" type="button" hidden="" disabled="">Sign out</button>
+              </div>
+            </details>
+          </div>
+          <a href="pages/search.html" class="site-search-toggle" id="siteSearchToggle" title="Search the website" aria-label="Search the website"><img class="site-search-icon" src="images/icons/search.svg" width="22" height="22" alt=""></a>
+        </nav>
+        <div class="store-toolbar" aria-label="Store controls">
+          <a class="cart-pill" href="pages/cart.html" aria-label="Cart, 0 items" title="View cart"><img class="cart-icon" src="images/icons/shopping-cart.svg" alt="" width="24" height="24"><span id="cartCount" aria-live="polite">0</span></a>
+          <label class="store-control" for="languageSelect">
+        <span>Language</span>
+        <select id="languageSelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <optgroup label="Languages">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="zh">简体中文</option>
+          </optgroup>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="languageSelectTrigger" aria-label="Language" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageSelectOptions" disabled=""><b>English</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="languageSelectOptions" role="listbox" aria-label="Language" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>EN</b><strong translate="no">English</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JA</b><strong translate="no">日本語</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ES</b><strong translate="no">Español</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>FR</b><strong translate="no">Français</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ZH</b><strong translate="no">简体中文</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <label class="store-control" for="currencySelect">
+        <span>Currency</span>
+        <select id="currencySelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <option value="PHP">PHP (P)</option>
+          <option value="USD">USD ($)</option>
+          <option value="JPY">JPY (¥)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="CNY">CNY (CN¥)</option>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="currencySelectTrigger" aria-label="Currency" aria-haspopup="listbox" aria-expanded="false" aria-controls="currencySelectOptions" disabled=""><b>PHP (P)</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="currencySelectOptions" role="listbox" aria-label="Currency" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>PHP</b><strong translate="no">PHP (P)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>USD</b><strong translate="no">USD ($)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JPY</b><strong translate="no">JPY (¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>EUR</b><strong translate="no">EUR (€)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>CNY</b><strong translate="no">CNY (CN¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <a class="wishlist-pill" href="pages/wishlist.html" aria-label="Wishlist"><span class="wishlist-link-label">Wishlist</span> <span id="wishlistCount">0</span></a>
+          <p class="control-status" id="controlStatus" role="status"></p>
+        </div>
+      </div>
+    </div>
+    <!--  Site header and navigation. Links point to pages inside this standalone edition.  -->
+    <header class="site-header" id="top">
+      <img src="images/showcase/home-banner.jpg" width="900" height="260" alt="Bits and Bytes Banner">
+      <hgroup>
+
+
+      <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1>
+      <h2>Products</h2>
+
+    </hgroup>
+    </header>
+    <!--  Page content. Product cards, articles and other catalog data below are written directly into this HTML.  -->
+    <main>
+      <section class="page-hero compact">
+        <p class="eyebrow">The Bits and Bytes collection</p>
+        <h1>Find your next upgrade.</h1>
+        <p>Great hardware for the way you work, create, and play.</p>
+        <nav class="collection-nav catalog-categories" aria-label="Product categories">
+          <a href="pages/products.html" class="" aria-pressed="false" data-catalog-type="all">All products</a>
+          <a href="pages/catalog-type-desktop-pc.html" class="" aria-pressed="false" data-catalog-type="Desktop PC">Desktops</a>
+          <a href="pages/catalog-type-laptop.html" class="" aria-pressed="false" data-catalog-type="Laptop">Laptops</a>
+          <a href="pages/catalog-type-computer-part.html" class="" aria-pressed="true" data-catalog-type="Computer Part">Components</a>
+          <a href="pages/catalog-type-monitor.html" class="" aria-pressed="false" data-catalog-type="Monitor">Monitors</a>
+          <a href="pages/catalog-type-accessory.html" class="" aria-pressed="false" data-catalog-type="Accessory">Accessories</a>
+        </nav>
+      </section>
+      <!-- Plain form controls keep search and display settings easy to edit. -->
+      <a class="section catalog-search button secondary" href="pages/search.html">Browse the searchable directory</a>
+      <details class="section shopping-extra comparison-tool" id="comparisonTool">
+        <summary>Compare your shortlist <span>Up to 3 configurations</span></summary>
+        <p>Compare the <strong>exact capacity and model</strong> before deciding. <em>For a custom build, check compatibility in the PC builder.</em></p>
+        <div class="comparison-selects">
+          <label for="compareOne">First product<select id="compareOne" data-compare-select=""><option value="">Choose a product</option><optgroup label="Laptop"><option value="lap-hp-victus-15::mica-silver">HP Victus 15-fa2007na — Mica Silver</option><option value="lap-hp-victus-15::performance-blue">HP Victus 15-fb3105na — Performance Blue</option><option value="lap-msi-thin-15-b13ve">MSI Thin 15 B13VE</option><option value="lap-msi-modern-15-b13m::star-blue">MSI Modern 15 B13M - Star Blue</option><option value="lap-msi-modern-15-b13m::classic-black">MSI Modern 15 B13M - Classic Black</option><option value="lap-msi-modern-14-c13m::beige-rose">MSI Modern 14 C13M - Beige Rose</option><option value="lap-msi-modern-14-c13m::urban-silver">MSI Modern 14 C13M - Urban Silver</option><option value="lap-msi-modern-14-c13m::classic-black">MSI Modern 14 C13M - Classic Black</option><option value="lap-msi-cyborg-15-a13v">MSI Cyborg 15 A13VF</option><option value="lap-dell-16-plus">Dell 16 Plus DB16250</option><option value="lap-dell-latitude-5440">Dell Latitude 5440</option><option value="lap-dell-g15-5530">Dell G15 5530 Gaming Laptop</option><option value="lap-microsoft-studio-2">Microsoft Surface Laptop Studio 2</option><option value="lap-dell-xps-13">Dell XPS 13 9340</option><option value="lap-acer-office">Acer Aspire 14 AS14H-53</option><option value="lap-asus-gaming">ASUS ROG Strix G16 (2023)</option><option value="lap-lenovo-office">Lenovo ThinkBook 14 G6 IRL</option><option value="lap-apple-creator::midnight">Apple MacBook Air 13-inch M3 - Midnight</option><option value="lap-apple-creator::silver">Apple MacBook Air 13-inch M3 - Silver</option><option value="lap-apple-creator::spacegray">Apple MacBook Air 13-inch M3 - Space Gray</option><option value="lap-apple-creator::starlight">Apple MacBook Air 13-inch M3 - Starlight</option><option value="lap-creator-pro::quiet-blue">ASUS Vivobook Pro 16 OLED K6602 - Quiet Blue</option><option value="lap-creator-pro::cool-silver">ASUS Vivobook Pro 16 OLED K6602 - Cool Silver</option><option value="lap-hp-pavilion-plus">HP Pavilion Plus 14</option><option value="lap-dell-inspiron-plus">Dell Inspiron 14 Plus 7440</option></optgroup><optgroup label="Desktop PC"><option value="pc-bb-foundation::black">Bits &amp; Bytes Foundation Desktop - Black</option><option value="pc-bb-foundation::white">Bits &amp; Bytes Foundation Desktop - White</option><option value="pc-bb-core::black">Bits &amp; Bytes Core Desktop - Black</option><option value="pc-bb-core::white">Bits &amp; Bytes Core Desktop - White</option><option value="pc-bb-apex::black">Bits &amp; Bytes Apex Desktop - Black</option><option value="pc-bb-apex::white">Bits &amp; Bytes Apex Desktop - White</option><option value="pc-msi-codex-6-14">MSI MAG Codex 6 14th</option><option value="pc-hp-pro-mini-400-g9">HP Pro Mini 400 G9</option><option value="pc-hp-omen-35l">HP OMEN 35L GT16-0066m</option><option value="pc-apple-mac-mini-m4">Apple Mac mini M4</option><option value="pc-gaming">MSI MAG Infinite S3 13th</option><option value="pc-office">Lenovo ThinkCentre neo 50t Gen 4</option><option value="pc-creator">ASUS ProArt Station PD5 PD500TC</option><option value="pc-aurora-elite">ASUS ROG G22CH</option><option value="pc-msi-aegis-rgb">MSI Aegis R 13th</option></optgroup><optgroup label="Monitor"><option value="monitor-msi-g244f-e2">MSI G244F E2</option><option value="monitor-msi-274qrf-qd-e2">MSI MAG 274QRF QD E2</option><option value="monitor-27::24inch">ASUS TUF Gaming VG249Q1A</option><option value="monitor-27::27inch">ASUS TUF Gaming VG27AQ</option><option value="monitor-27::32inch">ASUS ProArt PA329CV</option><option value="monitor-samsung-g3-24">Samsung Odyssey G3 G30D 24-inch</option><option value="monitor-samsung-g3-27">Samsung Odyssey G3 G30D 27-inch</option></optgroup><optgroup label="Computer Part"><option value="part-msi-a650bn">MSI MAG A650BN 650W</option><option value="part-msi-m450-1tb">MSI SPATIUM M450 1TB</option><option value="part-msi-m100r-white">MSI MAG FORGE M100R White</option><option value="part-msi-h610m-g">MSI PRO H610M-G DDR4</option><option value="part-msi-pro-b650-s">MSI PRO B650-S WIFI</option><option value="part-msi-4060-ti-gaming-x">MSI GeForce RTX 4060 Ti GAMING X 8G</option><option value="part-corsair-3000d::black">Corsair 3000D AIRFLOW - Black</option><option value="part-corsair-3000d::white">Corsair 3000D AIRFLOW - White</option><option value="part-corsair-4000d::black">Corsair 4000D AIRFLOW - Black</option><option value="part-corsair-4000d::white">Corsair 4000D AIRFLOW - White</option><option value="part-corsair-ml120-red">Corsair ML120 LED ELITE Red</option><option value="part-corsair-vengeance-32">Corsair VENGEANCE 32GB DDR5-6000</option><option value="part-msi-b760-gaming-plus">MSI B760 GAMING PLUS WIFI</option><option value="part-msi-4070-super">MSI GeForce RTX 4070 SUPER VENTUS 2X OC</option><option value="part-samsung-990-pro-1tb">Samsung 990 PRO 1TB NVMe SSD</option><option value="part-gpu-gtx-1650">MSI GeForce GTX 1650 VENTUS XS 4G OC</option><option value="part-gpu-rtx-3050">MSI GeForce RTX 3050 VENTUS 2X 6G OC</option><option value="part-gpu-rtx-5080">MSI GeForce RTX 5080 16G VENTUS 3X OC</option><option value="part-ssd-kingston-kc600::256gb">Kingston KC600 SATA SSD - 256GB</option><option value="part-ssd-kingston-kc600::512gb">Kingston KC600 SATA SSD - 512GB</option><option value="part-ssd-kingston-kc600::1tb">Kingston KC600 SATA SSD - 1TB</option><option value="part-ssd-kingston-kc600::2tb">Kingston KC600 SATA SSD - 2TB</option><option value="part-cpu-i5-14600k">Intel Core i5-14600K</option><option value="part-gpu-rtx-4060">MSI GeForce RTX 4060 VENTUS 2X BLACK 8GB</option><option value="part-ram-32gb-ddr5::8gb">Kingston FURY Beast DDR5-5600 Memory - 8GB</option><option value="part-ram-32gb-ddr5::16gb">Kingston FURY Beast DDR5 Memory - 16GB</option><option value="part-ram-32gb-ddr5::32gb">Kingston FURY Beast DDR5 Memory - 32GB</option><option value="part-ram-32gb-ddr5::64gb">Kingston FURY Beast DDR5 Memory - 64GB</option><option value="part-ssd-1tb-nvme::500gb">Kingston NV3 NVMe SSD - 500GB</option><option value="part-ssd-1tb-nvme::1tb">Kingston NV3 NVMe SSD - 1TB</option><option value="part-ssd-1tb-nvme::2tb">Kingston NV3 NVMe SSD - 2TB</option><option value="part-ssd-1tb-nvme::4tb">Kingston NV3 NVMe SSD - 4TB</option><option value="part-cpu-ryzen-7-7700x">AMD Ryzen 7 7700X</option><option value="part-board-gigabyte-b650">Gigabyte B650 AORUS Elite AX</option><option value="part-cooler-master-240">Cooler Master ML240L RGB</option><option value="part-corsair-psu-850::650w">Corsair RM650e Gold PSU</option><option value="part-corsair-psu-850::750w">Corsair RM750e Gold PSU</option><option value="part-corsair-psu-850::850w">Corsair RM850e Gold PSU</option><option value="part-corsair-psu-850::1000w">Corsair RM1000e Gold PSU</option><option value="part-kingston-fury-32::8gb">Kingston FURY Beast DDR5 - 8GB</option><option value="part-kingston-fury-32::16gb">Kingston FURY Beast DDR5 - 16GB</option><option value="part-kingston-fury-32::32gb">Kingston FURY Beast DDR5 - 32GB</option><option value="part-kingston-fury-32::64gb">Kingston FURY Beast DDR5 - 64GB</option></optgroup><optgroup label="Accessory"><option value="accessory-msi-gh20">MSI IMMERSE GH20</option><option value="accessory-msi-gm11">MSI CLUTCH GM11</option><option value="accessory-msi-gk30">MSI VIGOR GK30</option><option value="accessory-corsair-k65-plus">Corsair K65 PLUS WIRELESS</option><option value="accessory-logitech-g502">Logitech G502 HERO</option><option value="accessory-logitech-g435::black">Logitech G435 LIGHTSPEED - Black and Neon Yellow</option><option value="accessory-logitech-g435::blue">Logitech G435 LIGHTSPEED - Blue and Raspberry</option><option value="accessory-logitech-g435::white">Logitech G435 LIGHTSPEED - Off-White and Lilac</option><option value="keyboard-rgb">Keychron K8 Pro Mechanical Keyboard</option><option value="mouse-wireless::palegray">Logitech MX Master 3S - Pale Gray</option><option value="mouse-wireless::graphite">Logitech MX Master 3S - Graphite</option><option value="accessory-stream-kit">Elgato Facecam MK.2</option></optgroup></select></label>
+          <label for="compareTwo">Second product<select id="compareTwo" data-compare-select=""><option value="">Choose a product</option><optgroup label="Laptop"><option value="lap-hp-victus-15::mica-silver">HP Victus 15-fa2007na — Mica Silver</option><option value="lap-hp-victus-15::performance-blue">HP Victus 15-fb3105na — Performance Blue</option><option value="lap-msi-thin-15-b13ve">MSI Thin 15 B13VE</option><option value="lap-msi-modern-15-b13m::star-blue">MSI Modern 15 B13M - Star Blue</option><option value="lap-msi-modern-15-b13m::classic-black">MSI Modern 15 B13M - Classic Black</option><option value="lap-msi-modern-14-c13m::beige-rose">MSI Modern 14 C13M - Beige Rose</option><option value="lap-msi-modern-14-c13m::urban-silver">MSI Modern 14 C13M - Urban Silver</option><option value="lap-msi-modern-14-c13m::classic-black">MSI Modern 14 C13M - Classic Black</option><option value="lap-msi-cyborg-15-a13v">MSI Cyborg 15 A13VF</option><option value="lap-dell-16-plus">Dell 16 Plus DB16250</option><option value="lap-dell-latitude-5440">Dell Latitude 5440</option><option value="lap-dell-g15-5530">Dell G15 5530 Gaming Laptop</option><option value="lap-microsoft-studio-2">Microsoft Surface Laptop Studio 2</option><option value="lap-dell-xps-13">Dell XPS 13 9340</option><option value="lap-acer-office">Acer Aspire 14 AS14H-53</option><option value="lap-asus-gaming">ASUS ROG Strix G16 (2023)</option><option value="lap-lenovo-office">Lenovo ThinkBook 14 G6 IRL</option><option value="lap-apple-creator::midnight">Apple MacBook Air 13-inch M3 - Midnight</option><option value="lap-apple-creator::silver">Apple MacBook Air 13-inch M3 - Silver</option><option value="lap-apple-creator::spacegray">Apple MacBook Air 13-inch M3 - Space Gray</option><option value="lap-apple-creator::starlight">Apple MacBook Air 13-inch M3 - Starlight</option><option value="lap-creator-pro::quiet-blue">ASUS Vivobook Pro 16 OLED K6602 - Quiet Blue</option><option value="lap-creator-pro::cool-silver">ASUS Vivobook Pro 16 OLED K6602 - Cool Silver</option><option value="lap-hp-pavilion-plus">HP Pavilion Plus 14</option><option value="lap-dell-inspiron-plus">Dell Inspiron 14 Plus 7440</option></optgroup><optgroup label="Desktop PC"><option value="pc-bb-foundation::black">Bits &amp; Bytes Foundation Desktop - Black</option><option value="pc-bb-foundation::white">Bits &amp; Bytes Foundation Desktop - White</option><option value="pc-bb-core::black">Bits &amp; Bytes Core Desktop - Black</option><option value="pc-bb-core::white">Bits &amp; Bytes Core Desktop - White</option><option value="pc-bb-apex::black">Bits &amp; Bytes Apex Desktop - Black</option><option value="pc-bb-apex::white">Bits &amp; Bytes Apex Desktop - White</option><option value="pc-msi-codex-6-14">MSI MAG Codex 6 14th</option><option value="pc-hp-pro-mini-400-g9">HP Pro Mini 400 G9</option><option value="pc-hp-omen-35l">HP OMEN 35L GT16-0066m</option><option value="pc-apple-mac-mini-m4">Apple Mac mini M4</option><option value="pc-gaming">MSI MAG Infinite S3 13th</option><option value="pc-office">Lenovo ThinkCentre neo 50t Gen 4</option><option value="pc-creator">ASUS ProArt Station PD5 PD500TC</option><option value="pc-aurora-elite">ASUS ROG G22CH</option><option value="pc-msi-aegis-rgb">MSI Aegis R 13th</option></optgroup><optgroup label="Monitor"><option value="monitor-msi-g244f-e2">MSI G244F E2</option><option value="monitor-msi-274qrf-qd-e2">MSI MAG 274QRF QD E2</option><option value="monitor-27::24inch">ASUS TUF Gaming VG249Q1A</option><option value="monitor-27::27inch">ASUS TUF Gaming VG27AQ</option><option value="monitor-27::32inch">ASUS ProArt PA329CV</option><option value="monitor-samsung-g3-24">Samsung Odyssey G3 G30D 24-inch</option><option value="monitor-samsung-g3-27">Samsung Odyssey G3 G30D 27-inch</option></optgroup><optgroup label="Computer Part"><option value="part-msi-a650bn">MSI MAG A650BN 650W</option><option value="part-msi-m450-1tb">MSI SPATIUM M450 1TB</option><option value="part-msi-m100r-white">MSI MAG FORGE M100R White</option><option value="part-msi-h610m-g">MSI PRO H610M-G DDR4</option><option value="part-msi-pro-b650-s">MSI PRO B650-S WIFI</option><option value="part-msi-4060-ti-gaming-x">MSI GeForce RTX 4060 Ti GAMING X 8G</option><option value="part-corsair-3000d::black">Corsair 3000D AIRFLOW - Black</option><option value="part-corsair-3000d::white">Corsair 3000D AIRFLOW - White</option><option value="part-corsair-4000d::black">Corsair 4000D AIRFLOW - Black</option><option value="part-corsair-4000d::white">Corsair 4000D AIRFLOW - White</option><option value="part-corsair-ml120-red">Corsair ML120 LED ELITE Red</option><option value="part-corsair-vengeance-32">Corsair VENGEANCE 32GB DDR5-6000</option><option value="part-msi-b760-gaming-plus">MSI B760 GAMING PLUS WIFI</option><option value="part-msi-4070-super">MSI GeForce RTX 4070 SUPER VENTUS 2X OC</option><option value="part-samsung-990-pro-1tb">Samsung 990 PRO 1TB NVMe SSD</option><option value="part-gpu-gtx-1650">MSI GeForce GTX 1650 VENTUS XS 4G OC</option><option value="part-gpu-rtx-3050">MSI GeForce RTX 3050 VENTUS 2X 6G OC</option><option value="part-gpu-rtx-5080">MSI GeForce RTX 5080 16G VENTUS 3X OC</option><option value="part-ssd-kingston-kc600::256gb">Kingston KC600 SATA SSD - 256GB</option><option value="part-ssd-kingston-kc600::512gb">Kingston KC600 SATA SSD - 512GB</option><option value="part-ssd-kingston-kc600::1tb">Kingston KC600 SATA SSD - 1TB</option><option value="part-ssd-kingston-kc600::2tb">Kingston KC600 SATA SSD - 2TB</option><option value="part-cpu-i5-14600k">Intel Core i5-14600K</option><option value="part-gpu-rtx-4060">MSI GeForce RTX 4060 VENTUS 2X BLACK 8GB</option><option value="part-ram-32gb-ddr5::8gb">Kingston FURY Beast DDR5-5600 Memory - 8GB</option><option value="part-ram-32gb-ddr5::16gb">Kingston FURY Beast DDR5 Memory - 16GB</option><option value="part-ram-32gb-ddr5::32gb">Kingston FURY Beast DDR5 Memory - 32GB</option><option value="part-ram-32gb-ddr5::64gb">Kingston FURY Beast DDR5 Memory - 64GB</option><option value="part-ssd-1tb-nvme::500gb">Kingston NV3 NVMe SSD - 500GB</option><option value="part-ssd-1tb-nvme::1tb">Kingston NV3 NVMe SSD - 1TB</option><option value="part-ssd-1tb-nvme::2tb">Kingston NV3 NVMe SSD - 2TB</option><option value="part-ssd-1tb-nvme::4tb">Kingston NV3 NVMe SSD - 4TB</option><option value="part-cpu-ryzen-7-7700x">AMD Ryzen 7 7700X</option><option value="part-board-gigabyte-b650">Gigabyte B650 AORUS Elite AX</option><option value="part-cooler-master-240">Cooler Master ML240L RGB</option><option value="part-corsair-psu-850::650w">Corsair RM650e Gold PSU</option><option value="part-corsair-psu-850::750w">Corsair RM750e Gold PSU</option><option value="part-corsair-psu-850::850w">Corsair RM850e Gold PSU</option><option value="part-corsair-psu-850::1000w">Corsair RM1000e Gold PSU</option><option value="part-kingston-fury-32::8gb">Kingston FURY Beast DDR5 - 8GB</option><option value="part-kingston-fury-32::16gb">Kingston FURY Beast DDR5 - 16GB</option><option value="part-kingston-fury-32::32gb">Kingston FURY Beast DDR5 - 32GB</option><option value="part-kingston-fury-32::64gb">Kingston FURY Beast DDR5 - 64GB</option></optgroup><optgroup label="Accessory"><option value="accessory-msi-gh20">MSI IMMERSE GH20</option><option value="accessory-msi-gm11">MSI CLUTCH GM11</option><option value="accessory-msi-gk30">MSI VIGOR GK30</option><option value="accessory-corsair-k65-plus">Corsair K65 PLUS WIRELESS</option><option value="accessory-logitech-g502">Logitech G502 HERO</option><option value="accessory-logitech-g435::black">Logitech G435 LIGHTSPEED - Black and Neon Yellow</option><option value="accessory-logitech-g435::blue">Logitech G435 LIGHTSPEED - Blue and Raspberry</option><option value="accessory-logitech-g435::white">Logitech G435 LIGHTSPEED - Off-White and Lilac</option><option value="keyboard-rgb">Keychron K8 Pro Mechanical Keyboard</option><option value="mouse-wireless::palegray">Logitech MX Master 3S - Pale Gray</option><option value="mouse-wireless::graphite">Logitech MX Master 3S - Graphite</option><option value="accessory-stream-kit">Elgato Facecam MK.2</option></optgroup></select></label>
+          <label for="compareThree">Third product<select id="compareThree" data-compare-select=""><option value="">Choose a product</option><optgroup label="Laptop"><option value="lap-hp-victus-15::mica-silver">HP Victus 15-fa2007na — Mica Silver</option><option value="lap-hp-victus-15::performance-blue">HP Victus 15-fb3105na — Performance Blue</option><option value="lap-msi-thin-15-b13ve">MSI Thin 15 B13VE</option><option value="lap-msi-modern-15-b13m::star-blue">MSI Modern 15 B13M - Star Blue</option><option value="lap-msi-modern-15-b13m::classic-black">MSI Modern 15 B13M - Classic Black</option><option value="lap-msi-modern-14-c13m::beige-rose">MSI Modern 14 C13M - Beige Rose</option><option value="lap-msi-modern-14-c13m::urban-silver">MSI Modern 14 C13M - Urban Silver</option><option value="lap-msi-modern-14-c13m::classic-black">MSI Modern 14 C13M - Classic Black</option><option value="lap-msi-cyborg-15-a13v">MSI Cyborg 15 A13VF</option><option value="lap-dell-16-plus">Dell 16 Plus DB16250</option><option value="lap-dell-latitude-5440">Dell Latitude 5440</option><option value="lap-dell-g15-5530">Dell G15 5530 Gaming Laptop</option><option value="lap-microsoft-studio-2">Microsoft Surface Laptop Studio 2</option><option value="lap-dell-xps-13">Dell XPS 13 9340</option><option value="lap-acer-office">Acer Aspire 14 AS14H-53</option><option value="lap-asus-gaming">ASUS ROG Strix G16 (2023)</option><option value="lap-lenovo-office">Lenovo ThinkBook 14 G6 IRL</option><option value="lap-apple-creator::midnight">Apple MacBook Air 13-inch M3 - Midnight</option><option value="lap-apple-creator::silver">Apple MacBook Air 13-inch M3 - Silver</option><option value="lap-apple-creator::spacegray">Apple MacBook Air 13-inch M3 - Space Gray</option><option value="lap-apple-creator::starlight">Apple MacBook Air 13-inch M3 - Starlight</option><option value="lap-creator-pro::quiet-blue">ASUS Vivobook Pro 16 OLED K6602 - Quiet Blue</option><option value="lap-creator-pro::cool-silver">ASUS Vivobook Pro 16 OLED K6602 - Cool Silver</option><option value="lap-hp-pavilion-plus">HP Pavilion Plus 14</option><option value="lap-dell-inspiron-plus">Dell Inspiron 14 Plus 7440</option></optgroup><optgroup label="Desktop PC"><option value="pc-bb-foundation::black">Bits &amp; Bytes Foundation Desktop - Black</option><option value="pc-bb-foundation::white">Bits &amp; Bytes Foundation Desktop - White</option><option value="pc-bb-core::black">Bits &amp; Bytes Core Desktop - Black</option><option value="pc-bb-core::white">Bits &amp; Bytes Core Desktop - White</option><option value="pc-bb-apex::black">Bits &amp; Bytes Apex Desktop - Black</option><option value="pc-bb-apex::white">Bits &amp; Bytes Apex Desktop - White</option><option value="pc-msi-codex-6-14">MSI MAG Codex 6 14th</option><option value="pc-hp-pro-mini-400-g9">HP Pro Mini 400 G9</option><option value="pc-hp-omen-35l">HP OMEN 35L GT16-0066m</option><option value="pc-apple-mac-mini-m4">Apple Mac mini M4</option><option value="pc-gaming">MSI MAG Infinite S3 13th</option><option value="pc-office">Lenovo ThinkCentre neo 50t Gen 4</option><option value="pc-creator">ASUS ProArt Station PD5 PD500TC</option><option value="pc-aurora-elite">ASUS ROG G22CH</option><option value="pc-msi-aegis-rgb">MSI Aegis R 13th</option></optgroup><optgroup label="Monitor"><option value="monitor-msi-g244f-e2">MSI G244F E2</option><option value="monitor-msi-274qrf-qd-e2">MSI MAG 274QRF QD E2</option><option value="monitor-27::24inch">ASUS TUF Gaming VG249Q1A</option><option value="monitor-27::27inch">ASUS TUF Gaming VG27AQ</option><option value="monitor-27::32inch">ASUS ProArt PA329CV</option><option value="monitor-samsung-g3-24">Samsung Odyssey G3 G30D 24-inch</option><option value="monitor-samsung-g3-27">Samsung Odyssey G3 G30D 27-inch</option></optgroup><optgroup label="Computer Part"><option value="part-msi-a650bn">MSI MAG A650BN 650W</option><option value="part-msi-m450-1tb">MSI SPATIUM M450 1TB</option><option value="part-msi-m100r-white">MSI MAG FORGE M100R White</option><option value="part-msi-h610m-g">MSI PRO H610M-G DDR4</option><option value="part-msi-pro-b650-s">MSI PRO B650-S WIFI</option><option value="part-msi-4060-ti-gaming-x">MSI GeForce RTX 4060 Ti GAMING X 8G</option><option value="part-corsair-3000d::black">Corsair 3000D AIRFLOW - Black</option><option value="part-corsair-3000d::white">Corsair 3000D AIRFLOW - White</option><option value="part-corsair-4000d::black">Corsair 4000D AIRFLOW - Black</option><option value="part-corsair-4000d::white">Corsair 4000D AIRFLOW - White</option><option value="part-corsair-ml120-red">Corsair ML120 LED ELITE Red</option><option value="part-corsair-vengeance-32">Corsair VENGEANCE 32GB DDR5-6000</option><option value="part-msi-b760-gaming-plus">MSI B760 GAMING PLUS WIFI</option><option value="part-msi-4070-super">MSI GeForce RTX 4070 SUPER VENTUS 2X OC</option><option value="part-samsung-990-pro-1tb">Samsung 990 PRO 1TB NVMe SSD</option><option value="part-gpu-gtx-1650">MSI GeForce GTX 1650 VENTUS XS 4G OC</option><option value="part-gpu-rtx-3050">MSI GeForce RTX 3050 VENTUS 2X 6G OC</option><option value="part-gpu-rtx-5080">MSI GeForce RTX 5080 16G VENTUS 3X OC</option><option value="part-ssd-kingston-kc600::256gb">Kingston KC600 SATA SSD - 256GB</option><option value="part-ssd-kingston-kc600::512gb">Kingston KC600 SATA SSD - 512GB</option><option value="part-ssd-kingston-kc600::1tb">Kingston KC600 SATA SSD - 1TB</option><option value="part-ssd-kingston-kc600::2tb">Kingston KC600 SATA SSD - 2TB</option><option value="part-cpu-i5-14600k">Intel Core i5-14600K</option><option value="part-gpu-rtx-4060">MSI GeForce RTX 4060 VENTUS 2X BLACK 8GB</option><option value="part-ram-32gb-ddr5::8gb">Kingston FURY Beast DDR5-5600 Memory - 8GB</option><option value="part-ram-32gb-ddr5::16gb">Kingston FURY Beast DDR5 Memory - 16GB</option><option value="part-ram-32gb-ddr5::32gb">Kingston FURY Beast DDR5 Memory - 32GB</option><option value="part-ram-32gb-ddr5::64gb">Kingston FURY Beast DDR5 Memory - 64GB</option><option value="part-ssd-1tb-nvme::500gb">Kingston NV3 NVMe SSD - 500GB</option><option value="part-ssd-1tb-nvme::1tb">Kingston NV3 NVMe SSD - 1TB</option><option value="part-ssd-1tb-nvme::2tb">Kingston NV3 NVMe SSD - 2TB</option><option value="part-ssd-1tb-nvme::4tb">Kingston NV3 NVMe SSD - 4TB</option><option value="part-cpu-ryzen-7-7700x">AMD Ryzen 7 7700X</option><option value="part-board-gigabyte-b650">Gigabyte B650 AORUS Elite AX</option><option value="part-cooler-master-240">Cooler Master ML240L RGB</option><option value="part-corsair-psu-850::650w">Corsair RM650e Gold PSU</option><option value="part-corsair-psu-850::750w">Corsair RM750e Gold PSU</option><option value="part-corsair-psu-850::850w">Corsair RM850e Gold PSU</option><option value="part-corsair-psu-850::1000w">Corsair RM1000e Gold PSU</option><option value="part-kingston-fury-32::8gb">Kingston FURY Beast DDR5 - 8GB</option><option value="part-kingston-fury-32::16gb">Kingston FURY Beast DDR5 - 16GB</option><option value="part-kingston-fury-32::32gb">Kingston FURY Beast DDR5 - 32GB</option><option value="part-kingston-fury-32::64gb">Kingston FURY Beast DDR5 - 64GB</option></optgroup><optgroup label="Accessory"><option value="accessory-msi-gh20">MSI IMMERSE GH20</option><option value="accessory-msi-gm11">MSI CLUTCH GM11</option><option value="accessory-msi-gk30">MSI VIGOR GK30</option><option value="accessory-corsair-k65-plus">Corsair K65 PLUS WIRELESS</option><option value="accessory-logitech-g502">Logitech G502 HERO</option><option value="accessory-logitech-g435::black">Logitech G435 LIGHTSPEED - Black and Neon Yellow</option><option value="accessory-logitech-g435::blue">Logitech G435 LIGHTSPEED - Blue and Raspberry</option><option value="accessory-logitech-g435::white">Logitech G435 LIGHTSPEED - Off-White and Lilac</option><option value="keyboard-rgb">Keychron K8 Pro Mechanical Keyboard</option><option value="mouse-wireless::palegray">Logitech MX Master 3S - Pale Gray</option><option value="mouse-wireless::graphite">Logitech MX Master 3S - Graphite</option><option value="accessory-stream-kit">Elgato Facecam MK.2</option></optgroup></select></label>
+        </div>
+        <p id="compareStatus" role="status">Choose products to start your comparison.</p>
+        <div class="comparison-scroll" id="comparisonResults" hidden="">
+
+        </div>
+        <button class="button small" id="clearComparison" type="button" disabled="">Clear comparison</button>
+      </details>
+      <section class="section product-page-layout">
+        <aside class="filter-panel filters-ready">
+          <div class="filter-panel-heading">
+            <h2>Filters</h2>
+            <button id="toggleFilters" type="button" aria-expanded="true" aria-controls="filterControls" hidden="" disabled="">Filters &amp; sort</button>
+            <a href="pages/products.html" class="filter-reset" id="resetFilters">Reset</a>
+          </div>
+          <div class="filter-controls" id="filterControls">
+            <nav class="static-filter-links" aria-label="Catalog filters">
+              <details>
+                <summary>Categories</summary>
+                <a href="pages/catalog-type-laptop.html">Laptop</a>
+                <a href="pages/catalog-type-desktop-pc.html">Desktop PC</a>
+                <a href="pages/catalog-type-monitor.html">Monitor</a>
+                <a href="pages/catalog-type-computer-part.html">Computer Part</a>
+                <a href="pages/catalog-type-accessory.html">Accessory</a>
+              </details>
+              <details>
+                <summary>Brands</summary>
+                <a href="pages/catalog-brand-hp.html">HP</a>
+                <a href="pages/catalog-brand-bits-and-bytes.html">Bits and Bytes</a>
+                <a href="pages/catalog-brand-msi.html">MSI</a>
+                <a href="pages/catalog-brand-dell.html">Dell</a>
+                <a href="pages/catalog-brand-corsair.html">Corsair</a>
+                <a href="pages/catalog-brand-samsung.html">Samsung</a>
+                <a href="pages/catalog-brand-logitech.html">Logitech</a>
+                <a href="pages/catalog-brand-microsoft.html">Microsoft</a>
+                <a href="pages/catalog-brand-apple.html">Apple</a>
+                <a href="pages/catalog-brand-acer.html">Acer</a>
+                <a href="pages/catalog-brand-asus.html">ASUS</a>
+                <a href="pages/catalog-brand-lenovo.html">Lenovo</a>
+                <a href="pages/catalog-brand-keychron.html">Keychron</a>
+                <a href="pages/catalog-brand-elgato.html">Elgato</a>
+                <a href="pages/catalog-brand-kingston.html">Kingston</a>
+                <a href="pages/catalog-brand-intel.html">Intel</a>
+                <a href="pages/catalog-brand-amd.html">AMD</a>
+                <a href="pages/catalog-brand-gigabyte.html">Gigabyte</a>
+                <a href="pages/catalog-brand-cooler-master.html">Cooler Master</a>
+              </details>
+              <details open="">
+                <summary>Component types</summary>
+                <a href="pages/catalog-part-psu.html">psu</a>
+                <a href="pages/catalog-part-storage.html">storage</a>
+                <a href="pages/catalog-part-case.html">case</a>
+                <a href="pages/catalog-part-motherboard.html">motherboard</a>
+                <a href="pages/catalog-part-gpu.html">gpu</a>
+                <a href="pages/catalog-part-fan.html" aria-current="page">fan</a>
+                <a href="pages/catalog-part-ram.html">ram</a>
+                <a href="pages/catalog-part-cpu.html">cpu</a>
+                <a href="pages/catalog-part-cooling.html">cooling</a>
+              </details>
+            </nav>
+          </div>
+        </aside>
+        <div>
+          <div class="product-results-toolbar" aria-live="polite">
+            <p id="productResultCount">1 product found</p>
+            <p id="activeFilterSummary">Case Fans</p>
+          </div>
+          <p class="catalog-empty" id="catalogEmpty" hidden="">No products match your search. Try a brand name or reset the filters.</p>
+          <div class="product-collections">
+            <section class="product-collection collection-systems" id="computer-products" hidden="">
+              <div class="collection-heading">
+                <p class="eyebrow">01 / systems</p>
+                <h2>Desktops &amp; monitors</h2>
+                <p>Desktop PCs and monitors for a focused workspace or an RGB gaming station.</p>
+              </div>
+              <div class="product-grid" id="computerProductsGrid">
+
+              </div>
+            </section>
+            <section class="product-collection collection-laptops" id="laptops" hidden="">
+              <div class="collection-heading">
+                <p class="eyebrow">02 / portable</p>
+                <h2>Laptops</h2>
+                <p>Portable performance for study, office tasks, content work, and gaming.</p>
+              </div>
+              <div class="product-grid" id="laptopsGrid">
+
+              </div>
+            </section>
+            <section class="product-collection collection-accessories" id="accessories" hidden="">
+              <div class="collection-heading">
+                <p class="eyebrow">03 / desk gear</p>
+                <h2>Accessories</h2>
+                <p>Practical desk upgrades with clean lighting, comfort, and precision in mind.</p>
+              </div>
+              <div class="product-grid" id="accessoriesGrid">
+
+              </div>
+            </section>
+            <section class="product-collection collection-parts" id="computer-parts">
+              <div class="collection-heading">
+                <p class="eyebrow">04 / build core</p>
+                <h2>Case Fans</h2>
+                <p>Core components selected for a balanced upgrade path or a new custom build.</p>
+              </div>
+              <div class="product-grid" id="computerPartsGrid">
+                <article class="product-card" data-product-id="part-corsair-ml120-red">
+                  <button class="wishlist-button" data-wishlist-product="part-corsair-ml120-red" type="button" aria-label="Add Corsair ML120 LED ELITE Red to wishlist" aria-pressed="false" data-bound="true" disabled="">
+        <span aria-hidden="true">♡</span>
+      </button>
+                  <a class="product-image-button" href="pages/item-part-corsair-ml120-red.html" aria-label="View details for Corsair ML120 LED ELITE Red">
+        <img src="images/products/corsair-ml120-red-1.webp" alt="Corsair ML120 LED ELITE Red">
+
+      </a>
+                  <div class="product-card-body">
+                    <div class="tag-row">
+                      <span>Case Fans</span>
+                      <span>Build</span>
+                      <span class="stock-badge">24 in stock</span>
+                    </div>
+                    <h3><a class="product-name-button" href="pages/item-part-corsair-ml120-red.html">Corsair ML120 LED ELITE Red</a></h3>
+                    <p>Corsair - Single 120mm PWM case fan, red LEDs, magnetic-levitation bearing, 4-pin PWM connector</p>
+                    <div class="price-row">
+                      <strong class="current-price">₱1,495</strong>
+                      <div class="product-card-actions">
+                        <a href="pages/item-part-corsair-ml120-red.html" class="product-detail-button">Quick View</a>
+                        <a class="product-detail-button" href="pages/item-part-corsair-ml120-red.html">Full Details</a>
+                        <button class="button small" data-add-product="part-corsair-ml120-red" type="button" data-bound="true" disabled="">Add to Cart</button>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+          <details class="accessory-chooser">
+            <summary>Complete your setup <span>Quick accessory order</span></summary>
+            <h2>Choose an Accessory</h2>
+            <label for="accessorySelect">Accessory</label>
+            <select id="accessorySelect">
+            <option value="">Choose an accessory</option>
+          <option value="0">MSI IMMERSE GH20 - ₱1,195</option><option value="1">MSI CLUTCH GM11 - ₱995</option><option value="2">MSI VIGOR GK30 - ₱1,695</option><option value="3">Corsair K65 PLUS WIRELESS - ₱8,995</option><option value="4">Logitech G502 HERO - ₱1,995</option><option value="5">Logitech G435 LIGHTSPEED - Black and Neon Yellow - ₱3,495</option><option value="6">Keychron K8 Pro Mechanical Keyboard - ₱4,495</option><option value="7">Logitech MX Master 3S - Pale Gray - ₱1,995</option><option value="8">Elgato Facecam MK.2 - ₱7,650</option></select>
+            <button class="button small" id="addAccessoryBtn" type="button" disabled="">Add to Cart</button>
+          </details>
+        </div>
+      </section>
+      <details class="section shopping-extra">
+        <summary>Find the right setup <span>Buying guide</span></summary>
+        <section>
+          <div class="section-heading">
+            <p class="eyebrow">Compare setups</p>
+            <h2>Quick guide before shopping</h2>
+          </div>
+          <table class="lesson-table">
+        <caption>PC and Laptop Setup Comparison</caption>
+        <colgroup class="sidebar">
+          <col>
+        </colgroup>
+        <colgroup class="info" span="5"></colgroup>
+        <thead>
+          <tr>
+            <th colspan="6">Bits and Bytes Buying Guide</th>
+          </tr>
+          <tr>
+            <th>Use Case</th>
+            <th>Student Laptop</th>
+            <th>Office PC</th>
+            <th>Gaming PC</th>
+            <th>Creator PC</th>
+            <th>Accessories</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Best For</th>
+            <td>Reports and online classes</td>
+            <td>Documents and meetings</td>
+            <td>Smooth gameplay</td>
+            <td>Editing and design</td>
+            <td>Comfort and upgrades</td>
+          </tr>
+          <tr>
+            <th>Recommended Focus</th>
+            <td>Battery life</td>
+            <td>Reliability</td>
+            <td>GPU power</td>
+            <td>RAM and storage</td>
+            <td>Monitor, keyboard, mouse</td>
+          </tr>
+        </tbody>
+      </table>
+        </section>
+      </details>
+      <details class="section shopping-extra">
+        <summary>Already know what you need? <span>Quick order</span></summary>
+        <section class="section quick-order" aria-labelledby="quickOrderTitle">
+          <div class="section-heading">
+            <p class="eyebrow">Quick order</p>
+            <h2 id="quickOrderTitle">Choose any product and add it in seconds</h2>
+          </div>
+          <div class="quick-order-layout">
+            <div class="quick-order-preview">
+              <img id="quickOrderImage" src="images/products/hp-victus-15-fa2007na.png" alt="HP Victus 15-fa2007na — Mica Silver">
+              <div>
+                <p class="eyebrow">Selected item</p>
+                <h3 id="quickOrderName">HP Victus 15-fa2007na — Mica Silver</h3>
+                <p id="quickOrderSpecs">HP - Intel Core 7 240H, 24GB RAM, 1TB SSD, RTX 5060 Laptop 8GB, 15.6-inch FHD 144Hz, Mica Silver, UK keyboard</p>
+                <p class="quick-order-stock" id="quickOrderStock">8 in stock</p>
+              </div>
+            </div>
+            <form id="quickOrderForm">
+              <label for="quickOrderProduct">Product</label>
+              <select id="quickOrderProduct" disabled="">
+    <option value="lap-hp-victus-15">HP Victus 15-fa2007na — Mica Silver - ₱89,995</option>
+
+    <option value="pc-bb-foundation">Bits &amp; Bytes Foundation Desktop - Black - ₱32,995</option>
+
+    <option value="pc-bb-core">Bits &amp; Bytes Core Desktop - Black - ₱69,995</option>
+
+    <option value="pc-bb-apex">Bits &amp; Bytes Apex Desktop - Black - ₱129,995</option>
+
+    <option value="monitor-msi-g244f-e2">MSI G244F E2 - ₱8,995</option>
+
+    <option value="part-msi-a650bn">MSI MAG A650BN 650W - ₱2,950</option>
+
+    <option value="accessory-msi-gh20">MSI IMMERSE GH20 - ₱1,195</option>
+
+    <option value="accessory-msi-gm11">MSI CLUTCH GM11 - ₱995</option>
+
+    <option value="part-msi-m450-1tb">MSI SPATIUM M450 1TB - ₱3,495</option>
+
+    <option value="part-msi-m100r-white">MSI MAG FORGE M100R White - ₱3,495</option>
+
+    <option value="part-msi-h610m-g">MSI PRO H610M-G DDR4 - ₱4,995</option>
+
+    <option value="accessory-msi-gk30">MSI VIGOR GK30 - ₱1,695</option>
+
+    <option value="lap-msi-thin-15-b13ve">MSI Thin 15 B13VE - ₱52,995</option>
+
+    <option value="lap-msi-modern-15-b13m">MSI Modern 15 B13M - Star Blue - ₱36,995</option>
+
+    <option value="lap-msi-modern-14-c13m">MSI Modern 14 C13M - Beige Rose - ₱37,995</option>
+
+    <option value="lap-msi-cyborg-15-a13v">MSI Cyborg 15 A13VF - ₱67,995</option>
+
+    <option value="lap-dell-16-plus">Dell 16 Plus DB16250 - ₱89,995</option>
+
+    <option value="pc-msi-codex-6-14">MSI MAG Codex 6 14th - ₱72,995</option>
+
+    <option value="monitor-msi-274qrf-qd-e2">MSI MAG 274QRF QD E2 - ₱18,295</option>
+
+    <option value="part-msi-pro-b650-s">MSI PRO B650-S WIFI - ₱8,995</option>
+
+    <option value="part-msi-4060-ti-gaming-x">MSI GeForce RTX 4060 Ti GAMING X 8G - ₱27,995</option>
+
+    <option value="part-corsair-3000d">Corsair 3000D AIRFLOW - Black - ₱4,495</option>
+
+    <option value="accessory-corsair-k65-plus">Corsair K65 PLUS WIRELESS - ₱8,995</option>
+
+    <option value="lap-dell-latitude-5440">Dell Latitude 5440 - ₱59,995</option>
+
+    <option value="lap-dell-g15-5530">Dell G15 5530 Gaming Laptop - ₱84,995</option>
+
+    <option value="pc-hp-pro-mini-400-g9">HP Pro Mini 400 G9 - ₱42,995</option>
+
+    <option value="part-corsair-4000d">Corsair 4000D AIRFLOW - Black - ₱5,495</option>
+
+    <option value="part-corsair-ml120-red">Corsair ML120 LED ELITE Red - ₱1,495</option>
+
+    <option value="part-corsair-vengeance-32">Corsair VENGEANCE 32GB DDR5-6000 - ₱7,495</option>
+
+    <option value="part-msi-b760-gaming-plus">MSI B760 GAMING PLUS WIFI - ₱10,795</option>
+
+    <option value="part-msi-4070-super">MSI GeForce RTX 4070 SUPER VENTUS 2X OC - ₱39,995</option>
+
+    <option value="part-samsung-990-pro-1tb">Samsung 990 PRO 1TB NVMe SSD - ₱19,450</option>
+
+    <option value="accessory-logitech-g502">Logitech G502 HERO - ₱1,995</option>
+
+    <option value="accessory-logitech-g435">Logitech G435 LIGHTSPEED - Black and Neon Yellow - ₱3,495</option>
+
+    <option value="lap-microsoft-studio-2">Microsoft Surface Laptop Studio 2 - ₱139,995</option>
+
+    <option value="lap-dell-xps-13">Dell XPS 13 9340 - ₱99,995</option>
+
+    <option value="pc-hp-omen-35l">HP OMEN 35L GT16-0066m - ₱84,995</option>
+
+    <option value="pc-apple-mac-mini-m4">Apple Mac mini M4 - ₱36,990</option>
+
+    <option value="lap-acer-office">Acer Aspire 14 AS14H-53 - ₱34,995</option>
+
+    <option value="lap-asus-gaming">ASUS ROG Strix G16 (2023) - ₱99,995</option>
+
+    <option value="lap-lenovo-office">Lenovo ThinkBook 14 G6 IRL - ₱49,995</option>
+
+    <option value="lap-apple-creator">Apple MacBook Air 13-inch M3 - Midnight - ₱64,990</option>
+
+    <option value="pc-gaming">MSI MAG Infinite S3 13th - ₱69,995</option>
+
+    <option value="pc-office">Lenovo ThinkCentre neo 50t Gen 4 - ₱34,995</option>
+
+    <option value="pc-creator">ASUS ProArt Station PD5 PD500TC - ₱119,995</option>
+
+    <option value="monitor-27">ASUS TUF Gaming VG27AQ - ₱15,995</option>
+
+    <option value="keyboard-rgb">Keychron K8 Pro Mechanical Keyboard - ₱4,495</option>
+
+    <option value="mouse-wireless">Logitech MX Master 3S - Pale Gray - ₱1,995</option>
+
+    <option value="pc-aurora-elite">ASUS ROG G22CH - ₱149,995</option>
+
+    <option value="lap-creator-pro">ASUS Vivobook Pro 16 OLED K6602 - Quiet Blue - ₱124,995</option>
+
+    <option value="accessory-stream-kit">Elgato Facecam MK.2 - ₱7,650</option>
+
+    <option value="lap-hp-pavilion-plus">HP Pavilion Plus 14 - ₱52,995</option>
+
+    <option value="pc-msi-aegis-rgb">MSI Aegis R 13th - ₱109,995</option>
+
+    <option value="lap-dell-inspiron-plus">Dell Inspiron 14 Plus 7440 - ₱58,995</option>
+
+    <option value="monitor-samsung-g3-24">Samsung Odyssey G3 G30D 24-inch - ₱8,395</option>
+
+    <option value="monitor-samsung-g3-27">Samsung Odyssey G3 G30D 27-inch - ₱10,895</option>
+
+    <option value="part-gpu-gtx-1650">MSI GeForce GTX 1650 VENTUS XS 4G OC - ₱10,490</option>
+
+    <option value="part-gpu-rtx-3050">MSI GeForce RTX 3050 VENTUS 2X 6G OC - ₱19,000</option>
+
+    <option value="part-gpu-rtx-5080">MSI GeForce RTX 5080 16G VENTUS 3X OC - ₱147,000</option>
+
+    <option value="part-ssd-kingston-kc600">Kingston KC600 SATA SSD - ₱2,495</option>
+
+    <option value="part-cpu-i5-14600k">Intel Core i5-14600K - ₱18,995</option>
+
+    <option value="part-gpu-rtx-4060">MSI GeForce RTX 4060 VENTUS 2X BLACK 8GB - ₱19,995</option>
+
+    <option value="part-ram-32gb-ddr5">Kingston FURY Beast DDR5 Memory - ₱6,995</option>
+
+    <option value="part-ssd-1tb-nvme">Kingston NV3 NVMe SSD - ₱3,495</option>
+
+    <option value="part-cpu-ryzen-7-7700x">AMD Ryzen 7 7700X - ₱19,495</option>
+
+    <option value="part-board-gigabyte-b650">Gigabyte B650 AORUS Elite AX - ₱13,995</option>
+
+    <option value="part-cooler-master-240">Cooler Master ML240L RGB - ₱5,295</option>
+
+    <option value="part-corsair-psu-850">Corsair RM850e Gold PSU - ₱8,195</option>
+
+    <option value="part-kingston-fury-32">Kingston FURY Beast 32GB DDR5 - ₱7,295</option>
+  </select>
+              <input id="quickOrderPrice" type="hidden" value="89995" disabled="">
+              <div class="quick-order-fields">
+                <div>
+                  <label for="quickOrderQty">Quantity</label>
+                  <input id="quickOrderQty" type="number" min="1" max="8" value="1" disabled="">
+                </div>
+                <div class="quick-order-total">
+                  <span>Order total</span>
+                  <output id="quickOrderTotal" for="quickOrderProduct quickOrderQty">₱89,995</output>
+                </div>
+              </div>
+              <button class="button primary" type="submit" disabled="">Add to Cart</button>
+            </form>
+          </div>
+        </section>
+      </details>
+    </main>
+    <!--  Shared footer. These links work without a server or JavaScript.  -->
+    <footer class="site-footer" data-store-footer="ready" id="storeFooter">
+      <div class="footer-main">
+        <a class="footer-brand" href="index.html" aria-label="Bits and Bytes home">
+          <img class="footer-brand-mark" src="images/branding/bitsandbyteslogo.png" alt="Bits and Bytes logo">
+          <span><strong>Bits and Bytes</strong><small>PC and Laptop Store</small></span>
+        </a>
+        <section class="footer-location">
+          <h2>Bits and Bytes Manila</h2>
+          <p>Computer and laptop support desk<br>Quezon City, Metro Manila<br><a href="pages/contact.html"><span class="footer-link-label">Contact customer service</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Bits and Bytes Cebu</h2>
+          <p>PC build and pickup support<br>Cebu City, Cebu<br><a href="pages/contact.html"><span class="footer-link-label">Ask about availability</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Online Store Support</h2>
+          <p>Delivery, product advice, and checkout help<br>Philippines-wide service<br><a href="pages/contact.html"><span class="footer-link-label">Send an inquiry</span></a></p>
+        </section>
+      </div>
+      <div class="footer-bottom">
+        <nav aria-label="Footer navigation">
+          <a href="pages/about.html"><span class="footer-link-label">About Us</span></a>
+          <a href="pages/articles.html"><span class="footer-link-label">The Journal</span></a>
+          <a href="pages/tracking.html"><span class="footer-link-label">Track Order</span></a>
+          <a href="pages/profile.html"><span class="footer-link-label">My account</span></a>
+          <a href="pages/warranty.html"><span class="footer-link-label">Warranty Info</span></a>
+          <a href="pages/downloads.html"><span class="footer-link-label">Downloads</span></a>
+          <a href="pages/contact.html"><span class="footer-link-label">Contact Us</span></a>
+          <a data-back-to-top="" href="pages/catalog-part-fan.html#top"><span class="footer-link-label">Back to top ↑</span></a>
+        </nav>
+        <div class="footer-social">
+          <span>Follow us on</span>
+          <div class="social-links" aria-label="Follow Bits and Bytes on social media">
+            <a class="social-icon facebook" href="https://www.facebook.com/johncarlo.herrera.58" target="_blank" rel="noopener noreferrer" aria-label="Facebook: John Carlo Herrera" title="Facebook"><img src="images/social/facebook.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon instagram" href="https://www.instagram.com/jayzzzz0723/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: jayzzzz0723" title="Instagram"><img src="images/social/instagram.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon x-twitter" href="https://x.com/Jayzee20202" target="_blank" rel="noopener noreferrer" aria-label="X: Jayzee20202" title="X"><img src="images/social/x.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon youtube" href="https://www.youtube.com/@johncarloherrera8540" target="_blank" rel="noopener noreferrer" aria-label="YouTube: johncarloherrera8540" title="YouTube"><img src="images/social/youtube.svg" alt="" width="24" height="24"></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>© 2026 Herrera Corporation. All rights reserved.</p>
+        <nav aria-label="Legal information">
+          <a href="pages/terms.html"><span class="footer-link-label">Terms of Use</span></a>
+          <a href="pages/privacy.html"><span class="footer-link-label">Privacy Policy</span></a>
+        </nav>
+      </div>
+    </footer>
+    <aside class="support-chat" id="supportChat" aria-label="Customer service chat">
+      <button class="store-back-to-top" id="storeBackToTop" type="button" aria-label="Back to top" title="Back to top" hidden="" disabled="">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 15 7-7 7 7"></path></svg>
+      </button>
+      <a href="pages/contact.html" class="support-chat-launcher" id="supportChatLauncher" title="Chat with us" aria-label="Chat with us">
+        <img class="chat-robot-normal" src="images/branding/support-robot-hover.png" width="64" height="64" alt="" aria-hidden="true">
+        <img class="chat-robot-hover" src="images/branding/support-robot-normal.png" width="64" height="64" alt="" aria-hidden="true">
+        <span class="chat-notification-dot" aria-hidden="true"></span>
+      </a>
+    </aside>
+  </body>
+</html>

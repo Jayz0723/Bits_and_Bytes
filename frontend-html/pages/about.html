@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!-- Bits & Bytes, HTML and CSS edition. Open this folder’s index.html to start. -->
+<html lang="en">
+  <head>
+    <!-- Resolve shared files from the project root, including on local file URLs. -->
+    <base href="../">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Bits and Bytes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/storefront.css?v=20261031-catalog-v23">
+    <link rel="stylesheet" href="css/site-experience.css?v=20261026-cutouts-v6">
+    <!-- Shared storefront styles above retain the original layout. Static controls below use native HTML and CSS. -->
+    <link rel="stylesheet" href="css/static-edition.css">
+  </head>
+  <body class="utility-page store-gradient" style="--journey: 0;">
+    <div class="site-nav-space">
+      <div class="sticky-site-nav" aria-label="Sticky site navigation">
+        <nav class="main-nav foldable-nav" id="horizontal" aria-label="Main navigation">
+          <a class="mobile-store-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+          <!--  The mobile menu opens when its native checkbox is checked.  -->
+          <input id="static-nav-toggle" class="sr-only" type="checkbox" aria-label="Main menu" aria-controls="primaryNavMenu">
+          <label class="nav-toggle" for="static-nav-toggle">Menu</label>
+          <div class="nav-menu" id="primaryNavMenu">
+            <a class="nav-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+            <a class="nav-home" href="index.html">Home</a>
+            <details class="nav-group">
+              <summary>Shop Now</summary>
+              <div class="nav-submenu shop-submenu">
+                <a href="pages/products.html#computer-products">Computer Products</a>
+                <a href="pages/products.html#laptops">Laptops</a>
+                <a href="pages/products.html#accessories">Accessories</a>
+                <a href="pages/products.html#computer-parts">Computer Parts</a>
+                <a class="" href="pages/build.html">Build Your Own PC</a>
+                <a class="" href="pages/products.html">Products</a>
+              </div>
+            </details>
+            <details class="nav-group current">
+              <summary>Explore</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/articles.html">Articles</a>
+                <a class="" href="pages/components.html">Interactive Guide</a>
+                <a class="active" href="pages/about.html" aria-current="page">About</a>
+                <a class="" href="pages/downloads.html">Downloads</a>
+              </div>
+            </details>
+            <details class="nav-group">
+              <summary>Support</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/contact.html">Contact</a>
+                <a class="" href="pages/tracking.html">Track Order</a>
+                <a class="" href="pages/profile.html">My account</a>
+                <a class="" href="pages/login.html">Login</a>
+              </div>
+            </details>
+            <details class="nav-group nav-account">
+              <summary title="Your account"><img src="images/icons/user-round.svg" alt="" width="20" height="20"><span class="nav-account-greeting">My account</span></summary>
+              <div class="nav-submenu">
+                <a href="pages/profile.html">Manage my account</a>
+                <a href="pages/profile.html#orders">My purchases</a>
+                <a href="pages/profile.html#addresses">Address book</a>
+                <a href="pages/profile.html#tracking">Delivery tracking</a>
+                <a href="pages/profile.html#favorites">My favorites</a>
+                <a href="pages/profile.html#refunds">Returns &amp; refunds</a>
+                <button class="nav-account-signout" type="button" hidden="" disabled="">Sign out</button>
+              </div>
+            </details>
+          </div>
+          <a href="pages/search.html" class="site-search-toggle" id="siteSearchToggle" title="Search the website" aria-label="Search the website"><img class="site-search-icon" src="images/icons/search.svg" width="22" height="22" alt=""></a>
+        </nav>
+        <div class="store-toolbar" aria-label="Store controls">
+          <a class="cart-pill" href="pages/cart.html" aria-label="Cart, 0 items" title="View cart"><img class="cart-icon" src="images/icons/shopping-cart.svg" alt="" width="24" height="24"><span id="cartCount" aria-live="polite">0</span></a>
+          <label class="store-control" for="languageSelect">
+        <span>Language</span>
+        <select id="languageSelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <optgroup label="Languages">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="zh">简体中文</option>
+          </optgroup>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="languageSelectTrigger" aria-label="Language" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageSelectOptions" disabled=""><b>English</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="languageSelectOptions" role="listbox" aria-label="Language" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>EN</b><strong translate="no">English</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JA</b><strong translate="no">日本語</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ES</b><strong translate="no">Español</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>FR</b><strong translate="no">Français</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ZH</b><strong translate="no">简体中文</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <label class="store-control" for="currencySelect">
+        <span>Currency</span>
+        <select id="currencySelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <option value="PHP">PHP (P)</option>
+          <option value="USD">USD ($)</option>
+          <option value="JPY">JPY (¥)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="CNY">CNY (CN¥)</option>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="currencySelectTrigger" aria-label="Currency" aria-haspopup="listbox" aria-expanded="false" aria-controls="currencySelectOptions" disabled=""><b>PHP (P)</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="currencySelectOptions" role="listbox" aria-label="Currency" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>PHP</b><strong translate="no">PHP (P)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>USD</b><strong translate="no">USD ($)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JPY</b><strong translate="no">JPY (¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>EUR</b><strong translate="no">EUR (€)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>CNY</b><strong translate="no">CNY (CN¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <a class="wishlist-pill" href="pages/wishlist.html" aria-label="Wishlist"><span class="wishlist-link-label">Wishlist</span> <span id="wishlistCount">0</span></a>
+          <p class="control-status" id="controlStatus" role="status"></p>
+        </div>
+      </div>
+    </div>
+    <!--  Site header and navigation. Links point to pages inside this standalone edition.  -->
+    <header class="site-header" id="top">
+      <hgroup>
+
+
+      <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1>
+      <h2>About Us</h2>
+
+    </hgroup>
+    </header>
+    <!--  Page content. Product cards, articles and other catalog data below are written directly into this HTML.  -->
+    <main>
+      <section class="about-banner" aria-labelledby="aboutTitle">
+        <img src="images/showcase/showcase-keyboard.jpg" alt="RGB mechanical keyboard">
+        <div>
+          <p class="eyebrow">Bits and Bytes</p>
+          <h1 id="aboutTitle">About Us</h1>
+        </div>
+      </section>
+      <section class="about-story" aria-labelledby="storyTitle">
+        <div class="about-story-heading">
+          <p class="eyebrow">Our approach</p>
+          <h2 id="storyTitle">Technology choices made easier</h2>
+        </div>
+        <div class="about-logo-grid" aria-label="Brands in the Bits and Bytes collection">
+          <img src="images/branding/microsoft-logo.png" alt="Microsoft">
+          <img src="images/branding/amd-logo.png" alt="AMD">
+          <img src="images/branding/coolermaster-logo.png" alt="Cooler Master">
+          <img src="images/branding/corsair-logo.png" alt="Corsair">
+          <img src="images/branding/gigabyte-logo.png" alt="Gigabyte">
+          <img src="images/branding/intel-logo.png" alt="Intel">
+          <img src="images/branding/kingston-logo.png" alt="Kingston">
+          <img src="images/branding/nvidia-logo.png" alt="NVIDIA">
+          <img src="images/branding/hp-logo.png" alt="HP">
+          <img src="images/branding/msi-logo.png" alt="MSI">
+          <img src="images/branding/asus logo.png" alt="ASUS">
+          <img src="images/branding/lenovo logo.png" alt="Lenovo">
+          <img src="images/branding/dell logo.png" alt="Dell">
+          <img src="images/branding/apple logo.png" alt="Apple">
+        </div>
+        <div class="about-copy">
+          <p>Bits and Bytes brings together PCs, laptops, and components for the things you do every day. From a Microsoft Surface for creative work to a desktop built around your favorite games, our collection is organized around your needs, not just a list of specifications.</p>
+          <p>Instead of leaving visitors to compare random specifications alone, the website brings product details, stock availability, a wishlist, checkout options, and a custom PC builder into one approachable shopping experience.</p>
+        </div>
+      </section>
+      <section class="about-mission" aria-labelledby="missionTitle">
+        <div>
+          <p class="eyebrow">Our mission</p>
+          <h2 id="missionTitle">Help every customer build a setup that fits.</h2>
+        </div>
+        <p>Our mission is to make computer shopping more understandable and more personal. Whether someone needs a reliable laptop for school, a capable workstation for creative work, or an RGB gaming PC, Bits and Bytes helps them see the important differences and choose with confidence.</p>
+        <div class="mission-values">
+          <article>
+            <strong>Clear guidance</strong>
+            <span>Product information in plain, useful language.</span>
+          </article>
+          <article>
+            <strong>Practical choices</strong>
+            <span>Options for different goals and realistic budgets.</span>
+          </article>
+          <article>
+            <strong>Build with confidence</strong>
+            <span>Compatibility checks for custom PC parts.</span>
+          </article>
+        </div>
+      </section>
+      <section class="about-showcase" aria-labelledby="showcaseTitle">
+        <div class="about-showcase-heading">
+          <p class="eyebrow">From desk to build</p>
+          <h2 id="showcaseTitle">A setup for every kind of work</h2>
+        </div>
+        <div class="about-image-grid">
+          <img src="images/showcase/showcase-gaming-pc.jpg" alt="RGB gaming desktop computer">
+          <img src="images/showcase/showcase-laptop.jpg" alt="Laptop workspace">
+          <img src="images/products/legacy/custom-pc-build.jpg" alt="Custom PC components">
+        </div>
+      </section>
+    </main>
+    <!--  Shared footer. These links work without a server or JavaScript.  -->
+    <footer class="site-footer" data-store-footer="ready" id="storeFooter">
+      <div class="footer-main">
+        <a class="footer-brand" href="index.html" aria-label="Bits and Bytes home">
+          <img class="footer-brand-mark" src="images/branding/bitsandbyteslogo.png" alt="Bits and Bytes logo">
+          <span><strong>Bits and Bytes</strong><small>PC and Laptop Store</small></span>
+        </a>
+        <section class="footer-location">
+          <h2>Bits and Bytes Manila</h2>
+          <p>Computer and laptop support desk<br>Quezon City, Metro Manila<br><a href="pages/contact.html"><span class="footer-link-label">Contact customer service</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Bits and Bytes Cebu</h2>
+          <p>PC build and pickup support<br>Cebu City, Cebu<br><a href="pages/contact.html"><span class="footer-link-label">Ask about availability</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Online Store Support</h2>
+          <p>Delivery, product advice, and checkout help<br>Philippines-wide service<br><a href="pages/contact.html"><span class="footer-link-label">Send an inquiry</span></a></p>
+        </section>
+      </div>
+      <div class="footer-bottom">
+        <nav aria-label="Footer navigation">
+          <a href="pages/about.html"><span class="footer-link-label">About Us</span></a>
+          <a href="pages/articles.html"><span class="footer-link-label">The Journal</span></a>
+          <a href="pages/tracking.html"><span class="footer-link-label">Track Order</span></a>
+          <a href="pages/profile.html"><span class="footer-link-label">My account</span></a>
+          <a href="pages/warranty.html"><span class="footer-link-label">Warranty Info</span></a>
+          <a href="pages/downloads.html"><span class="footer-link-label">Downloads</span></a>
+          <a href="pages/contact.html"><span class="footer-link-label">Contact Us</span></a>
+          <a data-back-to-top="" href="pages/about.html#top"><span class="footer-link-label">Back to top ↑</span></a>
+        </nav>
+        <div class="footer-social">
+          <span>Follow us on</span>
+          <div class="social-links" aria-label="Follow Bits and Bytes on social media">
+            <a class="social-icon facebook" href="https://www.facebook.com/johncarlo.herrera.58" target="_blank" rel="noopener noreferrer" aria-label="Facebook: John Carlo Herrera" title="Facebook"><img src="images/social/facebook.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon instagram" href="https://www.instagram.com/jayzzzz0723/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: jayzzzz0723" title="Instagram"><img src="images/social/instagram.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon x-twitter" href="https://x.com/Jayzee20202" target="_blank" rel="noopener noreferrer" aria-label="X: Jayzee20202" title="X"><img src="images/social/x.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon youtube" href="https://www.youtube.com/@johncarloherrera8540" target="_blank" rel="noopener noreferrer" aria-label="YouTube: johncarloherrera8540" title="YouTube"><img src="images/social/youtube.svg" alt="" width="24" height="24"></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>© 2026 Herrera Corporation. All rights reserved.</p>
+        <nav aria-label="Legal information">
+          <a href="pages/terms.html"><span class="footer-link-label">Terms of Use</span></a>
+          <a href="pages/privacy.html"><span class="footer-link-label">Privacy Policy</span></a>
+        </nav>
+      </div>
+    </footer>
+    <aside class="support-chat" id="supportChat" aria-label="Customer service chat">
+      <button class="store-back-to-top" id="storeBackToTop" type="button" aria-label="Back to top" title="Back to top" hidden="" disabled="">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 15 7-7 7 7"></path></svg>
+      </button>
+      <a href="pages/contact.html" class="support-chat-launcher" id="supportChatLauncher" title="Chat with us" aria-label="Chat with us">
+        <img class="chat-robot-normal" src="images/branding/support-robot-hover.png" width="64" height="64" alt="" aria-hidden="true">
+        <img class="chat-robot-hover" src="images/branding/support-robot-normal.png" width="64" height="64" alt="" aria-hidden="true">
+        <span class="chat-notification-dot" aria-hidden="true"></span>
+      </a>
+    </aside>
+  </body>
+</html>

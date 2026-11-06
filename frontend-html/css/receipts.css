@@ -1,0 +1,52 @@
+/* A readable receipt on screen, with a clean paper layout for Print / Save as PDF. */
+.order-receipt { color: #dcebef; background: #18272d; border: 1px dashed #5b7a81; border-radius: 6px; padding: 26px; text-align: left; overflow-wrap: anywhere; }
+.order-receipt > header { display: flex; align-items: center; justify-content: center; gap: 14px; padding-bottom: 22px; border-bottom: 1px dashed #46636b; }
+.order-receipt header img { width: 48px; height: 48px; background: transparent; border: 0; object-fit: contain; }
+.order-receipt header h3 { margin: 0; color: #edf7fa; font-size: 24px; font-weight: 600; }
+.order-receipt header p { margin: 6px 0 0; color: #79ddc6; font-size: 12px; }
+.order-receipt dl { margin: 20px 0; }
+.order-receipt dl > div { display: grid; grid-template-columns: minmax(100px,.8fr) minmax(0,1.2fr); gap: 12px; margin: 12px 0; font-size: 14px; line-height: 1.7; }
+.order-receipt dt { color: #a5bdc8; }
+.order-receipt dd { margin: 0; text-align: right; color: #e5f0f4; font-weight: 500; }
+.order-receipt h4 { padding-top: 20px; margin: 20px 0 12px; color: #82dec9; border-top: 1px dashed #46636b; font-size: 13px; font-weight: 500; }
+.receipt-items { list-style: none; margin: 0; padding: 0; }
+.receipt-items li { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: start; gap: 18px; margin: 18px 0; font-size: 14px; line-height: 1.6; }
+.receipt-items strong { font-weight: 500; }.receipt-items b { color: #f0d38b; font-weight: 500; white-space: nowrap; }
+.receipt-items small { display: block; margin-top: 4px; color: #9fb9c4; font-size: 12px; line-height: 1.7; }
+.order-receipt .receipt-totals { border-top: 1px dashed #46636b; padding-top: 14px; }
+.receipt-totals > div:last-child { border-top: 1px solid #46636b; padding-top: 16px; font-size: 19px; }
+.receipt-totals > div:last-child dd { color: #f0d38b; font-weight: 700; }
+.receipt-estimate { padding: 18px 0; text-align: center; border-top: 1px dashed #46636b; border-bottom: 1px dashed #46636b; }
+.receipt-estimate p { margin: 0 0 8px; color: #9fb9c4; font-size: 13px; }
+.receipt-estimate strong { display: block; color: #9ee8d6; font-size: 16px; line-height: 1.6; }
+.receipt-estimate small { display: block; margin-top: 8px; color: #9fb9c4; font-size: 12px; line-height: 1.7; }
+.receipt-thanks { text-align: center; color: #b6d6d5; font-size: 14px; margin: 24px 0 8px; }
+.receipt-disclaimer { color: #a1b9c3; text-align: center; font-size: 12px; line-height: 1.8; }
+#checkoutReceipt { margin: 28px 0 18px; }
+.receipt-print { gap: 10px; width: 100%; margin-bottom: 12px; }
+.receipt-print img { width: 18px; height: 18px; background: transparent; border: 0; filter: brightness(0) invert(1); }
+.sample-payment-dialog.has-order-receipt { width: min(640px, calc(100% - 32px)); }
+.order-receipt-dialog { position: fixed; inset: 0; margin: auto; width: min(640px, calc(100% - 32px)); max-height: calc(100dvh - 32px); padding: 48px 20px 20px; overflow-y: auto; color: #dcebef; background: #1e2d34; border: 1px solid #54717c; border-radius: 8px; }
+.order-receipt-dialog::backdrop { background: #030b10d9; backdrop-filter: blur(4px); }
+.order-receipt-dialog .receipt-print { margin: 18px 0 0; }
+.receipt-dialog-close { position: absolute; top: 6px; right: 12px; width: 36px; height: 36px; background: transparent; color: #ccdee6; border: 0; font-size: 28px; cursor: pointer; }
+.receipt-reopen { margin-top: 24px; }
+#storeReceiptPrint { display: none; }
+@media (max-width: 480px) {
+  .order-receipt { padding: 18px 14px; }
+  .order-receipt dl > div { grid-template-columns: minmax(0,1fr); gap: 2px; }
+  .order-receipt dd { text-align: left; }
+  .order-receipt .receipt-totals > div { grid-template-columns: minmax(0,1fr) auto; gap: 12px; }
+  .receipt-items li { grid-template-columns: minmax(0,1fr); gap: 6px; }
+  .receipt-items b { text-align: right; }
+  .order-receipt header h3 { font-size: 21px; }
+}
+@media print {
+  body.printing-receipt > * { display: none !important; }
+  body.printing-receipt > #storeReceiptPrint { display: block !important; width: 100%; max-width: 720px; margin: 0 auto; color: #14262b; background: #fff; border-color: #657b81; }
+  #storeReceiptPrint :is(h3, dt, dd, h4, p, b, strong, small) { color: #14262b; }
+  #storeReceiptPrint header p, #storeReceiptPrint .receipt-totals > div:last-child dd { color: #126354; }
+  #storeReceiptPrint li, #storeReceiptPrint dl > div { break-inside: avoid; }
+  dialog::backdrop { display: none !important; }
+  @page { margin: 15mm; }
+}

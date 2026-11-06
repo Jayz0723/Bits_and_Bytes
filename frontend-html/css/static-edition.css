@@ -1,0 +1,111 @@
+/* The original stylesheets provide the layout, typography and colors.
+   This file styles controls that use HTML and CSS in the standalone edition. */
+
+/* Five native radio inputs select a slide. Visibility also keeps links on
+   offscreen slides out of keyboard navigation. */
+.promo-carousel .promo-slide { visibility: hidden; }
+#static-promo-1:checked ~ .promo-carousel-viewport .promo-slide:nth-child(1),
+#static-promo-2:checked ~ .promo-carousel-viewport .promo-slide:nth-child(2),
+#static-promo-3:checked ~ .promo-carousel-viewport .promo-slide:nth-child(3),
+#static-promo-4:checked ~ .promo-carousel-viewport .promo-slide:nth-child(4),
+#static-promo-5:checked ~ .promo-carousel-viewport .promo-slide:nth-child(5) {
+  visibility: visible;
+}
+#static-promo-2:checked ~ .promo-carousel-viewport .promo-carousel-track { transform: translateX(-100%); }
+#static-promo-3:checked ~ .promo-carousel-viewport .promo-carousel-track { transform: translateX(-200%); }
+#static-promo-4:checked ~ .promo-carousel-viewport .promo-carousel-track { transform: translateX(-300%); }
+#static-promo-5:checked ~ .promo-carousel-viewport .promo-carousel-track { transform: translateX(-400%); }
+.static-promo-dots label {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #769099;
+  border-radius: 4px;
+  background: #101b24;
+  color: #dce9ee;
+  cursor: pointer;
+}
+#static-promo-1:checked ~ .static-promo-dots label:nth-child(1),
+#static-promo-2:checked ~ .static-promo-dots label:nth-child(2),
+#static-promo-3:checked ~ .static-promo-dots label:nth-child(3),
+#static-promo-4:checked ~ .static-promo-dots label:nth-child(4),
+#static-promo-5:checked ~ .static-promo-dots label:nth-child(5) {
+  background: var(--teal);
+  color: #071716;
+}
+.promo-carousel:focus-within .static-promo-dots { outline: 2px solid var(--teal); }
+@media (prefers-reduced-motion: reduce) {
+  .promo-carousel .promo-carousel-track { transition: none; }
+}
+
+/* The checkbox holds the mobile menu state. Desktop uses the original menu. */
+#static-nav-toggle { display: none; }
+@media (max-width: 760px) {
+  #static-nav-toggle { display: block; }
+  #static-nav-toggle:focus-visible + .nav-toggle { outline: 2px solid var(--teal); }
+  #static-nav-toggle:checked + .nav-toggle::after { content: "−"; }
+  .foldable-nav:has(#static-nav-toggle:checked) .nav-menu {
+    display: grid;
+    grid-template-columns: 1fr;
+    position: absolute;
+    z-index: 2;
+    inset: 100% 16px auto;
+    width: auto;
+    max-height: calc(100dvh - 160px);
+    margin-top: 0;
+    padding: 14px;
+    overflow: auto;
+    background: #1b2125;
+    border: 1px solid var(--line);
+  }
+}
+
+/* Native popovers open and close from their matching popovertarget buttons. */
+.partner-dialog[popover] { position: fixed; inset: 0; margin: auto; }
+.partner-dialog[popover]::backdrop { background: #03070bbf; }
+
+/* Catalog categories and options are normal links to prebuilt HTML pages. */
+.static-filter-links details { border-bottom: 1px solid #354854; padding: 10px 0; }
+.static-filter-links { grid-column: 1 / -1; }
+.static-filter-links summary { cursor: pointer; font-weight: 700; }
+.static-filter-links a { display: block; margin: 8px 0; }
+.static-variant-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.static-variant-links a, [data-catalog-type][href] {
+  padding: 7px 10px;
+  border: 1px solid #354854;
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+}
+a[aria-current="page"], [data-catalog-type][aria-pressed="true"] { border-color: var(--teal); }
+
+/* The checked thumbnail selects media in place. Each product page provides
+   the selectors for its own set of pictures and videos. */
+.product-gallery [data-static-view] { display: none; }
+.product-gallery-thumbnails .static-gallery-thumb {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: 62px 22px;
+  gap: 7px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--surface-1);
+  color: #bcd0da;
+  text-decoration: none;
+  font-size: 0.76rem;
+  cursor: pointer;
+}
+.product-gallery-thumbnails .static-gallery-thumb img { width: 100%; height: 62px; object-fit: contain; }
+
+/* Account and checkout retain their design as clearly labeled previews. */
+.static-preview-note {
+  width: min(100% - 32px, 1320px);
+  margin: 16px auto;
+  padding: 12px 16px;
+  border: 1px solid #354854;
+  border-radius: 4px;
+  background: #151f27;
+  color: #dce9ee;
+}

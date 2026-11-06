@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720">
+  <rect width="960" height="720" fill="#111820"/>
+  <rect x="40" y="40" width="880" height="640" fill="none" stroke="#2a3944"/>
+  <text x="480" y="342" text-anchor="middle" fill="#9cafba" font-family="Arial, sans-serif" font-size="28">Product photo coming soon</text>
+  <text x="480" y="394" text-anchor="middle" fill="#637987" font-family="Arial, sans-serif" font-size="18">BITS &amp; BYTES</text>
+</svg>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<!-- Bits & Bytes, HTML and CSS edition. Open this folder’s index.html to start. -->
+<html lang="en">
+  <head>
+    <base href="../">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | Bits and Bytes</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/storefront.css?v=20261031-catalog-v23">
+    <link rel="stylesheet" href="css/profile.css?v=20261027-photo-v3">
+    <link rel="stylesheet" href="css/receipts.css?v=20261017-receipts-v1">
+    <link rel="stylesheet" href="css/site-experience.css?v=20261026-cutouts-v6">
+    <!-- Shared storefront styles above retain the original layout. Static controls below use native HTML and CSS. -->
+    <link rel="stylesheet" href="css/static-edition.css">
+  </head>
+  <body class="utility-page profile-page store-gradient" style="--journey: 0;">
+    <div class="site-nav-space">
+      <div class="sticky-site-nav" aria-label="Sticky site navigation">
+        <nav class="main-nav foldable-nav" aria-label="Main navigation">
+          <a class="mobile-store-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+          <!--  The mobile menu opens when its native checkbox is checked.  -->
+          <input id="static-nav-toggle" class="sr-only" type="checkbox" aria-label="Main menu" aria-controls="primaryNavMenu">
+          <label class="nav-toggle" for="static-nav-toggle">Menu</label>
+          <div class="nav-menu" id="primaryNavMenu">
+            <a class="nav-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+            <a class="nav-home" href="index.html">Home</a>
+            <details class="nav-group">
+              <summary>Shop Now</summary>
+              <div class="nav-submenu shop-submenu">
+                <a href="pages/products.html#computer-products">Computer Products</a>
+                <a href="pages/products.html#laptops">Laptops</a>
+                <a href="pages/products.html#accessories">Accessories</a>
+                <a href="pages/products.html#computer-parts">Computer Parts</a>
+                <a class="" href="pages/build.html">Build Your Own PC</a>
+                <a class="" href="pages/products.html">Products</a>
+              </div>
+            </details>
+            <details class="nav-group">
+              <summary>Explore</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/articles.html">Articles</a>
+                <a class="" href="pages/components.html">Interactive Guide</a>
+                <a class="" href="pages/about.html">About</a>
+                <a class="" href="pages/downloads.html">Downloads</a>
+              </div>
+            </details>
+            <details class="nav-group">
+              <summary>Support</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/contact.html">Contact</a>
+                <a class="" href="pages/tracking.html">Track Order</a>
+                <a class="" href="pages/profile.html">My account</a>
+                <a class="" href="pages/login.html">Login</a>
+              </div>
+            </details>
+            <details class="nav-group nav-account current">
+              <summary title="Your account"><img src="images/icons/user-round.svg" alt="" width="20" height="20"><span class="nav-account-greeting">My account</span></summary>
+              <div class="nav-submenu">
+                <a href="pages/profile.html" class="active" aria-current="page">Manage my account</a>
+                <a href="pages/profile.html#orders">My purchases</a>
+                <a href="pages/profile.html#addresses">Address book</a>
+                <a href="pages/profile.html#tracking">Delivery tracking</a>
+                <a href="pages/profile.html#favorites">My favorites</a>
+                <a href="pages/profile.html#refunds">Returns &amp; refunds</a>
+                <button class="nav-account-signout" type="button" hidden="" disabled="">Sign out</button>
+              </div>
+            </details>
+          </div>
+          <a href="pages/search.html" class="site-search-toggle" id="siteSearchToggle" title="Search the website" aria-label="Search the website"><img class="site-search-icon" src="images/icons/search.svg" width="22" height="22" alt=""></a>
+        </nav>
+        <div class="store-toolbar" aria-label="Store controls">
+          <a class="cart-pill" href="pages/cart.html" aria-label="Cart, 0 items" title="View cart"><img class="cart-icon" src="images/icons/shopping-cart.svg" alt="" width="24" height="24"><span id="cartCount" aria-live="polite">0</span></a>
+          <label class="store-control" for="languageSelect">
+        <span>Language</span>
+        <select id="languageSelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <optgroup label="Languages">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="zh">简体中文</option>
+          </optgroup>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="languageSelectTrigger" aria-label="Language" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageSelectOptions" disabled=""><b>English</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="languageSelectOptions" role="listbox" aria-label="Language" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>EN</b><strong translate="no">English</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JA</b><strong translate="no">日本語</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ES</b><strong translate="no">Español</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>FR</b><strong translate="no">Français</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ZH</b><strong translate="no">简体中文</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <label class="store-control" for="currencySelect">
+        <span>Currency</span>
+        <select id="currencySelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <option value="PHP">PHP (P)</option>
+          <option value="USD">USD ($)</option>
+          <option value="JPY">JPY (¥)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="CNY">CNY (CN¥)</option>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="currencySelectTrigger" aria-label="Currency" aria-haspopup="listbox" aria-expanded="false" aria-controls="currencySelectOptions" disabled=""><b>PHP (P)</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="currencySelectOptions" role="listbox" aria-label="Currency" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>PHP</b><strong translate="no">PHP (P)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>USD</b><strong translate="no">USD ($)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JPY</b><strong translate="no">JPY (¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>EUR</b><strong translate="no">EUR (€)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>CNY</b><strong translate="no">CNY (CN¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <a class="wishlist-pill" href="pages/wishlist.html" aria-label="Wishlist"><span class="wishlist-link-label">Wishlist</span> <span id="wishlistCount">0</span></a>
+          <p class="control-status" id="controlStatus" role="status"></p>
+        </div>
+      </div>
+    </div>
+    <!--  Site header and navigation. Links point to pages inside this standalone edition.  -->
+    <header class="site-header" id="top">
+      <hgroup>
+
+
+    <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1><h2>My account</h2>
+
+  </hgroup>
+    </header>
+    <!--  Page content. Product cards, articles and other catalog data below are written directly into this HTML.  -->
+    <main class="account-shell">
+      <p class="static-preview-note">Frontend preview. Live account, ordering and form features are available in the original storefront.</p>
+      <section id="profileGate" class="account-gate">
+        <img src="images/icons/user-round.svg" width="40" height="40" alt="">
+        <p class="eyebrow">Your personal corner</p>
+        <h1>Everything for your next setup.</h1>
+        <p>Sign in to view your purchases, follow deliveries, and keep your favorite finds together.</p>
+        <button id="profileLogin" class="button primary" type="button" disabled="">Sign in / Create an account</button>
+      </section>
+      <div id="profileAccount" hidden="">
+        <header class="account-heading">
+          <div>
+            <p class="eyebrow">My Bits &amp; Bytes</p>
+            <h1>Welcome back, <span id="profileGreeting"></span>.</h1>
+            <p>Your orders, saved finds, and a little less searching.</p>
+          </div>
+          <a class="button secondary" href="pages/products.html">Continue shopping <img src="images/icons/chevron-right.svg" alt="" width="18" height="18"></a>
+        </header>
+        <div class="account-layout">
+          <aside class="account-sidebar">
+            <div class="account-identity">
+              <a id="profileAvatar" class="account-avatar" href="pages/profile.html#details" aria-label="Edit profile photo"></a>
+              <div>
+                <strong id="profileName"></strong>
+                <small id="profileEmail"></small>
+                <a class="profile-edit-link" href="pages/profile.html#details">Edit profile →</a>
+              </div>
+            </div>
+            <nav class="account-navigation" aria-label="Account sections">
+              <a href="pages/profile.html#orders" data-account-section="orders"><img src="images/icons/package.svg" alt="">My purchases<span id="ordersCount"></span></a>
+              <a href="pages/profile.html#tracking" data-account-section="tracking"><img src="images/icons/truck.svg" alt="">Delivery tracking</a>
+              <a href="pages/profile.html#refunds" data-account-section="refunds"><img src="images/icons/rotate-ccw.svg" alt="">Returns &amp; refunds</a>
+              <a href="pages/profile.html#favorites" data-account-section="favorites"><img src="images/icons/heart.svg" alt="">My favorites<span id="favoritesCount"></span></a>
+              <a href="pages/profile.html#details" data-account-section="details"><img src="images/icons/user-round.svg" alt="">Account details</a>
+              <a href="pages/profile.html#addresses" data-account-section="addresses"><img src="images/icons/map-pin.svg" alt="">Address book</a>
+            </nav>
+            <a class="account-support" href="pages/contact.html">Need a hand? Contact support →</a>
+            <button id="profileLogout" class="account-logout" type="button" disabled=""><img src="images/icons/log-out.svg" alt="">Sign out</button>
+          </aside>
+          <div class="account-content">
+            <p id="profileNotice" class="account-notice" role="status"></p>
+            <section id="ordersPanel" data-account-panel="orders" aria-labelledby="ordersTitle">
+              <div class="account-section-heading">
+                <div>
+                  <p class="eyebrow">Purchase history</p>
+                  <h2 id="ordersTitle">My purchases</h2>
+                </div>
+                <label class="order-search"><img src="images/icons/search.svg" alt=""><input id="profileOrderSearch" type="search" placeholder="Search products or order number" aria-label="Search your orders"></label>
+              </div>
+              <div class="purchase-tabs" role="group" aria-label="Filter orders">
+                <button type="button" data-order-filter="all" aria-pressed="true" disabled="">All orders <span id="allOrdersCount">0</span></button>
+                <button type="button" data-order-filter="receiving" aria-pressed="false" disabled="">To receive <span id="receivingCount">0</span></button>
+                <button type="button" data-order-filter="completed" aria-pressed="false" disabled="">Completed <span id="completedCount">0</span></button>
+              </div>
+              <p class="account-storage-note">Order history is saved in this browser. Sample payments and delivery updates are not live transactions.</p>
+              <div id="profileOrders" class="account-order-list">
+
+              </div>
+            </section>
+            <section id="trackingPanel" data-account-panel="tracking" aria-labelledby="profileTrackingTitle" hidden="">
+              <div class="account-section-heading">
+                <div>
+                  <p class="eyebrow">From our desk to yours</p>
+                  <h2 id="profileTrackingTitle">Delivery tracking</h2>
+                </div>
+              </div>
+              <p class="account-storage-note">Follow your saved order timeline. No live courier is connected.</p>
+              <div id="profileDeliveries" class="account-order-list">
+
+              </div>
+            </section>
+            <section id="refundsPanel" data-account-panel="refunds" aria-labelledby="refundsTitle" hidden="">
+              <div class="account-section-heading">
+                <div>
+                  <p class="eyebrow">After your purchase</p>
+                  <h2 id="refundsTitle">Returns &amp; refunds</h2>
+                </div>
+                <a class="text-link" href="pages/warranty.html">Warranty &amp; returns →</a>
+              </div>
+              <p class="account-storage-note">Requests are saved on this device only, not sent to the store. No money is returned automatically. Contact support for an actual return or refund.</p>
+              <div id="profileRefunds" class="account-order-list">
+
+              </div>
+            </section>
+            <section id="favoritesPanel" data-account-panel="favorites" aria-labelledby="favoritesTitle" hidden="">
+              <div class="account-section-heading">
+                <div>
+                  <p class="eyebrow">Worth coming back for</p>
+                  <h2 id="favoritesTitle">My favorites</h2>
+                </div>
+                <a class="text-link" href="pages/products.html">Find something new →</a>
+              </div>
+              <div id="profileFavorites" class="account-favorites">
+
+              </div>
+            </section>
+            <section id="addressesPanel" data-account-panel="addresses" aria-labelledby="addressesTitle" hidden="">
+              <div class="account-section-heading">
+                <div>
+                  <p class="eyebrow">A place for every delivery</p>
+                  <h2 id="addressesTitle">Address book</h2>
+                </div>
+                <button class="button primary" id="addProfileAddress" type="button" disabled="">Add address</button>
+              </div>
+              <p class="account-storage-note">Save home, work, or another delivery address. Your default address is selected at checkout. Changes apply to future orders only.</p>
+              <div id="profileAddressBook" class="address-book-list">
+
+              </div>
+            </section>
+            <section id="detailsPanel" data-account-panel="details" aria-labelledby="detailsTitle" hidden="">
+              <div class="account-section-heading">
+                <div>
+                  <p class="eyebrow">The essentials</p>
+                  <h2 id="detailsTitle">Account details</h2>
+                </div>
+              </div>
+              <div class="profile-photo-editor">
+                <span id="profilePhotoPreview" class="account-avatar profile-photo-preview"></span>
+                <div class="profile-photo-controls">
+                  <h3>Your profile photo</h3>
+                  <p>A familiar face makes this space yours.</p>
+                  <label for="profilePhotoFile" class="button secondary">Choose photo</label>
+                  <input id="profilePhotoFile" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="profilePhotoHelp">
+                  <p id="profilePhotoHelp">JPG, PNG or WebP, up to 5 MB. Your photo is cropped to a square.</p>
+                  <div class="profile-photo-actions">
+                    <button id="saveProfilePhoto" class="button primary" type="button" hidden="" disabled="">Save photo</button>
+                    <button id="cancelProfilePhoto" class="button secondary" type="button" hidden="" disabled="">Cancel</button>
+                    <button id="removeProfilePhoto" class="profile-remove-photo" type="button" hidden="" disabled="">Remove photo</button>
+                  </div>
+                  <p id="profilePhotoStatus" role="status"></p>
+                </div>
+              </div>
+              <form id="profileDetailsForm" class="account-details-form">
+                <label for="profileDisplayName">Display name</label>
+                <input id="profileDisplayName" required="" maxlength="100" autocomplete="name" disabled="">
+                <label for="profileAccountEmail">Email address</label>
+                <input id="profileAccountEmail" type="email" readonly="" disabled="">
+                <p class="account-storage-note">Your email identifies orders saved to this account. Changing your display name does not change previous delivery recipients.</p>
+                <button class="button primary" type="submit" disabled="">Save changes</button>
+              </form>
+              <h3 class="account-address-title"><img src="images/icons/map-pin.svg" width="20" height="20" alt="">Recent delivery addresses</h3>
+              <div id="profileAddresses">
+
+              </div>
+              <p class="account-storage-note">Addresses come from your saved purchases. You can enter a different address at your next checkout.</p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!--  Shared footer. These links work without a server or JavaScript.  -->
+    <footer class="site-footer" data-store-footer="ready" id="storeFooter">
+      <div class="footer-main">
+        <a class="footer-brand" href="index.html" aria-label="Bits and Bytes home">
+          <img class="footer-brand-mark" src="images/branding/bitsandbyteslogo.png" alt="Bits and Bytes logo">
+          <span><strong>Bits and Bytes</strong><small>PC and Laptop Store</small></span>
+        </a>
+        <section class="footer-location">
+          <h2>Bits and Bytes Manila</h2>
+          <p>Computer and laptop support desk<br>Quezon City, Metro Manila<br><a href="pages/contact.html"><span class="footer-link-label">Contact customer service</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Bits and Bytes Cebu</h2>
+          <p>PC build and pickup support<br>Cebu City, Cebu<br><a href="pages/contact.html"><span class="footer-link-label">Ask about availability</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Online Store Support</h2>
+          <p>Delivery, product advice, and checkout help<br>Philippines-wide service<br><a href="pages/contact.html"><span class="footer-link-label">Send an inquiry</span></a></p>
+        </section>
+      </div>
+      <div class="footer-bottom">
+        <nav aria-label="Footer navigation">
+          <a href="pages/about.html"><span class="footer-link-label">About Us</span></a>
+          <a href="pages/articles.html"><span class="footer-link-label">The Journal</span></a>
+          <a href="pages/tracking.html"><span class="footer-link-label">Track Order</span></a>
+          <a href="pages/profile.html"><span class="footer-link-label">My account</span></a>
+          <a href="pages/warranty.html"><span class="footer-link-label">Warranty Info</span></a>
+          <a href="pages/downloads.html"><span class="footer-link-label">Downloads</span></a>
+          <a href="pages/contact.html"><span class="footer-link-label">Contact Us</span></a>
+          <a data-back-to-top="" href="pages/profile.html#top"><span class="footer-link-label">Back to top ↑</span></a>
+        </nav>
+        <div class="footer-social">
+          <span>Follow us on</span>
+          <div class="social-links" aria-label="Follow Bits and Bytes on social media">
+            <a class="social-icon facebook" href="https://www.facebook.com/johncarlo.herrera.58" target="_blank" rel="noopener noreferrer" aria-label="Facebook: John Carlo Herrera" title="Facebook"><img src="images/social/facebook.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon instagram" href="https://www.instagram.com/jayzzzz0723/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: jayzzzz0723" title="Instagram"><img src="images/social/instagram.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon x-twitter" href="https://x.com/Jayzee20202" target="_blank" rel="noopener noreferrer" aria-label="X: Jayzee20202" title="X"><img src="images/social/x.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon youtube" href="https://www.youtube.com/@johncarloherrera8540" target="_blank" rel="noopener noreferrer" aria-label="YouTube: johncarloherrera8540" title="YouTube"><img src="images/social/youtube.svg" alt="" width="24" height="24"></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>© 2026 Herrera Corporation. All rights reserved.</p>
+        <nav aria-label="Legal information">
+          <a href="pages/terms.html"><span class="footer-link-label">Terms of Use</span></a>
+          <a href="pages/privacy.html"><span class="footer-link-label">Privacy Policy</span></a>
+        </nav>
+      </div>
+    </footer>
+    <aside class="support-chat" id="supportChat" aria-label="Customer service chat">
+      <button class="store-back-to-top" id="storeBackToTop" type="button" aria-label="Back to top" title="Back to top" hidden="" disabled="">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 15 7-7 7 7"></path></svg>
+      </button>
+      <a href="pages/contact.html" class="support-chat-launcher" id="supportChatLauncher" title="Chat with us" aria-label="Chat with us">
+        <img class="chat-robot-normal" src="images/branding/support-robot-hover.png" width="64" height="64" alt="" aria-hidden="true">
+        <img class="chat-robot-hover" src="images/branding/support-robot-normal.png" width="64" height="64" alt="" aria-hidden="true">
+        <span class="chat-notification-dot" aria-hidden="true"></span>
+      </a>
+    </aside>
+  </body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<!-- Bits & Bytes, HTML and CSS edition. Open this folder’s index.html to start. -->
+<html lang="en">
+  <head>
+    <!-- Resolve shared files from the project root, including on local file URLs. -->
+    <base href="../">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive PC Guide | Bits and Bytes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=20261003-interactive-guide">
+    <link rel="stylesheet" href="css/storefront.css?v=20261031-catalog-v23">
+    <link rel="stylesheet" href="css/component-guide.css?v=20261016-upgrade-notes-v3">
+    <link rel="stylesheet" href="css/site-experience.css?v=20261026-cutouts-v6">
+    <!-- Shared storefront styles above retain the original layout. Static controls below use native HTML and CSS. -->
+    <link rel="stylesheet" href="css/static-edition.css">
+  </head>
+  <body class="utility-page store-gradient" style="--journey: 0;">
+    <div class="site-nav-space">
+      <div class="sticky-site-nav" aria-label="Sticky site navigation">
+        <nav class="main-nav foldable-nav" id="horizontal" aria-label="Main navigation">
+          <a class="mobile-store-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+          <!--  The mobile menu opens when its native checkbox is checked.  -->
+          <input id="static-nav-toggle" class="sr-only" type="checkbox" aria-label="Main menu" aria-controls="primaryNavMenu">
+          <label class="nav-toggle" for="static-nav-toggle">Menu</label>
+          <div class="nav-menu" id="primaryNavMenu">
+            <a class="nav-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+            <a class="nav-home" href="index.html">Home</a>
+            <details class="nav-group">
+              <summary>Shop Now</summary>
+              <div class="nav-submenu shop-submenu">
+                <a href="pages/products.html#computer-products">Computer Products</a>
+                <a href="pages/products.html#laptops">Laptops</a>
+                <a href="pages/products.html#accessories">Accessories</a>
+                <a href="pages/products.html#computer-parts">Computer Parts</a>
+                <a class="" href="pages/build.html">Build Your Own PC</a>
+                <a class="" href="pages/products.html">Products</a>
+              </div>
+            </details>
+            <details class="nav-group current">
+              <summary>Explore</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/articles.html">Articles</a>
+                <a class="active" href="pages/components.html" aria-current="page">Interactive Guide</a>
+                <a class="" href="pages/about.html">About</a>
+                <a class="" href="pages/downloads.html">Downloads</a>
+              </div>
+            </details>
+            <details class="nav-group">
+              <summary>Support</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/contact.html">Contact</a>
+                <a class="" href="pages/tracking.html">Track Order</a>
+                <a class="" href="pages/profile.html">My account</a>
+                <a class="" href="pages/login.html">Login</a>
+              </div>
+            </details>
+            <details class="nav-group nav-account">
+              <summary title="Your account"><img src="images/icons/user-round.svg" alt="" width="20" height="20"><span class="nav-account-greeting">My account</span></summary>
+              <div class="nav-submenu">
+                <a href="pages/profile.html">Manage my account</a>
+                <a href="pages/profile.html#orders">My purchases</a>
+                <a href="pages/profile.html#addresses">Address book</a>
+                <a href="pages/profile.html#tracking">Delivery tracking</a>
+                <a href="pages/profile.html#favorites">My favorites</a>
+                <a href="pages/profile.html#refunds">Returns &amp; refunds</a>
+                <button class="nav-account-signout" type="button" hidden="" disabled="">Sign out</button>
+              </div>
+            </details>
+          </div>
+          <a href="pages/search.html" class="site-search-toggle" id="siteSearchToggle" title="Search the website" aria-label="Search the website"><img class="site-search-icon" src="images/icons/search.svg" width="22" height="22" alt=""></a>
+        </nav>
+        <div class="store-toolbar" aria-label="Store controls">
+          <a class="cart-pill" href="pages/cart.html" aria-label="Cart, 0 items" title="View cart"><img class="cart-icon" src="images/icons/shopping-cart.svg" alt="" width="24" height="24"><span id="cartCount" aria-live="polite">0</span></a>
+          <label class="store-control" for="languageSelect">
+        <span>Language</span>
+        <select id="languageSelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <optgroup label="Languages">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="zh">简体中文</option>
+          </optgroup>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="languageSelectTrigger" aria-label="Language" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageSelectOptions" disabled=""><b>English</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="languageSelectOptions" role="listbox" aria-label="Language" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>EN</b><strong translate="no">English</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JA</b><strong translate="no">日本語</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ES</b><strong translate="no">Español</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>FR</b><strong translate="no">Français</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ZH</b><strong translate="no">简体中文</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <label class="store-control" for="currencySelect">
+        <span>Currency</span>
+        <select id="currencySelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <option value="PHP">PHP (P)</option>
+          <option value="USD">USD ($)</option>
+          <option value="JPY">JPY (¥)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="CNY">CNY (CN¥)</option>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="currencySelectTrigger" aria-label="Currency" aria-haspopup="listbox" aria-expanded="false" aria-controls="currencySelectOptions" disabled=""><b>PHP (P)</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="currencySelectOptions" role="listbox" aria-label="Currency" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>PHP</b><strong translate="no">PHP (P)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>USD</b><strong translate="no">USD ($)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JPY</b><strong translate="no">JPY (¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>EUR</b><strong translate="no">EUR (€)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>CNY</b><strong translate="no">CNY (CN¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <a class="wishlist-pill" href="pages/wishlist.html" aria-label="Wishlist"><span class="wishlist-link-label">Wishlist</span> <span id="wishlistCount">0</span></a>
+          <p class="control-status" id="controlStatus" role="status"></p>
+        </div>
+      </div>
+    </div>
+    <!--  Site header and navigation. Links point to pages inside this standalone edition.  -->
+    <header class="site-header" id="top">
+      <img src="images/showcase/editorial-pc-components.png" width="1536" height="1024" alt="A closer look at the components inside your next PC">
+      <hgroup>
+
+
+      <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1>
+      <h2>Interactive Guide</h2>
+
+    </hgroup>
+    </header>
+    <!--  Page content. Product cards, articles and other catalog data below are written directly into this HTML.  -->
+    <main>
+      <section class="page-hero compact">
+        <p class="eyebrow">Interactive page</p>
+        <h1>Learn PC and laptop parts</h1>
+        <p>Study four highlighted desktop components, then use the PC and laptop image maps to explore the complete hardware layout.</p>
+      </section>
+      <section class="photo-component-guide" aria-labelledby="photoGuideTitle">
+        <div class="section-heading photo-guide-heading">
+          <p class="eyebrow">Highlighted component guide</p>
+          <h2 id="photoGuideTitle">Four parts at the center of PC performance</h2>
+          <p>Each supplied image highlights the exact component inside the same desktop build. Read the matching explanation and buying tip beside it.</p>
+        </div>
+        <nav class="component-guide-links" aria-label="Jump to a component">
+          <a href="pages/components.html#guideCPU"><span>01</span> CPU <small>Processor</small></a>
+          <a href="pages/components.html#guideGPU"><span>02</span> GPU <small>Graphics</small></a>
+          <a href="pages/components.html#guideRAM"><span>03</span> RAM <small>Memory</small></a>
+          <a href="pages/components.html#guideSSD"><span>04</span> SSD <small>Storage</small></a>
+        </nav>
+        <div class="focused-component-grid">
+          <article class="focused-component-card" id="guideCPU">
+            <div class="focused-component-image">
+              <img class="focused-map-image" data-responsive-map="" src="images/guides/CPU.webp" usemap="#cpuFocusedMap" width="1200" height="1200" alt="CPU highlighted inside a desktop computer; click the highlighted processor for information">
+              <map name="cpuFocusedMap">
+              <area shape="rect" coords="176,195,271,287" data-original-coords="380,420,585,620" href="pages/components.html#guideCPUInfo" alt="Open CPU information">
+            </map>
+            </div>
+            <div class="focused-component-copy" id="guideCPUInfo">
+              <div class="component-title-row">
+                <span>01</span>
+                <p>Processing</p>
+              </div>
+              <h3>Processor (CPU)</h3>
+              <p>The CPU is the computer's main processor. It handles instructions for school work, programming, office applications, gaming frame rates, and video-editing timelines.</p>
+              <dl>
+              <div><dt>Best starting point</dt><dd>Modern 6-core processor</dd></div>
+              <div><dt>Important match</dt><dd>Motherboard socket</dd></div>
+            </dl>
+              <aside>
+                <strong>Buying tip</strong>
+                <span>Match the CPU socket with the motherboard socket before ordering.</span>
+              </aside>
+              <a class="text-link component-shop-link" href="pages/catalog-part-cpu.html">Explore processors <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="focused-component-card" id="guideGPU">
+            <div class="focused-component-image">
+              <img class="focused-map-image" data-responsive-map="" src="images/guides/GPU.webp" usemap="#gpuFocusedMap" width="1200" height="1200" alt="Graphics card highlighted inside a desktop computer; click the highlighted card for information">
+              <map name="gpuFocusedMap">
+              <area shape="rect" coords="97,301,433,394" data-original-coords="210,650,935,850" href="pages/components.html#guideGPUInfo" alt="Open graphics card information">
+            </map>
+            </div>
+            <div class="focused-component-copy" id="guideGPUInfo">
+              <div class="component-title-row">
+                <span>02</span>
+                <p>Graphics</p>
+              </div>
+              <h3>Graphics Card (GPU)</h3>
+              <p>The GPU renders games, 3D applications, video effects, and other visually demanding work. Office systems can often use integrated graphics instead of a separate card.</p>
+              <dl>
+              <div><dt>Most important for</dt><dd>Gaming and 3D work</dd></div>
+              <div><dt>Important match</dt><dd>Power supply and case</dd></div>
+            </dl>
+              <aside>
+                <strong>Buying tip</strong>
+                <span>More powerful graphics cards require enough PSU wattage and physical case clearance.</span>
+              </aside>
+              <a class="text-link component-shop-link" href="pages/catalog-part-gpu.html">Explore graphics cards <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="focused-component-card" id="guideRAM">
+            <div class="focused-component-image">
+              <img class="focused-map-image" data-responsive-map="" src="images/guides/RAM.webp" usemap="#ramFocusedMap" width="1200" height="1200" alt="RAM modules highlighted inside a desktop computer; click the highlighted memory for information">
+              <map name="ramFocusedMap">
+              <area shape="rect" coords="264,178,306,313" data-original-coords="570,385,660,675" href="pages/components.html#guideRAMInfo" alt="Open RAM information">
+            </map>
+            </div>
+            <div class="focused-component-copy" id="guideRAMInfo">
+              <div class="component-title-row">
+                <span>03</span>
+                <p>Memory</p>
+              </div>
+              <h3>Random Access Memory (RAM)</h3>
+              <p>RAM keeps active applications and files ready for the processor. More memory improves multitasking and gives games and creative software additional working room.</p>
+              <dl>
+              <div><dt>Recommended</dt><dd>16GB to 32GB</dd></div>
+              <div><dt>Important match</dt><dd>DDR generation and speed</dd></div>
+            </dl>
+              <aside>
+                <strong>Buying tip</strong>
+                <span>DDR5 memory requires a DDR5-compatible motherboard and processor platform.</span>
+              </aside>
+              <a class="text-link component-shop-link" href="pages/catalog-part-ram.html">Explore memory <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="focused-component-card" id="guideSSD">
+            <div class="focused-component-image">
+              <img class="focused-map-image" data-responsive-map="" src="images/guides/SSD.webp" usemap="#ssdFocusedMap" width="1200" height="1200" alt="NVMe SSD highlighted inside a desktop computer; click the highlighted drive for information">
+              <map name="ssdFocusedMap">
+              <area shape="rect" coords="141,287,266,327" data-original-coords="305,620,575,705" href="pages/components.html#guideSSDInfo" alt="Open SSD information">
+            </map>
+            </div>
+            <div class="focused-component-copy" id="guideSSDInfo">
+              <div class="component-title-row">
+                <span>04</span>
+                <p>Storage</p>
+              </div>
+              <h3>Solid State Drive (SSD)</h3>
+              <p>The SSD stores Windows, applications, games, and personal files. A fast NVMe SSD reduces startup times and makes the computer feel more responsive.</p>
+              <dl>
+              <div><dt>Recommended</dt><dd>1TB NVMe SSD</dd></div>
+              <div><dt>Important match</dt><dd>M.2 size and interface</dd></div>
+            </dl>
+              <aside>
+                <strong>Buying tip</strong>
+                <span>One terabyte is a practical starting capacity for most students, gamers, and office users.</span>
+              </aside>
+              <a class="text-link component-shop-link" href="pages/catalog-part-storage.html">Explore storage <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="gpu-range-guide section" aria-labelledby="gpuRangeTitle">
+        <p class="eyebrow">Graphics, at every level</p>
+        <h2 id="gpuRangeTitle">Find your place from GTX to RTX</h2>
+        <p>Compare the exact card, memory and power requirements. These are use-case starting points; game performance varies by settings and resolution.</p>
+        <div class="gpu-range-grid">
+          <a class="gpu-range-card" href="pages/item-part-gpu-gtx-1650.html"><img src="images/products/expansion/gtx1650-main.webp" alt="MSI GeForce GTX 1650 VENTUS XS 4G OC" loading="lazy"><small>Legacy / entry-level</small><h3>MSI GeForce GTX 1650 VENTUS XS 4G OC</h3><p>Older games and lighter esports. No dedicated RT or Tensor cores.</p><strong>₱10,490</strong></a>
+          <a class="gpu-range-card" href="pages/item-part-gpu-rtx-3050.html"><img src="images/products/expansion/rtx3050-main.webp" alt="MSI GeForce RTX 3050 VENTUS 2X 6G OC" loading="lazy"><small>Entry-level RTX</small><h3>MSI GeForce RTX 3050 VENTUS 2X 6G OC</h3><p>An introduction to DLSS and ray tracing in supported games.</p><strong>₱19,000</strong></a>
+          <a class="gpu-range-card" href="pages/item-part-gpu-rtx-4060.html"><img src="images/products/msi-rtx-4060-main.webp" alt="MSI GeForce RTX 4060 VENTUS 2X BLACK 8GB" loading="lazy"><small>Mid-range</small><h3>MSI GeForce RTX 4060 VENTUS 2X BLACK 8GB</h3><p>A compact 8GB option for mainstream Full HD gaming.</p><strong>₱19,995</strong></a>
+          <a class="gpu-range-card" href="pages/item-part-msi-4070-super.html"><img src="images/products/msi-4070-super-1.webp" alt="MSI GeForce RTX 4070 SUPER VENTUS 2X OC" loading="lazy"><small>Performance</small><h3>MSI GeForce RTX 4070 SUPER VENTUS 2X OC</h3><p>12GB of memory for more demanding games and creative workloads.</p><strong>₱39,995</strong></a>
+          <a class="gpu-range-card" href="pages/item-part-gpu-rtx-5080.html"><img src="images/products/expansion/rtx5080-main.webp" alt="MSI GeForce RTX 5080 16G VENTUS 3X OC" loading="lazy"><small>High-end</small><h3>MSI GeForce RTX 5080 16G VENTUS 3X OC</h3><p>16GB GDDR7 for demanding gaming and GPU-accelerated projects.</p><strong>₱147,000</strong></a>
+        </div>
+      </section>
+      <section class="interactive-layout" aria-labelledby="imageMapTitle">
+        <div class="pc-map-panel">
+          <div class="pc-map-heading">
+            <div>
+              <p class="eyebrow">Desktop and laptop image maps</p>
+              <h2 id="imageMapTitle">Explore every visible part</h2>
+            </div>
+            <p>Click directly on either image or use the component shortcuts beneath it.</p>
+          </div>
+          <div class="device-map-list">
+            <article class="device-map-card">
+              <div class="device-map-title">
+                <span>01</span>
+                <div>
+                  <h3>Desktop PC</h3>
+                  <p>Performance components and cooling system</p>
+                </div>
+              </div>
+              <div class="component-map-frame pc-map-frame">
+                <img class="component-map-image" src="images/guides/pc-interactive-guide.jpg" usemap="#pcHardwareMap" width="1279" height="1500" alt="Open desktop PC with mapped internal components">
+                <map name="pcHardwareMap" id="pcHardwareMap"><area shape="rect" coords="387,231,450,286" data-original-coords="745,445,865,550" data-part="boardpower" data-device="Desktop PC" href="pages/components.html#partInfo" alt="24-pin power"><area shape="rect" coords="244,359,286,523" data-original-coords="470,690,550,1005" data-part="gpupower" data-device="Desktop PC" href="pages/components.html#partInfo" alt="GPU power cable"><area shape="rect" coords="385,187,468,226" data-original-coords="740,360,900,435" data-part="tubes" data-device="Desktop PC" href="pages/components.html#partInfo" alt="Coolant tubes"><area shape="rect" coords="26,55,494,109" data-original-coords="50,105,950,210" data-part="radiator" data-device="Desktop PC" href="pages/components.html#partInfo" alt="Top radiator">
+                <area shape="circle" coords="247,218,55" data-original-coords="475,420,105" data-part="cpu" data-device="Desktop PC" href="pages/components.html#partInfo" alt="CPU water block">
+                <area shape="rect" coords="315,112,380,307" data-original-coords="605,215,730,590" data-part="ram" data-device="Desktop PC" href="pages/components.html#partInfo" alt="Desktop RAM modules">
+                <area shape="rect" coords="198,278,338,325" data-original-coords="380,535,650,625" data-part="storage" data-device="Desktop PC" href="pages/components.html#partInfo" alt="NVMe solid state drive">
+                <area shape="rect" coords="34,317,525,455" data-original-coords="65,610,1010,875" data-part="gpu" data-device="Desktop PC" href="pages/components.html#partInfo" alt="Dedicated graphics card">
+                <area shape="rect" coords="442,603,533,738" data-original-coords="850,1160,1025,1420" data-part="frontio" data-device="Desktop PC" href="pages/components.html#partInfo" alt="Front input and output ports">
+                <area shape="rect" coords="26,55,494,117" data-original-coords="50,105,950,225" data-part="cooling" data-device="Desktop PC" href="pages/components.html#partInfo" alt="Top radiator and cooling fans">
+                <area shape="rect" coords="29,112,140,291" data-original-coords="55,215,270,560" data-part="cooling" data-device="Desktop PC" href="pages/components.html#partInfo" alt="Rear cooling fan">
+                <area shape="rect" coords="460,127,632,512" data-original-coords="885,245,1215,985" data-part="cooling" data-device="Desktop PC" href="pages/components.html#partInfo" alt="Front cooling fans">
+                <area shape="rect" coords="135,96,455,333" data-original-coords="260,185,875,640" data-part="motherboard" data-device="Desktop PC" href="pages/components.html#partInfo" alt="Desktop motherboard">
+                <area shape="rect" coords="0,536,665,777" data-original-coords="0,1030,1279,1495" data-part="psu" data-device="Desktop PC" href="pages/components.html#partInfo" alt="Power supply chamber">
+                <area shape="rect" coords="0,0,665,780" data-original-coords="0,0,1279,1500" data-part="case" data-device="Desktop PC" href="pages/components.html#partInfo" alt="Desktop computer case">
+              </map>
+              </div>
+              <div class="pc-map-legend" aria-label="Desktop PC component shortcuts">
+                <button class="part-legend-button active" data-part="cpu" data-device="Desktop PC" type="button" aria-pressed="true" disabled=""><span></span>CPU block</button>
+                <button class="part-legend-button" data-part="gpu" data-device="Desktop PC" type="button" aria-pressed="false" disabled=""><span></span>Graphics card</button>
+                <button class="part-legend-button" data-part="ram" data-device="Desktop PC" type="button" aria-pressed="false" disabled=""><span></span>Memory</button>
+                <button class="part-legend-button" data-part="storage" data-device="Desktop PC" type="button" aria-pressed="false" disabled=""><span></span>NVMe SSD</button>
+                <button class="part-legend-button" data-part="cooling" data-device="Desktop PC" type="button" aria-pressed="false" disabled=""><span></span>Cooling</button>
+                <button class="part-legend-button" data-part="motherboard" data-device="Desktop PC" type="button" aria-pressed="false" disabled=""><span></span>Motherboard</button>
+                <button class="part-legend-button" data-part="psu" data-device="Desktop PC" type="button" aria-pressed="false" disabled=""><span></span>Power supply</button>
+                <button class="part-legend-button" data-part="frontio" data-device="Desktop PC" type="button" aria-pressed="false" disabled=""><span></span>Front I/O</button>
+                <button class="part-legend-button" data-part="case" data-device="Desktop PC" type="button" aria-pressed="false" disabled=""><span></span>Case</button>
+                <button type="button" class="part-legend-button" data-part="radiator" data-device="Desktop PC" aria-pressed="false" disabled=""><span></span>Top radiator</button>
+                <button type="button" class="part-legend-button" data-part="tubes" data-device="Desktop PC" aria-pressed="false" disabled=""><span></span>Coolant tubes</button>
+                <button type="button" class="part-legend-button" data-part="gpupower" data-device="Desktop PC" aria-pressed="false" disabled=""><span></span>GPU power cable</button>
+                <button type="button" class="part-legend-button" data-part="boardpower" data-device="Desktop PC" aria-pressed="false" disabled=""><span></span>24-pin power</button>
+              </div>
+            </article>
+            <article class="device-map-card">
+              <div class="device-map-title">
+                <span>02</span>
+                <div>
+                  <h3>Laptop</h3>
+                  <p>Compact internals, power, storage, and connectivity</p>
+                </div>
+              </div>
+              <div class="component-map-frame laptop-map-frame">
+                <img class="component-map-image" src="images/guides/laptop-interactive-guide.jpg" usemap="#laptopHardwareMap" width="1000" height="711" alt="Open laptop with mapped internal components">
+                <map name="laptopHardwareMap" id="laptopHardwareMap">
+                <area shape="rect" coords="220,62,320,212" data-original-coords="265,75,385,255" data-part="cpu" data-device="Laptop" href="pages/components.html#partInfo" alt="Laptop processor beneath heat spreader">
+                <area shape="rect" coords="320,62,416,212" data-original-coords="385,75,500,255" data-part="gpu" data-device="Laptop" href="pages/components.html#partInfo" alt="Laptop graphics processor beneath heat spreader">
+                <area shape="rect" coords="71,216,258,324" data-original-coords="85,260,310,390" data-part="ram" data-device="Laptop" href="pages/components.html#partInfo" alt="Laptop RAM modules">
+                <area shape="rect" coords="62,54,253,141" data-original-coords="75,65,305,170" data-part="storage" data-device="Laptop" href="pages/components.html#partInfo" alt="First laptop solid state drive">
+                <area shape="rect" coords="237,295,436,369" data-original-coords="285,355,525,445" data-part="storage" data-device="Laptop" href="pages/components.html#partInfo" alt="Second laptop solid state drive">
+                <area shape="rect" coords="482,282,573,369" data-original-coords="580,340,690,445" data-part="wifi" data-device="Laptop" href="pages/components.html#partInfo" alt="Wi-Fi and Bluetooth card">
+                <area shape="rect" coords="416,95,769,303" data-original-coords="500,115,925,365" data-part="cooling" data-device="Laptop" href="pages/components.html#partInfo" alt="Dual laptop cooling fans">
+                <area shape="rect" coords="75,46,432,228" data-original-coords="90,55,520,275" data-part="heatpipes" data-device="Laptop" href="pages/components.html#partInfo" alt="Laptop heat pipes">
+                <area shape="rect" coords="29,394,195,577" data-original-coords="35,475,235,695" data-part="speakers" data-device="Laptop" href="pages/components.html#partInfo" alt="Left laptop speaker">
+                <area shape="rect" coords="748,394,819,577" data-original-coords="900,475,985,695" data-part="speakers" data-device="Laptop" href="pages/components.html#partInfo" alt="Right laptop speaker">
+                <area shape="rect" coords="195,378,756,548" data-original-coords="235,455,910,660" data-part="battery" data-device="Laptop" href="pages/components.html#partInfo" alt="Laptop battery">
+                <area shape="rect" coords="12,46,71,378" data-original-coords="15,55,85,455" data-part="ports" data-device="Laptop" href="pages/components.html#partInfo" alt="Left laptop ports">
+                <area shape="rect" coords="765,46,819,378" data-original-coords="920,55,985,455" data-part="ports" data-device="Laptop" href="pages/components.html#partInfo" alt="Right laptop ports">
+                <area shape="rect" coords="33,12,798,71" data-original-coords="40,15,960,85" data-part="hinge" data-device="Laptop" href="pages/components.html#partInfo" alt="Laptop display hinges">
+                <area shape="rect" coords="25,62,802,390" data-original-coords="30,75,965,470" data-part="motherboard" data-device="Laptop" href="pages/components.html#partInfo" alt="Laptop motherboard">
+              </map>
+              </div>
+              <div class="pc-map-legend" aria-label="Laptop component shortcuts">
+                <button class="part-legend-button" data-part="cpu" data-device="Laptop" type="button" aria-pressed="false" disabled=""><span></span>Processor</button>
+                <button class="part-legend-button" data-part="gpu" data-device="Laptop" type="button" aria-pressed="false" disabled=""><span></span>Graphics chip</button>
+                <button class="part-legend-button" data-part="heatpipes" data-device="Laptop" type="button" aria-pressed="false" disabled=""><span></span>Heat pipes</button>
+                <button class="part-legend-button" data-part="cooling" data-device="Laptop" type="button" aria-pressed="false" disabled=""><span></span>Dual fans</button>
+                <button class="part-legend-button" data-part="ram" data-device="Laptop" type="button" aria-pressed="false" disabled=""><span></span>Memory</button>
+                <button class="part-legend-button" data-part="storage" data-device="Laptop" type="button" aria-pressed="false" disabled=""><span></span>NVMe SSDs</button>
+                <button class="part-legend-button" data-part="wifi" data-device="Laptop" type="button" aria-pressed="false" disabled=""><span></span>Wi-Fi card</button>
+                <button class="part-legend-button" data-part="motherboard" data-device="Laptop" type="button" aria-pressed="false" disabled=""><span></span>Motherboard</button>
+                <button class="part-legend-button" data-part="battery" data-device="Laptop" type="button" aria-pressed="false" disabled=""><span></span>Battery</button>
+                <button class="part-legend-button" data-part="speakers" data-device="Laptop" type="button" aria-pressed="false" disabled=""><span></span>Speakers</button>
+                <button class="part-legend-button" data-part="ports" data-device="Laptop" type="button" aria-pressed="false" disabled=""><span></span>Side ports</button>
+                <button class="part-legend-button" data-part="hinge" data-device="Laptop" type="button" aria-pressed="false" disabled=""><span></span>Display hinges</button>
+              </div>
+            </article>
+          </div>
+        </div>
+        <article class="part-info" id="partInfo">
+          <p class="eyebrow">Selected Desktop PC component</p>
+          <h2>CPU</h2>
+          <p>The CPU is the main processor. It matters for school work, programming, office apps, gaming frame rates, and video editing timelines.</p>
+          <div class="tip-box">
+            <strong>Tip:</strong>
+             Match the CPU socket with the motherboard socket.
+          </div>
+        </article>
+      </section>
+      <section class="section laptop-preview-section" aria-labelledby="laptopPreviewTitle">
+        <article class="toggle-panel laptop-preview">
+          <div class="laptop-preview-stage">
+            <figure id="pc">
+              <img src="images/showcase/showcase-laptop.jpg" alt="Laptop with its display and keyboard visible" loading="lazy" decoding="async">
+              <figcaption>Look beyond performance. Find a laptop that feels right every day.</figcaption>
+            </figure>
+            <div class="laptop-preview-hidden" aria-hidden="true">
+              <img src="images/icons/eye-off.svg" width="28" height="28" alt="">
+              <span>Laptop preview hidden</span>
+            </div>
+          </div>
+          <div class="laptop-preview-copy">
+            <p class="eyebrow">A closer look</p>
+            <h2 id="laptopPreviewTitle">Space for work.<br>Power to go.</h2>
+            <p>A laptop keeps your workspace portable. Check its display size, weight, and available connections before choosing.</p>
+            <dl class="laptop-shopping-points">
+          <div><dt>Comfort</dt><dd>Display size &amp; keyboard layout</dd></div>
+          <div><dt>Portability</dt><dd>Weight &amp; battery life</dd></div>
+          <div><dt>Connectivity</dt><dd>Ports for your everyday devices</dd></div>
+        </dl>
+            <div class="laptop-preview-actions">
+              <a class="button primary" href="pages/products.html#laptops">Explore laptops <span aria-hidden="true">→</span></a>
+              <button class="button secondary" id="laptopReveal" type="button" aria-controls="pc" aria-expanded="true" disabled="">Hide laptop</button>
+            </div>
+          </div>
+        </article>
+      </section>
+      <section class="section component-notes" aria-labelledby="upgradeNotesTitle">
+        <header class="upgrade-notes-heading">
+          <p class="eyebrow">Buy with confidence</p>
+          <h2 id="upgradeNotesTitle">Plan your next upgrade</h2>
+          <p>A little preparation makes it easier to choose the right parts.</p>
+        </header>
+        <article class="upgrade-glossary">
+          <h3>Know your next upgrade</h3>
+          <dl>
+          <div>
+          <dt><dfn>CPU</dfn> — central processing unit</dt>
+          <dd>The processor handles instructions. Match its socket to your motherboard before buying.</dd>
+          </div>
+          <div>
+          <dt><dfn><ruby>RAM<rp> (</rp><rt>ram</rt><rp>)</rp></ruby></dfn> — random-access memory</dt>
+          <dd>Working memory for open apps. DDR4 and DDR5 are not interchangeable, and laptop SO-DIMMs differ from desktop DIMMs.</dd>
+          </div>
+          <div>
+          <dt><dfn>SSD</dfn> — solid-state drive</dt>
+          <dd>Storage for files and games. Check the SATA or NVMe connection, physical size, and the slot your device supports.</dd>
+          </div>
+        </dl>
+        </article>
+        <aside class="upgrade-use-cases">
+          <h3>Choose for your day</h3>
+          <dl>
+          <div>
+          <dt>Study and office</dt>
+          <dd>Start with 16GB RAM and a 512GB SSD for everyday multitasking; check battery life for portable work.</dd>
+          </div>
+          <div>
+          <dt>Gaming and creative projects</dt>
+          <dd>Compare graphics performance, display resolution, and project storage. A larger number alone does not guarantee a better fit.</dd>
+          </div>
+        </dl>
+        </aside>
+        <article class="purchase-checklist">
+          <h3>Before and after checkout</h3>
+          <div class="purchase-checklist-columns">
+            <div>
+              <h4><span>01</span> Before you buy</h4>
+              <ol>
+                <li>
+                  Check your current device model and upgrade slots.
+                </li>
+                <li>
+                  Compare compatible parts and the exact capacity.
+                </li>
+                <li>
+                  Review quantities, delivery details, and the warranty.
+                </li>
+              </ol>
+            </div>
+            <div>
+              <h4><span>02</span> After it arrives</h4>
+              <ul>
+                <li>
+                  Back up your files before changing storage.
+                </li>
+                <li>
+                  Install drivers from the manufacturer's website.
+                </li>
+                <li>
+                  Keep vents clear and save your purchase records.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <table class="lesson-table">
+        <caption>Upgrade compatibility checklist</caption>
+        <thead><tr>
+          <th scope="col">Upgrade</th>
+          <th scope="col">Check before buying</th>
+        </tr></thead>
+        <tbody>
+          <tr><th scope="row">CPU</th><td>Processor socket matches the motherboard.</td></tr>
+          <tr><th scope="row">RAM</th><td>Correct DDR generation and desktop DIMM or laptop SO-DIMM form factor.</td></tr>
+          <tr><th scope="row">SSD</th><td>Supported SATA or NVMe connection, slot, and physical drive size.</td></tr>
+          <tr><th scope="row">GPU</th><td>Enough case clearance and a suitable power supply.</td></tr>
+        </tbody>
+      </table>
+      </section>
+    </main>
+    <!--  Shared footer. These links work without a server or JavaScript.  -->
+    <footer class="site-footer" data-store-footer="ready" id="storeFooter">
+      <div class="footer-main">
+        <a class="footer-brand" href="index.html" aria-label="Bits and Bytes home">
+          <img class="footer-brand-mark" src="images/branding/bitsandbyteslogo.png" alt="Bits and Bytes logo">
+          <span><strong>Bits and Bytes</strong><small>PC and Laptop Store</small></span>
+        </a>
+        <section class="footer-location">
+          <h2>Bits and Bytes Manila</h2>
+          <p>Computer and laptop support desk<br>Quezon City, Metro Manila<br><a href="pages/contact.html"><span class="footer-link-label">Contact customer service</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Bits and Bytes Cebu</h2>
+          <p>PC build and pickup support<br>Cebu City, Cebu<br><a href="pages/contact.html"><span class="footer-link-label">Ask about availability</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Online Store Support</h2>
+          <p>Delivery, product advice, and checkout help<br>Philippines-wide service<br><a href="pages/contact.html"><span class="footer-link-label">Send an inquiry</span></a></p>
+        </section>
+      </div>
+      <div class="footer-bottom">
+        <nav aria-label="Footer navigation">
+          <a href="pages/about.html"><span class="footer-link-label">About Us</span></a>
+          <a href="pages/articles.html"><span class="footer-link-label">The Journal</span></a>
+          <a href="pages/tracking.html"><span class="footer-link-label">Track Order</span></a>
+          <a href="pages/profile.html"><span class="footer-link-label">My account</span></a>
+          <a href="pages/warranty.html"><span class="footer-link-label">Warranty Info</span></a>
+          <a href="pages/downloads.html"><span class="footer-link-label">Downloads</span></a>
+          <a href="pages/contact.html"><span class="footer-link-label">Contact Us</span></a>
+          <a data-back-to-top="" href="pages/components.html#top"><span class="footer-link-label">Back to top ↑</span></a>
+        </nav>
+        <div class="footer-social">
+          <span>Follow us on</span>
+          <div class="social-links" aria-label="Follow Bits and Bytes on social media">
+            <a class="social-icon facebook" href="https://www.facebook.com/johncarlo.herrera.58" target="_blank" rel="noopener noreferrer" aria-label="Facebook: John Carlo Herrera" title="Facebook"><img src="images/social/facebook.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon instagram" href="https://www.instagram.com/jayzzzz0723/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: jayzzzz0723" title="Instagram"><img src="images/social/instagram.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon x-twitter" href="https://x.com/Jayzee20202" target="_blank" rel="noopener noreferrer" aria-label="X: Jayzee20202" title="X"><img src="images/social/x.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon youtube" href="https://www.youtube.com/@johncarloherrera8540" target="_blank" rel="noopener noreferrer" aria-label="YouTube: johncarloherrera8540" title="YouTube"><img src="images/social/youtube.svg" alt="" width="24" height="24"></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>© 2026 Herrera Corporation. All rights reserved.</p>
+        <nav aria-label="Legal information">
+          <a href="pages/terms.html"><span class="footer-link-label">Terms of Use</span></a>
+          <a href="pages/privacy.html"><span class="footer-link-label">Privacy Policy</span></a>
+        </nav>
+      </div>
+    </footer>
+    <aside class="support-chat" id="supportChat" aria-label="Customer service chat">
+      <button class="store-back-to-top" id="storeBackToTop" type="button" aria-label="Back to top" title="Back to top" hidden="" disabled="">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 15 7-7 7 7"></path></svg>
+      </button>
+      <a href="pages/contact.html" class="support-chat-launcher" id="supportChatLauncher" title="Chat with us" aria-label="Chat with us">
+        <img class="chat-robot-normal" src="images/branding/support-robot-hover.png" width="64" height="64" alt="" aria-hidden="true">
+        <img class="chat-robot-hover" src="images/branding/support-robot-normal.png" width="64" height="64" alt="" aria-hidden="true">
+        <span class="chat-notification-dot" aria-hidden="true"></span>
+      </a>
+    </aside>
+  </body>
+</html>

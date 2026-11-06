@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<!-- Bits & Bytes, HTML and CSS edition. Open this folder’s index.html to start. -->
+<html lang="en">
+  <head>
+    <!-- Resolve shared files from the project root, including on local file URLs. -->
+    <base href="../">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Own PC | Bits and Bytes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/storefront.css?v=20261031-catalog-v23">
+    <link rel="stylesheet" href="css/site-experience.css?v=20261026-cutouts-v6">
+    <link rel="stylesheet" href="css/builder.css?v=20261029-pictures-v1">
+    <!-- Shared storefront styles above retain the original layout. Static controls below use native HTML and CSS. -->
+    <link rel="stylesheet" href="css/static-edition.css">
+  </head>
+  <body class="utility-page builder-page store-gradient" style="--journey: 0;">
+    <div class="site-nav-space">
+      <div class="sticky-site-nav" aria-label="Sticky site navigation">
+        <nav class="main-nav foldable-nav" id="horizontal" aria-label="Main navigation">
+          <a class="mobile-store-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+          <!--  The mobile menu opens when its native checkbox is checked.  -->
+          <input id="static-nav-toggle" class="sr-only" type="checkbox" aria-label="Main menu" aria-controls="primaryNavMenu">
+          <label class="nav-toggle" for="static-nav-toggle">Menu</label>
+          <div class="nav-menu" id="primaryNavMenu">
+            <a class="nav-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+            <a class="nav-home" href="index.html">Home</a>
+            <details class="nav-group current">
+              <summary>Shop Now</summary>
+              <div class="nav-submenu shop-submenu">
+                <a href="pages/products.html#computer-products">Computer Products</a>
+                <a href="pages/products.html#laptops">Laptops</a>
+                <a href="pages/products.html#accessories">Accessories</a>
+                <a href="pages/products.html#computer-parts">Computer Parts</a>
+                <a class="active" href="pages/build.html" aria-current="page">Build Your Own PC</a>
+                <a class="" href="pages/products.html">Products</a>
+              </div>
+            </details>
+            <details class="nav-group">
+              <summary>Explore</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/articles.html">Articles</a>
+                <a class="" href="pages/components.html">Interactive Guide</a>
+                <a class="" href="pages/about.html">About</a>
+                <a class="" href="pages/downloads.html">Downloads</a>
+              </div>
+            </details>
+            <details class="nav-group">
+              <summary>Support</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/contact.html">Contact</a>
+                <a class="" href="pages/tracking.html">Track Order</a>
+                <a class="" href="pages/profile.html">My account</a>
+                <a class="" href="pages/login.html">Login</a>
+              </div>
+            </details>
+            <details class="nav-group nav-account">
+              <summary title="Your account"><img src="images/icons/user-round.svg" alt="" width="20" height="20"><span class="nav-account-greeting">My account</span></summary>
+              <div class="nav-submenu">
+                <a href="pages/profile.html">Manage my account</a>
+                <a href="pages/profile.html#orders">My purchases</a>
+                <a href="pages/profile.html#addresses">Address book</a>
+                <a href="pages/profile.html#tracking">Delivery tracking</a>
+                <a href="pages/profile.html#favorites">My favorites</a>
+                <a href="pages/profile.html#refunds">Returns &amp; refunds</a>
+                <button class="nav-account-signout" type="button" hidden="" disabled="">Sign out</button>
+              </div>
+            </details>
+          </div>
+          <a href="pages/search.html" class="site-search-toggle" id="siteSearchToggle" title="Search the website" aria-label="Search the website"><img class="site-search-icon" src="images/icons/search.svg" width="22" height="22" alt=""></a>
+        </nav>
+        <div class="store-toolbar" aria-label="Store controls">
+          <a class="cart-pill" href="pages/cart.html" aria-label="Cart, 0 items" title="View cart"><img class="cart-icon" src="images/icons/shopping-cart.svg" alt="" width="24" height="24"><span id="cartCount" aria-live="polite">0</span></a>
+          <label class="store-control" for="languageSelect">
+        <span>Language</span>
+        <select id="languageSelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <optgroup label="Languages">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="zh">简体中文</option>
+          </optgroup>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="languageSelectTrigger" aria-label="Language" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageSelectOptions" disabled=""><b>English</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="languageSelectOptions" role="listbox" aria-label="Language" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>EN</b><strong translate="no">English</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JA</b><strong translate="no">日本語</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ES</b><strong translate="no">Español</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>FR</b><strong translate="no">Français</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ZH</b><strong translate="no">简体中文</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <label class="store-control" for="currencySelect">
+        <span>Currency</span>
+        <select id="currencySelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <option value="PHP">PHP (P)</option>
+          <option value="USD">USD ($)</option>
+          <option value="JPY">JPY (¥)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="CNY">CNY (CN¥)</option>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="currencySelectTrigger" aria-label="Currency" aria-haspopup="listbox" aria-expanded="false" aria-controls="currencySelectOptions" disabled=""><b>PHP (P)</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="currencySelectOptions" role="listbox" aria-label="Currency" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>PHP</b><strong translate="no">PHP (P)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>USD</b><strong translate="no">USD ($)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JPY</b><strong translate="no">JPY (¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>EUR</b><strong translate="no">EUR (€)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>CNY</b><strong translate="no">CNY (CN¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <a class="wishlist-pill" href="pages/wishlist.html" aria-label="Wishlist"><span class="wishlist-link-label">Wishlist</span> <span id="wishlistCount">0</span></a>
+          <p class="control-status" id="controlStatus" role="status"></p>
+        </div>
+      </div>
+    </div>
+    <!--  Site header and navigation. Links point to pages inside this standalone edition.  -->
+    <header class="site-header" id="top">
+      <img src="images/showcase/home-banner.jpg" width="900" height="260" alt="Bits and Bytes Banner">
+      <hgroup>
+
+
+      <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1>
+      <h2>Build Your Own PC</h2>
+
+    </hgroup>
+    </header>
+    <!--  Page content. Product cards, articles and other catalog data below are written directly into this HTML.  -->
+    <main>
+      <p class="static-preview-note">Frontend preview. Live account, ordering and form features are available in the original storefront.</p>
+      <section class="page-hero">
+        <p class="eyebrow">Special feature</p>
+        <h1>Build Your Own PC</h1>
+        <p>
+        Pick parts for gaming, office work, or content creation. The page checks important
+        compatibility details while you build.
+      </p>
+      </section>
+      <section class="build-starter" aria-labelledby="buildStarterTitle">
+        <div>
+          <p class="eyebrow">Guided PC builder</p>
+          <h2 id="buildStarterTitle">Start with a purpose, then fine-tune every part.</h2>
+          <p>Choose a ready direction to fill a compatible starting build. You can still replace any part below.</p>
+        </div>
+        <div class="build-presets" aria-label="Build presets">
+          <button type="button" class="build-preset" data-build-preset="student" disabled="">Study and Office</button>
+          <button type="button" class="build-preset" data-build-preset="gaming" disabled="">RGB Gaming</button>
+          <button type="button" class="build-preset" data-build-preset="creator" disabled="">Creator and Editing</button>
+        </div>
+      </section>
+      <nav class="build-part-nav" aria-label="PC build sections">
+        <button type="button" data-builder-part="cooling" disabled="">Cooling</button>
+        <button type="button" data-builder-part="cpu" disabled="">Processor</button>
+        <button type="button" data-builder-part="gpu" disabled="">Graphics</button>
+        <button type="button" data-builder-part="ram" disabled="">Memory</button>
+        <button type="button" data-builder-part="motherboard" disabled="">Motherboard</button>
+        <button type="button" data-builder-part="storage" disabled="">Storage</button>
+        <button type="button" data-builder-part="psu" disabled="">Power</button>
+        <button type="button" data-builder-part="case" disabled="">Case</button>
+        <button type="button" data-builder-part="monitor" disabled="">Monitor</button>
+        <button type="button" data-builder-part="keyboard" disabled="">Keyboard</button>
+        <button type="button" data-builder-part="accessories" disabled="">Accessories</button>
+      </nav>
+      <section class="builder-layout">
+        <form class="builder-card" id="pcBuilder">
+          <div class="builder-heading">
+            <div>
+              <p class="eyebrow">Parts catalog</p>
+              <h2>Choose parts</h2>
+              <p class="builder-help">Choose a component to see its photo, price, and key details. Click the picture for a closer look.</p>
+            </div>
+            <label class="builder-search" for="buildSearch">
+            <span>Search parts</span>
+            <input id="buildSearch" type="search" placeholder="Search CPU, GPU, RAM..." disabled="">
+          </label>
+          </div>
+          <div class="builder-fields" id="builderFields">
+            <div class="builder-choice" data-builder-choice="cooling">
+              <label for="cooling">Cooling</label>
+              <select id="cooling" name="cooling" disabled="">
+        <option value="">Choose Cooling</option>
+
+          <option value="0">AirFlow 120 Tower Cooler - ₱1,995</option>
+
+          <option value="1">FrostLoop 240 RGB Liquid Cooler - ₱5,495</option>
+
+      </select>
+              <div class="builder-part-preview" hidden="">
+                <button class="builder-part-photo" type="button" data-preview-part="cooling" disabled=""><img alt="" width="120" height="120"><span>View picture ↗</span></button>
+                <div>
+                  <strong class="builder-part-name"></strong>
+                  <span class="builder-part-price"></span>
+                  <p class="builder-part-details"></p>
+                  <p class="builder-part-caption"></p>
+                </div>
+              </div>
+            </div>
+            <div class="builder-choice" data-builder-choice="cpu">
+              <label for="cpu">Processor</label>
+              <select id="cpu" name="cpu" disabled="">
+        <option value="">Choose Processor</option>
+
+          <option value="0">Intel Core i5-14600K - ₱18,995</option>
+
+          <option value="1">Intel Core i7-14700K - ₱24,995</option>
+
+          <option value="2">AMD Ryzen 5 7600 - ₱12,995</option>
+
+          <option value="3">AMD Ryzen 9 7900X - ₱26,995</option>
+
+      </select>
+              <div class="builder-part-preview" hidden="">
+                <button class="builder-part-photo" type="button" data-preview-part="cpu" disabled=""><img alt="" width="120" height="120"><span>View picture ↗</span></button>
+                <div>
+                  <strong class="builder-part-name"></strong>
+                  <span class="builder-part-price"></span>
+                  <p class="builder-part-details"></p>
+                  <p class="builder-part-caption"></p>
+                </div>
+              </div>
+            </div>
+            <div class="builder-choice" data-builder-choice="motherboard">
+              <label for="motherboard">Motherboard</label>
+              <select id="motherboard" name="motherboard" disabled="">
+        <option value="">Choose Motherboard</option>
+
+          <option value="0">MSI B760 Gaming Plus WiFi - ₱10,495</option>
+
+          <option value="1">ASUS Prime Z790-P - ₱13,995</option>
+
+          <option value="2">Gigabyte B650 Eagle AX - ₱11,995</option>
+
+          <option value="3">ASRock A620M Pro RS - ₱6,995</option>
+
+      </select>
+              <div class="builder-part-preview" hidden="">
+                <button class="builder-part-photo" type="button" data-preview-part="motherboard" disabled=""><img alt="" width="120" height="120"><span>View picture ↗</span></button>
+                <div>
+                  <strong class="builder-part-name"></strong>
+                  <span class="builder-part-price"></span>
+                  <p class="builder-part-details"></p>
+                  <p class="builder-part-caption"></p>
+                </div>
+              </div>
+            </div>
+            <div class="builder-choice" data-builder-choice="gpu">
+              <label for="gpu">Graphics Card</label>
+              <select id="gpu" name="gpu" disabled="">
+        <option value="">Choose Graphics Card</option>
+
+          <option value="0">No dedicated GPU - ₱0</option>
+
+          <option value="1">NVIDIA RTX 4060 8GB - ₱19,995</option>
+
+          <option value="2">NVIDIA RTX 4070 Super - ₱39,995</option>
+
+          <option value="3">AMD Radeon RX 7800 XT - ₱32,995</option>
+
+      </select>
+              <div class="builder-part-preview" hidden="">
+                <button class="builder-part-photo" type="button" data-preview-part="gpu" disabled=""><img alt="" width="120" height="120"><span>View picture ↗</span></button>
+                <div>
+                  <strong class="builder-part-name"></strong>
+                  <span class="builder-part-price"></span>
+                  <p class="builder-part-details"></p>
+                  <p class="builder-part-caption"></p>
+                </div>
+              </div>
+            </div>
+            <div class="builder-choice" data-builder-choice="ram">
+              <label for="ram">Memory</label>
+              <select id="ram" name="ram" disabled="">
+        <option value="">Choose Memory</option>
+
+          <option value="0">16GB DDR5 5600 - ₱4,295</option>
+
+          <option value="1">32GB DDR5 6000 - ₱6,995</option>
+
+          <option value="2">64GB DDR5 6000 - ₱12,995</option>
+
+          <option value="3">8GB DDR5 5600 - ₱1,995</option>
+
+      </select>
+              <div class="builder-part-preview" hidden="">
+                <button class="builder-part-photo" type="button" data-preview-part="ram" disabled=""><img alt="" width="120" height="120"><span>View picture ↗</span></button>
+                <div>
+                  <strong class="builder-part-name"></strong>
+                  <span class="builder-part-price"></span>
+                  <p class="builder-part-details"></p>
+                  <p class="builder-part-caption"></p>
+                </div>
+              </div>
+            </div>
+            <div class="builder-choice" data-builder-choice="storage">
+              <label for="storage">Storage</label>
+              <select id="storage" name="storage" disabled="">
+        <option value="">Choose Storage</option>
+
+          <option value="0">500GB NVMe SSD - ₱2,295</option>
+
+          <option value="1">1TB NVMe SSD - ₱3,495</option>
+
+          <option value="2">2TB NVMe SSD - ₱5,995</option>
+
+          <option value="3">256GB NVMe SSD - ₱1,695</option>
+
+          <option value="4">512GB NVMe SSD - ₱2,495</option>
+
+          <option value="5">4TB NVMe SSD - ₱10,995</option>
+
+      </select>
+              <div class="builder-part-preview" hidden="">
+                <button class="builder-part-photo" type="button" data-preview-part="storage" disabled=""><img alt="" width="120" height="120"><span>View picture ↗</span></button>
+                <div>
+                  <strong class="builder-part-name"></strong>
+                  <span class="builder-part-price"></span>
+                  <p class="builder-part-details"></p>
+                  <p class="builder-part-caption"></p>
+                </div>
+              </div>
+            </div>
+            <div class="builder-choice" data-builder-choice="psu">
+              <label for="psu">Power Supply</label>
+              <select id="psu" name="psu" disabled="">
+        <option value="">Choose Power Supply</option>
+
+          <option value="0">550W Bronze PSU - ₱3,295</option>
+
+          <option value="1">650W Gold PSU - ₱4,995</option>
+
+          <option value="2">850W Gold PSU - ₱7,495</option>
+
+          <option value="3">750W Gold PSU - ₱6,495</option>
+
+          <option value="4">1000W Gold PSU - ₱9,995</option>
+
+      </select>
+              <div class="builder-part-preview" hidden="">
+                <button class="builder-part-photo" type="button" data-preview-part="psu" disabled=""><img alt="" width="120" height="120"><span>View picture ↗</span></button>
+                <div>
+                  <strong class="builder-part-name"></strong>
+                  <span class="builder-part-price"></span>
+                  <p class="builder-part-details"></p>
+                  <p class="builder-part-caption"></p>
+                </div>
+              </div>
+            </div>
+            <div class="builder-choice" data-builder-choice="case">
+              <label for="case">Case</label>
+              <select id="case" name="case" disabled="">
+        <option value="">Choose Case</option>
+
+          <option value="0">AirBox ATX Case - ₱4,295</option>
+
+          <option value="1">MiniFlow Micro-ATX Case - ₱3,795</option>
+
+          <option value="2">Creator Glass ATX Case - ₱6,995</option>
+
+      </select>
+              <div class="builder-part-preview" hidden="">
+                <button class="builder-part-photo" type="button" data-preview-part="case" disabled=""><img alt="" width="120" height="120"><span>View picture ↗</span></button>
+                <div>
+                  <strong class="builder-part-name"></strong>
+                  <span class="builder-part-price"></span>
+                  <p class="builder-part-details"></p>
+                  <p class="builder-part-caption"></p>
+                </div>
+              </div>
+            </div>
+            <div class="builder-choice" data-builder-choice="monitor">
+              <label for="monitor">Monitor</label>
+              <select id="monitor" name="monitor" disabled="">
+        <option value="">Choose Monitor</option>
+
+          <option value="0">24-inch 1080p Office Monitor - ₱6,995</option>
+
+          <option value="1">27-inch 1440p 165Hz Gaming Monitor - ₱15,995</option>
+
+          <option value="2">32-inch 4K Creator Monitor - ₱29,995</option>
+
+      </select>
+              <div class="builder-part-preview" hidden="">
+                <button class="builder-part-photo" type="button" data-preview-part="monitor" disabled=""><img alt="" width="120" height="120"><span>View picture ↗</span></button>
+                <div>
+                  <strong class="builder-part-name"></strong>
+                  <span class="builder-part-price"></span>
+                  <p class="builder-part-details"></p>
+                  <p class="builder-part-caption"></p>
+                </div>
+              </div>
+            </div>
+            <div class="builder-choice" data-builder-choice="keyboard">
+              <label for="keyboard">Keyboard</label>
+              <select id="keyboard" name="keyboard" disabled="">
+        <option value="">Choose Keyboard</option>
+
+          <option value="0">Basic Office Keyboard - ₱1,295</option>
+
+          <option value="1">Mechanical RGB Keyboard - ₱4,495</option>
+
+          <option value="2">Wireless Creator Keyboard - ₱5,995</option>
+
+      </select>
+              <div class="builder-part-preview" hidden="">
+                <button class="builder-part-photo" type="button" data-preview-part="keyboard" disabled=""><img alt="" width="120" height="120"><span>View picture ↗</span></button>
+                <div>
+                  <strong class="builder-part-name"></strong>
+                  <span class="builder-part-price"></span>
+                  <p class="builder-part-details"></p>
+                  <p class="builder-part-caption"></p>
+                </div>
+              </div>
+            </div>
+            <div class="builder-choice" data-builder-choice="accessories">
+              <label for="accessories">Extra Accessory</label>
+              <select id="accessories" name="accessories" disabled="">
+        <option value="">Choose Extra Accessory</option>
+
+          <option value="0">WiFi and Bluetooth Adapter - ₱1,295</option>
+
+          <option value="1">Studio Webcam - ₱3,995</option>
+
+          <option value="2">Gaming Headset - ₱4,995</option>
+
+      </select>
+              <div class="builder-part-preview" hidden="">
+                <button class="builder-part-photo" type="button" data-preview-part="accessories" disabled=""><img alt="" width="120" height="120"><span>View picture ↗</span></button>
+                <div>
+                  <strong class="builder-part-name"></strong>
+                  <span class="builder-part-price"></span>
+                  <p class="builder-part-details"></p>
+                  <p class="builder-part-caption"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <aside class="build-summary">
+          <h2>Your build</h2>
+          <div id="compatibilityBox" class="compatibility-box good">
+            Choose parts to begin.
+          </div>
+          <ul id="buildList" class="build-list">
+            <li>
+              No parts selected yet.
+            </li>
+          </ul>
+          <div class="total-row">
+            <span>Total</span>
+            <strong id="buildTotal">₱0</strong>
+          </div>
+          <button class="button primary full-width" id="addBuildToCart" type="button" disabled="">Add Build to Cart</button>
+        </aside>
+      </section>
+      <section class="build-confidence" aria-label="Build service details">
+        <article>
+          <strong>Compatibility review</strong>
+          <span>Socket, memory, case, and estimated power checks.</span>
+        </article>
+        <article>
+          <strong>Clear parts list</strong>
+          <span>Your selected components and total stay visible while you build.</span>
+        </article>
+        <article>
+          <strong>Ready for checkout</strong>
+          <span>Add a complete build directly to the same cart as store products.</span>
+        </article>
+      </section>
+    </main>
+    <!--  Shared footer. These links work without a server or JavaScript.  -->
+    <footer class="site-footer" data-store-footer="ready" id="storeFooter">
+      <div class="footer-main">
+        <a class="footer-brand" href="index.html" aria-label="Bits and Bytes home">
+          <img class="footer-brand-mark" src="images/branding/bitsandbyteslogo.png" alt="Bits and Bytes logo">
+          <span><strong>Bits and Bytes</strong><small>PC and Laptop Store</small></span>
+        </a>
+        <section class="footer-location">
+          <h2>Bits and Bytes Manila</h2>
+          <p>Computer and laptop support desk<br>Quezon City, Metro Manila<br><a href="pages/contact.html"><span class="footer-link-label">Contact customer service</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Bits and Bytes Cebu</h2>
+          <p>PC build and pickup support<br>Cebu City, Cebu<br><a href="pages/contact.html"><span class="footer-link-label">Ask about availability</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Online Store Support</h2>
+          <p>Delivery, product advice, and checkout help<br>Philippines-wide service<br><a href="pages/contact.html"><span class="footer-link-label">Send an inquiry</span></a></p>
+        </section>
+      </div>
+      <div class="footer-bottom">
+        <nav aria-label="Footer navigation">
+          <a href="pages/about.html"><span class="footer-link-label">About Us</span></a>
+          <a href="pages/articles.html"><span class="footer-link-label">The Journal</span></a>
+          <a href="pages/tracking.html"><span class="footer-link-label">Track Order</span></a>
+          <a href="pages/profile.html"><span class="footer-link-label">My account</span></a>
+          <a href="pages/warranty.html"><span class="footer-link-label">Warranty Info</span></a>
+          <a href="pages/downloads.html"><span class="footer-link-label">Downloads</span></a>
+          <a href="pages/contact.html"><span class="footer-link-label">Contact Us</span></a>
+          <a data-back-to-top="" href="pages/build.html#top"><span class="footer-link-label">Back to top ↑</span></a>
+        </nav>
+        <div class="footer-social">
+          <span>Follow us on</span>
+          <div class="social-links" aria-label="Follow Bits and Bytes on social media">
+            <a class="social-icon facebook" href="https://www.facebook.com/johncarlo.herrera.58" target="_blank" rel="noopener noreferrer" aria-label="Facebook: John Carlo Herrera" title="Facebook"><img src="images/social/facebook.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon instagram" href="https://www.instagram.com/jayzzzz0723/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: jayzzzz0723" title="Instagram"><img src="images/social/instagram.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon x-twitter" href="https://x.com/Jayzee20202" target="_blank" rel="noopener noreferrer" aria-label="X: Jayzee20202" title="X"><img src="images/social/x.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon youtube" href="https://www.youtube.com/@johncarloherrera8540" target="_blank" rel="noopener noreferrer" aria-label="YouTube: johncarloherrera8540" title="YouTube"><img src="images/social/youtube.svg" alt="" width="24" height="24"></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>© 2026 Herrera Corporation. All rights reserved.</p>
+        <nav aria-label="Legal information">
+          <a href="pages/terms.html"><span class="footer-link-label">Terms of Use</span></a>
+          <a href="pages/privacy.html"><span class="footer-link-label">Privacy Policy</span></a>
+        </nav>
+      </div>
+    </footer>
+    <aside class="support-chat" id="supportChat" aria-label="Customer service chat">
+      <button class="store-back-to-top" id="storeBackToTop" type="button" aria-label="Back to top" title="Back to top" hidden="" disabled="">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 15 7-7 7 7"></path></svg>
+      </button>
+      <a href="pages/contact.html" class="support-chat-launcher" id="supportChatLauncher" title="Chat with us" aria-label="Chat with us">
+        <img class="chat-robot-normal" src="images/branding/support-robot-hover.png" width="64" height="64" alt="" aria-hidden="true">
+        <img class="chat-robot-hover" src="images/branding/support-robot-normal.png" width="64" height="64" alt="" aria-hidden="true">
+        <span class="chat-notification-dot" aria-hidden="true"></span>
+      </a>
+    </aside>
+  </body>
+</html>

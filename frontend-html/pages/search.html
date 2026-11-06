@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<!-- Bits & Bytes, HTML and CSS edition. Open this folder’s index.html to start. -->
+<html lang="en">
+  <head>
+    <base href="../">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search | Bits and Bytes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/storefront.css?v=20261031-catalog-v23">
+    <link rel="stylesheet" href="css/site-experience.css?v=20261026-cutouts-v6">
+    <!-- Shared storefront styles above retain the original layout. Static controls below use native HTML and CSS. -->
+    <link rel="stylesheet" href="css/static-edition.css">
+  </head>
+  <body class="utility-page search-results-page store-gradient" style="--journey: 0;">
+    <div class="site-nav-space">
+      <div class="sticky-site-nav" aria-label="Sticky site navigation">
+        <nav class="main-nav foldable-nav" aria-label="Main navigation">
+          <a class="mobile-store-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+          <!--  The mobile menu opens when its native checkbox is checked.  -->
+          <input id="static-nav-toggle" class="sr-only" type="checkbox" aria-label="Main menu" aria-controls="primaryNavMenu">
+          <label class="nav-toggle" for="static-nav-toggle">Menu</label>
+          <div class="nav-menu" id="primaryNavMenu">
+            <a class="nav-brand" href="index.html" aria-label="Bits and Bytes home"><img src="images/branding/bitsandbyteslogo.png" alt=""><span>Bits &amp; Bytes</span></a>
+            <a class="nav-home" href="index.html">Home</a>
+            <details class="nav-group">
+              <summary>Shop Now</summary>
+              <div class="nav-submenu shop-submenu">
+                <a href="pages/products.html#computer-products">Computer Products</a>
+                <a href="pages/products.html#laptops">Laptops</a>
+                <a href="pages/products.html#accessories">Accessories</a>
+                <a href="pages/products.html#computer-parts">Computer Parts</a>
+                <a class="" href="pages/build.html">Build Your Own PC</a>
+                <a class="" href="pages/products.html">Products</a>
+              </div>
+            </details>
+            <details class="nav-group">
+              <summary>Explore</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/articles.html">Articles</a>
+                <a class="" href="pages/components.html">Interactive Guide</a>
+                <a class="" href="pages/about.html">About</a>
+                <a class="" href="pages/downloads.html">Downloads</a>
+              </div>
+            </details>
+            <details class="nav-group">
+              <summary>Support</summary>
+              <div class="nav-submenu">
+                <a class="" href="pages/contact.html">Contact</a>
+                <a class="" href="pages/tracking.html">Track Order</a>
+                <a class="" href="pages/profile.html">My account</a>
+                <a class="" href="pages/login.html">Login</a>
+              </div>
+            </details>
+            <details class="nav-group nav-account">
+              <summary title="Your account"><img src="images/icons/user-round.svg" alt="" width="20" height="20"><span class="nav-account-greeting">My account</span></summary>
+              <div class="nav-submenu">
+                <a href="pages/profile.html">Manage my account</a>
+                <a href="pages/profile.html#orders">My purchases</a>
+                <a href="pages/profile.html#addresses">Address book</a>
+                <a href="pages/profile.html#tracking">Delivery tracking</a>
+                <a href="pages/profile.html#favorites">My favorites</a>
+                <a href="pages/profile.html#refunds">Returns &amp; refunds</a>
+                <button class="nav-account-signout" type="button" hidden="" disabled="">Sign out</button>
+              </div>
+            </details>
+          </div>
+          <a href="pages/search.html" class="site-search-toggle" id="siteSearchToggle" title="Search the website" aria-label="Search the website"><img class="site-search-icon" src="images/icons/search.svg" width="22" height="22" alt=""></a>
+        </nav>
+        <div class="store-toolbar" aria-label="Store controls">
+          <a class="cart-pill" href="pages/cart.html" aria-label="Cart, 0 items" title="View cart"><img class="cart-icon" src="images/icons/shopping-cart.svg" alt="" width="24" height="24"><span id="cartCount" aria-live="polite">0</span></a>
+          <label class="store-control" for="languageSelect">
+        <span>Language</span>
+        <select id="languageSelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <optgroup label="Languages">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="zh">简体中文</option>
+          </optgroup>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="languageSelectTrigger" aria-label="Language" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageSelectOptions" disabled=""><b>English</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="languageSelectOptions" role="listbox" aria-label="Language" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>EN</b><strong translate="no">English</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JA</b><strong translate="no">日本語</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ES</b><strong translate="no">Español</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>FR</b><strong translate="no">Français</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>ZH</b><strong translate="no">简体中文</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <label class="store-control" for="currencySelect">
+        <span>Currency</span>
+        <select id="currencySelect" data-enhanced="true" class="enhanced-native-select" tabindex="-1" aria-hidden="true">
+          <option value="PHP">PHP (P)</option>
+          <option value="USD">USD ($)</option>
+          <option value="JPY">JPY (¥)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="CNY">CNY (CN¥)</option>
+        </select><div class="store-picker"><button class="store-picker-trigger" type="button" id="currencySelectTrigger" aria-label="Currency" aria-haspopup="listbox" aria-expanded="false" aria-controls="currencySelectOptions" disabled=""><b>PHP (P)</b><img src="images/icons/chevron-right.svg" alt="" height="14" width="14"></button><div class="store-picker-options" id="currencySelectOptions" role="listbox" aria-label="Currency" hidden=""><button type="button" role="option" aria-selected="true" tabindex="-1" disabled=""><b>PHP</b><strong translate="no">PHP (P)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>USD</b><strong translate="no">USD ($)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>JPY</b><strong translate="no">JPY (¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>EUR</b><strong translate="no">EUR (€)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button><button type="button" role="option" aria-selected="false" tabindex="-1" disabled=""><b>CNY</b><strong translate="no">CNY (CN¥)</strong><img src="images/icons/circle-check.svg" alt="" height="16" width="16"></button></div></div>
+      </label>
+          <a class="wishlist-pill" href="pages/wishlist.html" aria-label="Wishlist"><span class="wishlist-link-label">Wishlist</span> <span id="wishlistCount">0</span></a>
+          <p class="control-status" id="controlStatus" role="status"></p>
+        </div>
+      </div>
+    </div>
+    <!--  Site header and navigation. Links point to pages inside this standalone edition.  -->
+    <header class="site-header" id="top">
+      <hgroup>
+
+
+    <h1><a class="logo" href="index.html">Bits and <span>Bytes</span></a></h1><h2>Search</h2>
+
+  </hgroup>
+    </header>
+    <!--  Page content. Product cards, articles and other catalog data below are written directly into this HTML.  -->
+    <main>
+      <section class="search-page-content">
+        <p class="eyebrow">Bits &amp; Bytes</p>
+        <h1>Find your next upgrade</h1>
+        <p id="resultsCount" role="status">Browse the directory below or use your browser’s Find command to search this page.</p>
+        <div id="searchPageResults">
+          <p class="search-empty">No results yet. Try fewer words, a brand name, RAM, storage or delivery.</p>
+          <section>
+            <h2>Products</h2>
+            <a class="site-search-result" href="pages/item-lap-hp-victus-15.html"><img src="images/products/hp-victus-15-fa2007na.png" alt="" width="64" height="64" loading="lazy"><span><strong>HP Victus 15-fa2007na — Mica Silver</strong><span>Intel Core 7 240H, 24GB RAM, 1TB SSD, RTX 5060 Laptop 8GB, 15.6-inch FHD 144Hz, Mica Silver, UK keyboard</span></span></a>
+            <a class="site-search-result" href="pages/item-pc-bb-foundation.html"><img src="images/products/corsair-4000d-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>Bits &amp; Bytes Foundation Desktop - Black</strong><span>Entry-level desktop, Ryzen 5 7600, integrated graphics, 16GB DDR5, 1TB NVMe SSD, AM5 motherboard, 550W PSU, Corsair 4000D Airflow case; monitor and peripherals excluded, Color: Black</span></span></a>
+            <a class="site-search-result" href="pages/item-pc-bb-core.html"><img src="images/products/corsair-4000d-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>Bits &amp; Bytes Core Desktop - Black</strong><span>Mid-range desktop, Core i5-14600K, RTX 4060 8GB, 32GB DDR5, 1TB NVMe SSD, LGA1700 motherboard, 650W PSU, Corsair 4000D Airflow case; monitor and peripherals excluded, Color: Black</span></span></a>
+            <a class="site-search-result" href="pages/item-pc-bb-apex.html"><img src="images/products/corsair-4000d-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>Bits &amp; Bytes Apex Desktop - Black</strong><span>High-end desktop, Core i7-14700K, RTX 4070 Super, 64GB DDR5, 2TB NVMe SSD, LGA1700 motherboard, 850W PSU, Corsair 4000D Airflow case; monitor and peripherals excluded, Color: Black</span></span></a>
+            <a class="site-search-result" href="pages/item-monitor-msi-g244f-e2.html"><img src="images/products/new-arrivals/monitor-msi-g244f-e2-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI G244F E2</strong><span>23.8-inch Rapid IPS, 1920 x 1080 Full HD, 180Hz, 1ms GtG, HDMI and DisplayPort</span></span></a>
+            <a class="site-search-result" href="pages/item-part-msi-a650bn.html"><img src="images/products/new-arrivals/part-msi-a650bn-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI MAG A650BN 650W</strong><span>650W ATX power supply, 80 PLUS Bronze, 120mm fan, fixed cables</span></span></a>
+            <a class="site-search-result" href="pages/item-accessory-msi-gh20.html"><img src="images/products/new-arrivals/accessory-msi-gh20-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI IMMERSE GH20</strong><span>Wired 3.5mm headset, 40mm drivers, adjustable microphone, inline audio controls, 245g</span></span></a>
+            <a class="site-search-result" href="pages/item-accessory-msi-gm11.html"><img src="images/products/new-arrivals/accessory-msi-gm11-3.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI CLUTCH GM11</strong><span>USB wired optical mouse, PixArt PMW-3325, up to 5000 DPI, six programmable buttons, RGB</span></span></a>
+            <a class="site-search-result" href="pages/item-part-msi-m450-1tb.html"><img src="images/products/new-arrivals/part-msi-m450-1tb-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI SPATIUM M450 1TB</strong><span>1TB M.2 2280 NVMe SSD, PCIe 4.0 x4, up to 3600MB/s read and 3000MB/s write</span></span></a>
+            <a class="site-search-result" href="pages/item-part-msi-m100r-white.html"><img src="images/products/new-arrivals/part-msi-m100r-white-3.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI MAG FORGE M100R White</strong><span>White Micro-ATX tower, Micro-ATX / Mini-ITX support, four 120mm ARGB fans, 300mm GPU clearance</span></span></a>
+            <a class="site-search-result" href="pages/item-part-msi-h610m-g.html"><img src="images/products/new-arrivals/part-msi-h610m-g-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI PRO H610M-G DDR4</strong><span>Intel H610, LGA1700, Micro-ATX, two DDR4 slots, M.2 storage, Gigabit LAN</span></span></a>
+            <a class="site-search-result" href="pages/item-accessory-msi-gk30.html"><img src="images/products/new-arrivals/accessory-msi-gk30-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI VIGOR GK30</strong><span>Full-size USB keyboard, plunger switches, RGB lighting, 6-key rollover, 20-key anti-ghosting</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-msi-thin-15-b13ve.html"><img src="images/products/new-arrivals/lap-msi-thin-15-b13ve-2.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI Thin 15 B13VE</strong><span>13th Gen Intel Core platform, GeForce RTX 4050 Laptop GPU 6GB, DDR4 memory support, 15.6-inch Full HD 144Hz</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-msi-modern-15-b13m.html"><img src="images/products/new-arrivals/lap-msi-modern-15-b13m-2.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI Modern 15 B13M - Star Blue</strong><span>13th Gen Intel Core platform, onboard DDR4 memory support, 15.6-inch Full HD IPS-level display, Star Blue, Color: Star Blue</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-msi-modern-14-c13m.html"><img src="images/products/msi-modern-14-c13m-5.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI Modern 14 C13M - Beige Rose</strong><span>Intel Core i5-1335U, 16GB DDR4 memory, 512GB NVMe SSD, 14-inch Full HD display, Color: Beige Rose</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-msi-cyborg-15-a13v.html"><img src="images/products/msi-cyborg-15-a13v-2.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI Cyborg 15 A13VF</strong><span>Intel Core i7-13620H, GeForce RTX 4060 8GB, 16GB DDR5 RAM, 512GB NVMe SSD, 15.6-inch Full HD 144Hz display</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-dell-16-plus.html"><img src="images/products/dell-16-plus-1.png" alt="" width="64" height="64" loading="lazy"><span><strong>Dell 16 Plus DB16250</strong><span>Intel Core Ultra 7 256V, Intel Arc graphics, 16GB LPDDR5X RAM, 1TB SSD, 16-inch 2560 x 1600 display, Ice Blue</span></span></a>
+            <a class="site-search-result" href="pages/item-pc-msi-codex-6-14.html"><img src="images/products/msi-codex-6-14-3.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI MAG Codex 6 14th</strong><span>Intel Core i5-14400F, GeForce RTX 4060 8GB, 16GB DDR5 RAM, 1TB NVMe SSD, air-cooled tower</span></span></a>
+            <a class="site-search-result" href="pages/item-monitor-msi-274qrf-qd-e2.html"><img src="images/products/msi-mag-274qrf-qd-e2-3.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI MAG 274QRF QD E2</strong><span>27-inch Rapid IPS Quantum Dot display, 2560 x 1440, 180Hz, 1ms GtG, adjustable stand</span></span></a>
+            <a class="site-search-result" href="pages/item-part-msi-pro-b650-s.html"><img src="images/products/msi-pro-b650-s-2.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI PRO B650-S WIFI</strong><span>AMD B650 chipset, AM5 socket, ATX, DDR5 memory slots, Wi-Fi 6E, M.2 NVMe storage support</span></span></a>
+            <a class="site-search-result" href="pages/item-part-msi-4060-ti-gaming-x.html"><img src="images/products/msi-4060-ti-gaming-x-2.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI GeForce RTX 4060 Ti GAMING X 8G</strong><span>8GB GDDR6 graphics memory, PCIe 4.0, TWIN FROZR 9 dual-fan cooler, HDMI and DisplayPort outputs</span></span></a>
+            <a class="site-search-result" href="pages/item-part-corsair-3000d.html"><img src="images/products/corsair-3000d-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>Corsair 3000D AIRFLOW - Black</strong><span>ATX mid-tower case, mesh front panel, tempered-glass side panel, Color: Black</span></span></a>
+            <a class="site-search-result" href="pages/item-accessory-corsair-k65-plus.html"><img src="images/products/corsair-k65-plus-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>Corsair K65 PLUS WIRELESS</strong><span>75% RGB mechanical keyboard, US layout, pre-lubricated switches, wireless and USB connectivity</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-dell-latitude-5440.html"><img src="images/products/dell-latitude-5440-1.png" alt="" width="64" height="64" loading="lazy"><span><strong>Dell Latitude 5440</strong><span>Intel Core i5-1345U, Intel integrated graphics, 16GB RAM, 512GB SSD, 14-inch Full HD display</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-dell-g15-5530.html"><img src="images/products/dell-g15-5530-1.png" alt="" width="64" height="64" loading="lazy"><span><strong>Dell G15 5530 Gaming Laptop</strong><span>Intel Core i7-13650HX, RTX 4060 8GB, 16GB RAM, 512GB SSD, 15.6-inch Full HD 165Hz display</span></span></a>
+            <a class="site-search-result" href="pages/item-pc-hp-pro-mini-400-g9.html"><img src="images/products/hp-pro-mini-400-g9.png" alt="" width="64" height="64" loading="lazy"><span><strong>HP Pro Mini 400 G9</strong><span>Intel Core i5-13500T, Intel UHD graphics, 16GB DDR4 RAM, 512GB SSD, compact mini desktop</span></span></a>
+            <a class="site-search-result" href="pages/item-part-corsair-4000d.html"><img src="images/products/corsair-4000d-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>Corsair 4000D AIRFLOW - Black</strong><span>ATX mid-tower case, tempered-glass side panel, 2 included 120mm fans, up to 360mm GPU clearance, Color: Black</span></span></a>
+            <a class="site-search-result" href="pages/item-part-corsair-ml120-red.html"><img src="images/products/corsair-ml120-red-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>Corsair ML120 LED ELITE Red</strong><span>Single 120mm PWM case fan, red LEDs, magnetic-levitation bearing, 4-pin PWM connector</span></span></a>
+            <a class="site-search-result" href="pages/item-part-corsair-vengeance-32.html"><img src="images/products/corsair-vengeance-32gb-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>Corsair VENGEANCE 32GB DDR5-6000</strong><span>32GB kit (2 x 16GB), DDR5-6000 CL36, Intel XMP 3.0, CMK32GX5M2B6000C36</span></span></a>
+            <a class="site-search-result" href="pages/item-part-msi-b760-gaming-plus.html"><img src="images/products/msi-b760-gaming-plus-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI B760 GAMING PLUS WIFI</strong><span>Intel B760 chipset, LGA1700, ATX, DDR5 DIMM slots, Wi-Fi 6E, PCIe 4.0 M.2</span></span></a>
+            <a class="site-search-result" href="pages/item-part-msi-4070-super.html"><img src="images/products/msi-4070-super-1.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI GeForce RTX 4070 SUPER VENTUS 2X OC</strong><span>12GB GDDR6X graphics memory, dual-fan cooling, PCIe 4.0, HDMI and DisplayPort outputs</span></span></a>
+            <a class="site-search-result" href="pages/item-part-samsung-990-pro-1tb.html"><img src="images/products/samsung-990-pro-1tb.png" alt="" width="64" height="64" loading="lazy"><span><strong>Samsung 990 PRO 1TB NVMe SSD</strong><span>1TB storage, M.2 2280, PCIe 4.0 x4 NVMe, MZ-V9P1T0BW</span></span></a>
+            <a class="site-search-result" href="pages/item-accessory-logitech-g502.html"><img src="images/products/logitech-g502-hero-1.png" alt="" width="64" height="64" loading="lazy"><span><strong>Logitech G502 HERO</strong><span>Wired USB gaming mouse, HERO sensor, adjustable weights, 11 programmable buttons</span></span></a>
+            <a class="site-search-result" href="pages/item-accessory-logitech-g435.html"><img src="images/products/logitech-g435-1.png" alt="" width="64" height="64" loading="lazy"><span><strong>Logitech G435 LIGHTSPEED - Black and Neon Yellow</strong><span>Wireless gaming headset, LIGHTSPEED USB receiver and Bluetooth, built-in microphones, USB-C charging, Color: Black and Neon Yellow</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-microsoft-studio-2.html"><img src="images/products/surface-studio-2-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>Microsoft Surface Laptop Studio 2</strong><span>Intel Core i7-13700H, RTX 4050 6GB, 16GB RAM, 512GB SSD, 14.4-inch 120Hz touchscreen display</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-dell-xps-13.html"><img src="images/products/dell-xps-13-9340.png" alt="" width="64" height="64" loading="lazy"><span><strong>Dell XPS 13 9340</strong><span>Intel Core Ultra 7 155H, Intel Arc graphics, 16GB RAM, 512GB SSD, 13.4-inch display</span></span></a>
+            <a class="site-search-result" href="pages/item-pc-hp-omen-35l.html"><img src="images/products/hp-omen-35l.png" alt="" width="64" height="64" loading="lazy"><span><strong>HP OMEN 35L GT16-0066m</strong><span>AMD Ryzen 7 8700G, RTX 4060 8GB, 16GB DDR5 RAM, 1TB SSD</span></span></a>
+            <a class="site-search-result" href="pages/item-pc-apple-mac-mini-m4.html"><img src="images/products/mac-mini-m4-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>Apple Mac mini M4</strong><span>Apple M4 10-core CPU, 10-core integrated graphics, 16GB unified memory, 256GB SSD</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-acer-office.html"><img src="images/products/acer-aspire-14-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>Acer Aspire 14 AS14H-53</strong><span>Intel Core 5 210H, 16GB RAM, 512GB SSD, 14-inch WUXGA display</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-asus-gaming.html"><img src="images/products/asus-rog-g16-main.png" alt="" width="64" height="64" loading="lazy"><span><strong>ASUS ROG Strix G16 (2023)</strong><span>Intel Core i7, RTX 4060, 16GB RAM, 1TB SSD, 16-inch 165Hz display</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-lenovo-office.html"><img src="images/products/lenovo-thinkbook-14-g6-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>Lenovo ThinkBook 14 G6 IRL</strong><span>Intel Core i5-13420H, 16GB RAM, 512GB SSD, 14-inch display</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-apple-creator.html"><img src="images/products/apple-macbook-air-m3.png" alt="" width="64" height="64" loading="lazy"><span><strong>Apple MacBook Air 13-inch M3 - Midnight</strong><span>Apple M3, 16GB unified memory, 512GB SSD, 13.6-inch Liquid Retina display, Color: Midnight</span></span></a>
+            <a class="site-search-result" href="pages/item-pc-gaming.html"><img src="images/products/msi-infinite-s3-front.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI MAG Infinite S3 13th</strong><span>Intel Core i5-13400F, RTX 4060 Ti, 8GB DDR5 RAM, 512GB NVMe SSD</span></span></a>
+            <a class="site-search-result" href="pages/item-pc-office.html"><img src="images/products/lenovo-neo-50t.webp" alt="" width="64" height="64" loading="lazy"><span><strong>Lenovo ThinkCentre neo 50t Gen 4</strong><span>Intel Core i5-13400, Intel UHD graphics, 8GB DDR4 RAM, 512GB SSD</span></span></a>
+            <a class="site-search-result" href="pages/item-pc-creator.html"><img src="images/products/asus-proart-pd500tc.png" alt="" width="64" height="64" loading="lazy"><span><strong>ASUS ProArt Station PD5 PD500TC</strong><span>Intel Core i7-11700, RTX 3060 12GB, 32GB DDR4 RAM, 1TB NVMe SSD</span></span></a>
+            <a class="site-search-result" href="pages/item-monitor-27.html"><img src="images/products/asus-vg27aq.png" alt="" width="64" height="64" loading="lazy"><span><strong>ASUS TUF Gaming VG27AQ</strong><span>27-inch QHD IPS display, 165Hz refresh rate</span></span></a>
+            <a class="site-search-result" href="pages/item-keyboard-rgb.html"><img src="images/products/keychron-k8-pro-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>Keychron K8 Pro Mechanical Keyboard</strong><span>Tenkeyless, Thai/English keycaps, hot-swappable switches, Bluetooth / USB-C</span></span></a>
+            <a class="site-search-result" href="pages/item-mouse-wireless.html"><img src="images/products/logitech-mx-master-3s.png" alt="" width="64" height="64" loading="lazy"><span><strong>Logitech MX Master 3S - Pale Gray</strong><span>8000 DPI sensor, quiet clicks, rechargeable battery, Bluetooth / Logi Bolt, Color: Pale Gray</span></span></a>
+            <a class="site-search-result" href="pages/item-pc-aurora-elite.html"><img src="images/products/asus-rog-g22ch.png" alt="" width="64" height="64" loading="lazy"><span><strong>ASUS ROG G22CH</strong><span>Intel Core i7-14700KF, RTX 4070 Super, 32GB DDR5 RAM, 1TB NVMe SSD</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-creator-pro.html"><img src="images/products/colors/k6602-quiet-blue-2761.png" alt="" width="64" height="64" loading="lazy"><span><strong>ASUS Vivobook Pro 16 OLED K6602 - Quiet Blue</strong><span>Intel Core i9-13900H, RTX 4060, 16GB RAM, 1TB SSD, 16-inch OLED display, Color: Quiet Blue</span></span></a>
+            <a class="site-search-result" href="pages/item-accessory-stream-kit.html"><img src="images/products/elgato-facecam-mk2-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>Elgato Facecam MK.2</strong><span>1080p 60fps HDR webcam, fixed-focus lens, USB 3.0, privacy shutter</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-hp-pavilion-plus.html"><img src="images/products/hp-pavilion-plus-14-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>HP Pavilion Plus 14</strong><span>Intel Core Ultra 5, 16GB RAM, 512GB SSD, 14-inch display</span></span></a>
+            <a class="site-search-result" href="pages/item-pc-msi-aegis-rgb.html"><img src="images/products/msi-aegis-r.png" alt="" width="64" height="64" loading="lazy"><span><strong>MSI Aegis R 13th</strong><span>Intel i7, RTX 4060 Ti, 32GB DDR5, 1TB NVMe, RGB case</span></span></a>
+            <a class="site-search-result" href="pages/item-lap-dell-inspiron-plus.html"><img src="images/products/dell-inspiron-14-plus-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>Dell Inspiron 14 Plus 7440</strong><span>Intel Core Ultra 7, 16GB RAM, 1TB SSD, 14-inch QHD display</span></span></a>
+            <a class="site-search-result" href="pages/item-monitor-samsung-g3-24.html"><img src="images/products/expansion/samsung-g3-24-view-0.png" alt="" width="64" height="64" loading="lazy"><span><strong>Samsung Odyssey G3 G30D 24-inch</strong><span>LS24DG302EEXXP, 24-inch VA, 1920 × 1080, 180Hz, 1ms MPRT, FreeSync, HDMI, DisplayPort, headphone output, adjustable stand</span></span></a>
+            <a class="site-search-result" href="pages/item-monitor-samsung-g3-27.html"><img src="images/products/expansion/samsung-g3-27-view-0.png" alt="" width="64" height="64" loading="lazy"><span><strong>Samsung Odyssey G3 G30D 27-inch</strong><span>LS27DG302EEXXP, 27-inch VA, 1920 × 1080, 180Hz, 1ms MPRT, FreeSync, HDMI, DisplayPort, headphone output, adjustable stand</span></span></a>
+            <a class="site-search-result" href="pages/item-part-gpu-gtx-1650.html"><img src="images/products/expansion/gtx1650-main.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI GeForce GTX 1650 VENTUS XS 4G OC</strong><span>4GB GDDR5, 128-bit, dual-fan cooler, DisplayPort, HDMI, DVI-D, 75W board power</span></span></a>
+            <a class="site-search-result" href="pages/item-part-gpu-rtx-3050.html"><img src="images/products/expansion/rtx3050-main.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI GeForce RTX 3050 VENTUS 2X 6G OC</strong><span>6GB GDDR6, 96-bit, dual-fan cooler, DisplayPort 1.4a, 2 × HDMI, 70W board power</span></span></a>
+            <a class="site-search-result" href="pages/item-part-gpu-rtx-5080.html"><img src="images/products/expansion/rtx5080-main.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI GeForce RTX 5080 16G VENTUS 3X OC</strong><span>16GB GDDR7, 256-bit, triple-fan cooler, 3 × DisplayPort, HDMI, Blackwell architecture</span></span></a>
+            <a class="site-search-result" href="pages/item-part-ssd-kingston-kc600.html"><img src="images/products/kingston-kc600-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>Kingston KC600 SATA SSD</strong><span>512GB Kingston KC600, 2.5-inch SATA III SSD</span></span></a>
+            <a class="site-search-result" href="pages/item-part-cpu-i5-14600k.html"><img src="images/products/intel-core-i5-14600k-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>Intel Core i5-14600K</strong><span>14-core desktop processor for gaming and multitasking</span></span></a>
+            <a class="site-search-result" href="pages/item-part-gpu-rtx-4060.html"><img src="images/products/msi-rtx-4060-main.webp" alt="" width="64" height="64" loading="lazy"><span><strong>MSI GeForce RTX 4060 VENTUS 2X BLACK 8GB</strong><span>8GB GDDR6, NVIDIA Ada Lovelace graphics, dual-fan cooling, HDMI and DisplayPort outputs</span></span></a>
+            <a class="site-search-result" href="pages/item-part-ram-32gb-ddr5.html"><img src="images/products/kingston-fury-32gb-kit-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>Kingston FURY Beast DDR5 Memory</strong><span>32GB DDR5-5600 desktop memory, AM5 / compatible Intel DDR5 motherboards</span></span></a>
+            <a class="site-search-result" href="pages/item-part-ssd-1tb-nvme.html"><img src="images/products/kingston-nv3-1000gb.png" alt="" width="64" height="64" loading="lazy"><span><strong>Kingston NV3 NVMe SSD</strong><span>1TB Kingston NV3, M.2 2280, PCIe 4.0 x4 NVMe</span></span></a>
+            <a class="site-search-result" href="pages/item-part-cpu-ryzen-7-7700x.html"><img src="images/products/amd-ryzen-7-7700x-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>AMD Ryzen 7 7700X</strong><span>8-core AM5 processor for high-refresh gaming and creator tasks</span></span></a>
+            <a class="site-search-result" href="pages/item-part-board-gigabyte-b650.html"><img src="images/products/gigabyte-b650-aorus-elite-ax.png" alt="" width="64" height="64" loading="lazy"><span><strong>Gigabyte B650 AORUS Elite AX</strong><span>AM5 ATX motherboard with DDR5 support, Wi-Fi, and RGB headers</span></span></a>
+            <a class="site-search-result" href="pages/item-part-cooler-master-240.html"><img src="images/products/cooler-master-ml240l.png" alt="" width="64" height="64" loading="lazy"><span><strong>Cooler Master ML240L RGB</strong><span>240mm liquid cooler with RGB lighting</span></span></a>
+            <a class="site-search-result" href="pages/item-part-corsair-psu-850.html"><img src="images/products/corsair-rm850e.webp" alt="" width="64" height="64" loading="lazy"><span><strong>Corsair RM850e Gold PSU</strong><span>850W fully modular RMe series power supply</span></span></a>
+            <a class="site-search-result" href="pages/item-part-kingston-fury-32.html"><img src="images/products/kingston-fury-32gb-kit-cutout.png" alt="" width="64" height="64" loading="lazy"><span><strong>Kingston FURY Beast 32GB DDR5</strong><span>32GB Kingston FURY Beast DDR5-5600 desktop memory kit</span></span></a>
+          </section>
+          <section>
+            <h2>Articles</h2>
+            <a class="site-search-result" href="pages/story-choose-your-laptop.html"><img src="images/showcase/real-laptop-workspace.jpg" alt="" width="64" height="64" loading="lazy"><span><strong>A laptop that fits your day</strong><span>Balance portability, performance and the connections you actually use.</span></span></a>
+            <a class="site-search-result" href="pages/story-plan-a-balanced-pc.html"><img src="images/showcase/real-desktop-setup.jpg" alt="" width="64" height="64" loading="lazy"><span><strong>Build a balanced PC, one part at a time</strong><span>A practical starting point for choosing compatible hardware without overspending.</span></span></a>
+            <a class="site-search-result" href="pages/story-ram-upgrade-guide.html"><img src="images/showcase/real-pc-components.jpg" alt="" width="64" height="64" loading="lazy"><span><strong>Memory upgrades without the guesswork</strong><span>Understand memory generations, form factors and upgrade slots before ordering RAM.</span></span></a>
+            <a class="site-search-result" href="pages/story-ssd-storage-guide.html"><img src="images/products/kingston-nv3.png" alt="" width="64" height="64" loading="lazy"><span><strong>Choose the right SSD for your next upgrade</strong><span>Capacity is only the beginning: compare interface, physical size and slot support.</span></span></a>
+            <a class="site-search-result" href="pages/story-monitor-desk-guide.html"><img src="images/showcase/showcase-monitor.jpg" alt="" width="64" height="64" loading="lazy"><span><strong>A clearer view of your next workspace</strong><span>Find the right balance of display size, resolution, refresh rate and desk space.</span></span></a>
+            <a class="site-search-result" href="pages/story-delivery-checklist.html"><img src="images/showcase/showcase-keyboard.jpg" alt="" width="64" height="64" loading="lazy"><span><strong>From checkout to your doorstep</strong><span>Prepare your address, review delivery choices and keep your order details close.</span></span></a>
+          </section>
+          <section>
+            <h2>Pages</h2>
+            <a class="site-search-result" href="pages/build.html"><span><strong>Build Your Own PC</strong><span>Compatible processor motherboard graphics RAM memory storage cooling power supply case</span></span></a>
+            <a class="site-search-result" href="pages/components.html"><span><strong>Interactive component guide</strong><span>Learn CPU GPU RAM SSD computer parts explained</span></span></a>
+            <a class="site-search-result" href="pages/contact.html"><span><strong>Contact support</strong><span>Help inquiry questions customer service</span></span></a>
+            <a class="site-search-result" href="pages/tracking.html"><span><strong>Track your order</strong><span>Delivery shipping status parcel tracking</span></span></a>
+            <a class="site-search-result" href="pages/profile.html"><span><strong>My account</strong><span>Profile address book purchases refunds returns favorites</span></span></a>
+            <a class="site-search-result" href="pages/cart.html"><span><strong>Cart and checkout</strong><span>Payment GCash Maya voucher promo shipping pickup overseas</span></span></a>
+            <a class="site-search-result" href="pages/warranty.html"><span><strong>Warranty</strong><span>Repairs replacement warranty coverage</span></span></a>
+            <a class="site-search-result" href="pages/downloads.html"><span><strong>Downloads</strong><span>Manuals resources guides</span></span></a>
+            <a class="site-search-result" href="pages/privacy.html"><span><strong>Privacy Policy</strong><span>Data privacy account information</span></span></a>
+            <a class="site-search-result" href="pages/terms.html"><span><strong>Terms of Use</strong><span>Store terms conditions policies</span></span></a>
+          </section>
+        </div>
+      </section>
+    </main>
+    <!--  Shared footer. These links work without a server or JavaScript.  -->
+    <footer class="site-footer" data-store-footer="ready" id="storeFooter">
+      <div class="footer-main">
+        <a class="footer-brand" href="index.html" aria-label="Bits and Bytes home">
+          <img class="footer-brand-mark" src="images/branding/bitsandbyteslogo.png" alt="Bits and Bytes logo">
+          <span><strong>Bits and Bytes</strong><small>PC and Laptop Store</small></span>
+        </a>
+        <section class="footer-location">
+          <h2>Bits and Bytes Manila</h2>
+          <p>Computer and laptop support desk<br>Quezon City, Metro Manila<br><a href="pages/contact.html"><span class="footer-link-label">Contact customer service</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Bits and Bytes Cebu</h2>
+          <p>PC build and pickup support<br>Cebu City, Cebu<br><a href="pages/contact.html"><span class="footer-link-label">Ask about availability</span></a></p>
+        </section>
+        <section class="footer-location">
+          <h2>Online Store Support</h2>
+          <p>Delivery, product advice, and checkout help<br>Philippines-wide service<br><a href="pages/contact.html"><span class="footer-link-label">Send an inquiry</span></a></p>
+        </section>
+      </div>
+      <div class="footer-bottom">
+        <nav aria-label="Footer navigation">
+          <a href="pages/about.html"><span class="footer-link-label">About Us</span></a>
+          <a href="pages/articles.html"><span class="footer-link-label">The Journal</span></a>
+          <a href="pages/tracking.html"><span class="footer-link-label">Track Order</span></a>
+          <a href="pages/profile.html"><span class="footer-link-label">My account</span></a>
+          <a href="pages/warranty.html"><span class="footer-link-label">Warranty Info</span></a>
+          <a href="pages/downloads.html"><span class="footer-link-label">Downloads</span></a>
+          <a href="pages/contact.html"><span class="footer-link-label">Contact Us</span></a>
+          <a data-back-to-top="" href="pages/search.html#top"><span class="footer-link-label">Back to top ↑</span></a>
+        </nav>
+        <div class="footer-social">
+          <span>Follow us on</span>
+          <div class="social-links" aria-label="Follow Bits and Bytes on social media">
+            <a class="social-icon facebook" href="https://www.facebook.com/johncarlo.herrera.58" target="_blank" rel="noopener noreferrer" aria-label="Facebook: John Carlo Herrera" title="Facebook"><img src="images/social/facebook.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon instagram" href="https://www.instagram.com/jayzzzz0723/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: jayzzzz0723" title="Instagram"><img src="images/social/instagram.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon x-twitter" href="https://x.com/Jayzee20202" target="_blank" rel="noopener noreferrer" aria-label="X: Jayzee20202" title="X"><img src="images/social/x.svg" alt="" width="24" height="24"></a>
+            <a class="social-icon youtube" href="https://www.youtube.com/@johncarloherrera8540" target="_blank" rel="noopener noreferrer" aria-label="YouTube: johncarloherrera8540" title="YouTube"><img src="images/social/youtube.svg" alt="" width="24" height="24"></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>© 2026 Herrera Corporation. All rights reserved.</p>
+        <nav aria-label="Legal information">
+          <a href="pages/terms.html"><span class="footer-link-label">Terms of Use</span></a>
+          <a href="pages/privacy.html"><span class="footer-link-label">Privacy Policy</span></a>
+        </nav>
+      </div>
+    </footer>
+    <aside class="support-chat" id="supportChat" aria-label="Customer service chat">
+      <button class="store-back-to-top" id="storeBackToTop" type="button" aria-label="Back to top" title="Back to top" hidden="" disabled="">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 15 7-7 7 7"></path></svg>
+      </button>
+      <a href="pages/contact.html" class="support-chat-launcher" id="supportChatLauncher" title="Chat with us" aria-label="Chat with us">
+        <img class="chat-robot-normal" src="images/branding/support-robot-hover.png" width="64" height="64" alt="" aria-hidden="true">
+        <img class="chat-robot-hover" src="images/branding/support-robot-normal.png" width="64" height="64" alt="" aria-hidden="true">
+        <span class="chat-notification-dot" aria-hidden="true"></span>
+      </a>
+    </aside>
+  </body>
+</html>

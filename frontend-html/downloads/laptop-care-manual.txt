@@ -1,0 +1,12 @@
+BITS AND BYTES - LAPTOP CARE MANUAL
+
+1. Use the laptop on a firm surface so its cooling vents remain open.
+2. Use the supplied charger or a compatible charger with the correct rating.
+3. Keep liquids away from the keyboard and ports.
+4. Install operating-system, firmware, and driver updates from trusted sources.
+5. Transport the laptop in a padded sleeve and avoid pressure on the display.
+6. Back up school, work, and personal files regularly.
+7. Stop using the laptop if the battery swells or the chassis separates.
+8. Clean vents with the device powered off and disconnected from power.
+
+This sample manual is intended as a replaceable download for the storefront project.
