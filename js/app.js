@@ -745,6 +745,10 @@ function renderProductsPage() {
 
   // Shared search and brand links open the catalog with the right filters applied.
   const query = new URLSearchParams(location.search);
+  const requestedType = query.get("type");
+  if (requestedType && [...typeFilter.options].some(option => option.value === requestedType)) {
+    typeFilter.value = requestedType;
+  }
   if (computerPartCategories.some((category) => category.id === query.get("part"))) {
     typeFilter.value = "part:" + query.get("part");
   }

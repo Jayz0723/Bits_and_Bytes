@@ -1,11 +1,7 @@
-# Bits & Bytes HTML and CSS edition
+# Bits & Bytes navigation pages
 
-Open `index.html` in this folder to browse the replica. Keep the whole folder together when copying it. The pages, stylesheets, photos, videos, and downloads have local paths.
+Open `index.html` in this folder. The 14 HTML pages cover Home and the destinations in the header menus and toolbar. HTML comments explain the page structure. The stylesheet `css/static-edition.css` explains the native menu and carousel controls.
 
-- `pages/products.html` is the catalog. Its category, brand, and component links open prebuilt catalog views.
-- `pages/item-*.html` contains individual products and their color or configuration variants. Product thumbnails and the homepage slides use native radio inputs with CSS.
-- `pages/articles.html` and `pages/story-*.html` contain the journal and its articles.
-- `pages/search.html` lists the product, article, and page directory. Use the browser’s Find command to search its contents.
-- `css/static-edition.css` explains the CSS for slide selection, mobile navigation, gallery thumbnails, and the static filter links. HTML comments mark the corresponding page sections.
+Product details, color variants, individual articles, and filtered catalog results link to the original store pages. JavaScript builds those views from the original catalog and article data. Supporting footer pages also open from the original store. Keep this folder next to the original `pages` folder so those links resolve.
 
-The HTML captures the storefront’s public guest views. Account, cart, checkout, tracking, contact forms, and the build configurator are previews. The promotion carousel uses manual controls, and the brand strip continues its CSS animation. The original storefront provides live accounts, ordering, search, and other interactive services.
+Account, checkout, and other form pages in this folder are previews with links to their interactive counterparts. Run `npm start` from the repository root to use the original store’s server features.

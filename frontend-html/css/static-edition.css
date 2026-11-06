@@ -65,7 +65,7 @@
 .partner-dialog[popover] { position: fixed; inset: 0; margin: auto; }
 .partner-dialog[popover]::backdrop { background: #03070bbf; }
 
-/* Catalog categories and options are normal links to prebuilt HTML pages. */
+/* Catalog categories and options open the original interactive views. */
 .static-filter-links details { border-bottom: 1px solid #354854; padding: 10px 0; }
 .static-filter-links { grid-column: 1 / -1; }
 .static-filter-links summary { cursor: pointer; font-weight: 700; }
@@ -79,25 +79,6 @@
   color: inherit;
 }
 a[aria-current="page"], [data-catalog-type][aria-pressed="true"] { border-color: var(--teal); }
-
-/* The checked thumbnail selects media in place. Each product page provides
-   the selectors for its own set of pictures and videos. */
-.product-gallery [data-static-view] { display: none; }
-.product-gallery-thumbnails .static-gallery-thumb {
-  min-width: 0;
-  display: grid;
-  grid-template-rows: 62px 22px;
-  gap: 7px;
-  padding: 5px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  background: var(--surface-1);
-  color: #bcd0da;
-  text-decoration: none;
-  font-size: 0.76rem;
-  cursor: pointer;
-}
-.product-gallery-thumbnails .static-gallery-thumb img { width: 100%; height: 62px; object-fit: contain; }
 
 /* Account and checkout retain their design as clearly labeled previews. */
 .static-preview-note {
