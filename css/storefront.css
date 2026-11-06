@@ -309,9 +309,11 @@ body { font-family: "Inter", Arial, sans-serif; letter-spacing: 0; }
 .home-page .microsoft-promo > img { position: absolute; right: 3%; top: 10%; width: 52%; height: 80%; object-fit: contain; background: transparent; }
 .home-page .microsoft-promo .promo-slide-content { width: 38%; }
 .brand-strip .partner-logo img { max-width: 135px; }
-.brand-strip .partner-with-product { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; }
-.brand-strip .partner-with-product img, .partner-dialog .partner-with-product img { height: 64px; padding: 0; object-fit: contain; filter: none; }
-.brand-strip .partner-with-product .catalog-brand-wordmark { font-size: 14px; line-height: 1.2; }
+.partner-dialog .partner-card :is(img[src$="elgato-logo.svg"], img[src$="keychron-logo.svg"]) {
+  padding: 12px;
+  border-radius: 4px;
+  background: #e0e8eb;
+}
 .brand-strip .carousel { overflow: hidden; }
 .brand-strip .car-slide { flex-shrink: 0; }
 /* Keep both copies synchronized when a keyboard user focuses a brand link. */

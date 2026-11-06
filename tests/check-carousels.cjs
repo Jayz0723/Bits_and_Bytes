@@ -17,6 +17,7 @@ const { chromium } = require('./browser.cjs');
       Promise.all(images.map(image => { image.loading = 'eager'; return image.decode(); })));
     const copies = await page.locator('.car-slide').evaluateAll(strips => strips.map(strip => [...strip.querySelectorAll('img')].map(image => image.getAttribute('src'))));
     assert.deepEqual(copies[0], copies[1], 'Both copies contain every brand in the same order');
+    assert.ok(copies.flat().every(src => src.startsWith('images/branding/')), 'The carousel uses brand artwork');
     await page.locator('.brand-strip .carousel').hover();
     const before = await page.locator('.car-slide').evaluateAll(strips => strips.map(strip => strip.getAnimations()[0].currentTime));
     await page.waitForTimeout(400);
@@ -36,6 +37,13 @@ const { chromium } = require('./browser.cjs');
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       await page.screenshot({ path: path.resolve(__dirname, '../images/previews/carousel-fixed-' + width + '.png') });
     }
-    console.log('Passed local image decoding for every promotion and brand, continuous hover playback, synchronized strips and responsive layouts.');
+    await page.goto(pathToFileURL(path.resolve(__dirname, '../frontend-html/index.html')).href);
+    const staticCopies = await page.locator('.car-slide').evaluateAll(strips => strips.map(strip => [...strip.querySelectorAll('img')].map(image => image.getAttribute('src'))));
+    assert.deepEqual(staticCopies, copies, 'The HTML edition uses the same logos and order');
+    await page.locator('.car-slide img, .partner-card img').evaluateAll(images => Promise.all(images.map(image => image.decode())));
+    await page.locator('#viewPartners').click();
+    assert.deepEqual(await page.locator('.partner-card span').allTextContents(), expected);
+    assert.ok(await page.locator('.partner-card img').evaluateAll(images => images.every(image => image.getAttribute('src').startsWith('images/branding/'))));
+    console.log('Passed logo loading and carousel parity in both editions, continuous hover playback, synchronized strips and responsive layouts.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

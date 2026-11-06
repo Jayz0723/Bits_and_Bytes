@@ -223,39 +223,21 @@ function renderCatalogBrands() {
   if (!strip) return;
   const originalLinks = new Map([...strip.querySelectorAll('.car-slide:first-child a')]
     .map(link => [link.querySelector('img')?.alt, link]));
-  const websites = {
-    Samsung: 'https://www.samsung.com/ph/', Acer: 'https://www.acer.com/ph-en',
-    Logitech: 'https://www.logitech.com/', Keychron: 'https://www.keychron.com/',
-    Elgato: 'https://www.elgato.com/', 'Bits and Bytes': 'pages/about.html',
-    'Bits and Bytes Select': 'pages/about.html'
-  };
-  const brandPhotos = new Map();
-  for (const product of catalogProducts()) {
-    if (product.image && !brandPhotos.has(product.brand)) brandPhotos.set(product.brand, product.image);
-  }
   const brands = [...new Set(catalogProducts().map(product => product.brand))].sort();
   function brandLink(brand, className, duplicate = false) {
     const existing = originalLinks.get(brand);
+    const logo = existing?.querySelector('img');
     const link = document.createElement('a');
     link.className = className;
     link.dataset.catalogBrand = brand;
-    link.href = existing?.getAttribute('href') || websites[brand] || 'pages/products.html?brand=' + encodeURIComponent(brand);
+    link.href = existing?.getAttribute('href') || 'pages/products.html?brand=' + encodeURIComponent(brand);
     link.setAttribute('aria-label', brand);
     if (/^https:/.test(link.getAttribute('href'))) {
       link.target = '_blank'; link.rel = 'noopener noreferrer';
     }
     if (duplicate) link.tabIndex = -1;
-    if (existing?.querySelector('img')) {
-      link.append(existing.querySelector('img').cloneNode());
-    } else {
-      link.classList.add('partner-with-product');
-      const photo = document.createElement('img');
-      photo.src = brandPhotos.get(brand) || 'images/branding/bitsandbyteslogo.png';
-      photo.alt = '';
-      photo.decoding = 'async';
-      link.append(photo);
-    }
-    if (!existing?.querySelector('img') || className === 'partner-card') {
+    if (logo) link.append(logo.cloneNode());
+    if (!logo || className === 'partner-card') {
       const wordmark = document.createElement('span');
       wordmark.className = 'catalog-brand-wordmark';
       wordmark.textContent = brand;
