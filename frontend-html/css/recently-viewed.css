@@ -1,0 +1,32 @@
+/* Self-contained styling keeps this enhancement away from existing shopping controls. */
+.recent-products { max-width: 1320px; margin: 64px auto; padding: 28px; border: 1px solid #34494e; border-radius: 18px; background: linear-gradient(125deg, #222d31, #172126 70%); color: #edf5f7; scroll-margin-top: 130px; }
+.recent-products[hidden], .recent-products [hidden] { display: none; }
+.recent-products-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.recent-products .recent-products-eyebrow { margin: 0 0 10px; color: #6de4d1; font-size: 12px; font-weight: 700; letter-spacing: .1em; }
+.recent-products h2 { margin: 0; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; }
+.recent-products .recent-products-note { margin: 10px 0 0; color: #b4c6ce; font-size: 14px; }
+.recent-products-controls { display: flex; gap: 8px; flex-shrink: 0; }
+.recent-products .recent-products-button { display: inline-flex; justify-content: center; align-items: center; min-height: 44px; min-width: 44px; padding: 10px 14px; margin: 0; border: 1px solid #49616a; border-radius: 10px; background: #202f36; color: #e7f5f8; font: inherit; font-size: 14px; cursor: pointer; transition: background .2s, border-color .2s; }
+.recent-products .recent-products-button:hover { background: #2c444b; border-color: #6de4d1; }
+.recent-products .recent-products-button:disabled { opacity: .35; cursor: default; }
+.recent-products-list { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x proximity; padding: 4px 4px 14px; margin: 0; list-style: none; scrollbar-width: thin; scrollbar-color: #517983 #172126; }
+.recent-products-card { flex: 0 0 calc((100% - 48px) / 4); min-width: 220px; position: relative; border: 1px solid #344b54; border-radius: 12px; background: #111d23; scroll-snap-align: start; }
+.recent-products-link { display: flex; height: 100%; flex-direction: column; padding: 20px; color: #edf5f7; text-decoration: none; border-radius: 12px; transition: background .2s; }
+.recent-products-link:hover { color: #edf5f7; background: #20323a; }
+.recent-products-link img { width: 100%; height: 170px; object-fit: contain; margin: 8px 0 16px; background: transparent; border: 0; }
+.recent-products h3 { margin: 0 0 18px; font-size: 16px; line-height: 1.5; overflow-wrap: anywhere; }
+.recent-products-return { margin-top: auto; color: #6de4d1; font-size: 14px; font-weight: 600; }
+.recent-products .recent-products-remove { position: absolute; top: 6px; right: 6px; width: 36px; min-width: 36px; min-height: 36px; padding: 0; border-radius: 50%; font-size: 24px; background: #17252ef0; }
+.recent-products-status { margin: 0; color: #b4c6ce; }
+.recent-products-status:empty { display: none; }
+.recent-products :is(a, button):focus-visible { outline: 2px solid #6de4d1; outline-offset: 3px; }
+@media (max-width: 700px) {
+  .recent-products { margin: 36px 0; padding: 18px; border-radius: 12px; }
+  .recent-products-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .recent-products-controls { width: 100%; }
+  .recent-products-controls > :first-child { margin-right: auto; }
+  .recent-products-card { flex-basis: 78%; min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .recent-products *, .recent-products *::before, .recent-products *::after { transition: none; scroll-behavior: auto; }
+}
