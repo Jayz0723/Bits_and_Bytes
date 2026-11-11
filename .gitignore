@@ -14,3 +14,7 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+
+# Orders entered in the Python lesson stay local.
+Python_Lesson/orders.json
+Python_Lesson/orders.json.tmp
