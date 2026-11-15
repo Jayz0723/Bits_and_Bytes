@@ -36,7 +36,7 @@ function compareProducts() {
   const status = document.getElementById("compareStatus");
   results.hidden = selected.length === 0;
   status.textContent = selected.length < 2 ? "Choose two or three different configurations to compare."
-    : selected.length + " configurations selected. Prices are per item; shipping is not included.";
+    : selected.length + " configurations selected. Prices and stock are store listings. Shipping is not included. Unconfirmed specifications are labeled.";
 
   // Only trusted catalog data goes into this table, never the search input.
   results.innerHTML = `<table class="comparison-table">
@@ -54,6 +54,35 @@ function compareProducts() {
       <ins>${money(product.price)}</ins><br><button class="button small" type="button" data-compare-add="${product.id}" ${product.stock <= 0 ? "disabled" : ""}>Add to Cart</button>
     </td>`).join("")}</tr></tfoot>
   </table>`;
+  // Share the same variant-aware facts with the quick comparison dialog.
+  const profiles = selected.map(window.productComparisonDetails);
+  const labels = [...new Set(profiles.flatMap(profile => Object.keys(profile.values)))];
+  const body = results.querySelector('tbody');
+  for (const label of labels) {
+    const row = document.createElement('tr');
+    const heading = document.createElement('th');
+    heading.scope = 'row'; heading.textContent = label; row.append(heading);
+    for (const profile of profiles) {
+      const cell = document.createElement('td');
+      cell.textContent = profile.values[label] || 'Not confirmed for this configuration';
+      row.append(cell);
+    }
+    body.append(row);
+  }
+  const references = document.createElement('tr');
+  const referenceHeading = document.createElement('th');
+  referenceHeading.scope = 'row'; referenceHeading.textContent = 'Product references';
+  references.append(referenceHeading);
+  for (const profile of profiles) {
+    const cell = document.createElement('td');
+    if (profile.source) {
+      const link = document.createElement('a');
+      link.href = profile.source; link.textContent = 'View specification';
+      link.target = '_blank'; link.rel = 'noopener noreferrer'; cell.append(link);
+    } else cell.textContent = 'No external reference available';
+    references.append(cell);
+  }
+  body.append(references);
   for (const button of results.querySelectorAll("[data-compare-add]")) {
     button.addEventListener("click", () => {
       addToCart(comparisonOptions.find((product) => product.id === button.dataset.compareAdd));

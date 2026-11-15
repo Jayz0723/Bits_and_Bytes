@@ -118,31 +118,6 @@
     title.focus({ preventScroll: true });
     dialog.scrollTop = 0;
   }
-  // Manufacturer-checked profiles are tied to exact variants, never just a color family.
-  function verifiedDetails(item) {
-    if (item.id === 'lap-hp-victus-15' && item.variant === 'mica-silver') return {
-      source: 'https://www.hp.com/ie-en/products/laptops/product-details/product-specifications/2103174418',
-      values: { 'Configuration basis': 'HP 15-fa2007na / C09K1EA; checked 15 November 2026',
-        Processor: 'Intel Core 7 240H; 10 cores, 16 threads', Graphics: 'GeForce RTX 5060 Laptop; 8 GB GDDR7',
-        'Installed memory': '24 GB DDR5-5600 (2 × 12 GB)', 'Installed storage': '1 TB PCIe NVMe SSD',
-        Display: '15.6-inch IPS; 1920 × 1080; 144 Hz', 'Brightness / gamut': '300 nits; 62.5% sRGB',
-        Battery: '70 Wh', Weight: '2.29 kg', Wireless: 'Wi-Fi 6; Bluetooth 5.4',
-        Ports: '2 USB-A; USB-C with DisplayPort 1.4a; HDMI 2.1; Ethernet; combined audio jack',
-        'Power adapter': '200 W', 'Operating system': 'Windows 11 Home' }
-    };
-    if (item.id === 'lap-msi-thin-15-b13ve') return {
-      source: 'https://www.msi.com/Laptop/Thin-15-B13VX/Specification',
-      values: { 'Configuration basis': 'B13VE family specification; regional SKU not supplied; checked 15 November 2026',
-        Processor: 'Up to 13th-generation Core i7; exact CPU not confirmed', Graphics: 'GeForce RTX 4050 Laptop; 6 GB GDDR6; up to 45 W graphics power',
-        'Installed memory': 'Capacity not confirmed; supports DDR4-3200, 2 slots, up to 64 GB',
-        'Installed storage': 'Capacity not confirmed; supports M.2 PCIe 4 SSD and 2.5-inch SATA drive',
-        Display: '15.6-inch IPS-level; 1920 × 1080; 144 Hz', 'Brightness / gamut': 'Not specified in this manufacturer reference',
-        Battery: '52.4 Wh', Weight: '1.86 kg', Wireless: 'Wi-Fi 6E; Bluetooth 5.3',
-        Ports: '3 USB-A; USB-C with DisplayPort; HDMI (4K at 30 Hz); Ethernet; separate mic and headphone jacks',
-        'Power adapter': '120 W', 'Operating system': 'Windows 11 Home / Pro options; confirm regional SKU' }
-    };
-    return { values: { 'Configuration basis': 'Store catalog listing; additional specifications not independently verified' } };
-  }
   function renderTable() {
     viewport.replaceChildren();
     const items = selected.map(item => liveItem(item.id, item.variant) || item);
@@ -168,7 +143,7 @@
     head.append(headRow); table.append(caption, head);
     const body = node('tbody');
     let count = 0;
-    const profiles = items.map(verifiedDetails);
+    const profiles = items.map(window.productComparisonDetails);
     const detailLabels = [...new Set(profiles.flatMap(profile => Object.keys(profile.values)))];
     items.forEach((item, index) => { detailLabels.forEach(label => { item['detail:' + label] = profiles[index].values[label] || 'Not confirmed for this configuration'; }); });
     const comparisonFields = [...fields.filter(([key]) => key !== 'specs'), ...detailLabels.map(label => ['detail:' + label, label]), ['specs', 'Store catalog description']];
@@ -181,11 +156,11 @@
       body.append(row); count++;
     });
     const sources = node('tr');
-    const sourceLabel = node('th', '', 'Manufacturer references'); sourceLabel.scope = 'row'; sources.append(sourceLabel);
+    const sourceLabel = node('th', '', 'Product references'); sourceLabel.scope = 'row'; sources.append(sourceLabel);
     profiles.forEach(profile => {
       const cell = node('td');
       if (profile.source) { const link = node('a', '', 'View specification'); link.href = profile.source; link.target = '_blank'; link.rel = 'noopener noreferrer'; cell.append(link); }
-      else cell.textContent = 'No verified comparison reference yet';
+      else cell.textContent = 'No external specification reference available';
       sources.append(cell);
     });
     body.append(sources);
