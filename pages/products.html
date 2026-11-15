@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/site-experience.css?v=20261026-cutouts-v6">
   <link rel="stylesheet" href="css/recently-viewed.css?v=20261108">
   <link rel="stylesheet" href="css/compare-shortlist.css?v=20261110">
+  <link rel="stylesheet" href="css/storefront-refresh.css?v=20261115">
 </head>
 <body class="catalog-page">
   <header class="site-header" id="top">
@@ -40,7 +41,7 @@
     <section class="page-hero compact">
       <p class="eyebrow">The Bits and Bytes collection</p>
       <h1>Find your next upgrade.</h1>
-      <p>Great hardware for the way you work, create, and play.</p>
+      <p>Find the right hardware for your work, your games, and your budget.</p>
       <nav class="collection-nav catalog-categories" aria-label="Product categories">
         <button type="button" data-catalog-type="all" aria-pressed="true">All products</button>
         <button type="button" data-catalog-type="Desktop PC" aria-pressed="false">Desktops</button>
@@ -54,7 +55,7 @@
     <!-- Plain form controls keep search and display settings easy to edit. -->
     <form class="section catalog-search" id="catalogSearchForm" role="search">
       <div>
-        <label for="productSearch">Find your next upgrade</label>
+        <label for="productSearch">What are you looking for?</label>
         <div class="search-input-row">
           <input id="productSearch" type="search" list="productSuggestions" placeholder="Search a model, brand, or specification" autocomplete="off">
           <datalist id="productSuggestions"></datalist>
@@ -342,5 +343,6 @@
   <script src="js/recently-viewed.js?v=20261108"></script>
   <!-- Compare the displayed product cards without loading the main application. -->
   <script src="js/compare-shortlist.js?v=20261110"></script>
+  <script src="js/storefront-refresh.js?v=20261115"></script>
 </body>
 </html>
