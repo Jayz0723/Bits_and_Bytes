@@ -40,3 +40,23 @@
   .shortlist-panel { margin: 18px 0; padding: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .shortlist-dialog[open] { animation: none; } .shortlist-button { transition: none !important; } }
+
+/* A compact filter area and section headings keep long comparisons readable. */
+.shortlist-toolbar { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: end; padding: 18px; margin: 18px 0 8px; border: 1px solid #385159; border-radius: 12px; background: #192b31; }
+.shortlist-search { display: grid; gap: 8px; flex: 1 1 260px; font-size: 14px; font-weight: 600; }
+.shortlist-search input { width: 100%; min-width: 0; box-sizing: border-box; padding: 12px; border: 1px solid #536c74; border-radius: 8px; background: #101c21; color: #eef7fa; font: inherit; min-height: 44px; }
+.shortlist-search input::placeholder { color: #aac1c9; }
+.shortlist-toolbar .shortlist-differences { min-height: 44px; margin: 0; }
+.shortlist-context { color: #91e6da; font-size: 14px; line-height: 1.6; }
+.shortlist-context.shortlist-mixed { color: #f1d8a5; border-left: 3px solid #d2b074; padding-left: 12px; }
+.shortlist-result-status { font-size: 14px; color: #bacdd3; margin: 12px 0; }
+.shortlist-header-price, .shortlist-header-stock { display: block; margin-bottom: 10px; }
+.shortlist-header-price { font-size: 20px; font-weight: 700; color: #7ae6d2; }
+.shortlist-header-stock { font-size: 13px; font-weight: 400; color: #bcd1d6; }
+.shortlist-table .shortlist-section th { width: auto; background: #294249; color: #a4f4e7; padding: 12px 18px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+.shortlist-data-label { display: block; width: fit-content; font-size: 11px; line-height: 1.5; color: #b4d7e1; background: #263c46; border: 1px solid #49636b; border-radius: 4px; padding: 2px 6px; margin-bottom: 7px; }
+.shortlist-table .shortlist-unconfirmed { color: #b9c7cb; font-style: italic; }
+.shortlist-table tbody tr:not(.shortlist-section):hover { background: #28434a; }
+.shortlist-table tbody th[scope="row"] { position: sticky; left: 0; z-index: 1; background: #182b32; box-shadow: 2px 0 0 #3d5760; }
+.shortlist-dialog .shortlist-button[hidden] { display: none; }
+@media (max-width: 700px) { .shortlist-toolbar { padding: 12px; gap: 12px; } .shortlist-table :is(th, td) { padding: 14px; } }

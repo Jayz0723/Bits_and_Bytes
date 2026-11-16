@@ -30,6 +30,18 @@ const url = file => pathToFileURL(path.join(root, file)).href;
       await dialog.locator('img').evaluateAll(images => Promise.all(images.map(image => image.decode())));
       const rowCount = await dialog.locator('tbody tr').count();
       assert.ok(rowCount >= 6);
+      if (!edition) {
+        const search = page.getByLabel('Find a specification');
+        await search.fill('memory');
+        assert.match(await dialog.locator('tbody').textContent(), /memory/i);
+        assert.equal(await dialog.locator('.shortlist-header-price').count(), 3);
+        await search.fill('no-such-attribute-987');
+        assert.match(await dialog.locator('.shortlist-result-status').textContent(), /^0 of /);
+        await dialog.getByRole('button', { name: 'Reset comparison filters' }).click();
+        assert.equal(await search.inputValue(), '');
+        assert.equal(await dialog.locator('tbody tr').count(), rowCount);
+        assert.ok(await dialog.locator('.shortlist-section').count() >= 2);
+      }
       await page.getByLabel('Show differences only', { exact: true }).check();
       assert.ok(await dialog.locator('tbody tr').count() < rowCount);
       await page.getByLabel('Show differences only', { exact: true }).uncheck();

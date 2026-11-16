@@ -98,12 +98,27 @@
   differences.type = 'checkbox';
   differences.addEventListener('change', renderTable);
   filter.append(differences, document.createTextNode('Show differences only'));
+  const toolbar = node('div', 'shortlist-toolbar');
+  const searchLabel = node('label', 'shortlist-search', 'Find a specification');
+  const search = node('input'); search.type = 'search';
+  search.placeholder = 'Try memory, ports or display';
+  search.addEventListener('input', renderTable);
+  searchLabel.append(search);
+  toolbar.append(searchLabel, filter);
+  const context = node('p', 'shortlist-context');
+  const resultStatus = node('p', 'shortlist-result-status');
+  resultStatus.setAttribute('role', 'status');
+  resultStatus.setAttribute('aria-live', 'polite');
+  const resetFilters = button('Reset comparison filters', () => {
+    search.value = ''; differences.checked = false; renderTable(); search.focus();
+  });
+  resetFilters.hidden = true;
   const viewport = node('div', 'shortlist-table-wrap');
   viewport.tabIndex = 0;
   viewport.setAttribute('role', 'region');
   viewport.setAttribute('aria-label', 'Product comparison, scroll horizontally for more products');
   const scrollHint = node('p', 'shortlist-scroll-hint', 'Swipe the table sideways to compare all selected products.');
-  dialog.append(heading, description, filter, scrollHint, viewport);
+  dialog.append(heading, description, context, toolbar, resultStatus, resetFilters, scrollHint, viewport);
   document.body.append(dialog);
   dialog.addEventListener('click', event => { if (event.target === dialog) {
     const bounds = dialog.getBoundingClientRect();
@@ -122,6 +137,11 @@
     viewport.replaceChildren();
     const items = selected.map(item => liveItem(item.id, item.variant) || item);
     if (!items.length) { viewport.append(node('p', '', 'Choose products from the shop to start comparing.')); return; }
+    const types = [...new Set(items.map(item => item.type))];
+    context.textContent = types.length > 1
+      ? 'You are comparing different product categories. Missing attributes do not mean a product lacks that feature.'
+      : `${types[0]} comparison · ${items.length} selected configuration${items.length === 1 ? '' : 's'}`;
+    context.classList.toggle('shortlist-mixed', types.length > 1);
     const table = node('table', 'shortlist-table');
     const caption = node('caption', '', `${items.length} selected product${items.length === 1 ? '' : 's'}`);
     const head = node('thead');
@@ -138,7 +158,7 @@
       const remove = button('Remove', () => {
         selected.splice(index, 1); save(); sync(); renderTable(); title.focus({ preventScroll: true });
       }, `Remove ${item.name} from comparison`);
-      cell.append(image, link, remove); headRow.append(cell);
+      cell.append(image, link, node('span', 'shortlist-header-price', item.price), node('span', 'shortlist-header-stock', item.stock), remove); headRow.append(cell);
     });
     head.append(headRow); table.append(caption, head);
     const body = node('tbody');
@@ -147,14 +167,45 @@
     const detailLabels = [...new Set(profiles.flatMap(profile => Object.keys(profile.values)))];
     items.forEach((item, index) => { detailLabels.forEach(label => { item['detail:' + label] = profiles[index].values[label] || 'Not confirmed for this configuration'; }); });
     const comparisonFields = [...fields.filter(([key]) => key !== 'specs'), ...detailLabels.map(label => ['detail:' + label, label]), ['specs', 'Store catalog description']];
-    comparisonFields.forEach(([key, label]) => {
-      const same = items.every(item => item[key] === items[0][key]);
-      if (differences.checked && same && items.length > 1) return;
-      const row = node('tr', same ? '' : 'shortlist-different');
-      const header = node('th', '', label); header.scope = 'row'; row.append(header);
-      items.forEach(item => row.append(node('td', '', item[key])));
-      body.append(row); count++;
-    });
+    // Keep related attributes together without guessing which product is better.
+    function groupFor(label) {
+      if (/basis|unlisted|catalog description/i.test(label)) return 'Configuration notes';
+      if (/processor|graphics|memory|storage|interface|chipset|platform|capacity|endurance|sequential/i.test(label)) return 'Performance & capacity';
+      if (/display|brightness|refresh|response|audio|camera|drivers|frequency|impedance|microphone/i.test(label)) return 'Display & audio';
+      if (/ports|connection|wireless|network|outputs|controls|sensor|sensitivity|polling|buttons|switches|rollover|layout/i.test(label)) return 'Connectivity & controls';
+      if (/power|battery|weight|dimensions|cool|fan|mount|stand|clearance|cabling|efficiency|appearance|lighting|form factor/i.test(label)) return 'Design & power';
+      return 'Overview';
+    }
+    const groups = ['Overview', 'Performance & capacity', 'Display & audio', 'Connectivity & controls', 'Design & power', 'Configuration notes'];
+    const query = search.value.trim().toLocaleLowerCase();
+    for (const group of groups) {
+      const rows = comparisonFields.filter(([, label]) => groupFor(label) === group).filter(([key, label]) => {
+        const same = items.every(item => item[key] === items[0][key]);
+        return !(differences.checked && same && items.length > 1)
+          && (!query || [label, ...items.map(item => item[key])].join(' ').toLocaleLowerCase().includes(query));
+      });
+      if (!rows.length) continue;
+      const section = node('tr', 'shortlist-section');
+      const sectionTitle = node('th', '', group); sectionTitle.colSpan = items.length + 1;
+      section.append(sectionTitle); body.append(section);
+      for (const [key, label] of rows) {
+        const same = items.every(item => item[key] === items[0][key]);
+        const row = node('tr', same ? '' : 'shortlist-different');
+        const header = node('th', '', label); header.scope = 'row'; row.append(header);
+        items.forEach(item => {
+          const cell = node('td');
+          const value = item[key];
+          if (value.startsWith('Store listed: ')) {
+            cell.append(node('span', 'shortlist-data-label', 'Store listed'), document.createTextNode(value.slice(14)));
+          } else cell.textContent = value;
+          if (/^Not confirmed|^Not specified/i.test(value)) cell.classList.add('shortlist-unconfirmed');
+          row.append(cell);
+        });
+        body.append(row); count++;
+      }
+    }
+    resultStatus.textContent = `${count} of ${comparisonFields.length} attributes shown${differences.checked ? ' · Differences only' : ''}`;
+    resetFilters.hidden = !query && !differences.checked;
     const sources = node('tr');
     const sourceLabel = node('th', '', 'Product references'); sourceLabel.scope = 'row'; sources.append(sourceLabel);
     profiles.forEach(profile => {
@@ -165,7 +216,7 @@
     });
     body.append(sources);
     table.append(body); viewport.append(table);
-    if (!count) viewport.append(node('p', '', 'The displayed specifications match. Turn off the filter to see every row.'));
+    if (!count) viewport.append(node('p', '', 'No attributes match these filters. Reset the filters to see the full comparison.'));
   }
 
   function sync() {
